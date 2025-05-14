@@ -66,10 +66,10 @@ export default function Header() {
 
     const links = [
         { href: '/', name: 'home', page: 'Página Inicial' },
-        { href: '/produtos', name: 'produtos', page: 'Produtos' },
-        { href: '/adocao', name: 'adocao', page: 'Adoção' },
+        { href: '/produtos', name: 'produtos', page: 'pag1' },
+        { href: '/adocao', name: 'adocao', page: 'pag2' },
         { href: '/sobre', name: 'sobre', page: 'Sobre nós' },
-        { href: '/blog', name: 'blog', page: 'Blog' },
+        { href: '/blog', name: 'blog', page: 'pag3' },
     ];
     return (
         <>
