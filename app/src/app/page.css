@@ -1,0 +1,799 @@
+.texto-banner button p{
+color: #000000;
+text-decoration: none;
+}
+
+.texto-banner{
+  justify-items: start;
+}
+
+.comprar.black-btn{
+  padding: 10px 30px;
+text-decoration: none;
+}
+
+.sessão3,
+.sessão4,
+.sessão5,
+.sessão6,
+.sessão7 {
+  margin-top: 20vh;
+}
+
+.secao1 {
+  justify-items: center;
+  align-content: center;
+  height: 70vh;
+  width: 100%;
+  background-color: #F8F9FA;
+}
+
+.bannerpai {
+  justify-items: end;
+  width: 75%;
+}
+
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 78px);
+}
+
+.mini_texto_banner {
+  font-size: 1rem;
+  font-family: 'Poppins Medium';
+  color: #963542;
+  text-align: start;
+}
+
+.title-banner {
+  font-family: 'Poppins Bold';
+  padding-bottom: 30px;
+  text-align: start;
+}
+
+.img-banner {
+  width: 50%;
+}
+
+.botao-banner {
+  font-family: 'Poppins Bold';
+  border: none;
+  background-color: #000000;
+  border-radius: 10px;
+  padding: 13px 60px;
+  transition: all 0.3s ease;
+}
+
+.botao-banner:hover {
+  background-color: #BA4353;
+}
+
+.botao-banner a {
+  color: white;
+  text-decoration: none;
+}
+
+/*Sessão 2 "Conheça nossos serviços"*/
+.titulo {
+  text-align: center;
+  font-family: 'Poppins Bold';
+}
+
+.servicos {
+  white-space: nowrap;
+  font-size: 1vw;
+  margin-top: 5vh;
+}
+
+.servicos ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 0
+}
+
+.servicos li {
+  list-style: none;
+  justify-content: center;
+  display: inline;
+  margin: 0;
+}
+
+.servicos a {
+  text-decoration: none;
+  color: black;
+}
+
+.servicos .botao1 {
+  font-family: 'Poppins Bold';
+  border: none;
+  background-color: rgba(219, 219, 219, 0.767);
+  border-radius: 15px;
+  padding: 10px 3.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: 300ms;
+}
+
+.botao1 a b {
+  transition: 300ms;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.botao1 a {
+  transition: 300ms;
+}
+
+.botao1 .icon-adopt {
+  opacity: 0;
+  position: absolute;
+  right: 10px;
+  height: 25px;
+  transition: 300ms;
+  transform: translateX(10px);
+}
+
+.botao1:hover {
+  background-color: #000000;
+}
+
+.botao1:hover a {
+  transform: translateX(-12px) !important;
+  color: #fff;
+}
+
+.botao1:hover .icon-adopt {
+  opacity: 1;
+  transform: translateX(-10px);
+}
+
+/*Sessão 3 "Pesquisar por animais"*/
+.animalSearch ul {
+  display: flex;
+  padding: 0;
+  justify-content: space-between;
+  margin-top: 10vh;
+}
+
+.animalSearch ul li {
+  list-style: none;
+}
+
+.animalSearch ul li a {
+  text-decoration: none;
+  width: fit-content;
+}
+
+.cardAnimal {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: fit-content;
+  transition: transform 0.3s ease;
+}
+
+.cardAnimal:hover {
+  transform: scale(1.05);
+}
+
+.searchIcon-animal {
+  height: 14vh;
+  width: fit-content;
+}
+
+.search-category {
+  font-family: 'Poppins Medium';
+  color: #000000;
+  width: fit-content;
+  margin: 0.5rem 0 0 0;
+  font-size: 0.9rem;
+}
+
+/*Sessão4 Carrossel "promoções da semana"*/
+.sessão4 .imgpai {
+  width: 100%;
+}
+
+.sessão4 .carrossel {
+  margin-top: 3vw;
+  width: 100%;
+}
+
+.carousel-inner {
+  border-radius: 30px;
+}
+
+.s6.carousel-item.prev,
+.s6.carousel-item.next {
+  transform: translateX(0) scale(0.8);
+  opacity: 0.2;
+}
+
+.s6.carousel-control-next {
+  transform: translateX(50%);
+}
+
+.s6.carousel-control-prev {
+  transform: translateX(-50%);
+}
+
+.carrossel img {
+  width: 100%;
+  height: 100%;
+}
+
+.img1, .img1 img, .img2, .img2 img, .img3, .img3 img{
+  width: 100%;
+}
+
+/*Sessão 5 "Destaques em produtos"*/
+.cardlist {
+  justify-items: center;
+}
+
+.cardlist1 {
+  white-space: nowrap;
+  width: 100%;
+  padding-top: 4%;
+  font-size: 1vw;
+}
+
+.cardlist1 a {
+  text-decoration: none;
+  color: black;
+}
+
+.cardlist1 .cards1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardlist1 .card {
+  width: 13vw;
+  height: 16vw;
+}
+
+.cards1 b {
+  margin-top: 500vh;
+}
+
+.card img {
+  height: 70%;
+}
+
+.row {
+  margin-top: 10vh !important;
+}
+
+.cards-produtos {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 0 !important;
+}
+
+.card-img-top {
+  border: 0.0625rem solid #EEEEEE;
+  border-radius: 20px;
+}
+
+.card-produto {
+  width: 12rem;
+  border: none !important;
+  overflow: hidden;
+}
+
+.nome-produto {
+  font-family: 'Poppins Regular';
+  font-size: 0.8rem;
+}
+
+.preco {
+  font-family: 'Poppins Medium';
+  font-size: 0.8rem;
+  color: rgb(85, 85, 85);
+  margin: 0;
+}
+
+.fas .fa-heart {
+  font-size: 1.5rem;
+  color: gray;
+}
+
+.curtir {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-favorito {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/*Sessão6 "Marcas"*/
+.opcoes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  gap: 30px;
+  justify-items: center;
+  padding: 0 !important;
+}
+
+.opcao {
+  position: relative;
+  overflow: hidden;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.img_opcao {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.3s ease;
+}
+
+.opcao:hover .img_opcao {
+  transform: scale(1.05);
+  filter: brightness(50%);
+}
+
+.texto {
+  width: fit-content;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 34px;
+  opacity: 1;
+  transition: transform 0.3s ease-in-out;
+  font-weight: 900;
+  text-shadow: 0 2px 4px #fa4a6a;
+  font-family: "Libre Baskerville", serif;
+  z-index: 1;
+}
+
+.texto img {
+  width: 90%;
+}
+
+.overlay {
+  background: linear-gradient(180deg, rgba(29, 29, 29, 0), rgba(29, 29, 29, .64));
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 0;
+}
+
+.opcao:hover .texto {
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.botao_opcao {
+  font-family: 'Poppins Regular';
+  border: 1px solid #000000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  background-color: #fff;
+  color: #000000;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin: 0;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transition: 300ms;
+}
+
+.botao_opcao p {
+  margin: 0;
+}
+
+.opcao:hover .botao_opcao {
+  opacity: 1;
+}
+
+.botao_opcao:hover {
+  background-color: #000000;
+  color: #fff;
+}
+
+.secao7 {
+  width: 100%;
+  margin-top: 20vh;
+}
+
+.container {
+  padding: 0 !important;
+}
+
+.conteudo_secao7 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.texto_adocao {
+  width: 50%;
+}
+
+.feira-text {
+  font-family: 'Poppins Regular';
+  margin-top: 2vh;
+  font-size: 1rem;
+}
+
+.texto_adocao h1 {
+  font-family: 'Poppins Bold';
+}
+
+.texto_adocao h6 {
+  color: #BA4353;
+  font-family: 'Poppins Medium';
+}
+
+.black-btn {
+  padding: 10px 30px
+}
+
+.texto_adocao a {
+  text-decoration: none;
+}
+
+.secao7 img {
+  width: 34%;
+}
+
+.cards {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.blog-title {
+  font-family: 'Poppins Bold';
+  font-size: 1.1rem;
+}
+
+.blog-text {
+  font-family: 'Poppins Regular';
+  font-size: 0.9rem;
+}
+
+.blog {
+  width: 25rem;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 20px !important;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.blog:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.02);
+}
+
+.card-text,
+.blog-title {
+  width: fit-content;
+}
+
+.botao_blog {
+  width: fit-content;
+}
+
+.botao_blog a {
+  text-decoration: none;
+  width: fit-content;
+  display: flex;
+}
+
+.secao8 {
+  margin-top: 20vh;
+}
+
+.blog-section {
+  justify-items: center;
+  margin-top: 20vh;
+}
+
+.blog-section h1 {
+  font-family: 'Poppins Bold';
+  margin-bottom: 10vh;
+}
+
+.row.row-cols-1.row-cols-md-2.g-4.s7 {
+  margin: 0 !important;
+}
+
+.ntc-title {
+  color: #000000;
+  text-decoration: none;
+}
+
+.ntc-title:hover {
+  text-decoration: underline;
+}
+
+.cont-blog {
+  align-items: center;
+}
+
+.imgs7 {
+  height: fit-content;
+  padding: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgs7 img {
+  border-radius: 10px;
+  height: 100%;
+}
+
+.s7.row-cols-1 {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.s7.col {
+  width: 100%;
+}
+
+.container.b-l {
+  display: flex;
+  padding: 0;
+  justify-content: space-between;
+}
+
+.b-link {
+  text-decoration: none;
+  color: #9a1e22;
+  font-weight: 600;
+  font-family: "Poppins", serif;
+}
+
+.s7.card {
+  border: 0;
+}
+
+.s7.card-title {
+  font-family: "Poppins Bold"
+}
+
+.s7.card-text {
+  font-family: "Poppins", serif;
+  font-weight: 400;
+  text-align: justify;
+}
+
+.s7.text-body-secondary {
+  font-family: "Poppins Regular";
+}
+
+.row.g-0.cont-blog {
+  margin-top: 0 !important;
+}
+
+/* responsividade */
+@media screen and (max-width: 1095px) {
+  .opcoes {
+    gap: 10px;
+    padding: 0;
+  }
+
+  .botao_opcao {
+    visibility: hidden;
+  }
+
+  .texto_adocao h1 {
+    font-size: 1.3rem;
+  }
+
+  .feira-text {
+    font-size: .9rem;
+  }
+
+  .black-btn {
+    height: 4vh;
+  }
+
+  .animalSearch ul {
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 4vh 0
+  }
+
+  .texto-banner{
+    width: 40%;
+  }
+
+  .img-banner{
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .servicos ul {
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+  }
+
+  .servicos .botao1 {
+    padding: 10px 5vw;
+  }
+
+  .cards-produtos {
+    gap: 10px;
+  }
+
+  .banner{
+    flex-direction: column;
+  }
+
+  .texto-banner{
+    width: 100%;
+    justify-items: center
+  }
+
+  .title-banner{
+    text-align: center;
+  }
+
+  .img-banner{
+    margin-top: 3vh;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .secao7 img {
+    width: 45%;
+  }
+
+  .opcoes {
+    grid-template-columns: repeat(2, 2fr)
+  }
+
+  .card-produto {
+    width: 8rem;
+  }
+
+  .card-produto .card-body {
+    padding: 0;
+  }
+
+  .cards-produtos {
+    gap: 30px 10px;
+  }
+
+  .secao1{
+    height: 60vh;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .carousel-control-next,
+  .carousel-control-prev {
+    visibility: hidden;
+  }
+
+  .row,
+  .carrossel,
+  .cards {
+    margin: 4vh 0 0 0 !important;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .servicos .botao1{
+    padding: 10px 9vw;
+  }
+
+  .conteudo_secao7 {
+    flex-direction: column-reverse;
+  }
+
+  .texto_adocao {
+    width: 100%;
+  }
+
+  .texto_adocao h1 {
+    text-align: center;
+    font-size: 1.6rem;
+  }
+
+  .texto_adocao h6,
+  .texto_adocao a {
+    display: none;
+  }
+
+  .feira-text {
+    text-align: justify;
+  }
+
+  .img_adocao {
+    width: 70% !important;
+    margin-top: 2vh;
+  }
+
+  .sessão3,
+  .sessão4,
+  .sessão5,
+  .sessão6,
+  .sessão7, .blog-section {
+    margin-top: 10vh !important;
+  }
+
+  .animalSearch ul {
+    gap: 2vh 4vw;
+  }
+
+  .searchIcon-animal {
+    height: 10vh;
+  }
+
+  .blog-section h1{
+    margin-bottom: 3vh;
+  }
+
+  .animalSearch ul{
+    margin-top: 3vh;
+  }
+
+  .banner{
+    width: 100%;
+    padding-top: 40px;
+  }
+}
+
+@media screen and (max-width: 435px){
+  .servicos ul li{
+    width: 100%;
+  }
+
+  .servicos ul li .botao1{
+    width: 100%;
+    background-color: #000000;
+  }
+
+  .servicos ul li .botao1 a{
+    color:#fff
+  }
+
+  .botao1 .icon-adopt{
+    opacity: 1;
+    right: 80;
+  }
+
+  .img-banner{
+    display: none;
+  }
+
+  .secao1{
+    height: 40vh;
+  }
+}
