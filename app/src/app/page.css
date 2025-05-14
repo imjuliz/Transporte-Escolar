@@ -65,7 +65,7 @@
   left: 0;
   height: 100%;
   width: 78px;
-  background: #fff;
+  background: #161A23;
   padding: 6px 14px;
   transition: all 0.5s ease;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
@@ -145,7 +145,7 @@
   border-radius: 6px;
   height: 40px;
   width: 122px;
-  background: #F6F6F6;
+  background: #2D2F39;
   line-height: 35px;
   text-align: center;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -176,7 +176,7 @@
   border-radius: 12px;
   outline: none;
   border: none;
-  background: #F6F6F6;
+  background: #2D2F39;
   padding-left: 50px;
   font-size: 18px;
   color: #000;
@@ -192,7 +192,7 @@
 
 .sidebar .navList .navList-item .bx-search:hover {
   background-color: #000;
-  color: #F6F6F6;
+  color: #2D2F39;
 }
 
 /*texto navbar li*/
@@ -207,11 +207,9 @@
   justify-content: center;
   height: 50px;
 }
-
 .sidebar.active .navList .navList-item a svg {
   margin-left: 1rem;
 }
-
 .sidebar.active .navList .navList-item a span {
   display: inline;
 }
@@ -223,9 +221,9 @@
 .sidebar.active .navList .navList-item a {
   justify-content: flex-start;
 }
-
+/*como os icones da nav ficam ao passar o mouse por cima*/
 .sidebar .navList .navList-item a:hover {
-  background: #F6F6F6;
+  background: #2D2F39;
   color: #000;
 }
 

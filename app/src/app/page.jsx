@@ -79,13 +79,10 @@ const links = [
                         <div className="logo">
                             <div className="logoName">Quintal do pet</div>
                         </div>
-                        <i className='bx bx-menu' id="btn"></i>
+                        <i className='bx bx-menu' id="btn">c3</i>
                     </div>
                     <ul className="navList">
-                        <li className="navList-item barra">
-                            <svg className="searchBtn" aria-label="Pesquisar"></svg>
-                            <input type="text" placeholder="Pesquisar..." aria-label="Pesquisar" />
-                        </li>
+                        
                         {links.map(({ href, name, page }) => (
                             <li className="navList-item" key={name}>
                                 <a href={href}>
