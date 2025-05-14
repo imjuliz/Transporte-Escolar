@@ -5,16 +5,16 @@ export default function Footer() {
     // outras paginas do site
     const conteudos = [
         {
-            name: "Adote",
-            link: "../adote.jsx",
+            name: "",
+            link: "../",
         },
         {
-            name: "Categorias",
-            link: "../categorias.jsx"
+            name: "",
+            link: "../"
         },
         {
-            name: "Sobre nós",
-            link: "../sobrenos.jsx"
+            name: "",
+            link: "../"
         }
     ]
 
@@ -165,7 +165,7 @@ export default function Footer() {
                             </svg>
                             </div>
                         </div>
-                        <p>© Quintal do Pet 2025. Feito por Julia Alves, Lorena Oshiro e Maria Brito.</p>
+                        <p>© 2025. Feito por Julia Alves, Lorena Oshiro e Maria Brito.</p>
                     </div>
                 </div>
                 </div>

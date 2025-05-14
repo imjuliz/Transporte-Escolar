@@ -56,8 +56,7 @@ footer .container {
     width: calc(100% - 78px);
 }
 
-.f-col,
-.payMeth {
+.f-col,.payMeth {
     width: 20%;
 }
 
