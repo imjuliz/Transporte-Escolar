@@ -27,8 +27,8 @@ id_veiculo int not null auto_increment,
 motorista text,
 fabricacao date not null,
 instituicao text not null,
-foreign key (motorista) references motoristas(nome_motorista),
-foreign key (instituicao) references instituicao(nome_instituicao)
+foreign key (motorista) references motoristas(nome_motorista) on delete cascade on update cascade,
+foreign key (instituicao) references instituicao(nome_instituicao)on delete cascade on update cascade
 );
 
 #tabela da instituição/escola
