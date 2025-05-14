@@ -46,5 +46,14 @@ email varchar(50) not null,
 senha text not null
 );
 
+#tabela curriculos
+create table curriculos (
+cpf_candidato int not null primary key,
+nome_candidato text not null,
+email varchar(50) not null,
+telefone int ,
+curriculo longblob #carrega arquivos com mts bits(eu acho)
+);
+
 
 
