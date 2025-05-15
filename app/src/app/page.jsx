@@ -6,23 +6,23 @@ import { usePathname } from 'next/navigation';
 import { useRef, useEffect } from "react";
 
 export default function Home() {
-  useEffect(() => {
-    const menuBtn = document.querySelector("#btn");
-    const sidebar = document.querySelector(".sidebar");
-    const searchBtn = document.querySelector(".searchBtn");
+//   useEffect(() => {
+//     const menuBtn = document.querySelector("#btn");
+//     const sidebar = document.querySelector(".sidebar");
+//     const searchBtn = document.querySelector(".searchBtn");
 
-    const toggleSidebar = () => {
-        sidebar.classList.toggle("active");
-    };
-    menuBtn.addEventListener("click", toggleSidebar);
-    searchBtn.addEventListener("click", toggleSidebar);
+//     const toggleSidebar = () => {
+//         sidebar.classList.toggle("active");
+//     };
+//     menuBtn.addEventListener("click", toggleSidebar);
+//     searchBtn.addEventListener("click", toggleSidebar);
 
-    // Cleanup para evitar vazamento de eventos
-    return () => {
-        menuBtn.removeEventListener("click", toggleSidebar);
-        searchBtn.removeEventListener("click", toggleSidebar);
-    };
-}, []);
+//     // Cleanup para evitar vazamento de eventos
+//     return () => {
+//         menuBtn.removeEventListener("click", toggleSidebar);
+//         searchBtn.removeEventListener("click", toggleSidebar);
+//     };
+// }, []);
 
 
 const iconsNav =
