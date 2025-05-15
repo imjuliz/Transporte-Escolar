@@ -111,3 +111,15 @@ background-repeat: no-repeat;
   width: 30%;
   font-size: 25px;
 }
+
+.sessão4{
+  margin-top: 5%;
+}
+.sessão4 h1, h2, h3{
+  text-align: center;
+}
+.sessão4 h2{
+  color:#013FF6 ;
+  font-size: 20px;
+  margin-bottom: 2%;
+}
