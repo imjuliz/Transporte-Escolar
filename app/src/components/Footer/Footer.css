@@ -1,34 +1,37 @@
 
+
 footer {
     width: 100% !important;
-    background-color: #F8F9FA;
+    background-color: #161A23;
     align-content: center;
     justify-items: center;
     margin-top: auto;
+    font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 footer a {
     text-decoration: none;
-    color: #000000;
+    color: #ffffff;
     width: fit-content;
     display: flex;
 }
 
 footer div h1 {
     font-size: 1rem;
-    color: #000000;
+    color: #FFC01D;
     margin-bottom: 3vh;
     font-weight: bold;
-    font-family: 'Poppins Bold';
 }
 
 footer div p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     opacity: 0.7;
     transition: opacity 0.3s ease-in;
-    font-family: 'Poppins Regular';
 }
-
+footer .logo{
+    color: #ffffff;
+    font-size: 25px;
+}
 .cont-1 p:hover {
     opacity: 1; /* Exemplo de mudança de opacidade */
 }
@@ -51,7 +54,6 @@ footer .container {
     position: relative;
     align-items: flex-end;
 }
-
 .cont-footer{
     width: calc(100% - 78px);
 }
@@ -66,6 +68,10 @@ footer .container {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
+    border-top: 1px solid #c1c7cd9a;
+}
+.f-col{
+    margin-top: 2%;
 }
 
 .cont-2 {
@@ -74,8 +80,9 @@ footer .container {
 
 .cont-2 p {
     margin: 0;
+    margin-top: 2%;
     height: fit-content;
-    color: #838383;
+    color: #ffffff;
     text-align: center;
 }
 
