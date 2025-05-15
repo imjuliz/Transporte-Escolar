@@ -136,6 +136,11 @@ export default function Home() {
                     ))}
                 </div>
             </section>
+            <section className='sessão4'>
+                <h2 className='title2'>Como funciona?</h2>
+                <h1 className='title'>Entenda em poucos passos</h1>
+            <h3 className='title3'>Em apenas algumas etapas fáceis, você está pronto para gerenciar suas viagens com nosso transporte escolar. Tudo me um só lugar.</h3>
+            </section>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
         </>
     );
