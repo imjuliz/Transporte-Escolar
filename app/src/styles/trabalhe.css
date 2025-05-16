@@ -1,0 +1,162 @@
+header{
+    margin-top: 2%;
+  position: absolute;
+  z-index: 1;
+  background-color:#161A23 ;
+  width: 80%;
+  display: flex;
+  border-radius: 15px;
+  justify-content: center;
+  }
+  
+  header ul{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    margin-bottom: 0;
+    text-decoration: none;
+    padding: 1vh 0;
+    align-items: center;
+  }
+  
+  .linksrapidos li{
+    height: fit-content;
+    font-family: "Plus Jakarta Sans SemiBold";
+    font-size: 0.9rem;
+  }
+  
+  header li a {
+      text-decoration: none;
+      color: white;
+  }
+  header ul .barra{
+    color:#2D2F39 ;
+    font-size: 35px;
+    margin-top: -1%;
+  }
+  
+  header ul .logo {
+  color: #ffffff86;
+  }
+  header li button .login{
+    color: #ffffff86;
+  }
+
+/* banner */
+.banner{
+    height: 100vh;
+    width: 100%;
+    padding-top: 15%;
+}
+
+/* trabalhe conosco */
+.sec1{
+    width: 75%;
+}
+
+.row-left{
+    display: flex;
+}
+
+.row-right{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.row-right p, .row-right h2{
+    text-align: end;
+}
+
+.trabalhe-text{
+    flex-direction: column;
+    display: flex;
+    width: 50%;
+}
+
+/* O que buscamos */
+.sec2{
+    width: 75%;
+}
+
+.reqs{
+    background-color: #161A23;
+    height: 100vh;
+    width: 100%;
+    align-content: center;
+    justify-items: center;
+}
+
+.req-cont p{
+    color: #fff;
+}
+
+.req-text{
+    justify-items: center;
+}
+
+.req-text h2{
+    font-family: "Plus Jakarta Sans Bold";
+    font-size: 2.5rem;
+    margin-bottom: 4vh;
+    color: #fff;
+}
+
+.req-text p{
+    font-family: "Plus Jakarta Sans Medium";
+    font-size: 1.2rem;
+    margin-bottom: 10vh;
+    color: #B4BFD3;
+    text-align: center;
+}
+
+.req-cont{
+    display: flex;
+    align-items: center;
+    width: 40%;
+}
+
+.req-cont img{
+    margin-right: 2vw;
+}
+
+.req-cont p{
+    margin: 0;
+    height: fit-content;
+    font-family: "Plus Jakarta Sans Regular";
+}
+
+/* candidatar-se */
+.candidate{
+    height: 100vh;
+}
+
+.candidate-text h4{
+    color: #013FF6;
+    font-family: "Plus Jakarta Sans Regular";
+    font-size: 0.9rem;
+}
+
+.candidate-text h2{
+    font-family: "Plus Jakarta Sans Bold";
+    font-size: 2.5rem;
+    margin-bottom: 4vh;
+}
+
+.candidate-text p{
+    font-family: "Plus Jakarta Sans Medium";
+    font-size: 1.2rem;
+    margin-bottom: 10vh;
+    color: #717479;
+    text-align: center;
+}
+
+/* formulario */
+.btn-form{
+    background-color: #013FF6;
+    font-family: "Plus Jakarta Sans Regular";
+    font-size: 0.9rem;
+    color: #fff;
+    padding: 1vh 5vw;
+    border-radius: 10px;
+}

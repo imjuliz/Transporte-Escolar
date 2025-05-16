@@ -4,6 +4,16 @@
     display: flex;
 }
 
+.login-corpo{
+    width: 70%;
+}
+
+.login-corpo h3 {
+    color: #fff;
+    font-family: "Plus Jakarta Sans SemiBold";
+    margin-bottom: 5vh;
+}
+
 .imgLogin{
     width: 40%;
     height: 100%;
@@ -15,6 +25,8 @@
     width: 60%;
     background-color: #161A23;
     border-radius: 20px 0 0 20px;
+    justify-items: center;
+    align-content: center;
 }
 
 .user{
@@ -24,11 +36,20 @@
     font-size: 1.3rem;
 }
 
+.login-btn-cont{
+    justify-items: center;
+}
+
+.container-itens-login{
+ display: flex;
+ width: 50%;
+ justify-content: space-between;
+}
 
 .container-login{
-    display: flex;
-    width: 80%;
-    padding: 4vh 0;
+    justify-items: end;
+    width: 100%;
+    padding: 4vh 3vw;
     background-color: #2D2F39;
     border-radius: 20px;
 }
