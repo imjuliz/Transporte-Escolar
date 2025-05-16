@@ -12,6 +12,7 @@ export default function Home() {
         { href: '/', page: 'Página Inicial' },
         { href: '/TrabalhoConosco', page: 'Trabalhe Conosco' }
     ];
+
     const cards = [
         {
             img: './img/card4.svg',
@@ -36,7 +37,25 @@ export default function Home() {
         }
     ];
 
-const banner = [
+    const sobreItens = [
+        {
+            text: 'Nossa missão é transformar a gestão do transporte escolar em um processo transparente e confiável, e estamos comprometidos em desenvolver uma solução eficaz para escolas, pais e alunos.',
+            img: './img/sobre1.svg',
+            classe: 'row-left'
+        },
+        {
+            text: 'Com tecnologia avançada, organizamos rotas exclusivas para os alunos, além de garantir que nossos usuários tenham acesso às informações necessárias para um transporte mais organizado.',
+            img: './img/sobre2.svg',
+            classe: 'row-right'
+        },
+        {
+            text: 'Não somos apenas um sistema. Somos a ponte entre a segurança e a inovação no transporte escolar.',
+            img: './img/sobre3.svg',
+            classe: 'row-left'
+        }
+    ]
+
+    const banner = [
     {
         img1: './img/banner1/montanha.svg',
         img2: './img/banner1/onibus.svg',
@@ -44,7 +63,8 @@ const banner = [
         img4: './img/banner1/arvore2.svg',
         img5:'./img/banner1/circulo.svg'
     }
-]
+    ];
+
     const card4 = [
         {
             img1: './img/sessao4/bolinha1.svg',
@@ -61,7 +81,8 @@ const banner = [
             img2: './img/sessao4/card4_3.svg',
             text: 'Tenha total controle na palma da mão.'
         }
-    ]
+    ];
+
     const cards5 = [
         {
             img: './img/sessao5/icon1.svg',
@@ -78,7 +99,8 @@ const banner = [
             title: 'Previsibilidade e controle',
             text: 'Dados acessíveis para planejamento preciso, permitindo ajustes rápidos e garantindo pontualidade.'
         }
-    ]
+    ];
+
     return (
         <>
             {/* navbar */}
@@ -118,7 +140,6 @@ const banner = [
                 </div>
             </section>
 
-            <main>
                 <section className='sessão2'>
                     <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-inner">
@@ -163,28 +184,21 @@ const banner = [
                         </div>
                     </div>
                 </section>
+
                 <section className='sessão3'>
-                    <h1 className='title'>Sobre nós</h1>
-                    <div className='sobrenos'>
-                    {/* parte da julia */}
-                    </div>
+                    <div className='sessao3-corpo'>
+                    <h2>Sobre nós</h2>
+                <div className="grid grid-flow-col grid-rows-3 gap-4">
+                    {sobreItens.map((sobre, index) => (
+                        <div key={index} className={sobre.classe}>
+                            <img src={sobre.img} />
+                                <p>{sobre.text}</p>
+                        </div>
+                    ))}
+                </div>
+                </div>
                 </section>
-                <section className='sessão4'>
-                    <h2 className='title2'>Como funciona?</h2>
-                    <h1 className='title'>Entenda em poucos passos</h1>
-                    <h3 className='title3'>Em apenas algumas etapas fáceis, você está pronto para gerenciar suas viagens com nosso transporte escolar. Tudo me um só lugar.</h3>
-                    <div className='cards4'>
-                        {card4.map(({ img1, img2, text, card }) => (
-                            <div className="cards42" key={card}>
-                                <div className='cards42'>
-                                    <img src={img2} className='card4' />
-                                    <img src={img1} className='bolinha' />
-                                    <p className='text4'>{text}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
+
                 <section className='sessão5'>
                     <h2 className='title5_2'>Por que usar o -nome-?</h2>
                     <h1 className='title5_1'>Simples, fácil e rápido</h1>
@@ -204,7 +218,23 @@ const banner = [
                        
                     </div> <img src='./img/sessao5/Content.svg' className='rounded float-end banner2'/>
                 </section>
-            </main>
+
+                <section className='sessão4'>
+                    <h2 className='title2'>Como funciona?</h2>
+                    <h1 className='title'>Entenda em poucos passos</h1>
+                    <h3 className='title3'>Em apenas algumas etapas fáceis, você está pronto para gerenciar suas viagens com nosso transporte escolar. Tudo me um só lugar.</h3>
+                    <div className='cards4'>
+                        {card4.map(({ img1, img2, text, card }) => (
+                            <div className="cards42" key={card}>
+                                <div className='cards42'>
+                                    <img src={img2} className='card4' />
+                                    <img src={img1} className='bolinha' />
+                                    <p className='text4'>{text}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
 
         </>
     );
