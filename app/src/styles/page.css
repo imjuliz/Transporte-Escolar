@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 header{
-  margin-top: 2%;
+  margin-top: 0%;
 position: absolute;
 z-index: 1;
 background-color:#161A23 ;
@@ -48,13 +48,59 @@ header li button .login{
 /* banner */
 .banner{
 height: 100vh;
-width: 100%;
-padding-top: 15%;
+width: 130vw;
+padding-top: 13%;
 }
-
+.banner1img{
+  margin-top: -26%;
+margin-left: 11%;
+width: 100%;
+}
+.banner1img .montanha{
+  width: 101vw;
+}
+.banner1img .onibus{
+  width: 20vw;
+margin-left: 30%;
+margin-top: -10%;
+}
+.banner1img .arvore1{
+  width: 8vw;
+margin-left: 60%;
+margin-top: -25%;
+}
+.banner1img .arvore2{
+width: 5vw;
+margin-left: 65%;
+margin-top: -2%;
+}
+.banner1img .circulo{
+width: 25vw;
+margin-left: 60%;
+margin-top: -20%;
+}
+.banner .banner-textos{
+  font-family: "Plus Jakarta Sans SemiBold";
+  width: 30%;
+  text-align: center;
+  margin-left: 30%;
+}
+.banner .banner-textos h1{
+  width: 150%;
+  margin-left: -15%;
+  margin-top: 5%;
+  font-size: 4vw;
+}
+.banner .banner-textos p{
+  width: 73%;
+  margin-left: 26%;
+  margin-top: 5%;
+  font-size: 1vw;
+}
 
 /*carrossel sessão2*/
 .sessão2{
+  font-family: "Plus Jakarta Sans SemiBold";
   margin-top: 5%;
   width: 80%;
   margin-left: 10%;
@@ -94,33 +140,147 @@ padding-top: 15%;
   width: 80%;
 }
 .sessão3{
+  font-family: "Plus Jakarta Sans ";
   margin-left: 5%;
-  width: 90%;
-}
-.sessão3 .sobrenos{
-  display: grid;
+  width: 80%;
 }
 .sessão3 h1{
   text-align: center;
   margin-top: 5%;
+  margin-bottom: 10%;
+}
+.sessão3 .imgtext{
+  display: flex;
+  justify-content: space-between;
 }
 .sessão3 img{
   width: 20vw;
   margin-bottom: 5%;
+
 }
 .sessão3 p{
-  width: 30%;
+  width: 40%;
   font-size: 25px;
+  text-align: right;
 }
 
 .sessão4{
+
   margin-top: 5%;
 }
 .sessão4 h1, h2, h3{
   text-align: center;
 }
+.sessão4 h1{
+  margin-bottom: 5%;
+  font-family: "Plus Jakarta Sans SemiBold";
+}
 .sessão4 h2{
   color:#013FF6 ;
   font-size: 20px;
   margin-bottom: 2%;
+  font-family: "Plus Jakarta Sans SemiBold";
 }
+
+.sessão4 .title3{
+  font-family: "Plus Jakarta Sans ";
+  color: #90A3BF;
+}
+.sessão4 .bolinha{
+z-index: 1;
+margin-top: -11vw;
+min-width: 50px;
+margin-left: -5%;
+}
+.sessão4 .cards4{
+display: flex;
+justify-content: space-between;
+text-align: center;
+margin-top: 5%;
+width: 80%;
+margin-left: 10%;
+}
+.sessão4 .cards42{
+  margin-bottom: 15%;
+  align-items: center;
+  width: 10vw;
+}
+.sessão4 .text4{
+  margin-top: 8vw;
+  font-family: "Plus Jakarta Sans ";
+}
+.sessão4 .card4{
+z-index:-10;
+width: 10vw;
+height: 10vw;
+border-radius: 10px;
+}
+
+.sessão5{
+  background-color:#161A23 ;
+  width: 133.7%;
+  height: 50vw;
+  margin-left: -17%;
+  padding-top: 13%;
+}
+.sessão5 h1, h2, h3{
+  text-align: center;
+}
+.sessão5 h1{
+  margin-bottom: 3%;
+  font-family: "Plus Jakarta Sans SemiBold";
+  color: white;
+}
+.sessão5 h2{
+  color:#FFC01D ;
+  font-size: 20px;
+  margin-bottom: 2%;
+  margin-top: -5%;
+  font-family: "Plus Jakarta Sans SemiBold";
+}
+
+.sessão5 .title5_3{
+  font-family: "Plus Jakarta Sans ";
+  color: #e8edf79a;
+  width: 55%;
+  margin-left: 22.5%;
+  margin-bottom: 7%;
+}
+
+.sessão5 .cards5{
+  justify-content: space-between;
+  text-align: center;
+  margin-top: 5%;
+  width: 80%;
+  }
+  .sessão5 .cards52{
+    align-items: center;
+    width: 15vw;
+    margin-left: 10%;
+    margin-bottom: 5%;
+  }
+  .sessão5 .card5{
+  z-index:-10;
+  width: 5vw;
+  border-radius: 10px;
+  }
+  .sessão5 .title5{
+    font-family: "Plus Jakarta Sans semibold";
+    text-align: left;
+    color:white ;
+    font-size: 24px;
+    white-space: nowrap;
+    margin-left: 8vw;
+    margin-top: -6vw;
+  }
+  .sessão5 .text5{
+    font-family: "Plus Jakarta Sans ";
+color: #e8edf786;
+text-align: left;
+width: 150%;
+margin-left: 8vw;
+  }
+  .sessão5 .banner2{
+    margin-right: 5%;
+    margin-top: -25%;
+  }
