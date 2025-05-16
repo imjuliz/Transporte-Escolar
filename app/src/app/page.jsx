@@ -36,20 +36,6 @@ export default function Home() {
         }
     ];
 
-    const sobre = [
-        {
-            img: './img/sobre1.svg',
-            text: 'Nossa missão é transformar a gestão do transporte escolar em um processo transparente e confiável, e estamos comprometidos em desenvolver uma solução eficaz para escolas, pais e alunos.'
-        },
-        {
-            img: './img/sobre2.svg',
-            text: 'Com tecnologia avançada, organizamos rotas exclusivas para os alunos, além de garantir que nossos usuários tenham acesso às informações necessárias para um transporte mais organizado.'
-        },
-        {
-            img: './img/sobre3.svg',
-            text: 'Não somos apenas um sistema. Somos a ponte entre a segurança e a inovação no transporte escolar.'
-        }
-    ];
 const banner = [
     {
         img1: './img/banner1/montanha.svg',
