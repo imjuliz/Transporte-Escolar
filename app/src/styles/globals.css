@@ -50,3 +50,7 @@ html, body {
 html{
     align-items: center;
 }
+
+main{
+    width: 75%;
+}

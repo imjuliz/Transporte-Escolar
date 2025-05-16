@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
 header{
-  margin-top: 3%;
+  margin-top: 2%;
 position: absolute;
 z-index: 1;
 background-color:#161A23 ;
 width: 80%;
 display: flex;
 border-radius: 15px;
+justify-content: center;
 }
 
 header ul{
@@ -15,15 +16,18 @@ header ul{
   display: flex;
   justify-content: space-between;
   white-space: nowrap;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  margin-left: 5%;
+  margin-bottom: 0;
   text-decoration: none;
+  padding: 1vh 0;
+  align-items: center;
 }
-header li{
-  font-size: 18px;
-  text-decoration: none;
+
+.linksrapidos li{
+  height: fit-content;
+  font-family: "Plus Jakarta Sans SemiBold";
+  font-size: 0.9rem;
 }
+
 header li a {
     text-decoration: none;
     color: white;
