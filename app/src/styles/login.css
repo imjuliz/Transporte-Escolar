@@ -1,0 +1,34 @@
+.login{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.imgLogin{
+    width: 40%;
+    height: 100%;
+    background-color: white;
+}
+
+.login-btn{
+    height: 100%;
+    width: 60%;
+    background-color: #161A23;
+    border-radius: 20px 0 0 20px;
+}
+
+.user{
+    color: #fff;
+    margin: 0;
+    font-family: "Plus Jakarta Sans Medium";
+    font-size: 1.3rem;
+}
+
+
+.container-login{
+    display: flex;
+    width: 80%;
+    padding: 4vh 0;
+    background-color: #2D2F39;
+    border-radius: 20px;
+}
