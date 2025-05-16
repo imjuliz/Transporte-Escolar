@@ -1,5 +1,4 @@
 import './Footer.css'
-import '../../app/globals.css'
 export default function Footer() {
 
     // outras paginas do site

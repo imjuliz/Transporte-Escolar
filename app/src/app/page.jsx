@@ -1,14 +1,23 @@
 "use client";
-import { Kings } from 'next/font/google'
-import './globals.css'
-import './page.css'
-import { usePathname } from 'next/navigation';
-import { useRef, useEffect } from "react";
+{/*
 
+import { Kings } from 'next/font/google'
+import '../styles/globals.css'
+import '../styles/page.css'
+import { usePathname } from 'next/navigation';
+import { useRef, useEffect, useState } from "react";
 
 export default function Home() {
+ const pathname = usePathname();
+    const [mensagem, setMensagem] = useState("");
 
-    const pathname = usePathname();
+    // Chamada à API do backend ao carregar a página
+    useEffect(() => {
+        fetch("http://localhost:3000/")
+            .then((response) => response.text())
+            .then((data) => setMensagem(data))
+            .catch((error) => console.error("Erro ao buscar dados", error));
+    }, []);
 
     const links = [
         { href: '/', page: 'Página Inicial' },
@@ -144,4 +153,48 @@ export default function Home() {
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
         </>
     );
+}
+*/}
+
+import { Kings } from 'next/font/google'
+import '../styles/globals.css'
+import '../styles/page.css'
+import { usePathname } from 'next/navigation';
+import { useRef, useEffect, useState } from "react";
+
+export default function Home() {
+    const pathname = usePathname();
+
+    const [title, setTitle] = useState("");
+
+    // Chamada à API do backend ao carregar a página
+    useEffect(() => {
+        fetch("http://localhost:3001/home").then(
+            response => response.json()
+        ).then(
+            data => {
+                console.log(data)
+                setTitle(data.title)
+            }
+        )
+    }, [] // para que a requisiçao seja executada apenas uma vez
+    );
+
+
+    return (
+        <>
+        {/* banner */}
+            <section>
+                {/* textos */}
+                <div>
+                    <h1>{title}</h1>
+                </div>
+
+                {/* imagens do banner */}
+                <div>
+                    <image></image>
+                </div>
+            </section>
+        </>
+    )
 }
