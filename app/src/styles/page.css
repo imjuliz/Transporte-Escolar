@@ -1,20 +1,15 @@
 @import "tailwindcss";
-body{
-  background-color: aliceblue;
-  font-family: "Plus Jakarta Sans", sans-serif
-}
 
 header{
-  margin-top: 9%;
+  margin-top: 3%;
 position: absolute;
 z-index: 1;
 background-color:#161A23 ;
 width: 80%;
 display: flex;
-margin-left: 10%;
 border-radius: 15px;
-font-family: "Plus Jakarta Sans", sans-serif;
 }
+
 header ul{
   width: 90%;
   display: flex;
@@ -45,13 +40,15 @@ color: #ffffff86;
 header li button .login{
   color: #ffffff86;
 }
-.sessão1 .banner{
-  margin-top: -8.5%;
-background-repeat: no-repeat;
+
+/* banner */
+.banner{
+height: 100vh;
+width: 100%;
+padding-top: 15%;
 }
-.banner img{
-  width: 100%;
-}
+
+
 /*carrossel sessão2*/
 .sessão2{
   margin-top: 5%;
