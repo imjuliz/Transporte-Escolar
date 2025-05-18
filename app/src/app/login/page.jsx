@@ -1,22 +1,26 @@
 "use client";
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
-import '../../styles/login.css'
-import { usePathname } from 'next/navigation';
-import { useRef, useEffect, useState } from "react";
+import '../../styles/login.css';
+import { useState } from "react";
 
 export default function Login() {
-    const [usuarioAtivo, setUsuarioAtivo] = useState("");
+  const [usuarioAtivo, setUsuarioAtivo] = useState("");
 
-    const usuarios = [
-        { nome: 'Administrador' },
-        { nome: 'Aluno' },
-        { nome: 'Motorista' },
-        { nome: 'Responsável' }
-    ]
+  const handleUserClick = (nome: string) => {
+    setUsuarioAtivo(nome);
+  };
 
-    // caso a opção administrador ou motorista for selecionada, o usuario deverá logar com seu CPF, caso seja aluno ou responsavel, o usuario deverá logar com seu email
-   const renderFormulario = () => {
+
+  const usuarios = [
+    { nome: 'Administrador' },
+    { nome: 'Aluno' },
+    { nome: 'Motorista' },
+    { nome: 'Responsável' }
+  ]
+
+  // caso a opção administrador ou motorista for selecionada, o usuario deverá logar com seu CPF, caso seja aluno ou responsavel, o usuario deverá logar com seu email
+  const renderFormulario = () => {
     switch (usuarioAtivo.toLowerCase()) {
       case "administrador":
       case "motorista":
@@ -86,4 +90,4 @@ export default function Login() {
       )}
     </section>
   );
-    }
+}
