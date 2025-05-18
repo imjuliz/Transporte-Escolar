@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Login() {
   const [usuarioAtivo, setUsuarioAtivo] = useState("");
 
-  const handleUserClick = (nome: string) => {
+  const handleUserClick = () => {
     setUsuarioAtivo(nome);
   };
 
