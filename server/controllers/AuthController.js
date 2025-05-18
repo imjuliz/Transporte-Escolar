@@ -1,19 +1,16 @@
 import { buscarUsuarioPorEmailOuCPF } from "../models/User.js";
 
 const loginController = async (req, res) => {
-  const { identificador, senha } = req.body; // pode ser CPF ou Email
+  const { identificador, senha } = req.body;
 
   try {
-    const usuario = await buscarUsuarioPorEmailOuCPF(identificador); 
-    if (!usuario) {
-      return res.status(404).json({ mensagem: "Usuário não encontrado" });
+    const usuario = await buscarUsuarioPorEmailOuCPF(identificador);
+
+    if (!usuario || senha !== usuario.senha) {
+      return res.status(401).json({ mensagem: "Senha inválida" });
     }
 
-    if (senha !== usuario.senha) {
-      return res.status(401).json({ mensagem: "Senha incorreta" });
-    }
-
-    res.status(200).json({ mensagem: "Login realizado", token: "SEGREDO" });
+    res.status(200).json({ mensagem: "Login realizado com sucesso!"});
   } catch (error) {
     console.error("Erro ao fazer login:", error);
     res.status(500).json({ mensagem: "Erro ao fazer login" });
