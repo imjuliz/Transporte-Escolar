@@ -1,30 +1,23 @@
-import jwt from 'jsonwebtoken';
-import { read, compare } from '../config/database.js'
-// import { JWT_SECRET } from '../config/jwt.js';
+import { buscarUsuarioPorEmailOuCPF } from "../models/User.js";
 
-//login. consulta o banco de dados e verifica
 const loginController = async (req, res) => {
-    const { email, senha } = req.body;
-    //verifica se o usuario existe
-    try {
-        const usuario = await read('usuarios', `email = '${email}'`);
-        if (!usuario) {
-            return res.status(404).json({ mensagem: 'Usuário não encontrado' });
-        }
-        // verifica se a senha corresponde
-        const senhaCorreta = await compare(senha, usuario.senha);
+  const { identificador, senha } = req.body; // pode ser CPF ou Email
 
-        if (!senhaCorreta) {
-            return res.status(401).json({ mensagem: 'Senha incorreta' })
-        }
-
-        //criação do token. ele expira em 1 hora
-        const token = jwt.sign({ id: usuario.id, tipo: usuario.tipo }, JWT_SECRET, { expiresIn: '1h' });
-        res.status(200).json({ mensagem: 'Login realizado com sucesso', token });
-    } catch (err) {
-        console.error('Erro ao fazer login: ', err);
-        res.status(500).json({ mensagem: 'Erro ao fazer login' });
+  try {
+    const usuario = await buscarUsuarioPorEmailOuCPF(identificador); 
+    if (!usuario) {
+      return res.status(404).json({ mensagem: "Usuário não encontrado" });
     }
+
+    if (senha !== usuario.senha) {
+      return res.status(401).json({ mensagem: "Senha incorreta" });
+    }
+
+    res.status(200).json({ mensagem: "Login realizado", token: "SEGREDO" });
+  } catch (error) {
+    console.error("Erro ao fazer login:", error);
+    res.status(500).json({ mensagem: "Erro ao fazer login" });
+  }
 };
 
 export { loginController };

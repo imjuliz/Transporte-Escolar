@@ -1,9 +1,12 @@
-// rota da autenticação
+// rotas que precisam da autenticação
 import express from 'express';
 import { loginController } from '../controllers/AuthController.js';
+import { authMiddleware } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/login', loginController);
+router.get("/perfil", authMiddleware, (req, res) => {
+  res.json({ mensagem: "Bem-vindo ao seu perfil privado!" });
+});
 
 export default router;

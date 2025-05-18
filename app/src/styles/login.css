@@ -12,6 +12,7 @@
     color: #fff;
     font-family: "Plus Jakarta Sans SemiBold";
     margin-bottom: 5vh;
+    font-size: 1.8rem;
 }
 
 .imgLogin{
@@ -52,4 +53,63 @@
     padding: 4vh 3vw;
     background-color: #2D2F39;
     border-radius: 20px;
+}
+
+/* formulario */
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+form label{
+    color: #fff;
+    font-family: "Plus Jakarta Sans SemiBold";
+    margin-bottom: 1.2vh;
+    font-size: 1.3rem;
+}
+
+form label:not(:first-child){
+    margin-top: 6vh;
+}
+
+form input{
+    color: #fff;
+    padding: 0.7rem;
+    border-bottom: 0.5px solid #FFFFFF61;
+}
+
+form input:focus {
+    outline: 0px; 
+}
+
+form input::placeholder{
+    font-family: "Plus Jakarta Sans Regular";
+    color: #FFFFFF61;
+}
+
+.btn-entrar{
+    background-color: #FFC01D;
+    width: 100%;
+    border-radius: 10px;
+    color: #000;
+    font-family: "Plus Jakarta Sans SemiBold";
+    padding: 1vh 0;
+    margin-top: 8vh;
+}
+
+.campo-senha{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.campo-senha input{
+    width: 90%;
+}
+
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-password-toggle-button,
+input[type="password"]::-ms-reveal {
+  display: none;
 }

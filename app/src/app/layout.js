@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "../styles/globals.css";
-import Footer from "@/components/Footer/Footer";
-
+import Footer from "../components/Footer/Footer.jsx";
 
 export default function RootLayout({ children }) {
   return (
