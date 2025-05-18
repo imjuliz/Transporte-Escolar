@@ -11,7 +11,6 @@ export default function Login() {
     setUsuarioAtivo(nome);
   };
 
-
   const usuarios = [
     { nome: 'Administrador' },
     { nome: 'Aluno' },
