@@ -8,5 +8,8 @@ const router = express.Router();
 router.get("/perfil", authMiddleware, (req, res) => {
   res.json({ mensagem: "Bem-vindo ao seu perfil privado!" });
 });
+router.get("/motorista", authMiddleware, (req, res) => {
+  res.json({ mensagem: "Bem-vindo ao seu perfil privado!" });
+});
 
 export default router;
