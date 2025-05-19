@@ -130,6 +130,12 @@ export default function embarque() {
                     </div>
                 </div>
             </header>
+            <section className='secao1'>
+                <h1 className='title1'>Embarques e desembarques</h1>
+                <div className='escolas'>
+                    
+                </div>
+            </section>
         </>
     )
 }
