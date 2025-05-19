@@ -1,0 +1,204 @@
+
+
+footer {
+    width: 100% !important;
+    background-color: #161A23;
+    align-content: center;
+    justify-items: center;
+    margin-top: auto;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+footer a {
+    text-decoration: none;
+    color: #ffffff;
+    width: fit-content;
+    display: flex;
+}
+
+footer div h1 {
+    font-size: 1rem;
+    color: #FFC01D;
+    margin-bottom: 3vh;
+    font-weight: bold;
+}
+
+footer div p {
+    font-size: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in;
+}
+footer .logo{
+    color: #ffffff;
+    font-size: 25px;
+}
+.cont-1 p:hover {
+    opacity: 1; /* Exemplo de mudança de opacidade */
+}
+
+.cont-redes {
+    display: flex;
+    width: 80% !important;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .container {
+    width: 75% !important;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 8vh 0;
+    justify-content: space-between;
+    z-index: 99;
+    position: relative;
+    align-items: flex-end;
+}
+.cont-footer{
+    width: calc(100% - 78px);
+}
+
+.f-col,.payMeth {
+    width: 20%;
+}
+
+.cont-1,
+.cont-2 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    border-top: 1px solid #c1c7cd9a;
+}
+.f-col{
+    margin-top: 2%;
+}
+
+.cont-2 {
+    margin-top: 5vh;
+}
+
+.cont-2 p {
+    margin: 0;
+    margin-top: 2%;
+    height: fit-content;
+    color: #ffffff;
+    text-align: center;
+}
+
+.payMeth {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* responsividade */
+@media screen and (max-width: 1250px) {
+    .f-col,.payMeth {
+        width: 80%;
+    }
+
+    .cont-redes {
+        width: 100% !important;
+    }
+
+    .cont-1 {
+        display: grid;
+        grid-template-columns: repeat(2, 2fr);
+        justify-items: center;
+        height: 40vh;
+        align-content: space-between;
+    }
+
+    .col-redes{
+        align-self: center;
+    }
+
+    .cont-2 {
+        display: grid;
+        grid-template-columns: repeat(1, 2fr);
+        justify-items: center;
+        align-content: space-between;
+        margin-top: 7vh;
+    }
+
+    .payMeth{
+        width: 30%;
+    }
+
+    .cont-2 p{
+        margin-top: 4vh;
+    }
+}
+
+@media screen and (max-width: 970px) {
+    .f-col {
+        width: 90%;
+    }
+
+    .cont-1{
+        height: fit-content;
+    }
+}
+
+@media screen and (max-width:770px){
+    .cont-redes{
+        width: 80%!important;
+    }
+
+    .payMeth{
+        width: 45%;
+    }
+
+    .cont-1{
+        height: 50vh;
+    }
+}
+
+@media screen and (max-width:600px){
+    .cont-2 {
+        height: 12vh;
+    }
+    .f-col {
+        width: 100%;
+    }
+    .cont-redes{
+        width: 80% !important;
+}}
+
+@media screen and (max-width: 680px){
+    .cont-footer{
+        width: 100%;
+    }
+
+    footer{
+        width: 100%!important;
+    }
+    .cont-1{
+        grid-template-columns: repeat(1, 4fr);
+        height: 75vh;
+    }
+
+    footer div h1{
+        margin-bottom: 1.3vh;
+    }
+
+    .cont-redes{
+        width: 60%!important;
+    }
+    .cont-redes img{
+        width: 30px;
+    }
+}
+
+@media screen and (max-width: 500px){
+.payMeth{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 400px){
+.cont-redes{
+        width: 80% !important;
+    }
+
+}
