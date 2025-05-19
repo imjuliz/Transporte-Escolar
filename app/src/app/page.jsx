@@ -115,7 +115,7 @@ export default function Home() {
                         </li>
                     ))}
                     <li className='barra'>|</li>
-                    <li className='login'><a href='#'>entrar</a></li>
+                    <li className='login'><a href='/login'>entrar</a></li>
                 </ul>
             </header>
             {/* banner */}
