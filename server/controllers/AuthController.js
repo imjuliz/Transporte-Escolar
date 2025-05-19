@@ -1,18 +1,23 @@
-import { buscarUsuarioPorEmailOuCPF } from "../models/User.js";
+import { buscarUsuario, buscarPorEmail } from "../models/User.js";
 
 const loginController = async (req, res) => {
-  const { identificador, senha } = req.body;
-
+  const { email, senha, tipo } = req.body;
+  //verifica se o usuario existe
   try {
-    const usuario = await buscarUsuarioPorEmailOuCPF(identificador);
+      const usuario = await buscarPorEmail(email, tipo);
+      if (!usuario) {
+          return res.status(404).json({ mensagem: 'Usuário não encontrado' });
+      }
+      // verifica se a senha corresponde
+      const senhaCorreta = await buscarUsuario(email, senha, tipo)
 
-    if (!usuario || senha !== usuario.senha) {
-      return res.status(401).json({ mensagem: "Senha inválida" });
-    }
+      if (!senhaCorreta) {
+          return res.status(401).json({ mensagem: 'Senha incorreta' })
+      }
 
     res.status(200).json({ mensagem: "Login realizado com sucesso!"});
-  } catch (error) {
-    console.error("Erro ao fazer login:", error);
+  } catch (err) {
+    console.error("Erro ao fazer login:", err);
     res.status(500).json({ mensagem: "Erro ao fazer login" });
   }
 };

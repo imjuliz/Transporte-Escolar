@@ -1,15 +1,25 @@
 import { read } from "../config/database.js";
 
-async function buscarUsuarioPorEmailOuCPF(identificador) {
-    // verifica se é CPF
-    const tipoBusca = /^\d{11}$/.test(identificador) ? "cpf" : "email";
-    // limpa formatação do CPF 
-    const identificadorLimpo = identificador.replace(/\D/g, "");
-    const usuario = await read("usuarios", `${tipoBusca} = '${identificadorLimpo}'`);
-    if (!usuario) {
-        return null; // Retorno explícito para evitar erros
-    }
-    return usuario; // Retorna o usuário corretamente
+// busca o email requisitado no banco de dados, baseado no tipo de usuario
+const buscarPorEmail = async (email, tipo) => {
+    try{
+        const condicao = `email = '${email.replace(/'/g, "''")}' and tipo = '${tipo}'`; // escapa aspas simples
+        return await read('usuarios', condicao);
+    } catch(err){
+        console.error('Erro ao fazer login: ', err)
+        throw err;
+    };
 }
 
-export { buscarUsuarioPorEmailOuCPF };
+// busca o email, senha E tipo requisitados no banco de dados
+const buscarUsuario = async (email, senha, tipo) => {
+    try{
+        const condicao = `email = '${email.replace(/'/g, "''")}' and senha = '${senha}' and tipo = '${tipo}'`; // escapa aspas simples
+        return await read('usuarios', condicao);
+    } catch(err){
+        console.error('Erro ao fazer login: ', err)
+        throw err;
+    };
+}
+
+export { buscarPorEmail, buscarUsuario }
