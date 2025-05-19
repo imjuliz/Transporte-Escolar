@@ -4,7 +4,10 @@
 //     sessionStorage.clear(); 
 //     window.location.href = "../app/src/app/page.jsx"; // leva pra pagina inicial
 //   }
-  function logout() {
+  async function logout() {
     localStorage.removeItem('token');
-    window.location.href = '../app/src/app/page.jsx';
+    window.location.href = '../../app/src/app';
   }
+
+
+  export {logout};

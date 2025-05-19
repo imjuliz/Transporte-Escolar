@@ -91,7 +91,7 @@
   .sidebar .logoContent .logoName { /*logo da barra*/
     display: flex;
     height: 50px;
-    margin-left: 50%;
+    margin-left: 35%;
     width: 100%;
     font-family: "Plus Jakarta Sans SemiBold";
     align-items: center;
@@ -99,7 +99,7 @@
   }
   .sidebar .logoContent .nomepessoa { /*logo da barra*/
     height: 50px;
-    margin-left: -50%;
+    margin-left: -60%;
     margin-top: 30%;
     width: 100%;
     font-family: "Plus Jakarta Sans SemiBold";
@@ -114,7 +114,7 @@
   
   .logoContent .logo i {
     font-size: 28px;
-    margin-right: 5px;
+    margin-right: -15%;
   }
   
   .logoContent .logo .logoName {
