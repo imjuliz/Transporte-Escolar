@@ -85,8 +85,6 @@ export default function Login() {
           return null;
       }
     };
-  
-  
     // formatação de cpf
     const cpfRef = useRef(null); // referência para o input de CPF para que seja possivel fazer a validação/formatação depois da renderização
     useEffect(() => {
