@@ -8,5 +8,13 @@ const router = express.Router();
 router.get("/perfil", loginController, (req, res) => {
   res.json({ mensagem: "Bem-vindo ao seu perfil privado!" });
 });
+router.get("/motorista", authMiddleware, (req, res) => {
+  res.json({ mensagem: "Bem-vindo ao seu perfil privado!" });
+});
+
+//admin
+import { registrarUsuarioController  } from '../controllers/AdminController.js';
+//registrar usuario
+router.post('/', authMiddleware, registrarUsuarioController);
 
 export default router;

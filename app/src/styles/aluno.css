@@ -1,0 +1,499 @@
+@import "tailwindcss";
+
+.nav-icon.active path {
+    stroke: #5F4E34;
+  }
+  
+  .comprar.black-btn:hover .icon-btn {
+    transform: translateX(0px);
+  }
+  .cont-icons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 85%;
+  }
+  
+  .nav-label {
+    display: none;
+    font-family: "Plus Jakarta Sans SemiBold";
+  }
+  
+  .offcanvas-body {
+    padding: 40px !important;
+  }
+  
+  .navbar-toggler {
+    border-radius: 50% !important;
+  }
+  
+  .offcanvas-start {
+    width: fit-content !important;
+  }
+  
+  
+  .navbar.expanded {
+    width: fit-content;
+    padding: 0 !important;
+    height: 100%;
+    align-items: flex-start !important;
+  }
+  
+  .nav-link {
+    display: flex !important;
+    align-items: center !important;
+    padding: 0;
+  }
+  
+  .nav-label {
+    height: fit-content;
+  }
+  
+  .navbar.expanded .nav-label {
+    display: inline;
+    margin-left: 8px;
+  }
+  
+  .linksNames {
+    font-family: "Plus Jakarta Sans SemiBold";
+    font-size: .9rem;
+  }
+  
+  .sidebar {  /*barra lateral*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 78px;
+    background: #161A23;
+    padding: 6px 14px;
+    transition: all 0.5s ease;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  }
+
+  .sidebar.active {  /*widht da barra lateral*/
+    width: 240px;
+  }
+ 
+  .sidebar .logoContent .logo { /*logo da barra*/
+    color: #ffffff8f;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    font-family: "Plus Jakarta Sans SemiBold";
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s ease;
+    font-size: 1rem;
+  }
+  .sidebar .logoContent .logoName { /*logo da barra*/
+    display: flex;
+    height: 50px;
+    margin-left: 35%;
+    width: 100%;
+    font-family: "Plus Jakarta Sans SemiBold";
+    align-items: center;
+    font-size: 1rem;
+  }
+  .sidebar .logoContent .nomepessoa { /*logo da barra*/
+    height: 50px;
+    margin-left: -60%;
+    margin-top: 30%;
+    width: 100%;
+    font-family: "Plus Jakarta Sans SemiBold";
+    align-items: center;
+    font-size: 1rem;
+  }
+  
+  .sidebar.active .logoContent .logo {
+    opacity: 1;
+    pointer-events: none;
+  }
+  
+  .logoContent .logo i {
+    font-size: 28px;
+    margin-right: -15%;
+  }
+  
+  .logoContent .logo .logoName {
+    font-size: 20px;
+    font-weight: 400;
+  }
+  .sidebar .logoContent { /*logo da barra*/
+    margin-bottom: 20%;
+ 
+  }
+  
+  .sidebar #btn {
+    position: absolute;
+    color: #000;
+    top: 6px;
+    left: 50%;
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50%);
+  }
+  
+  .sidebar.active #btn {
+    left: 90%;
+  }
+  
+  .sidebar .navList {
+    margin-top: 10px;
+    padding: 0;
+    padding-top: 20%;
+    border-top: 1px solid #2D2F39;
+  }
+  
+  .sidebar .navList .navList-item {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin: 0 5px;
+    list-style: none;
+    line-height: 50px;
+  }
+  
+  .sidebar .navList .navList-item .tooltip {
+    position: absolute;
+    left: 122px;
+    top: 0;
+    align-content: center;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    height: 40px;
+    width: 122px;
+    background: #F6F6F6;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+  }
+  
+  .sidebar.active .navList .navList-item .tooltip {
+    display: none;
+  }
+  
+  .sidebar .navList .navList-item:hover .tooltip {
+    transition: all 0.5s ease;
+    opacity: 1;
+    top: 50%;
+  }
+  .navList h5 {
+    color: #ffffffb0;
+  }
+  .sidebar .navList .navList-item a {/*texto navbar li*/
+    color: #ecd9d9;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    border-radius: 12px;
+    white-space: normal;
+    justify-content: center;
+    height: 50px;
+  }
+  
+  .sidebar.active .navList .navList-item a svg {
+    margin-left: 1rem;
+  }
+  
+  .sidebar.active .navList .navList-item a span {
+    display: inline;
+  }
+  
+  .sidebar .navList .navList-item a span {
+    display: none;
+  }
+  
+  .sidebar.active .navList .navList-item a {
+    justify-content: flex-start;
+    
+  }
+  
+  .sidebar .navList .navList-item a:hover {
+    background: #F6F6F6;
+    color: #000;
+  }
+  
+  /*icones li*/
+  .sidebar .navList .navList-item svg {
+    height: 25px;
+    min-width: 25px;
+    line-height: 20px;
+    text-align: center;
+    color: #ebd9d9;
+  }
+  
+  .sidebar.active .navList .navList-item svg {
+    margin-right: 1rem;
+  }
+
+  .sidebar .navList2 .navList-item svg {
+    height: 25px;
+    min-width: 25px;
+    line-height: 20px;
+    text-align: center;
+    color: #ebd9d9;
+  }
+  
+  .sidebar.active .navList2 .navList-item svg {
+    margin-right: 1rem;
+  }
+  .sidebar .navList {
+    margin-top: 10px;
+    padding: 0;
+    padding-top: 20%;
+    border-top: 1px solid #2D2F39;
+  }
+  
+  .sidebar .navList .navList-item {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin: 0 5px;
+    list-style: none;
+    line-height: 50px;
+  }
+  
+  .sidebar .navList .navList-item .tooltip {
+    position: absolute;
+    left: 122px;
+    top: 0;
+    align-content: center;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    height: 40px;
+    width: 122px;
+    background: #F6F6F6;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+  }
+  
+  .sidebar.active .navList .navList-item .tooltip {
+    display: none;
+  }
+  
+  .sidebar .navList .navList-item:hover .tooltip {
+    transition: all 0.5s ease;
+    opacity: 1;
+    top: 50%;
+  }
+  .navList h5 {
+    color: #ffffffb0;
+  }
+  .sidebar .navList .navList-item a {/*texto navbar li*/
+    color: #ecd9d9;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    border-radius: 12px;
+    white-space: normal;
+    justify-content: center;
+    height: 50px;
+  }
+  
+  .sidebar .linksNames {
+    color: #757575;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease;
+  }
+  
+  .sidebar.active .linksNames {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .linksNames:hover {
+    color: #000;
+  }
+  
+  .sidebar .profileContent {
+    position: absolute;
+    color: #000;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  .sidebar .profileContent .profile {
+    position: relative;
+    padding: 10px 6px;
+    height: 60px;
+    background: #F6F6F6;
+    transition: all 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sidebar .navList .links2{
+    margin-top: 100%;
+    padding: 0;
+    padding-top: 20%;
+    border-top: 1px solid #2D2F39;
+  }
+  .sidebar.active .profileContent .profile {
+    background: none;
+  }
+  
+  .profileContent .profile .profileDetails {
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  
+  .sidebar.active .profile .profileDetails {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .profile .profileDetails img {
+    height: 45px;
+    width: 45px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  
+  .profile .profileDetails .nameJob {
+    margin-left: 10px;
+  }
+  
+  .profile .profileDetails .name {
+    font-size: 15px;
+    font-weight: 400;
+  }
+  
+  .profile .profileDetails .job {
+    font-size: 12px;
+  }
+  
+  .profile #logOut {
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    min-width: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.5s ease;
+    background: #F6F6F6;
+  }
+  
+  .sidebar.active .profile #logOut {
+    left: 88%;
+  }
+  
+  .sidebar.active .profile #logOut {
+    background: none;
+  }
+  
+  /* responsividade */
+  @media screen and (max-width:1024px) {
+    .sidebar .navList .navList-item svg {
+      height: 20px;
+      min-width: 15px;
+    }
+  
+    .sidebar .navList .navList-item a { /*texto navbar li*/
+      height: 40px;
+    }
+  
+    .sidebar .navList .navList-item input {
+      padding-left: 58px;
+      font-size: 16px;
+    }
+  
+    .sidebar {/*barra lateral*/
+      height: 100%;
+      padding: 3px 10px;
+    }
+  
+    .sidebar.active { /*widht da barra lateral*/
+      width: 190px;
+    }
+  
+    .sidebar .logoContent .logo { /*logo da barra*/
+      height: 40px;
+      width: 100%;
+    }
+  
+    .logoContent .logo i {
+      font-size: 20px;
+      margin-right: 5px;
+    }}
+  
+  @media screen and (max-width: 680px) {
+  .sidebar{
+    background-color: #fff;
+  }
+  
+    .sidebar.active .logoContent .logo .logoName {
+      font-size: 1.3rem;
+    }
+  
+    .sidebar {
+      width: 100%;
+      height: 45px;
+    }
+  
+    .sidebar .logoContent .logo {
+      opacity: 1;
+      justify-content: center;
+    }
+  
+    .sidebar .navList, .sidebar .profileContent {
+      visibility: hidden;
+    }
+  
+    .sidebar.active .navList {
+      visibility: visible;
+      margin-top: 10vh;
+    }
+  
+    .sidebar .navList .barra{
+      margin-bottom: 4vh;
+    }
+  
+  .sidebar #btn{
+    left: 10%;
+    top: 0;
+  }
+  .sidebar.active #btn{
+    left: 90%;
+  }
+  .sidebar .logoContent{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+  }
+  .sidebar.active{
+    width: 50%;
+    height: 100%;
+  }}
+  @media screen and (max-width: 500px){
+    .sidebar.active{
+      width: 100%;
+    }
+  }

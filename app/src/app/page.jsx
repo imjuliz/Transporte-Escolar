@@ -1,7 +1,7 @@
 "use client";
 import { Kings } from 'next/font/google'
-import '../styles/globals.css'
-import '../styles/page.css'
+import '../styles/globals.css';
+import '../styles/page.css';
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 
@@ -10,7 +10,8 @@ export default function Home() {
 
     const links = [
         { href: '/', page: 'Página Inicial' },
-        { href: '/TrabalhoConosco', page: 'Trabalhe Conosco' }
+        { href: '/TrabalhoConosco', page: 'Trabalhe Conosco' },
+        { href: '/responsaveis', page: 'Responsaveis'}
     ];
 
     const cards = [
@@ -115,7 +116,7 @@ export default function Home() {
                         </li>
                     ))}
                     <li className='barra'>|</li>
-                    <li className='login'><a href='#'>entrar</a></li>
+                    <li className='login'><a href='/login'>entrar</a></li>
                 </ul>
             </header>
             {/* banner */}
@@ -141,7 +142,7 @@ export default function Home() {
                 </div>
             </section>
 
-                <section className='sessão2'>
+                <section className='secão2'>
                     <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             <div className="carousel-item active" data-bs-interval="3000">
@@ -186,8 +187,8 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section className='sessão3'>
-                    <div className='sessao3-corpo'>
+                <section className='secão3'>
+                    <div className='secao3-corpo'>
                     <h2>Sobre nós</h2>
                 <div className="grid grid-flow-col grid-rows-3 gap-4">
                     {sobreItens.map((sobre, index) => (
@@ -200,7 +201,7 @@ export default function Home() {
                 </div>
                 </section>
 
-                <section className='sessão5'>
+                <section className='secão5'>
                     <h2 className='title5_2'>Por que usar o -nome-?</h2>
                     <h1 className='title5_1'>Simples, fácil e rápido</h1>
                     <h3 className='title5_3'>Nossa plataforma te ajuda a ter controle total e otimizar uma experiência organizada e confiável com o transporte escolar!</h3>
@@ -220,7 +221,7 @@ export default function Home() {
                     </div> <img src='./img/sessao5/Content.svg' className='rounded float-end banner2'/>
                 </section>
 
-                <section className='sessão4'>
+                <section className='secão4'>
                     <h2 className='title2'>Como funciona?</h2>
                     <h1 className='title'>Entenda em poucos passos</h1>
                     <h3 className='title3'>Em apenas algumas etapas fáceis, você está pronto para gerenciar suas viagens com nosso transporte escolar. Tudo me um só lugar.</h3>
@@ -240,45 +241,3 @@ export default function Home() {
         </>
     );
 }
-
-{/* TESTE
-import { Kings } from 'next/font/google'
-import '../styles/globals.css'
-import '../styles/page.css'
-import { usePathname } from 'next/navigation';
-import { useRef, useEffect, useState } from "react";
-
-export default function Home() {
-    const pathname = usePathname();
-
-    const [title, setTitle] = useState("");
-
-    // Chamada à API do backend ao carregar a página
-    useEffect(() => {
-        fetch("http://localhost:3001/home").then(
-            response => response.json()
-        ).then(
-            data => {
-                console.log(data)
-                setTitle(data.title)
-            }
-        )
-    }, [] // para que a requisiçao seja executada apenas uma vez
-    );
-
-
-    return (
-        <>
-            <section>
-                <div>
-                    <h1>{title}</h1>
-                </div>
-
-                <div>
-                    <image></image>
-                </div>
-            </section>
-        </>
-    )
-}
-*/}
