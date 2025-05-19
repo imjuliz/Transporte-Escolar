@@ -1,11 +1,11 @@
 "use client";
 import { Kings } from 'next/font/google'
-import '../../styles/motorista.css'
+import '../../styles/embarque.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 // import { logout } from '../../../../server/models/logout';
 
-export default function motorista() {
+export default function embarque() {
     useEffect(() => {
         const menuBtn = document.querySelector("#btn");
         const sidebar = document.querySelector(".sidebar");
@@ -130,12 +130,6 @@ export default function motorista() {
                     </div>
                 </div>
             </header>
-            <section className='secao1'>
-                <h1 className='title1'>Embarques e desembarques</h1>
-                <div className='escolas'>
-                    
-                </div>
-            </section>
         </>
     )
 }
