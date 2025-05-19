@@ -6,7 +6,7 @@
 //   }
   async function logout() {
     localStorage.removeItem('token');
-    window.location.href = '../../app/src/app';
+    window.location.href = '../../app/src/app';//taca no login, tem que criar a função 
   }
 
 
