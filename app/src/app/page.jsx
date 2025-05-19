@@ -1,7 +1,7 @@
 "use client";
 import { Kings } from 'next/font/google'
-import '../styles/globals.css'
-import '../styles/page.css'
+import '../styles/globals.css';
+import '../styles/page.css';
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 
@@ -10,7 +10,8 @@ export default function Home() {
 
     const links = [
         { href: '/', page: 'Página Inicial' },
-        { href: '/TrabalhoConosco', page: 'Trabalhe Conosco' }
+        { href: '/TrabalhoConosco', page: 'Trabalhe Conosco' },
+        { href: '/responsaveis', page: 'Responsaveis'}
     ];
 
     const cards = [
