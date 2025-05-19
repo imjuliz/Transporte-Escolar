@@ -9,4 +9,9 @@ router.get("/perfil", authMiddleware, (req, res) => {
   res.json({ mensagem: "Bem-vindo ao seu perfil privado!" });
 });
 
+//admin
+import { registrarUsuarioController  } from '../controllers/AdminController.js';
+//registrar usuario
+router.post('/', authMiddleware, registrarUsuarioController);
+
 export default router;
