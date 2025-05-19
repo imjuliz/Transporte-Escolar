@@ -29,27 +29,32 @@ export default function Login() {
   const handleLogin = async (e) => {
   e.preventDefault();
 
-  const identificador =
-    usuarioAtivo.toLowerCase() === "administrador" || usuarioAtivo.toLowerCase() === "motorista"
-      ? document.getElementById("cpf")?.value.trim()
-      : document.getElementById("email")?.value.trim();
-
+  // const identificador =
+  //   usuarioAtivo.toLowerCase() === "administrador" || usuarioAtivo.toLowerCase() === "motorista"
+  //     ? document.getElementById("cpf")?.value.trim()
+  //     : document.getElementById("email")?.value.trim();
+function identificador() {
+  usuarioAtivo.toLowerCase() === "administrador" || usuarioAtivo.toLowerCase() === "motorista"
+  ? document.getElementById("cpf")?.value.trim()
+  : document.getElementById("email")?.value.trim();
+}
   const credenciais = { identificador, senha: document.getElementById("senha")?.value.trim() };
 
   try {
-    const resposta = await fetch("http://localhost:3001/login", {
+    const resposta = await identificador( {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credenciais),
     });
 
-    const dados = await resposta.json();
+    const dados = await resposta;
 
-    if (resposta.ok) {
+    if (resposta) {
       localStorage.setItem("token", dados.token);
-      alert("Login realizado com sucesso!");
+      alert("Login realizado com sucesso!!!!");
+      console.log('login realizado com sucesso!!!')
     } else {
-      alert(dados.mensagem);
+      alert(dados);
     }
   } catch (error) {
     console.error("Erro ao fazer login:", error);
