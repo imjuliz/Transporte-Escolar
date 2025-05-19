@@ -1,6 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "../styles/globals.css";
-import Footer from "../components/Footer/Footer.jsx";
 
 export default function RootLayout({ children }) {
   return (
@@ -13,7 +12,6 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         {children}
-        <Footer/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossOrigin="anonymous"></script>
       </body>
       

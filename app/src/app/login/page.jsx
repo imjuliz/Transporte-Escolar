@@ -39,13 +39,13 @@ export default function Login() {
 
     try {
       const tipo = usuarioAtivo
-      .normalize("NFD") // p deixar sem acento
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase(); // p deixar minusculo
+        .normalize("NFD") // p deixar sem acento
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase(); // p deixar minusculo
       const resposta = await fetch("http://localhost:3001/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({email: document.getElementById("email").value, senha: document.getElementById("senha").value, tipo: tipo}),
+        body: JSON.stringify({ email: document.getElementById("email").value, senha: document.getElementById("senha").value, tipo: tipo }),
       });
 
       const dados = await resposta.json();
@@ -53,6 +53,22 @@ export default function Login() {
       if (resposta.ok) {
         localStorage.setItem("token", dados.token);
         alert("Login realizado com sucesso!");
+        // redirecionar o usuário para a página correta com base no tipo de perfil dele
+        switch (dados.tipo) {
+          case 'administrador':
+            router.push('/administrador/dashboard');
+            break;
+          case 'aluno':
+            router.push('/aluno/dashboard');
+            break;
+          case 'motorista':
+            router.push('/motorista/dashboard');
+            break;
+          case 'responsavel':
+            router.push('/responsavel/dashboard');
+            break;
+        }
+
       } else {
         alert(dados.mensagem);
       }

@@ -2,6 +2,7 @@
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
 import '../../styles/trabalhe.css'
+import Footer from "../../components/Footer/Footer.jsx";
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect } from "react";
 
@@ -159,7 +160,7 @@ export default function TrabalheConosco() {
 
                 </div>
             </section>
-
+<Footer/>
         </>
     );
 }
