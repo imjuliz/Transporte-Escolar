@@ -78,6 +78,8 @@ async function create(table, data) {
     }
 }
 
+
+
 //Função para atualizar um registro
 async function update(table, data, where) {
     const connection = await getConnection();

@@ -14,6 +14,6 @@ router.get("/motorista", loginController, (req, res) => {
 });
 
 //admin - registrar usuario
-router.post('/', loginController, registrarUsuarioController);
+router.post("/registrar", /*loginController*/ registrarUsuarioController);
 
 export default router;
