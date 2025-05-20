@@ -3,7 +3,10 @@ import { Kings } from 'next/font/google'
 import '../styles/globals.css';
 import '../styles/page.css';
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import Footer from '../components/Footer/Footer.jsx'
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 import { usePathname } from 'next/navigation';
@@ -242,7 +245,11 @@ export default function Home() {
                 </div>
             </section>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             {/* <Footer /> */}
+=======
+            
+>>>>>>> Stashed changes
 =======
             
 >>>>>>> Stashed changes

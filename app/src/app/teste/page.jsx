@@ -1,6 +1,9 @@
 // criar a pagina aqui - lorena TESTE DA API DE REGISTRAR USUARIO - CONTA DOS ADMINS
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 //A API localhost:3001/registrar está funcionando, mas ainda precisa arrumar a conexão do formulário com o servidor, para enviar as informações
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 
@@ -9,6 +12,7 @@
 "use client";
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 import '../../components/Footer/Footer.jsx';
 import React, { useEffect, useState } from "react";
@@ -19,6 +23,8 @@ export default function RegistrarUsuario() {
    
      document.getElementById('registrarForm').addEventListener('submit', async function(event) {
 =======
+=======
+>>>>>>> Stashed changes
 import '../../styles/login.css';
 import '../../components/Footer/Footer.jsx';
 import { useState } from "react";
@@ -26,6 +32,9 @@ import { useState } from "react";
 export default function RegistrarUsuario() {
 
     document.getElementById('registrarForm').addEventListener('submit', async function (event) {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         event.preventDefault();
 
@@ -34,17 +43,23 @@ export default function RegistrarUsuario() {
 
         try {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             const response = await fetch('http://localhost:3001/registrar', {
                 method: 'POST',
                 //headers: {
                    // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGlwbyI6ImNvbXVtIiwiaWF0IjoxNzQ3MTYwOTQxLCJleHAiOjE3NDcxNjQ1NDF9.8JJKrhTr1iYV0Q29djaMh6VYUrLin7r4TwEUaelxfPY' // Substitua pelo seu token JWT
                // },
 =======
+=======
+>>>>>>> Stashed changes
             const response = await fetch('http://localhost:3000/administradores/cadastrar', {
                 method: 'POST',
                 headers: {
                     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGlwbyI6ImNvbXVtIiwiaWF0IjoxNzQ3MTYwOTQxLCJleHAiOjE3NDcxNjQ1NDF9.8JJKrhTr1iYV0Q29djaMh6VYUrLin7r4TwEUaelxfPY' // Substitua pelo seu token JWT
                 },
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                 body: formData
             });
@@ -55,6 +70,7 @@ export default function RegistrarUsuario() {
             console.error('Erro:', error);
             document.getElementById('responseContent').textContent = 'Erro ao enviar os dados.';
         }
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     });*/}
 
@@ -93,10 +109,14 @@ export default function RegistrarUsuario() {
 =======
     })
 >>>>>>> Stashed changes
+=======
+    })
+>>>>>>> Stashed changes
 
 
     return (
         <>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         
             <h1>registrar usuario</h1>
@@ -112,6 +132,8 @@ export default function RegistrarUsuario() {
 
                 <label htmlFor="tipo">Tipo de Usuário</label> {/**Só por enquanto, depois vou adicionar o tipo específico em cada rota ex: admin/registrar/motorista */}
 =======
+=======
+>>>>>>> Stashed changes
             <h1>registrar usuario</h1>
             <form id="registrarForm">
                 <label for="cpf">CPF:</label>
@@ -124,6 +146,9 @@ export default function RegistrarUsuario() {
                 <input type="text" id="senha" name="senha" required></input>
 
                 <label for="tipo">Tipo de Usuário</label> {/**Só por enquanto, depois vou adicionar o tipo específico em cada rota ex: admin/registrar/motorista */}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                 <input type="text" id="tipo" name="tipo" required></input>
 
@@ -136,6 +161,12 @@ export default function RegistrarUsuario() {
             </div>
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+            
+
+
+>>>>>>> Stashed changes
 =======
             
 

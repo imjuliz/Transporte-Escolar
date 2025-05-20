@@ -1,7 +1,10 @@
 // criar a pagina aqui - lorena
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 //cpf, email, senha, tipo
@@ -11,7 +14,10 @@ import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
 import '../../styles/login.css';
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import '../../components/Footer/Footer.jsx';
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 import { useState } from "react";
