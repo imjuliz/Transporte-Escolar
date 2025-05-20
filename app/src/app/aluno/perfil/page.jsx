@@ -1,24 +1,34 @@
 "use client";
 import { Kings } from 'next/font/google'
-import '../../styles/aluno.css'
-import { usePathname } from 'next/navigation';
+import '../../../styles/perfil.css'
+import '../../../styles/globals.css'
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 
 export default function aluno() {
-    useEffect(() => {
-        const menuBtn = document.querySelector("#btn");
-        const sidebar = document.querySelector(".sidebar");
-        const toggleSidebar = () => {
-            sidebar.classList.toggle("active");
-        };
-        menuBtn.addEventListener("click", toggleSidebar);
+    // useEffect(() => {
+    //     const menuBtn = document.querySelector("#btn");
+    //     const sidebar = document.querySelector(".sidebar");
+    //     const toggleSidebar = () => {
+    //         sidebar.classList.toggle("active");
+    //     };
+    //     menuBtn.addEventListener("click", toggleSidebar);
 
-        // Cleanup para evitar vazamento de eventos
-        return () => {
-            menuBtn.removeEventListener("click", toggleSidebar);
-        };
-    }, []); // [] garante que o código seja executado apenas uma vez
+    //     // Cleanup para evitar vazamento de eventos
+    //     return () => {
+    //         menuBtn.removeEventListener("click", toggleSidebar);
+    //     };
+    // }, []); // [] garante que o código seja executado apenas uma vez
 
+    // const router = useRouter();
+
+    // useEffect(() => {
+    //   const isAutenticado = false; // substitua com sua lógica real
+  
+    //   if (!isAutenticado) {
+    //     router.push('/login');
+    //   }
+    // }, []);
 
     const iconsNav =
     {
@@ -77,9 +87,10 @@ export default function aluno() {
         { href: '/notificacoes', name: 'notificacoes', page: 'Notificações' },
         { href: 'logout()', name: 'sair', page: 'Sair' }
     ];
+
     return (
         <>
-            <header>
+            {/* <header>
                 <div className="sidebar">
                     <div className="logoContent">
                         <div className="logo">
@@ -117,13 +128,77 @@ export default function aluno() {
                     </ul>
                     <div className="profileContent">
                         <div className="profile">
-                            <button type='submit'>{/* <button onClick={logout()}> */}
+                            <button type='submit'>
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11 1H13C14.1046 1 15 1.89543 15 3L15 13C15 14.1046 14.1046 15 13 15H11M1 8H11M11 8L9 10M11 8L9 6" stroke="#757575" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg></button>
                         </div>
                     </div>
                 </div>
-            </header>
+            </header> */}
+            <main>
+            <section>
+                <div className='page-indicador'>
+                <h1>Meu perfil</h1>
+                <hr />
+                </div>
+                <div className='user'>
+                    {/* colocar imagem */}
+                    <div>
+                    <h3>Nome e Sobrenome</h3>
+                    <p>Tipo de usuario</p>
+                    </div>
+                    <hr />
+                </div>
+
+                <div className='sec'>
+                    <h4>Dados Pessoais</h4>
+                    <div className='sec-container'>
+                    <div className='sec-campos'>
+                        <h6>Nome completo:</h6>
+                        <p>Nome completo.</p>
+                    </div>
+                    <div className='sec-campos'>
+                        <h6>Escola:</h6>
+                        <p>Nome da escola</p>
+                        <p>Endereço da escola</p>
+                    </div>
+                    <div className='sec-campos'>
+                        <h6>Email institucional:</h6>
+                        <p>Email.</p>
+                    </div>
+                    <div className='sec-campos'>
+                        <h6>Endereço:</h6>
+                        <p>Endereço.</p>
+                    </div>
+                </div>
+                </div>
+
+                <div className='sec'>
+                    <h4>Contatos</h4>
+                    <div className='sec-container'>
+                    <div className='sec-campos'>
+                        <h6>Email:</h6>
+                        <p>Email pessoal 1.</p>
+                    </div>
+                    <div>
+                    <div className='sec-campos'>
+                        <h6>Telefone:</h6>
+                        <p>Telefone pessoal 1</p>
+                    </div>
+                    <div className='sec-campos'>
+                        <h6>Tipo de telefone:</h6>
+                        <p>Recado ou principal</p>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+            <div>
+                <button>Adicionar contato</button>
+                <button>Editar informações</button>
+            </div>
+            </section>
+            </main>
         </>
     )}
