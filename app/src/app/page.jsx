@@ -2,7 +2,7 @@
 import { Kings } from 'next/font/google'
 import '../styles/globals.css';
 import '../styles/page.css';
-import Footer from "../../components/Footer/Footer.jsx";
+// import Footer from "../../components/Footer/Footer.jsx";
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 
@@ -238,7 +238,7 @@ export default function Home() {
                     ))}
                 </div>
             </section>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 }

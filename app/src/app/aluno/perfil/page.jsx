@@ -1,7 +1,7 @@
 "use client";
 import { Kings } from 'next/font/google'
 import '../../styles/aluno.css'
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 
 export default function aluno() {
@@ -19,6 +19,15 @@ export default function aluno() {
         };
     }, []); // [] garante que o código seja executado apenas uma vez
 
+    const router = useRouter();
+
+    useEffect(() => {
+      const isAutenticado = false; // substitua com sua lógica real
+  
+      if (!isAutenticado) {
+        router.push('/login');
+      }
+    }, []);
 
     const iconsNav =
     {

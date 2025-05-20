@@ -3,9 +3,12 @@ const emailInput = document.querySelector('#email');
 const passwordInput = document.querySelector('#senha');
 const confirmPasswordInput = document.querySelector('#confirm-password');
 
-form.addEventListener('submit', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', (event) => {
     // Previne o envio do formulário
-    event.preventDefault();
+        event.preventDefault();
 
     // Valida o endereço de email
     if (!emailInput.checkValidity()) {
@@ -27,4 +30,6 @@ form.addEventListener('submit', (event) => {
 
     // Se todos os campos estiverem válidos, envia o formulário
     form.submit();
+});
+}
 });
