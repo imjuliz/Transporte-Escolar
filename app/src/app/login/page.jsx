@@ -2,6 +2,7 @@
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
 import '../../styles/login.css';
+import embarque from '../motorista/embarqueDesembarque/page';
 // import './validação.js';
 import { useState } from "react";
 
@@ -41,7 +42,6 @@ export default function Login() {
     //   usuarioAtivo.toLowerCase() === "administrador" || usuarioAtivo.toLowerCase() === "motorista"
     //     ? document.getElementById("cpf")?.value.trim()
     //     : document.getElementById("email")?.value.trim();
-
     // const email = { email: document.getElementById("email") };
     // const senha = { senha: document.getElementById("senha") };
 
@@ -70,14 +70,13 @@ export default function Login() {
             router.push('/aluno/perfil');
             break;
           case 'motorista':
-            router.push('/motorista/dashboard');
+            window.location.replace('../motorista/embarqueDesembarque/page.jsx')
+            window.location.href('../motorista/embarqueDesembarque/page.jsx')
             break;
           case 'responsavel':
             router.push('/responsavel/dashboard');
             break;
-        }
-
-      } else {
+        }} else {
         alert(dados.mensagem);
       }
     } catch (error) {
