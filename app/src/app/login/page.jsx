@@ -2,9 +2,12 @@
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
 import '../../styles/login.css';
+import embarque from '../motorista/embarqueDesembarque/page';
 // import './validação.js';
+import router from '../../../../server/routes/authRotas.js'
 import { useState } from "react";
 import { useRouter } from 'next/navigation'; 
+
 
 export default function Login() {
   const router = useRouter();
@@ -32,15 +35,6 @@ export default function Login() {
   // envia credenciais para o backend
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    // const identificador =
-    //   usuarioAtivo.toLowerCase() === "administrador" || usuarioAtivo.toLowerCase() === "motorista"
-    //     ? document.getElementById("cpf")?.value.trim()
-    //     : document.getElementById("email")?.value.trim();
-
-    // const email = { email: document.getElementById("email") };
-    // const senha = { senha: document.getElementById("senha") };
-
     try {
       const tipo = usuarioAtivo
         .normalize("NFD") // p deixar sem acento
@@ -66,20 +60,18 @@ export default function Login() {
             router.push('/aluno/perfil');
             break;
           case 'motorista':
-            router.push('/motorista/dashboard');
+           router.push('../motorista/embarqueDesembarque/page.jsx');
             break;
           case 'responsavel':
             router.push('/responsavel/dashboard');
             break;
         }
-
       } else {
         alert(dados.mensagem);
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
-    }
-  };
+    } };
 
   /*
     // caso a opção administrador ou motorista for selecionada, o usuario deverá logar com seu CPF, caso seja aluno ou responsavel, o usuario deverá logar com seu email
@@ -92,7 +84,7 @@ export default function Login() {
               <label htmlFor="cpf">CPF:</label>
               <input type="text" id="cpf" ref={cpfRef} placeholder="Digite seu CPF" />
             </>
-          );
+            );
         case "aluno":
         case "responsável":
           return (
