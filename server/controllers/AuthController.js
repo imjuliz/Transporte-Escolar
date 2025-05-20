@@ -15,7 +15,7 @@ const loginController = async (req, res) => {
       return res.status(401).json({ mensagem: 'Senha incorreta' })
     }
 
-    req.session.usuario = { email, tipo };
+    // req.session.usuario = { email, tipo };
 
     res.status(200).json({ mensagem: "Login realizado com sucesso!" });
   } catch (err) {

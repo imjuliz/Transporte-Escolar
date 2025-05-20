@@ -2,15 +2,12 @@
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
 import '../../styles/login.css';
-import embarque from '../motorista/embarqueDesembarque/page';
+// import embarque from '../motorista/embarqueDesembarque/page';
 // import './validação.js';
-import router from '../../../../server/routes/authRotas.js'
 import { useState } from "react";
-import { useRouter } from 'next/navigation'; 
-
+import {BrouwserRouter, Router, Route} from 'react-router-dom';
 
 export default function Login() {
-  const router = useRouter();
 
   // senha
   const [senhaVisivel, setSenhaVisivel] = useState(false); // estado falso pq a senha esta oculta
@@ -53,14 +50,22 @@ export default function Login() {
         alert("Login realizado com sucesso!");
         // redirecionar o usuário para a página correta com base no tipo de perfil dele
         switch (dados.tipo) {
+          
           case 'administrador':
+          
             router.push('/administrador/dashboard');
             break;
           case 'aluno':
             router.push('/aluno/perfil');
             break;
-          case 'motorista':
-           router.push('../motorista/embarqueDesembarque/page.jsx');
+          case 'motorista':  
+          <BrouwserRouter>
+          <Router>
+              <Route path='/' element = {'/login'}/>
+              <Route path = '../motorista/embarqueDesembarque/page.jsx' element = {'../motorista/embarqueDesembarque/page.jsx'}/>
+            </Router> </BrouwserRouter>
+         
+          //  router.push('../motorista/embarqueDesembarque/page.jsx');
             break;
           case 'responsavel':
             router.push('/responsavel/dashboard');
