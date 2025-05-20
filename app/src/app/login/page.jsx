@@ -2,6 +2,7 @@
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
 import '../../styles/login.css';
+// import './validação.js';
 import { useState } from "react";
 
 export default function Login() {
@@ -10,6 +11,13 @@ export default function Login() {
   const mostrarSenha = () => {
     setSenhaVisivel((prev) => !prev); // pega o estado anterior e inverte, ou seja, alterna entre true e false
   };
+
+  // href - botao de entrar
+  const [hrefVisivel, setHrefVisivel] = useState(false); // estado falso pq a senha esta oculta
+  const mostrarHref = () => {
+    setHrefVisivel((prev) => !prev); // pega o estado anterior e inverte, ou seja, alterna entre true e false
+  };
+
 
   // escolha de usuario
   const [usuarioAtivo, setUsuarioAtivo] = useState("");
@@ -59,7 +67,7 @@ export default function Login() {
             router.push('/administrador/dashboard');
             break;
           case 'aluno':
-            router.push('/aluno/dashboard');
+            router.push('/aluno/perfil');
             break;
           case 'motorista':
             router.push('/motorista/dashboard');
@@ -156,7 +164,7 @@ export default function Login() {
                 </svg>
                 )}</button>
               </div>
-              <button type="submit" className='btn-entrar'>Entrar</button>
+              <button type="submit" className='btn-entrar' href={hrefVisivel ? "text" : "password"}>Entrar</button>
             </form>
             <button
               style={{ marginTop: "1rem", color: "#FFC01D" }}
