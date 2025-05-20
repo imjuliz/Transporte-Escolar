@@ -1,15 +1,14 @@
 "use client";
-import express from "express";
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
 import '../../styles/login.css';
 import embarque from '../motorista/embarqueDesembarque/page';
 // import './validação.js';
+import router from '../../../../server/routes/authRotas.js'
 import { useState } from "react";
 
-export default function Login() {
-  const router = express.Router();
 
+export default function Login() {
   // senha
   const [senhaVisivel, setSenhaVisivel] = useState(false); // estado falso pq a senha esta oculta
   const mostrarSenha = () => {
