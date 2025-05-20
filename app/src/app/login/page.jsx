@@ -4,7 +4,6 @@ import '../../styles/globals.css'
 import '../../styles/login.css';
 import embarque from '../motorista/embarqueDesembarque/page';
 // import './validação.js';
-import router from '../../../../server/routes/authRotas.js'
 import { useState } from "react";
 import { useRouter } from 'next/navigation'; 
 

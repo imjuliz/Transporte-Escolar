@@ -1,0 +1,36 @@
+section h1{
+    font-family: "Plus Jakarta Sans SemiBold";
+    font-size: 2rem;
+    width: max-content;
+    height: fit-content;
+}
+
+.page-indicador{
+    width: min-content;
+}
+
+.user h3{
+    font-size: 1.1rem;
+    font-family: "Plus Jakarta Sans Regular";
+}
+
+.user p{
+    font-size: 0.9rem;
+    color: #384D6C;
+    font-family: "Plus Jakarta Sans SemiBold";
+}
+
+.sec h4{
+    font-family: "Plus Jakarta Sans SemiBold";
+    font-size: 1.4rem;
+    width: max-content;
+    height: fit-content;
+}
+
+.sec-campos h6{
+    font-family: "Plus Jakarta Sans Regular";
+}
+
+.sec-campos p{
+    font-family: "Plus Jakarta Sans SemiBold";
+}

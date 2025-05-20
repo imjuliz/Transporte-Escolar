@@ -1,7 +1,6 @@
 import express from "express";
 import { loginController } from "../controllers/AuthController.js";
 import { registrarUsuarioController  } from '../controllers/AdminController.js';
-import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -15,7 +14,7 @@ router.get("/motorista", loginController, (req, res) => {
 });
 
 // login
-router.get('/admin/', (req, res) => {
+router.get('/administrador', (req, res) => {
   if (!req.session.usuario || req.session.usuario.tipo !== 'administrador') {
     return res.status(401).json({ mensagem: 'Acesso negado' });
 }
