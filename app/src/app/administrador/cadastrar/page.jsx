@@ -1,13 +1,19 @@
 // criar a pagina aqui - lorena
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 //cpf, email, senha, tipo
 
 "use client";
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
 import '../../styles/login.css';
+<<<<<<< Updated upstream
 import '../../components/Footer/Footer.jsx';
+=======
+>>>>>>> Stashed changes
 import { useState } from "react";
 
 export default function RegistrarUsuario() {
