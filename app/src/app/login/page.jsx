@@ -1,4 +1,5 @@
 "use client";
+import express from "express";
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
 import '../../styles/login.css';
@@ -7,18 +8,13 @@ import embarque from '../motorista/embarqueDesembarque/page';
 import { useState } from "react";
 
 export default function Login() {
+  const router = express.Router();
+
   // senha
   const [senhaVisivel, setSenhaVisivel] = useState(false); // estado falso pq a senha esta oculta
   const mostrarSenha = () => {
     setSenhaVisivel((prev) => !prev); // pega o estado anterior e inverte, ou seja, alterna entre true e false
   };
-
-  // href - botao de entrar
-  const [hrefVisivel, setHrefVisivel] = useState(false); // estado falso pq a senha esta oculta
-  const mostrarHref = () => {
-    setHrefVisivel((prev) => !prev); // pega o estado anterior e inverte, ou seja, alterna entre true e false
-  };
-
 
   // escolha de usuario
   const [usuarioAtivo, setUsuarioAtivo] = useState("");
@@ -37,14 +33,6 @@ export default function Login() {
   // envia credenciais para o backend
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    // const identificador =
-    //   usuarioAtivo.toLowerCase() === "administrador" || usuarioAtivo.toLowerCase() === "motorista"
-    //     ? document.getElementById("cpf")?.value.trim()
-    //     : document.getElementById("email")?.value.trim();
-    // const email = { email: document.getElementById("email") };
-    // const senha = { senha: document.getElementById("senha") };
-
     try {
       const tipo = usuarioAtivo
         .normalize("NFD") // p deixar sem acento
@@ -70,19 +58,18 @@ export default function Login() {
             router.push('/aluno/perfil');
             break;
           case 'motorista':
-            window.location.replace('../motorista/embarqueDesembarque/page.jsx')
-            window.location.href('../motorista/embarqueDesembarque/page.jsx')
+           router.push('../motorista/embarqueDesembarque/page.jsx');
             break;
           case 'responsavel':
             router.push('/responsavel/dashboard');
             break;
-        }} else {
+        }
+      } else {
         alert(dados.mensagem);
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
-    }
-  };
+    } };
 
   /*
     // caso a opção administrador ou motorista for selecionada, o usuario deverá logar com seu CPF, caso seja aluno ou responsavel, o usuario deverá logar com seu email
@@ -95,7 +82,7 @@ export default function Login() {
               <label htmlFor="cpf">CPF:</label>
               <input type="text" id="cpf" ref={cpfRef} placeholder="Digite seu CPF" />
             </>
-          );
+            );
         case "aluno":
         case "responsável":
           return (
@@ -163,7 +150,7 @@ export default function Login() {
                 </svg>
                 )}</button>
               </div>
-              <button type="submit" className='btn-entrar' href={hrefVisivel ? "text" : "password"}>Entrar</button>
+              <button type="submit" className='btn-entrar'>Entrar</button>
             </form>
             <button
               style={{ marginTop: "1rem", color: "#FFC01D" }}
