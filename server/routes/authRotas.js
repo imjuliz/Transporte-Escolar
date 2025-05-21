@@ -27,14 +27,7 @@ router.post('/logout', (req, res) => {
 });
 
 //admin - registrar usuario
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 router.post("/registrar", /*loginController*/ registrarUsuarioController);
-=======
 router.post('/administrador/cadastrar', loginController, registrarUsuarioController);
->>>>>>> Stashed changes
-=======
-router.post('/administrador/cadastrar', loginController, registrarUsuarioController);
->>>>>>> Stashed changes
 
 export default router;
