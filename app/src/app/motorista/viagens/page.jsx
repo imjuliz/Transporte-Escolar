@@ -1,12 +1,12 @@
 "use client";
 import { Kings } from 'next/font/google'
-import '../../../styles/embarque.css'
+import '../../../styles/viagens.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 
 // import { logout } from '../../../../server/models/logout';
 
-export default function embarque() {
+export default function viagens() {
     useEffect(() => {
         const menuBtn = document.querySelector("#btn");
         const sidebar = document.querySelector(".sidebar");
@@ -84,9 +84,10 @@ export default function embarque() {
         { href: 'logout()', name: 'sair', page: 'Sair' }
     ];
     const escolas = [
-        { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola X', endereco: 'R. Santo Andre, B. Nova Gerty', qtd: '65' },//qtd vai pegar do banco de dados
-        { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola Y', endereco: 'R.Boa Vista, B. Nova Gerty', qtd: '12' },
-        { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola Z', endereco: 'R. Não Sei, B. Vou Pensar', qtd: '34' },
+        // { hr: 'Hoje' },
+        { escola: 'escola A', hr: '06:00', endereco: 'Endereço A' },
+        { escola: 'escola B', hr: '06:30', endereco: 'Endereço B' },
+        { escola: 'escola C', hr: '07:00', endereco: 'Endereço C' }
     ]
     return (
         <>
@@ -133,23 +134,21 @@ export default function embarque() {
                 </div>
             </header>
             <section className='secao1'>
-                <h1 className='title1'>Embarques e desembarques</h1>
+                <h1 className='title1'>Planejamento de Viagens</h1>
                 <p className='linha'></p>
                 <div className="escolas">
-                    {escolas.map(({ escolas1, escola, endereco, qtd, img }) => (
-                        <div className="cartao-escola" key={escolas1}>
-                            <img src={img} alt="Imagem da escola" className="imagem-escola" />
-                            <div className="info-escola">
-                                <h1 className="nome-escola">{escola}</h1>
-                                <h2 className="endereco-escola">{endereco}</h2>
-                            </div>
-                            <div className="acoes-escola">
-                                <p className="qtd-alunos">{qtd} alunos</p>
-                               <a href='./embarqueDesembarque/alunos'><button className="botao-ver">
-                                    Ver todos os alunos
-                                    <img src="/img/motorista/embarque/Vector 108 (1).svg" alt="Ícone seta" />
-                                </button>
-                                </a>
+                    <div className='hoje basis-1/3'><p>Hoje</p></div>
+                    {escolas.map(({ escola, hr, endereco, escola1 }) => (
+                        <div className="cartao-escola" >
+                            <div class="flex flex-row">
+                                <div class="basis-1/3">
+                                    <div className='horarios text-center'>
+                                        <p>{hr}</p>
+                                    </div>
+                                </div>
+                                <div class="basis-2/3">
+                                    <div className='escolas1'><h3 className='escola-nome'>{escola}</h3> <p className='escola-endereco'>{endereco}</p> </div>
+                                </div>
                             </div>
                         </div>
                     ))}

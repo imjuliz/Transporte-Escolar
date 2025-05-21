@@ -1,10 +1,9 @@
 "use client";
 import { Kings } from 'next/font/google'
-import '../../../styles/embarque.css'
+import '../../../../styles/alunosEmbarque.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
-
-// import { logout } from '../../../../server/models/logout';
+// import embarque from '../page'
 
 export default function embarque() {
     useEffect(() => {
@@ -124,7 +123,7 @@ export default function embarque() {
                         </div></ul>
                     <div className="profileContent">
                         <div className="profile">
-                            <button type='submit'>{/* <button onClick={logout()}> */}
+                            <button type='submit'>
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11 1H13C14.1046 1 15 1.89543 15 3L15 13C15 14.1046 14.1046 15 13 15H11M1 8H11M11 8L9 10M11 8L9 6" stroke="#757575" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg></button>
@@ -136,25 +135,34 @@ export default function embarque() {
                 <h1 className='title1'>Embarques e desembarques</h1>
                 <p className='linha'></p>
                 <div className="escolas">
-                    {escolas.map(({ escolas1, escola, endereco, qtd, img }) => (
-                        <div className="cartao-escola" key={escolas1}>
-                            <img src={img} alt="Imagem da escola" className="imagem-escola" />
+                        <div className="cartao-escola" >
+                            <img src='/img/motorista/embarque/teste.jfif' alt="Imagem da escola" className="imagem-escola" />
                             <div className="info-escola">
-                                <h1 className="nome-escola">{escola}</h1>
-                                <h2 className="endereco-escola">{endereco}</h2>
+                                <h1 className="nome-escola">Escola X</h1>
+                                <h2 className="endereco-escola">Endereço X</h2>
                             </div>
                             <div className="acoes-escola">
-                                <p className="qtd-alunos">{qtd} alunos</p>
-                               <a href='./embarqueDesembarque/alunos'><button className="botao-ver">
-                                    Ver todos os alunos
-                                    <img src="/img/motorista/embarque/Vector 108 (1).svg" alt="Ícone seta" />
-                                </button>
-                                </a>
-                            </div>
+                                <p className="qtd-alunos">63 alunos</p>
+                                <a href='../embarqueDesembarque'><button className="botao-ver">Ver menos<img src="/img/motorista/embarque/Vector 108 (1).svg" alt="Ícone seta"/></button>
+                            </a></div>
                         </div>
-                    ))}
                 </div>
+
+                <table className="table-fixed">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>e-mail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>aluno1 sobrenome1</td>
+                            
+                            <td>aluno1@gmail.com</td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
         </>
-    )
-}
+    )}
