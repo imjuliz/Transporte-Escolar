@@ -1,10 +1,9 @@
 "use client";
 import { Kings } from 'next/font/google'
-import '../../../styles/embarque.css'
+import '../../../../styles/alunosEmbarque.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
-
-// import { logout } from '../../../../server/models/logout';
+// import embarque from '../page'
 
 export default function embarque() {
     useEffect(() => {
@@ -100,7 +99,7 @@ export default function embarque() {
                         <i className='bx bx-menu' id="btn"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="0.5" y="0.5" width="27" height="27" rx="7.5" fill="#161A23" />
                             <rect x="0.5" y="0.5" width="27" height="27" rx="7.5" stroke="#2D2F39" />
-                            <path d="M16.4715 10.4714C16.7318 10.2111 16.7318 9.78895 16.4715 9.5286C16.2111 9.26825 15.789 9.26825 15.5287 9.5286L11.5287 13.5286C11.2683 13.7889 11.2683 14.2111 11.5287 14.4714L15.5287 18.4714C15.789 18.7318 16.2111 18.7318 16.4715 18.4714C16.7318 18.2111 16.7318 17.7889 16.4715 17.5286L12.9429 14L16.4715 10.4714Z" fill="white" fill-opacity="0.8" />
+                            <path d="M16.4715 10.4714C16.7318 10.2111 16.7318 9.78895 16.4715 9.5286C16.2111 9.26825 15.789 9.26825 15.5287 9.5286L11.5287 13.5286C11.2683 13.7889 11.2683 14.2111 11.5287 14.4714L15.5287 18.4714C15.789 18.7318 16.2111 18.7318 16.4715 18.4714C16.7318 18.2111 16.7318 17.7889 16.4715 17.5286L12.9429 14L16.4715 10.4714Z" fill="white" fillOpacity="0.8" />
                         </svg></i></div>
                     <ul className="navList">
                         {links.map(({ href, name, page }) => (
@@ -124,7 +123,7 @@ export default function embarque() {
                         </div></ul>
                     <div className="profileContent">
                         <div className="profile">
-                            <button type='submit'>{/* <button onClick={logout()}> */}
+                            <button type='submit'>
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11 1H13C14.1046 1 15 1.89543 15 3L15 13C15 14.1046 14.1046 15 13 15H11M1 8H11M11 8L9 10M11 8L9 6" stroke="#757575" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg></button>
@@ -136,25 +135,34 @@ export default function embarque() {
                 <h1 className='title1'>Embarques e desembarques</h1>
                 <p className='linha'></p>
                 <div className="escolas">
-                    {escolas.map(({ escolas1, escola, endereco, qtd, img }) => (
-                        <div className="cartao-escola" key={escolas1}>
-                            <img src={img} alt="Imagem da escola" className="imagem-escola" />
+                        <div className="cartao-escola" >
+                            <img src='/img/motorista/embarque/teste.jfif' alt="Imagem da escola" className="imagem-escola" />
                             <div className="info-escola">
-                                <h1 className="nome-escola">{escola}</h1>
-                                <h2 className="endereco-escola">{endereco}</h2>
+                                <h1 className="nome-escola">Escola X</h1>
+                                <h2 className="endereco-escola">Endereço X</h2>
                             </div>
                             <div className="acoes-escola">
-                                <p className="qtd-alunos">{qtd} alunos</p>
-                               <a href='./embarqueDesembarque/alunos'><button className="botao-ver">
-                                    Ver todos os alunos
-                                    <img src="/img/motorista/embarque/Vector 108 (1).svg" alt="Ícone seta" />
-                                </button>
-                                </a>
-                            </div>
+                                <p className="qtd-alunos">63 alunos</p>
+                                <a href='../embarqueDesembarque'><button className="botao-ver">Ver menos<img src="/img/motorista/embarque/Vector 108 (1).svg" alt="Ícone seta"/></button>
+                            </a></div>
                         </div>
-                    ))}
                 </div>
+
+                <table className="table-fixed">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>e-mail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>aluno1 sobrenome1</td>
+                            
+                            <td>aluno1@gmail.com</td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
         </>
-    )
-}
+    )}

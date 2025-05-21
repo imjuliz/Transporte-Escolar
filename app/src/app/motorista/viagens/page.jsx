@@ -1,12 +1,12 @@
 "use client";
 import { Kings } from 'next/font/google'
-import '../../../styles/embarque.css'
+import '../../../styles/viagens.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 
 // import { logout } from '../../../../server/models/logout';
 
-export default function embarque() {
+export default function viagens() {
     useEffect(() => {
         const menuBtn = document.querySelector("#btn");
         const sidebar = document.querySelector(".sidebar");
@@ -84,9 +84,10 @@ export default function embarque() {
         { href: 'logout()', name: 'sair', page: 'Sair' }
     ];
     const escolas = [
-        { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola X', endereco: 'R. Santo Andre, B. Nova Gerty', qtd: '65' },//qtd vai pegar do banco de dados
-        { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola Y', endereco: 'R.Boa Vista, B. Nova Gerty', qtd: '12' },
-        { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola Z', endereco: 'R. Não Sei, B. Vou Pensar', qtd: '34' },
+        // { hr: 'Hoje' },
+        { escola: 'escola A', hr: '06:00', endereco: 'Endereço A' },
+        { escola: 'escola B', hr: '06:30', endereco: 'Endereço B' },
+        { escola: 'escola C', hr: '07:00', endereco: 'Endereço C' }
     ]
     return (
         <>
@@ -100,7 +101,7 @@ export default function embarque() {
                         <i className='bx bx-menu' id="btn"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="0.5" y="0.5" width="27" height="27" rx="7.5" fill="#161A23" />
                             <rect x="0.5" y="0.5" width="27" height="27" rx="7.5" stroke="#2D2F39" />
-                            <path d="M16.4715 10.4714C16.7318 10.2111 16.7318 9.78895 16.4715 9.5286C16.2111 9.26825 15.789 9.26825 15.5287 9.5286L11.5287 13.5286C11.2683 13.7889 11.2683 14.2111 11.5287 14.4714L15.5287 18.4714C15.789 18.7318 16.2111 18.7318 16.4715 18.4714C16.7318 18.2111 16.7318 17.7889 16.4715 17.5286L12.9429 14L16.4715 10.4714Z" fill="white" fill-opacity="0.8" />
+                            <path d="M16.4715 10.4714C16.7318 10.2111 16.7318 9.78895 16.4715 9.5286C16.2111 9.26825 15.789 9.26825 15.5287 9.5286L11.5287 13.5286C11.2683 13.7889 11.2683 14.2111 11.5287 14.4714L15.5287 18.4714C15.789 18.7318 16.2111 18.7318 16.4715 18.4714C16.7318 18.2111 16.7318 17.7889 16.4715 17.5286L12.9429 14L16.4715 10.4714Z" fill="white" fillOpacity="0.8" />
                         </svg></i></div>
                     <ul className="navList">
                         {links.map(({ href, name, page }) => (
@@ -133,23 +134,21 @@ export default function embarque() {
                 </div>
             </header>
             <section className='secao1'>
-                <h1 className='title1'>Embarques e desembarques</h1>
+                <h1 className='title1'>Planejamento de Viagens</h1>
                 <p className='linha'></p>
                 <div className="escolas">
-                    {escolas.map(({ escolas1, escola, endereco, qtd, img }) => (
-                        <div className="cartao-escola" key={escolas1}>
-                            <img src={img} alt="Imagem da escola" className="imagem-escola" />
-                            <div className="info-escola">
-                                <h1 className="nome-escola">{escola}</h1>
-                                <h2 className="endereco-escola">{endereco}</h2>
-                            </div>
-                            <div className="acoes-escola">
-                                <p className="qtd-alunos">{qtd} alunos</p>
-                               <a href='./embarqueDesembarque/alunos'><button className="botao-ver">
-                                    Ver todos os alunos
-                                    <img src="/img/motorista/embarque/Vector 108 (1).svg" alt="Ícone seta" />
-                                </button>
-                                </a>
+                    <div className='hoje basis-1/3'><p>Hoje</p></div>
+                    {escolas.map(({ escola, hr, endereco, escola1 }) => (
+                        <div className="cartao-escola" >
+                            <div class="flex flex-row">
+                                <div class="basis-1/3">
+                                    <div className='horarios text-center'>
+                                        <p>{hr}</p>
+                                    </div>
+                                </div>
+                                <div class="basis-2/3">
+                                    <div className='escolas1'><h3 className='escola-nome'>{escola}</h3> <p className='escola-endereco'>{endereco}</p> </div>
+                                </div>
                             </div>
                         </div>
                     ))}

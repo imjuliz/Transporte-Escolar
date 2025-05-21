@@ -75,11 +75,7 @@ async function create(table, data) {
         throw err;
     } finally {
         connection.release();
-    }
-}
-
-
-
+    }}
 //Função para atualizar um registro
 async function update(table, data, where) {
     const connection = await getConnection();
@@ -100,7 +96,6 @@ async function update(table, data, where) {
         connection.release();
     }
 }
-
 // Função para excluir um registro
 async function deleteRecord(table, where) {
     const connection = await getConnection();
