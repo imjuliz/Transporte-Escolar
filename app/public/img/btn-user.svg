@@ -1,4 +1,4 @@
 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 18L26 18M26 18L20 24M26 18L20 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-<circle cx="18" cy="18" r="18" fill="white" fill-opacity="0.5"/>
+<circle cx="18" cy="18" r="18" fill="white" fillOpacity="0.5"/>
 </svg>
