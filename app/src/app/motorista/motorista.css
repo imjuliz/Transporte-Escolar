@@ -1,4 +1,3 @@
-@import "tailwindcss";
 
 body{
   width: 100%;
@@ -120,12 +119,15 @@ body{
   font-family: "Plus Jakarta Sans Regular";
   font-size: 1rem;
   margin: 0;
+  margin-bottom: 0px;
+  margin-left: 40px;
 }
 
 .sidebar .logoContent .nomepessoa {
   /*logo da barra*/
   font-family: "Plus Jakarta Sans SemiBold";
   font-size: 1rem;
+  margin-right: -70px;
 }
 
 .sidebar.active .logoContent .logo {

@@ -1,6 +1,6 @@
 "use client"
 import "../../styles/globals.css";
-import "./styles/layout.css";
+import "../../styles/aluno.css";
 import { useEffect, useState } from "react";
 import Image from 'next/image'
 
@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
 
     const iconsNav =
     {
-        rota: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        navegacao: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_94_753" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
                 <path d="M0 0H20V20H0V0Z" fill="white" />
             </mask>
@@ -57,11 +57,10 @@ export default function RootLayout({ children }) {
     };
 
     const links = [
-        { href: '/aluno/minhaRota', name: 'rota', page: 'Minha Rota' },
-        { href: '/aluno/viagens', name: 'viagens', page: 'Viagens' },
-        { href: '/aluno/motoristas', name: 'motoristas', page: 'Motoristas' },
+        { href: '/navegacao', name: 'navegacao', page: 'Rotas' },
+        { href: '/viagens', name: 'viagens', page: 'Viagens' },
+        { href: '/perfil', name: 'perfil', page: 'Informações' },
         { href: '/ajuda', name: 'ajuda', page: 'Ajuda' },
-        { href: '/aluno/perfil', name: 'perfil', page: 'Meu Perfil' }
     ];
 
     return (

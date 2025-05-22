@@ -1,3 +1,6 @@
+
+/*Body*/
+/*seção 1*/
 section{
     width: 100%;
 }
@@ -45,13 +48,16 @@ section h1{
 
 .sec-campos{
     height: fit-content;
+    margin-bottom: 5%;
 }
 
 .sec-campos h6{
+    color: #384D6C;
     font-family: "Plus Jakarta Sans Regular";
 }
 
 .sec-campos p{
+    color: #384D6C;
     font-family: "Plus Jakarta Sans SemiBold";
     margin: 0;
 }

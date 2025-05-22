@@ -1,5 +1,4 @@
-import { read} from '../config/database.js';
-
+import {read} from '../config/database.js';
 const listarAlunos = async ()=>{
     try{
        const condicao = "tipo = 'aluno'";
