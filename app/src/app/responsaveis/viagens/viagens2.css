@@ -1,0 +1,115 @@
+/*meu css + css da julia*/
+hr{
+    width: 250px;
+}
+
+main{
+    align-content: start;
+
+}
+
+section{
+    margin-top: 10vh;
+    width: 100%;
+}
+
+.titulo{
+    align-items: flex-start;
+}
+
+.fotodeperfil{
+    width: 50px;
+height: 50px;
+    border-radius: 50%;
+}
+
+.nomealuno{
+    margin-bottom: 0px;
+}
+
+ul{
+    list-style: circle;
+}
+
+.chrome{
+    background-color: white;
+    padding: 4vh;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    
+}
+
+
+
+.aluno-active{
+    background-color:white;
+    padding: 1vh 3vh;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    
+}
+
+.aluno{
+    background-color: rgb(233, 233, 233);
+    padding: 1vh 3vh;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    
+}
+/********************************************************************/
+
+body{
+    background-color: #F5F5F5 !important;
+}
+
+main{
+    align-content: start;
+}
+
+section{
+    margin-top: 10vh;
+}
+
+.page-indicador{
+    width: fit-content;
+    margin-bottom: 8vh;
+}
+
+.page-indicador h1{
+    font-family: 'Plus Jakarta Sans Bold';
+}
+
+.days, section{
+    width: 100%;
+}
+
+.days h2{
+    font-family: 'Plus Jakarta Sans Semibold';
+    margin-bottom: 3vh;
+    font-size: 1.5rem;
+}
+
+.container-viagem{
+    width: 100%;
+    padding: 1.3rem 2.3rem;
+    box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
+}
+
+.container-viagem p{
+    font-family: 'Plus Jakarta Sans Medium';
+    font-size: 1rem;
+}
+
+.container-viagem h3{
+    font-family: 'Plus Jakarta Sans Semibold';
+    font-size: 1.2rem;
+}
+
+.circle{
+    margin: 0 1.7vw;
+}
+
+.circle-t{
+    margin: 0 1vw 0 0;
+}
