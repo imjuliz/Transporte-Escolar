@@ -1,6 +1,6 @@
 "use client"
 import "../../styles/globals.css";
-import "../../styles/aluno.css";
+import "./styles/layout.css";
 import { useEffect, useState } from "react";
 import Image from 'next/image'
 
@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
 
     const iconsNav =
     {
-        navegacao: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        rota: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_94_753" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
                 <path d="M0 0H20V20H0V0Z" fill="white" />
             </mask>
@@ -57,11 +57,11 @@ export default function RootLayout({ children }) {
     };
 
     const links = [
-        { href: '/navegacao', name: 'navegacao', page: 'Minha rota' },
-        { href: '/viagens', name: 'viagens', page: 'Viagens' },
-        { href: '/#', name: 'motoristas', page: 'Motoristas' },
+        { href: '/aluno/minhaRota', name: 'rota', page: 'Minha Rota' },
+        { href: '/aluno/viagens', name: 'viagens', page: 'Viagens' },
+        { href: '/aluno/motoristas', name: 'motoristas', page: 'Motoristas' },
         { href: '/ajuda', name: 'ajuda', page: 'Ajuda' },
-        { href: '/perfil', name: 'perfil', page: 'Meu Perfil' }
+        { href: '/aluno/perfil', name: 'perfil', page: 'Meu Perfil' }
     ];
 
     return (
@@ -117,7 +117,7 @@ export default function RootLayout({ children }) {
                         </div>
                     </div>
                 </header>
-                <main className={`main-content justify-items-center content-center ${sidebarActive ? 'collapsed' : ''}`}>
+                <main className={`main-content justify-items-center ${sidebarActive ? 'collapsed' : ''}`}>
                     {children}
                 </main>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossOrigin="anonymous"></script>

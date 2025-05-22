@@ -1,9 +1,18 @@
 @import "tailwindcss";
 
-body{
+body {
   width: 100%;
   flex-wrap: wrap;
   align-content: flex-end;
+}
+
+section {
+  width: 100%;
+  margin-top: 10vh;
+}
+
+main {
+  align-content: start;
 }
 
 .main-content {
@@ -25,18 +34,18 @@ body{
   height: 85%;
 }
 
-.btn-sair{
+.btn-sair {
   color: #ffffff8f;
   font-family: "Plus Jakarta Sans Regular";
   height: fit-content;
 }
 
-.btn-sair p{
+.btn-sair p {
   margin: 0;
   display: none;
 }
 
-.sidebar.active .btn-sair p{
+.sidebar.active .btn-sair p {
   display: inline;
 }
 
@@ -92,7 +101,7 @@ body{
   height: 100%;
   width: 78px;
   background: #161A23;
-  padding: 3vh 14px;
+  padding: 5vh 14px;
   transition: all 0.5s ease;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
@@ -126,6 +135,7 @@ body{
   /*logo da barra*/
   font-family: "Plus Jakarta Sans SemiBold";
   font-size: 1rem;
+  width: fit-content;
 }
 
 .sidebar.active .logoContent .logo {
@@ -133,7 +143,7 @@ body{
   pointer-events: none;
 }
 
-.sidebar.active .fotoPerfil{
+.sidebar.active .fotoPerfil {
   height: 70px;
   width: 70px;
 }
@@ -175,7 +185,7 @@ body{
   line-height: 50px;
 }
 
-.navList-item{
+.navList-item {
   margin: 0 !important;
 }
 
@@ -196,6 +206,7 @@ body{
   opacity: 0;
   pointer-events: none;
   display: block;
+  color: #fff;
 }
 
 .sidebar.active .navList .navList-item .tooltip {
@@ -297,7 +308,7 @@ body{
   border-radius: 6px;
   height: 40px;
   width: 122px;
-  background: #F6F6F6;
+  background: #2D2F39;
   line-height: 35px;
   text-align: center;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -455,12 +466,12 @@ body{
     /*barra lateral*/
     height: 100%;
     padding: 3px 10px;
-  }
+}
 
-  .sidebar.active {
+.sidebar.active {
     /*widht da barra lateral*/
     width: 190px;
-  }
+}
 
   .sidebar .logoContent .logo {
     /*logo da barra*/
@@ -468,68 +479,70 @@ body{
     width: 100%;
   }
 
-  .logoContent .logo i {
+.logoContent .logo i {
     font-size: 20px;
     margin-right: 5px;
-  }
+}
 }
 
 @media screen and (max-width: 680px) {
-  .sidebar {
-    background-color: #fff;
-  }
+/* .sidebar.active{
+  width: 30%;
+  height: 100%;
+} */
 
-  .sidebar.active .logoContent .logo .logoName {
-    font-size: 1.3rem;
-  }
+.sidebar {
+  background-color: #161A23;
+}
 
-  .sidebar {
-    width: 100%;
-    height: 45px;
-  }
+.sidebar.active .logoContent .logo .logoName {
+  font-size: 1.3rem;
+}
 
-  .sidebar .logoContent .logo {
-    opacity: 1;
-    justify-content: center;
-  }
+.sidebar .logoContent .logo {
+  opacity: 1;
+  justify-content: center;
+}
 
-  .sidebar .navList,
-  .sidebar .profileContent {
-    visibility: hidden;
-  }
+.sidebar.active .navList {
+  visibility: visible;
+  margin-top: 10vh;
+}
 
-  .sidebar.active .navList {
-    visibility: visible;
-    margin-top: 10vh;
-  }
+.sidebar .navList .barra {
+  margin-bottom: 4vh;
+}
 
-  .sidebar .navList .barra {
-    margin-bottom: 4vh;
-  }
+.sidebar #btn {
+  left: 10%;
+  top: 0;
+}
 
-  .sidebar #btn {
-    left: 10%;
-    top: 0;
-  }
+.sidebar.active #btn {
+  left: 90%;
+}
 
-  .sidebar.active #btn {
-    left: 90%;
-  }
+.sidebar .logoContent {
+  position: absolute;
+  z-index: 1;
+  width: 70%;
+}
 
-  .sidebar .logoContent {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-  }
+.main-content{
+  padding: 0 6%
+}
 
-  .sidebar.active {
-    width: 50%;
-    height: 100%;
-  }
+.main-content.collapsed{
+  width: 70%
+}
+
+.sidebar.active .navList .navList-item a svg{
+  margin-left: 0.6rem;
+}
 }
 
 @media screen and (max-width: 500px) {
-  .sidebar.active {
-    width: 100%;
-  }
+.sidebar.active {
+  width: 100%;
+}
 }
