@@ -1,9 +1,9 @@
-import { readAll} from '../config/database.js';
+import {read} from '../config/database.js';
 
 const listarAlunos = async ()=>{
     try{
        const condicao = "tipo = 'aluno'";
-return await readAll('usuarios', condicao);//nome da tabela
+return await read('usuarios', condicao);//nome da tabela
     }catch(err){
         console.error('Erro ao listar alunos!', err);
         throw err;

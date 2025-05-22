@@ -1,0 +1,59 @@
+/*seção 1*/
+.secao1 .title1 {
+    margin-left: -100%;
+    margin-top: 10%;
+  }
+  
+  .secao1 .linha {
+    margin-left: -100%;
+    margin-bottom: 10%;
+    width: 55%;
+    border-bottom: 2px solid #D0D0D0;
+  }
+  .botaoEditar{
+    margin-left: 170%;
+    white-space: nowrap;
+  }
+  .teste-scroll{
+    margin-left: -60%;
+    width: 280%;
+    overflow-x: scroll;
+  }
+  .escolas{
+    width: 100%;
+    margin-left: -90%;
+  }
+  .cartao-escola{
+  margin-bottom: 4%;
+  }
+  .cartao-escola :hover{
+    transform: scale(1.03); 
+  }
+  .escolas1{
+    border-left: 10px solid #6688FF;
+    height: 80%;
+    width: 200%;
+    background-color:#d9d9da2f ;
+    border-radius:15px ;
+    padding-left: 5%;
+  }
+  .hoje{
+    background-color: #ffffff;
+    width: 80px;
+    height: 60px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 10%;
+    padding-top: 1%; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  .escolas .horarios{
+    background-color: #6687ff5d;
+    width: 80px;
+    height: 60px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 10%;
+    padding-top: 4%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
