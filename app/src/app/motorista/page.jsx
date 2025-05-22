@@ -1,6 +1,6 @@
 "use client";
 import { Kings } from 'next/font/google'
-import '../../styles/motorista.css'
+import './motorista.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 // import { logout } from '../../../../server/models/logout';
