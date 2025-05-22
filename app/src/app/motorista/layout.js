@@ -37,11 +37,11 @@ export default function RootLayout({ children }) {
     };
 
     const links = [
-        { href: '/navegacao', name: 'navegacao', page: 'Painel de navegação' },
+        { href: './navegacao', name: 'navegacao', page: 'Painel de navegação' },
         { href: './motorista/embarqueDesembarque', name: 'embarque', page: 'Embarques/ desembarques' },
         { href: './viagens', name: 'viagens', page: 'Viagens' },
         { href: './veiculos', name: 'veiculos', page: 'Veículos' },
-        { href: '/incidentes', name: 'incidentes', page: 'Incidentes' },
+        { href: './incidentes', name: 'incidentes', page: 'Incidentes' },
     ];
 
     return (

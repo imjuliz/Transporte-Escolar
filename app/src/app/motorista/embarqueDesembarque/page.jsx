@@ -7,7 +7,7 @@ import { useRef, useEffect, useState } from "react";
 // import { logout } from '../../../../server/models/logout';
 
 export default function embarque() {
-  
+
     const escolas = [
         { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola X', endereco: 'R. Santo Andre, B. Nova Gerty', qtd: '65' },//qtd vai pegar do banco de dados
         { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola Y', endereco: 'R.Boa Vista, B. Nova Gerty', qtd: '12' },
@@ -15,30 +15,35 @@ export default function embarque() {
     ]
     return (
         <>
-           
-            <section className='secao1'>
-                <h1 className='title1'>Embarques e desembarques</h1>
+            <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            </head>
+
+            <section className='secao1 '>
+                <h1 className='title1 '>Embarques e desembarques</h1>
                 <p className='linha'></p>
-                <div className="escolas">
-                    {escolas.map(({ escolas1, escola, endereco, qtd, img }) => (
-                        <div className="cartao-escola" key={escolas1}>
-                            <img src={img} alt="Imagem da escola" className="imagem-escola" />
-                            <div className="info-escola">
-                                <h1 className="nome-escola">{escola}</h1>
-                                <h2 className="endereco-escola">{endereco}</h2>
+                <div className='@container'>
+                    <div className="escolas">
+                        {escolas.map(({ escolas1, escola, endereco, qtd, img }) => (
+                            <div className="cartao-escola lg:w-48 lg: md: sm:" key={escolas1}>
+                                <img src={img} alt="Imagem da escola" className="imagem-escola" />
+                                <div className="info-escola">
+                                    <h1 className="nome-escola">{escola}</h1>
+                                    <h2 className="endereco-escola">{endereco}</h2>
+                                </div>
+                                <div className="acoes-escola">
+                                    <p className="qtd-alunos">{qtd} alunos</p>
+                                    <a href='./embarqueDesembarque/alunos'><button className="botao-ver">
+                                        Ver todos os alunos
+                                        <img src="/img/motorista/embarque/Vector 108 (1).svg" alt="Ícone seta" />
+                                    </button>
+                                    </a>
+                                </div>
                             </div>
-                            <div className="acoes-escola">
-                                <p className="qtd-alunos">{qtd} alunos</p>
-                               <a href='./embarqueDesembarque/alunos'><button className="botao-ver">
-                                    Ver todos os alunos
-                                    <img src="/img/motorista/embarque/Vector 108 (1).svg" alt="Ícone seta" />
-                                </button>
-                                </a>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>     </div>
             </section>
+
         </>
     )
 }

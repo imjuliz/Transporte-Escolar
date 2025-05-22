@@ -29,7 +29,7 @@ export default function veiculos() {
                     </div>
                     <div className='sec'>
                         <div className='sec-indicador'>
-                            <h4>Informações</h4>
+                            <h4>Dados Pessoais</h4>
                             <hr/>
                         </div>
                         <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
@@ -38,46 +38,35 @@ export default function veiculos() {
                                 <p>Nome modelo</p>
                             </div>
                             <div className='sec-campos'>
-                                <h6></h6>
-                                <p></p>
-                                <p></p>
+                                <h6>Marca</h6>
+                                <p>Nome marca</p>
                             </div>
                             <div className='sec-campos'>
-                                <h6>Email institucional:</h6>
-                                <p>Email.</p>
+                                <h6>Ano</h6>
+                                <p>Ano ônibus</p>
                             </div>
                             <div className='sec-campos'>
-                                <h6>Endereço:</h6>
-                                <p>Endereço.</p>
+                                <h6>Placa</h6>
+                                <p>N° da placa</p>
                             </div>
                         </div>
                     </div>
-
                     <div className='sec'>
-                        <div className='sec-indicador'>
-                            <h4>Contatos</h4>
-                            <hr />
-                        </div>
-                        <div className='sec-container flex flex-col gap-8'>
+                        <div className='sec-container grid grid-flow-col grid-rows-1 gap-3'>
+                            <div className='sec-campos flex flex-nowrap gap-140'>
                             <div className='sec-campos'>
-                                <h6>Email:</h6>
-                                <p>Email pessoal 1.</p>
+                                <h6>Data de fabricação</h6>
+                                <p>data</p>
                             </div>
-                            <div className='sec-campos flex flex-nowrap gap-50'>
-                                <div className='sec-campos2'>
-                                    <h6>Telefone:</h6>
-                                    <p>Telefone pessoal 1</p>
-                                </div>
-                                <div className='sec-campos2'>
-                                    <h6>Tipo de telefone:</h6>
-                                    <p>Recado ou principal</p>
-                                </div>
+                            <div className='sec-campos'>
+                                <h6>N° de passageiros</h6>
+                                <p>N°</p>
+                            </div>
                             </div>
                         </div>
                     </div>
-
                     <div className='btn-perfil flex flex-wrap gap-6'>
-                        <button className='btn-add'>Adicionar contato</button>
+                        <button className='btn-add'>Adicionar veículo</button>
                         <button className='btn-edit'>Editar informações</button>
                     </div>
                 </section>

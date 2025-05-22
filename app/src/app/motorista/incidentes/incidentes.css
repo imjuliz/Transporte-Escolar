@@ -1,4 +1,10 @@
-
+@import "tailwindcss";
+@theme {
+    --breakpoint-md: 48rem;
+    --breakpoint-lg: 64rem;
+    --breakpoint-xl: 80rem;
+    --breakpoint-2xl: 96rem;
+  }
 /*Body*/
 /*seção 1*/
 section{
