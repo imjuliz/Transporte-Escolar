@@ -1,19 +1,13 @@
 // criar a pagina aqui - lorena TESTE DA API DE REGISTRAR USUARIO - CONTA DOS ADMINS
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 //A API localhost:3001/registrar está funcionando, mas ainda precisa arrumar a conexão do formulário com o servidor, para enviar as informações
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 
 //cpf, email, senha, tipo
 
 "use client";
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 import '../../components/Footer/Footer.jsx';
 import React, { useEffect, useState } from "react";
 import '../../styles/teste.css';
@@ -106,18 +100,17 @@ export default function RegistrarUsuario() {
             form.removeEventListener('submit', handleSubmit);
         };
     }, []);
-=======
+
     })
->>>>>>> Stashed changes
-=======
+
+
     })
->>>>>>> Stashed changes
+
 
 
     return (
         <>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
         
             <h1>registrar usuario</h1>
             <form id="registrarForm">
@@ -131,9 +124,7 @@ export default function RegistrarUsuario() {
                 <input type="text" id="senha" name="senha" required></input>
 
                 <label htmlFor="tipo">Tipo de Usuário</label> {/**Só por enquanto, depois vou adicionar o tipo específico em cada rota ex: admin/registrar/motorista */}
-=======
-=======
->>>>>>> Stashed changes
+
             <h1>registrar usuario</h1>
             <form id="registrarForm">
                 <label for="cpf">CPF:</label>
@@ -146,10 +137,7 @@ export default function RegistrarUsuario() {
                 <input type="text" id="senha" name="senha" required></input>
 
                 <label for="tipo">Tipo de Usuário</label> {/**Só por enquanto, depois vou adicionar o tipo específico em cada rota ex: admin/registrar/motorista */}
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
                 <input type="text" id="tipo" name="tipo" required></input>
 
                 <button type="submit">Registrar Usuário</button>
@@ -160,18 +148,7 @@ export default function RegistrarUsuario() {
                 <pre id="responseContent"></pre>
             </div>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-            
 
-
->>>>>>> Stashed changes
-=======
-            
-
-
->>>>>>> Stashed changes
         </>
     )
 }

@@ -1,0 +1,56 @@
+/*css da julia*/
+
+body{
+    background-color: #F5F5F5 !important;
+}
+
+main{
+    align-content: start;
+}
+
+section{
+    margin-top: 10vh;
+}
+
+.page-indicador{
+    width: fit-content;
+    margin-bottom: 8vh;
+}
+
+.page-indicador h1{
+    font-family: 'Plus Jakarta Sans Bold';
+}
+
+.days, section{
+    width: 100%;
+}
+
+.days h2{
+    font-family: 'Plus Jakarta Sans Semibold';
+    margin-bottom: 3vh;
+    font-size: 1.5rem;
+}
+
+.container-viagem{
+    width: 100%;
+    padding: 1.3rem 2.3rem;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+}
+
+.container-viagem p{
+    font-family: 'Plus Jakarta Sans Medium';
+    font-size: 1rem;
+}
+
+.container-viagem h3{
+    font-family: 'Plus Jakarta Sans Semibold';
+    font-size: 1.2rem;
+}
+
+.circle{
+    margin: 0 1.7vw;
+}
+
+.circle-t{
+    margin: 0 1vw 0 0;
+}
