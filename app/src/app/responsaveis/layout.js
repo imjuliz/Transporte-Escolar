@@ -1,6 +1,6 @@
 "use client"
 import "../../styles/globals.css";
-import "../../styles/aluno.css";
+import "./styles/layout.css";
 import { useEffect, useState } from "react";
 import Image from 'next/image'
 
