@@ -15,6 +15,19 @@ async function getConnection() {
     return pool.getConnection();
 }
 
+// async function loggers(table){//tabela logger
+//     const connection = await getConnection();
+//     try{
+//         const sql =`INSERT INTO logger(dataLog, metodo, url) VALUES(?, ?, ?)`
+//         const [rows] = await connection.execute(sql);
+//         return rows[0] || null;
+//     }catch(err){
+//         console.error('Erro ao salvar o logger', err)
+//         throw err;
+//     }finally{
+//         connection.release();
+//     }}
+
 //Função para ler todos os registros
 async function readAll(table, where = null) {
     const connection = await getConnection();
@@ -121,4 +134,4 @@ async function compare(senha, hash) {
     }
 }
 
-export { create, readAll, read, update, deleteRecord, compare }
+export { create, readAll, read, update, deleteRecord, compare}

@@ -4,6 +4,8 @@ import './veiculos.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 import Image from 'next/image'
+import '../../../styles/globals.css'
+import '../../../styles/globals.css'
 
 export default function veiculos() {
     return (
@@ -27,6 +29,7 @@ export default function veiculos() {
                         </div>
                         <hr/>
                     </div>
+                    <div className='@container'>
                     <div className='sec'>
                         <div className='sec-indicador'>
                             <h4>Dados Pessoais</h4>
@@ -51,9 +54,10 @@ export default function veiculos() {
                             </div>
                         </div>
                     </div>
+               
                     <div className='sec'>
-                        <div className='sec-container grid grid-flow-col grid-rows-1 gap-3'>
-                            <div className='sec-campos flex flex-nowrap gap-140'>
+                        <div className='sec-container grid grid-flow-col grid-rows-1 gap-3  '>
+                            <div className='sec-campos flex flex-nowrap gap-140 2xl:gap-105 xl:gap-80 lg:gap-56 md:gap-32 sm:gap-20'>
                             <div className='sec-campos'>
                                 <h6>Data de fabricação</h6>
                                 <p>data</p>
@@ -64,6 +68,7 @@ export default function veiculos() {
                             </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                     <div className='btn-perfil flex flex-wrap gap-6'>
                         <button className='btn-add'>Adicionar veículo</button>

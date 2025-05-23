@@ -3,10 +3,11 @@ import cors from "cors";
 import session from 'express-session';
 import publicRoutes from "./routes/public.js";
 import privateRoutes from "./routes/authRotas.js";
-
+// import { loggerController } from "./controllers/LoggerController.js";
 const app = express();
 const port = 3001;
 
+// app.use(loggerController);
 app.use(cors());
 app.use(express.json());
 

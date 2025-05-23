@@ -18,32 +18,31 @@ export default function embarque() {
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </head>
-
-            <section className='secao1 '>
-                <h1 className='title1 '>Embarques e desembarques</h1>
-                <p className='linha'></p>
-                <div className='@container'>
-                    <div className="escolas">
-                        {escolas.map(({ escolas1, escola, endereco, qtd, img }) => (
-                            <div className="cartao-escola lg:w-48 lg: md: sm:" key={escolas1}>
-                                <img src={img} alt="Imagem da escola" className="imagem-escola" />
-                                <div className="info-escola">
-                                    <h1 className="nome-escola">{escola}</h1>
-                                    <h2 className="endereco-escola">{endereco}</h2>
+            
+                <section className='secao1 '>
+                    <h1 className='title1 '>Embarques e desembarques</h1>
+                    <p className='linha'></p>
+                    <div className='@container'>
+                        <div className="escolas">
+                            {escolas.map(({ escolas1, escola, endereco, qtd, img }) => (
+                                <div className="cartao-escola lg:w-48" key={escolas1}>
+                                    <img src={img} alt="Imagem da escola" className="imagem-escola md:w-45 md:h-40 sm:w-40 sm:h-38" />
+                                    <div className="info-escola">
+                                        <h1 className="nome-escola">{escola}</h1>
+                                        <h2 className="endereco-escola">{endereco}</h2>
+                                    </div>
+                                    <div className="acoes-escola">
+                                        <p className="qtd-alunos">{qtd} alunos</p>
+                                        <a href='./embarqueDesembarque/alunos'><button className="botao-ver">
+                                            Ver todos os alunos
+                                            <img src="/img/motorista/embarque/Vector 108 (1).svg" alt="Ícone seta" />
+                                        </button>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div className="acoes-escola">
-                                    <p className="qtd-alunos">{qtd} alunos</p>
-                                    <a href='./embarqueDesembarque/alunos'><button className="botao-ver">
-                                        Ver todos os alunos
-                                        <img src="/img/motorista/embarque/Vector 108 (1).svg" alt="Ícone seta" />
-                                    </button>
-                                    </a>
-                                </div>
-                            </div>
-                        ))}
-                    </div>     </div>
-            </section>
-
+                            ))}
+                        </div>     </div>
+                </section>
         </>
     )
 }

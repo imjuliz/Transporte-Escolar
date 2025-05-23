@@ -4,6 +4,7 @@ import './incidentes.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 import Image from 'next/image'
+import '../../../styles/globals.css'
 
 export default function incidentes() {
     return (
@@ -15,7 +16,6 @@ export default function incidentes() {
             <section className='secao1'>
                 <div className='page-indicador'>
                     <h1>Incidentes</h1>
-                    <hr />
                 </div>
                 <div className='user'>
                     <div className='perfil-img-nome flex flex-nowrap items-center gap-3'>
@@ -56,9 +56,12 @@ export default function incidentes() {
                         </div>
                     </div>
                 </div>
+                </div>
+                <div className='@container'>
                 <div className='sec'>
                     <div className='sec-container grid grid-flow-col grid-rows-1 gap-3'>
-                            <div className='sec-campos flex whitespace-nowrap gap-140 2xl:gap-105 xl:gap-80 lg: lg:gap-57 md:gap-32 sm:gap-20'>
+                            <div className='sec-campos flex gap-105 xl:gap-80 lg:gap-56 md:gap-32 sm:gap-20'>
+                            {/* @2xl:gap-105 @xl:gap-80 @lg:gap-57 @md:gap-32 @sm:gap-20 */}
                                 <div className='sec-campos'>
                                     <h6>Data de fabricação</h6>
                                     <p>data</p>

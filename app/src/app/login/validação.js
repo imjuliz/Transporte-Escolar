@@ -1,3 +1,5 @@
+"use client"
+
 const form = document.querySelector('#loginForm');
 const emailInput = document.querySelector('#email');
 const passwordInput = document.querySelector('#senha');
@@ -33,3 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 }
 });
+
+function redirecionar(){
+
+const redirect = window.location.href('/motorista/embarqueDesembarque')
+if(redirect){
+    alert('Você foi redirecionado!!!')
+}
+else if(!redirect){
+    alert("Não foi possivel redirecionar!!!")
+}
+}
+       
+export {redirecionar}
