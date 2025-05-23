@@ -21,6 +21,10 @@ section h1{
     width: 100px;
 }
 
+.user{
+    padding-bottom: 4vh;
+}
+
 .user h3{
     font-size: 1.1rem;
     font-family: "Plus Jakarta Sans Regular";

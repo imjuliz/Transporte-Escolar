@@ -275,7 +275,7 @@ export default function Home() {
                 <h2 className='title5_2'>Por que usar o -nome-?</h2>
                 <h1 className='title5_1'>Simples, fácil e rápido</h1>
                 <h3 className='title5_3'>Nossa plataforma te ajuda a ter controle total e otimizar uma experiência organizada e confiável com o transporte escolar!</h3>
-                <div className='cards5 flex flex-row justify-between'>
+                <div className='cards5 flex flex-row lg:flex-col justify-between'>
                     <div className='container-cards flex flex-column gap-4'>
                         {cards5.map((card, index) => (
                             <div className="cards52 flex flex-row lg:flex-col gap-4" key={index}>

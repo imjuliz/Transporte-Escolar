@@ -465,7 +465,6 @@ main {
   .sidebar {
     /*barra lateral*/
     height: 100%;
-    padding: 3px 10px;
 }
 
 .sidebar.active {
@@ -486,13 +485,20 @@ main {
 }
 
 @media screen and (max-width: 680px) {
-/* .sidebar.active{
-  width: 30%;
-  height: 100%;
-} */
-
 .sidebar {
   background-color: #161A23;
+}
+
+.sidebar .logo{
+  visibility: hidden;
+} 
+
+.sidebar.active .logo{
+  visibility: visible;
+} 
+
+.sidebar.active{
+  width: 50%;
 }
 
 .sidebar.active .logoContent .logo .logoName {
@@ -506,26 +512,10 @@ main {
 
 .sidebar.active .navList {
   visibility: visible;
-  margin-top: 10vh;
 }
 
 .sidebar .navList .barra {
   margin-bottom: 4vh;
-}
-
-.sidebar #btn {
-  left: 10%;
-  top: 0;
-}
-
-.sidebar.active #btn {
-  left: 90%;
-}
-
-.sidebar .logoContent {
-  position: absolute;
-  z-index: 1;
-  width: 70%;
 }
 
 .main-content{
@@ -533,11 +523,15 @@ main {
 }
 
 .main-content.collapsed{
-  width: 70%
+  width: 100%
 }
 
 .sidebar.active .navList .navList-item a svg{
   margin-left: 0.6rem;
+}
+
+.navList{
+  height: 70vh;
 }
 }
 
