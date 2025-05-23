@@ -62,6 +62,12 @@ CREATE TABLE rotas (
     FOREIGN KEY (veiculo_id) REFERENCES veiculos(id_veiculo)
 );
 
+create table logger(
+dataLog datetime,
+metodo varchar (300),
+url varchar(300)
+);
+
 # inserção de dados nas tabelas 
 INSERT INTO usuarios (cpf, email, senha, tipo) VALUES
 ('11111111111', 'julia@gmail.com', 'julia@adm', 'administrador'),

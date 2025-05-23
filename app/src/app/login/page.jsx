@@ -2,11 +2,8 @@
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
 import '../../styles/login.css';
-// import embarque from '../motorista/embarqueDesembarque/page';
-// import './validação.js';
-import { useState } from "react";
-// import {BrouwserRouter, Router, Route} from 'react-router-dom';
-
+import { redirecionar } from './validação';
+import { useState } from "react";// import {BrouwserRouter, Router, Route} from 'react-router-dom';
 export default function Login() {
 
   // senha
@@ -50,22 +47,15 @@ export default function Login() {
         alert("Login realizado com sucesso!");
         // redirecionar o usuário para a página correta com base no tipo de perfil dele
         switch (dados.tipo) {
-          
           case 'administrador':
-          
             router.push('/administrador/dashboard');
             break;
           case 'aluno':
             router.push('/aluno/perfil');
             break;
-          case 'motorista':  
-          <BrouwserRouter>
-          <Router>
-              <Route path='/' element = {'/login'}/>
-              <Route path = '../motorista/embarqueDesembarque/page.jsx' element = {'../motorista/embarqueDesembarque/page.jsx'}/>
-            </Router> </BrouwserRouter>
-         
-          //  router.push('../motorista/embarqueDesembarque/page.jsx');
+          case 'motorista':
+            router.push("/motorista")
+            redirecionar();
             break;
           case 'responsavel':
             router.push('/responsavel/dashboard');
@@ -76,32 +66,10 @@ export default function Login() {
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
-    } };
-
+    }
+  };
+  
   /*
-    // caso a opção administrador ou motorista for selecionada, o usuario deverá logar com seu CPF, caso seja aluno ou responsavel, o usuario deverá logar com seu email
-    const renderFormulario = () => {
-      switch (usuarioAtivo.toLowerCase()) {
-        case "administrador":
-        case "motorista":
-          return (
-            <>
-              <label htmlFor="cpf">CPF:</label>
-              <input type="text" id="cpf" ref={cpfRef} placeholder="Digite seu CPF" />
-            </>
-            );
-        case "aluno":
-        case "responsável":
-          return (
-            <>
-              <label htmlFor="email">Email:</label>
-              <input type="email" id="email" placeholder="Digite seu email" />
-            </>
-          );
-        default:
-          return null;
-      }
-    };
     // formatação de cpf
     const cpfRef = useRef(null); // referência para o input de CPF para que seja possivel fazer a validação/formatação depois da renderização
     useEffect(() => {
@@ -122,7 +90,6 @@ export default function Login() {
       <div className="imgLogin">
         {/* <img src="" /> */}
       </div>
-
       {!usuarioAtivo ? (
         <div className="login-btn">
           <div className="login-corpo">
@@ -159,12 +126,7 @@ export default function Login() {
               </div>
               <button type="submit" className='btn-entrar'>Entrar</button>
             </form>
-            <button
-              style={{ marginTop: "1rem", color: "#FFC01D" }}
-              onClick={() => setUsuarioAtivo("")}
-            >
-              Voltar
-            </button>
+            <button style={{ marginTop: "1rem", color: "#FFC01D" }} onClick={() => setUsuarioAtivo("")}>Voltar</button>
           </div>
         </div>
       )}
