@@ -82,9 +82,9 @@ export default function Footer() {
     ]
     return (
         <>
-           <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true' />
-                <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet"></link>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true' />
+            <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet"></link>
 
             <footer className=''>
                 <div className="container">
@@ -126,7 +126,7 @@ export default function Footer() {
                         </div>
                         <div className='cont-2'>
                             <p>© 2025. Feito por Julia Alves, Lorena Oshiro e Maria Brito.</p>
-                       <p>Baixe o APP</p>
+                            <p>Baixe o APP</p>
                         </div>
                     </div>
                 </div>

@@ -1,17 +1,19 @@
 @import "tailwindcss";
 
-header{
-  margin-top: 0%;
-position: absolute;
-z-index: 1;
-background-color:#161A23 ;
-width: 80%;
-display: flex;
-border-radius: 15px;
-justify-content: center;
+body {}
+
+header {
+  margin-top: 5vh;
+  position: absolute;
+  z-index: 1;
+  background-color: #161A23;
+  width: 80%;
+  display: flex;
+  border-radius: 15px;
+  justify-content: center;
 }
 
-header ul{
+header ul {
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -22,92 +24,93 @@ header ul{
   align-items: center;
 }
 
-.linksrapidos li{
+.linksrapidos li {
   height: fit-content;
   font-family: "Plus Jakarta Sans SemiBold";
   font-size: 0.9rem;
 }
 
 header li a {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }
-header ul .barra{
-  color:#2D2F39 ;
+
+header ul .barra {
+  color: #2D2F39;
   font-size: 35px;
   margin-top: -1%;
 }
 
 header ul .logo {
-color: #ffffff86;
-}
-header li button .login{
   color: #ffffff86;
 }
 
+.login{
+  padding: 1vh 3vw;
+  border-radius: 10px;
+  font-family: "Plus Jakarta Sans Regular";
+}
+
 /* banner */
-.banner{
-height: 100vh;
-width: 130vw;
-padding-top: 13%;
+.banner {
+  height: 100vh;
+  width: 100%;
+  padding-top: 13%;
 }
-.banner1img{
-  margin-top: -26%;
-margin-left: 11%;
-width: 100%;
+
+.banner1img {
+  width: 100%;
 }
-.banner1img .montanha{
-  width: 101vw;
+
+.banner1img .montanha {
+  width: 100%;
 }
-.banner1img .onibus{
+
+.banner1img .onibus {
   width: 20vw;
-margin-left: 30%;
-margin-top: -10%;
 }
-.banner1img .arvore1{
+
+/* .banner1img .arvore1{
   width: 8vw;
 margin-left: 60%;
-margin-top: -25%;
 }
 .banner1img .arvore2{
 width: 5vw;
 margin-left: 65%;
-margin-top: -2%;
 }
 .banner1img .circulo{
 width: 25vw;
 margin-left: 60%;
-margin-top: -20%;
-}
-.banner .banner-textos{
-  font-family: "Plus Jakarta Sans SemiBold";
-  width: 30%;
+} */
+.banner .banner-textos h1 {
+  font-family: "Plus Jakarta Sans Bold";
   text-align: center;
-  margin-left: 30%;
+  margin: 0;
+  font-size: 3.5rem;
+  width: 50%;
 }
-.banner .banner-textos h1{
-  width: 150%;
-  margin-left: -15%;
-  margin-top: 5%;
-  font-size: 4vw;
-}
-.banner .banner-textos p{
-  width: 73%;
-  margin-left: 26%;
-  margin-top: 5%;
-  font-size: 1vw;
+
+.banner .banner-textos p {
+  font-family: "Plus Jakarta Sans Medium";
+  text-align: center;
+  margin: 0;
+  font-size: 1.3vw;
+  color: #90A3BF;
+  width: 40%;
 }
 
 /*carrossel seção2*/
-.secão2{
+.secão2 {
   font-family: "Plus Jakarta Sans SemiBold";
   margin-top: 5%;
   width: 80%;
   margin-left: 10%;
 }
+
 .secão2 .imgpai {
   width: 40%;
 }
+
 .secão2 .carrossel {
   margin-top: 3vw;
   width: 80%;
@@ -136,42 +139,48 @@ margin-top: -20%;
   height: 100%;
 }
 
-.img1, .img1 img{
+.img1,
+.img1 img {
   width: 80%;
 }
 
 /* seção 3 */
-.secão3{
+.secão3 {
   width: 75%;
   height: 100vh;
   justify-items: center;
   align-content: center;
 }
 
-.secão3 h2{
+.secao3-corpo {
+  width: 100%;
+}
+
+.secão3 h2 {
   font-family: "Plus Jakarta Sans Bold";
   font-size: 2.5rem;
   margin-bottom: 4vh;
 }
 
-.row-left{
+.row-left {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.row-left img, .row-right img{
+.row-left img,
+.row-right img {
   height: 20vh;
 }
 
-.row-right{
+.row-right {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
 }
 
-.row-right p{
+.row-right p {
   font-family: "Plus Jakarta Sans Regular";
   font-size: 1.2rem;
   text-align: start;
@@ -180,7 +189,7 @@ margin-top: -20%;
   width: 50%;
 }
 
-.row-left p{
+.row-left p {
   font-family: "Plus Jakarta Sans Regular";
   font-size: 1.2rem;
   text-align: end;
@@ -190,289 +199,248 @@ margin-top: -20%;
 }
 
 /* seção 4 */
-.secão4{
+.secão4 {
   width: 75%;
-  margin-top: 5%;
+  height: 100vh;
 }
-.secão4 h1, h2, h3{
+
+.secão4 h1,
+h2,
+h3 {
   text-align: center;
 }
-.secão4 h1{
-  margin-bottom: 5%;
-  font-family: "Plus Jakarta Sans SemiBold";
+
+.secão4 h1 {
+  margin-bottom: 3vh;
+  font-family: "Plus Jakarta Sans Bold";
 }
-.secão4 h2{
-  color:#013FF6 ;
+
+.secão4 h2 {
+  color: #013FF6;
   font-size: 20px;
-  margin-bottom: 2%;
   font-family: "Plus Jakarta Sans SemiBold";
 }
 
-.secão4 .title3{
-  font-family: "Plus Jakarta Sans SemiBold";
+.secão4 .title3 {
+  font-family: "Plus Jakarta Sans Regular";
   color: #90A3BF;
+  font-size: 1.3rem;
 }
-.secão4 .bolinha{
-z-index: 1;
-margin-top: -11vw;
-min-width: 50px;
-margin-left: -5%;
+
+.secão4 .bolinha {
+  z-index: 1;
+  margin-top: -11vw;
+  min-width: 50px;
+  margin-left: -5%;
 }
-.secão4 .cards4{
-display: flex;
-justify-content: space-between;
-text-align: center;
-margin-top: 5%;
-width: 80%;
-margin-left: 10%;
+
+.secão4 .cards4 {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-top: 8vh;
+  width: 80%;
 }
-.secão4 .cards42{
-  margin-bottom: 15%;
+
+.secão4 .cards42 {
   align-items: center;
   width: 10vw;
 }
-.secão4 .text4{
+
+.secão4 .text4 {
   margin-top: 8vw;
   font-family: "Plus Jakarta Sans SemiBold";
 }
-.secão4 .card4{
-z-index:-10;
-width: 10vw;
-height: 10vw;
-border-radius: 10px;
+
+.secão4 .card4 {
+  z-index: -10;
+  width: 10vw;
+  height: 10vw;
+  border-radius: 10px;
 }
 
 /* seção 5 */
 
-.secão5{
-  background-color:#161A23;
+.secão5 {
+  background-color: #161A23;
   width: 100%;
   height: 100vh;
 }
 
-.secao3-corpo{
-  width: 75%;
-}
-
-.secão5 h1, h2, h3{
+.secão5 h1,
+h2,
+h3 {
   text-align: center;
 }
-.secão5 h1{
-  margin-bottom: 3%;
-  font-family: "Plus Jakarta Sans SemiBold";
+
+.secão5 h1 {
+  font-family: "Plus Jakarta Sans Bold";
   color: white;
+  margin-bottom: 3vh;
 }
-.secão5 h2{
-  color:#FFC01D ;
+
+.secão5 h2 {
+  color: #FFC01D;
   font-size: 20px;
-  margin-bottom: 2%;
-  margin-top: 5%;
   font-family: "Plus Jakarta Sans SemiBold";
 }
 
-.secão5 .title5_3{
-  font-family: "Plus Jakarta Sans SemiBold";
+.secão5 .title5_3 {
+  font-family: "Plus Jakarta Sans Regular";
+  font-size: 1.3rem;
   color: #e8edf79a;
-  width: 55%;
-  margin-left: 22.5%;
-  margin-bottom: 7%;
+  width: 80%;
 }
 
-.secão5 .cards5{
-  justify-content: space-between;
-
+.cards5 {
   text-align: center;
-  margin-top: 5%;
   width: 80%;
-  }
-  .secão5 .cards52{
-    align-items: center;
-    
-    width: 15vw;
-    margin-left: 10%;
-    margin-bottom: 5%;
-  }
-  .sessão5 .card5{
-    
-  z-index:-10;
+  margin-top: 8vh;
+}
+
+.texto5, .texto5{
+  width: 100%;
+}
+
+.container-cards{
+  width: 40%;
+}
+
+.secão5 .cards52 {
+  align-items: center;
+}
+
+.sessão5 .card5 {
+  z-index: -10;
   width: 5vw;
   border-radius: 10px;
-  }
-  .secão5 .title5{
-    font-family: "Plus Jakarta Sans SemiBold";
-    text-align: left;
-    color:white ;
-    font-size: 24px;
-    white-space: nowrap;
-    margin-left: 8vw;
-    margin-top: -6vw;
-  }
-  .secão5 .text5{
-    font-family: "Plus Jakarta Sans SemiBold";
-color: #e8edf786;
-text-align: left;
-width: 150%;
-margin-left: 8vw;
-  }
-  .secão5 .text5 p{
-    font-family: "Plus Jakarta Sans SemiBold";
+}
 
+.secão5 .title5 {
+  font-family: "Plus Jakarta Sans SemiBold";
+  text-align: left;
+  color: white;
+  font-size: 24px;
+  white-space: nowrap;
+  margin-bottom: 1vh;
+}
+
+.secão5 .text5 {
+  font-family: "Plus Jakarta Sans Medium";
+  color: #e8edf786;
+  text-align: left;
+  margin: 0;
+}
+
+.secão5 .banner2 {
+}
+
+/* responsividade */
+@media screen and (max-width: 1500px){
+  .banner-textos{
+    margin-top: 15vh;
   }
-  .secão5 .banner2{
-    margin-right: 5%;
-    margin-top: -23%;
+}
+
+@media screen and (max-width: 1280px) {
+.secão5 .title5 {
+  font-family: "Plus Jakarta Sans semibold";
+  text-align: left;
+  color: white;
+  font-size: 24px;
+  white-space: nowrap;
+}
+
+.secão5 .text5 {
+  font-family: "Plus Jakarta Sans SemiBold";
+  color: #e8edf786;
+  text-align: left;
+}
+}
+
+@media screen and (max-width: 1000px) {
+.secão5 .title5_3 {
+  font-size: 20px;
+}
+
+.secão5 .title5 {
+  font-family: "Plus Jakarta Sans semibold";
+  text-align: left;
+  color: white;
+  font-size: 20px;
+  white-space: nowrap;
   }
 
-  /* responsividade */
-  @media screen and (max-width: 1280px){
-    .secão5{
-      background-color:#161A23 ;
-      width: 133.7%;
-      height: 70vw;
-      margin-left: -17%;
-      padding-top: 13%;
-    }
-    
-    .secão5 .title5{
-        font-family: "Plus Jakarta Sans semibold";
-        text-align: left;
-        color:white ;
-        font-size: 24px;
-        white-space: nowrap;
-        margin-left: 8vw;
-        margin-top: -6vw;
-      }
-      .secão5 .text5{
-        font-family: "Plus Jakarta Sans SemiBold";
-    color: #e8edf786;
-    text-align: left;
-    width: 150%;
-    margin-left: 8vw;
-      }
-      .secão5 .banner2{
-        margin-right: 5%;
-        margin-top: -40%;
-      } 
+.secão5 .text5 {
+  font-family: "Plus Jakarta Sans SemiBold";
+  color: #e8edf786;
+  text-align: left;
+  margin-left: 0vw;
+}
+
+  .secão5 .banner2 {
+    width: 50vw;
   }
-  @media screen and (max-width: 1000px){
-    .secão4 .bolinha{
-      width: 40px;
-      }
-      .secão4 .cards4{
-      text-align: center;
-      width: 80%;
-      }
-      .secão4 .cards42{
-        margin-bottom: 15%;
-        align-items: center;
-        width: 10vw;
-      }
-      .secão4 .text4{
-        margin-top: 8vw;
-        font-family: "Plus Jakarta Sans SemiBold";
-        width: 15vw;
-        margin-left: -25%;
-      }
-      .secão4 .card4{
-      z-index:-10;
-      width: 10vw;
-      height: 10vw;
-      border-radius: 10px;
-      }
-      /* sessão 5 */
-      .secão5{
-      background-color:#161A23 ;
-      width: 133.7%;
-      height: 80vw;
-      margin-left: -17%;
-      padding-top: 13%;
-    }
-    .secão5 .title5_3{
-      width: 55%;
-      font-size: 20px;
-      margin-left: 22.5%;
-      margin-bottom: 7%;
-    }
-    .secão5 .card5{
-      z-index:-10;
-      width: 5vw;
-      border-radius: 10px;
-      margin-left: -40%;
-      }
-    
-      .secão5 .title5{
-        font-family: "Plus Jakarta Sans semibold";
-        text-align: left;
-        color:white ;
-        font-size: 20px;
-        white-space: nowrap;
-        margin-left: -0vw;
-        margin-top: -6vw;
-      }
-      .secão5 .text5{
-        font-family: "Plus Jakarta Sans SemiBold";
-    color: #e8edf786;
-    text-align: left;
-    width: 190%;
-    margin-left: 0vw;
-      }
-      .secão5 .banner2{
-        width: 50vw;
-        margin-right: 5%;
-        margin-top: -45%;
-      } 
+
+  .container-cards{
+    width: 100%;
+}
+
+}
+
+@media screen and (max-width: 750px) {
+  .secão4 .bolinha {
+    width: 40px;
   }
-  @media screen and (max-width: 750px){
-    .secão4 .bolinha{
-      width: 40px;
-      }
-      .secão4 .cards4{
-      width: 80%;
-      }
-      .secão4 .cards42{
-        margin-bottom: 15%;
-        width: 10vw;
-      }
-      .secão4 .text4{
-        margin-top: 8vw;
-        width: 15vw;
-        margin-left: -25%;
-      }
-      .secão4 .card4{
-      width: 10vw;
-      height: 10vw;
-      }
-      /* seção 5 */
-      .secão5{
-      width: 133.7%;
-      height: 95vw;
-      margin-left: -17%;
-      padding-top: 13%;
-    }
-    .secão5 .title5_3{
-      width: 55%;
-      font-size: 16px;
-      margin-left: 22.5%;
-      margin-bottom: 7%;
-    }
-    .secão5 .card5{
-      width: 5vw;
-      margin-left: -40%;
-      }
-    
-      .secão5 .title5{
-        font-size: 18px;
-        margin-left: -0vw;
-        margin-top: -6vw;
-      }
-      .secão5 .text5{
+
+  .secão4 .cards4 {
+    width: 80%;
+  }
+
+  .secão4 .cards42 {
+    margin-bottom: 15%;
+    width: 10vw;
+  }
+
+  .secão4 .text4 {
+    margin-top: 8vw;
+    width: 15vw;
+  }
+
+  .secão4 .card4 {
+    width: 10vw;
+    height: 10vw;
+  }
+
+  /* seção 5 */
+  .secão5 {
+    height: 95vw;
+    padding-top: 13%;
+  }
+
+  .secão5 .title5_3 {
+    width: 55%;
+    font-size: 16px;
+    margin-left: 22.5%;
+    margin-bottom: 7%;
+  }
+
+  .secão5 .card5 {
+    width: 5vw;
+  }
+
+  .secão5 .title5 {
+    font-size: 18px;
+  }
+
+  .secão5 .text5 {
     width: 190%;
     margin-left: 0vw;
     font-size: 15px;
-      }
-      .secão5 .banner2{
-        width: 50vw;
-        margin-right: 5%;
-        margin-top: -60%;
-      } 
   }
+
+  .secão5 .banner2 {
+    width: 50vw;
+    margin-right: 5%;
+  }
+}
