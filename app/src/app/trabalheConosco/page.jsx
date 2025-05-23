@@ -1,8 +1,7 @@
 "use client";
 import { Kings } from 'next/font/google'
 import '../../styles/globals.css'
-import '../../styles/trabalhe.css'
-import Footer from "../../components/Footer/Footer.jsx";
+import './trabalhe.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect } from "react";
 
@@ -79,6 +78,14 @@ export default function TrabalheConosco() {
         }
     ]
 
+    const banners = [
+        {
+            img1: './img/banner1/montanha.svg',
+            img2: './img/banner1/onibus.svg',
+            img3: './img/arvores.svg',
+            img4: './img/banner1/circulo.svg'
+        }
+    ];
     return (
         <>
             {/* navbar */}
@@ -99,14 +106,23 @@ export default function TrabalheConosco() {
             {/* banner */}
             <section className='banner'>
                 <div className='banner-container'>
-                    <div className='banner-textos'>
+                    <div className='banner-textos flex flex-column items-center gap-10'>
                         <h1>Trabalhe conosco</h1>
-                        <p>Faça parte da nossa equipe de motoristas</p>
+                        <p>Faça parte da nossa equite de motoristas</p>
                     </div>
-                    <div className='banner-imgs'></div>
+                    <div className='banner-imgs'>
+                        {banners.map(( banner, index ) => (
+                            <div className='banner1img flex justify-center' key={index}>
+                                <img src={banner.img1} className='montanha z-10 absolute bottom-0 w-100' />
+                                <img src={banner.img2} className='onibus z-10 absolute bottom-0' />
+                                <img src={banner.img3} className='arvores z-10 absolute bottom-0 right-60' />
+                                <img src={banner.img5} className='circulo' />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
-
+            
             {/* trabalhe com a (?)*/}
             <section className='sec1'>
                 <div className="grid grid-flow-col grid-rows-3 gap-4">
@@ -147,20 +163,18 @@ export default function TrabalheConosco() {
                     <h2>Candidate-se</h2>
                     <p>Preencha o formulário abaixo ou entre em contato conosco pelos canais disponíveis. Nossa equipe entrará em contato para seguir com o processo de seleção.</p>
                 </div>
-                <form>
+                <form className=' grid grid-flow-row-dense grid-rows-2 gap-3'>
                     {/* <label for="nome">Nome Completo:</label> */}
-                    <input type="text" id="nome" placeholder="Nome Completo" />
-                    <input type="tel" id="phone" placeholder="Telefone para contato" pattern="\(\d{2}\)\s\d{5}-\d{4}" />
-                    <input type="text" id="email" placeholder="Email" />
+                    <input type="text" id="nome" placeholder="Nome Completo" className=' input border ' />
+                    <input type="tel" id="phone" placeholder="Telefone para contato" pattern="\(\d{2}\)\s\d{5}-\d{4}" className='input border ' />
+                    <input type="text" id="email" placeholder="Email" className='input border '/>
                     <label for="myfile">Envie seu currículo:</label>
-                    <input type="file" id="myfile" name="myfile"></input>
-                    <button className='btn-form'>Enviar</button>
+                    <input type="file" id="myfile" name="myfile" className='enviarArquivo border'></input>
+                    <button className='btn-form w-40 h-10'>Enviar</button>
                 </form>
                 <div className='contatos'>
-
                 </div>
             </section>
-<Footer/>
         </>
     );
 }

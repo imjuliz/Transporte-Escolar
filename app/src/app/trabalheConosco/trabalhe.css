@@ -48,11 +48,13 @@ header{
     height: 100vh;
     width: 100%;
     padding-top: 15%;
+    margin-bottom: 10%;
 }
 
 /* trabalhe conosco */
 .sec1{
     width: 75%;
+    margin-bottom: 10%;
 }
 
 .row-left{
@@ -129,6 +131,7 @@ header{
 /* candidatar-se */
 .candidate{
     height: 100vh;
+    margin-top: 10%;
 }
 
 .candidate-text h4{
@@ -150,13 +153,24 @@ header{
     color: #717479;
     text-align: center;
 }
-
+.candidate .input{
+    width: 62%;
+    height: 200%;
+    border-radius: 10px;
+}
 /* formulario */
 .btn-form{
     background-color: #013FF6;
     font-family: "Plus Jakarta Sans Regular";
     font-size: 0.9rem;
     color: #fff;
-    padding: 1vh 5vw;
+    text-align: center;
+    border-radius: 10px;
+}
+.enviarArquivo{
+    background-color: #c1c4c4;
+    align-items: center;
+    width: 62%;
+    padding: 2.5%;
     border-radius: 10px;
 }
