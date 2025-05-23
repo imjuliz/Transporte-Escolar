@@ -22,12 +22,11 @@ export default function embarque() {
             <section className='secao1'>
                 <h1 className='title1'>Embarques e desembarques</h1>
                 <p className='linha'></p>
-                <div className='@container'>
                     <div className="escolas">
-                        <div className="cartao-escola  " >
-                            <img  className="imagem-escola scale-x-30" src='/img/motorista/embarque/teste.jfif' alt="Imagem da escola" />
+                        <div className="cartao-escola " >
+                            <img  className="imagem-escola " src='/img/motorista/embarque/teste.jfif' alt="Imagem da escola" />
                             <div className="info-escola">
-                                <h1 className="nome-escola lg:text-md">Escola X</h1>
+                                <h1 className="nome-escola">Escola X</h1>
                                 <h2 className="endereco-escola">Endereço X</h2>
                             </div>
                             <div className="acoes-escola">
@@ -36,7 +35,6 @@ export default function embarque() {
                                 </a></div>
                         </div>
                     </div>
-                </div>
                 <div className='tabela'>
                     <table className="table-fixed">
                         <thead>
