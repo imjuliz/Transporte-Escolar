@@ -27,12 +27,12 @@ export default function viagens() {
                     {escolas.map(({ escola, hr, endereco, escola1 }) => (
                         <div className="cartao-escola" >
                             <div class="flex flex-row">
-                                <div class="basis-1/3">
+                                <div class="basis-1/3 ">
                                     <div className='horarios text-center'>
                                         <p>{hr}</p>
                                     </div>
                                 </div>
-                                <div class="basis-2/3">
+                                <div class="basis-2/3 md:w-10">
                                     <div className='escolas1'><h3 className='escola-nome'>{escola}</h3> <p className='escola-endereco'>{endereco}</p> </div>
                                 </div>
                             </div>

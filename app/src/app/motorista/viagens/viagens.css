@@ -57,3 +57,100 @@
     padding-top: 4%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
+  @media screen and (max-width:1536px) {
+    .botaoEditar{
+      margin-left: 35%;
+      white-space: nowrap;
+    }
+  }
+  @media screen and (max-width:1280px) {
+    .secao1 .title1 {
+      margin-left: -100%;
+      margin-top: 10%;
+      font-size: 30px;
+    }
+    
+    .secao1 .linha {
+      margin-left: -100%;
+      margin-bottom: 10%;
+      width: 55%;
+      border-bottom: 2px solid #D0D0D0;
+    }
+    .botaoEditar{
+      margin-left: 20%;
+      white-space: nowrap;
+    }
+  }
+  @media screen and (max-width:1024px) {
+    .secao1 .title1 {
+      margin-left: -100%;
+      margin-top: 10%;
+      font-size: 25px;
+    }
+    
+    .secao1 .linha {
+      margin-left: -100%;
+      margin-bottom: 10%;
+      width: 55%;
+    }
+    .botaoEditar{
+      margin-left: 20%;
+    }
+    .hoje{
+      padding-top: 5%; 
+    }
+    .escola-nome{
+      font-size: 20px;
+    }
+    .escola-endereco{
+      font-size: 13px;
+    }
+  }
+  @media screen and (max-width:768px) {
+    .secao1 .title1 {
+      margin-left: -60%;
+      margin-top: 10%;
+      font-size: 25px;
+    }
+    
+    .secao1 .linha {
+      margin-left: -60%;
+      margin-bottom: 10%;
+      width: 55%;
+    }
+    .botaoEditar{
+      margin-left: 15%;
+      width: 60%;
+    }
+    
+  .cartao-escola{
+    margin-bottom: 4%;
+    width: 80%;
+    margin-left: 30%;
+    }
+    .escolas .horarios{
+      width: 60px;
+      height: 40px;
+      margin-bottom: 10%;
+      padding-top: 4%;
+    }
+    .hoje{
+      margin-left: 30%;
+      width: 60px;
+      height: 40px;
+      margin-bottom: 10%;
+      padding-top: 1%; 
+    }
+  }
+  @media screen and (max-width:640px) {
+    
+    .botaoEditar{
+      margin-left: 5%;
+      width: 60%;
+    }
+    
+  .cartao-escola{
+    width: 75%;
+    margin-left: 30%;
+    }
+  }
