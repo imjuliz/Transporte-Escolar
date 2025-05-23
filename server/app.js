@@ -14,13 +14,19 @@ app.use(express.json());
 app.use("/", publicRoutes);
 app.use("/", privateRoutes);
 
-// para armazenar informações do usuário entre requisições
-app.use(session({
-    secret: 'tranporte-ecolar-key',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false }
-  }));
+// // para armazenar informações do usuário entre requisições
+// app.use(session({
+//     secret: 'tranporte-ecolar-key',
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { secure: false }
+//   }));
+
+app.post('/login', (req, res) =>{
+  const emailEnviado = req.body.Email
+  const senhaEnviada = req.body.Senha
+  const Valores = [emailEnviado, senhaEnviada]
+})
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
