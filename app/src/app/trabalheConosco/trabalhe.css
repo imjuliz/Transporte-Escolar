@@ -167,6 +167,9 @@ header{
     text-align: center;
     border-radius: 10px;
 }
+.envieCurriculo{
+margin-top: 2%;
+}
 .enviarArquivo{
     background-color: #c1c4c4;
     align-items: center;

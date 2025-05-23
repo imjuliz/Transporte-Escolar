@@ -166,9 +166,9 @@ export default function TrabalheConosco() {
                 <form className=' grid grid-flow-row-dense grid-rows-2 gap-3'>
                     {/* <label for="nome">Nome Completo:</label> */}
                     <input type="text" id="nome" placeholder="Nome Completo" className=' input border ' />
-                    <input type="tel" id="phone" placeholder="Telefone para contato" pattern="\(\d{2}\)\s\d{5}-\d{4}" className='input border ' />
+                    <input type="tel" id="phone" placeholder="Telefone para contato" pattern="\(\d{2}\)\s\d{5}-\d{4}" className='input border' />
                     <input type="text" id="email" placeholder="Email" className='input border '/>
-                    <label for="myfile">Envie seu currículo:</label>
+                    <label for="myfile" className='envieCurriculo'>Envie seu currículo:</label>
                     <input type="file" id="myfile" name="myfile" className='enviarArquivo border'></input>
                     <button className='btn-form w-40 h-10'>Enviar</button>
                 </form>
