@@ -1,0 +1,76 @@
+hr {
+    width: 300px;
+}
+
+body {
+    background-color: #F5F5F5 !important;
+}
+
+main {
+    align-content: start;
+}
+
+section {
+    margin-top: 10vh;
+}
+
+.page-indicador {
+    width: fit-content;
+    margin-bottom: 8vh;
+}
+
+.page-indicador h1 {
+    font-family: 'Plus Jakarta Sans Bold';
+}
+
+.container-aluno {
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
+    margin-bottom: 30px;
+    transition: box-shadow .3s;
+    border: none !important;
+    border-radius: 30px !important;
+    font-family: 'Plus Jakarta Sans Medium';
+}
+
+.container-aluno p{   
+    font-size: 1rem;
+}
+
+
+.container-aluno h3{
+    font-size: 1.2rem;
+    font-family: 'Plus Jakarta Sans Semibold';
+}
+
+.container-aluno img{
+    width: 300px !important;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 30px !important;
+    border-bottom-left-radius: 30px !important;
+}
+
+.foto-aluno{
+    width: fit-content;
+}
+
+.conteudo-aluno{
+    padding: 30px 20px !important;
+    display: flex;
+  
+    
+}
+
+/*.botao{
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 40px;
+    width: fit-content;
+    
+}*/
+
+
+
+
