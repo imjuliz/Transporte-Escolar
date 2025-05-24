@@ -1,5 +1,5 @@
 import express from "express";
-import { loginController } from "../controllers/AuthController.js";
+import { loginController } from "../controllers/LoginController.js"
 import { registrarUsuarioController  } from '../controllers/AdminController.js';
 
 const router = express.Router();
@@ -29,5 +29,8 @@ const router = express.Router();
 // //admin - registrar usuario
 // router.post("/registrar", /*loginController*/ registrarUsuarioController);
 // router.post('/administrador/cadastrar', loginController, registrarUsuarioController);
+
+// pagina de login
+router.post("/login", loginController);
 
 export default router;

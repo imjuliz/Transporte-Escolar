@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 
 export default function Home() {
+
     const pathname = usePathname();
 
     const links = [
