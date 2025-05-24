@@ -2,7 +2,7 @@
 import { Kings } from 'next/font/google'
 import '../styles/globals.css';
 import '../styles/page.css';
-import '../styles/Footer.css';
+import '../styles/Footer.css'
 // import Footer from '../components/Footer/Footer.jsx'
 
 import { usePathname } from 'next/navigation';
@@ -64,7 +64,7 @@ export default function Home() {
             img1: './img/banner1/montanha.svg',
             img2: './img/banner1/onibus.svg',
             img3: './img/arvores.svg',
-            img4: './img/banner1/circulo.svg'
+            // img4: './img/banner1/circulo.svg'
         }
     ];
 
@@ -251,7 +251,6 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-
             <section className='secão3'>
                 <div className='secao3-corpo'>
                     <h2>Sobre nós</h2>
@@ -265,7 +264,6 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-
             <section className='secão5 justify-items-center content-center'>
                 <h2 className='title5_2'>Por que usar o -nome-?</h2>
                 <h1 className='title5_1'>Simples, fácil e rápido</h1>
@@ -285,7 +283,6 @@ export default function Home() {
                     <img src='./img/sessao5/Content.svg' className='rounded banner2 xl:w-5/6' />
                 </div>
             </section>
-
             <section className='secão4 justify-items-center content-center'>
                 <h2 className='title2'>Como funciona?</h2>
                 <h1 className='title'>Entenda em poucos passos</h1>
@@ -302,7 +299,6 @@ export default function Home() {
                     ))}
                 </div>
             </section>
-
             <footer className=''>
                 <div className="container">
                     <div className='cont-footer'>
@@ -327,8 +323,7 @@ export default function Home() {
                             <div className="f-col col-redes">
                                 <h1>Siga-nos</h1>
                                 <div className='cont-redes flex flex-row gap-4'>
-                                    {
-                                        msociais.map((social, index) => (
+                                    {msociais.map((social, index) => (
                                             <div key={index}>
                                                 <a href={social.link}>{social.img}</a>
                                             </div>
