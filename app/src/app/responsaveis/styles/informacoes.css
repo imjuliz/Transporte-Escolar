@@ -23,43 +23,16 @@ section {
     font-family: 'Plus Jakarta Sans Bold';
 }
 
-.container-aluno {
-    width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
-    margin-bottom: 30px;
-    transition: box-shadow .3s;
-    border: none !important;
-    border-radius: 30px !important;
-    font-family: 'Plus Jakarta Sans Medium';
+/*}.aluno-card h5{
+text-decoration: none !important;
+color: black;
+font-family: 'Plus Jakarta Sans Bold';
+width: 100%;
+align-items: center;
 }
 
-.container-aluno p{   
-    font-size: 1rem;
-}
-
-
-.container-aluno h3{
-    font-size: 1.2rem;
-    font-family: 'Plus Jakarta Sans Semibold';
-}
-
-.container-aluno img{
-    width: 300px !important;
-    height: 200px;
-    object-fit: cover;
-    border-top-left-radius: 30px !important;
-    border-bottom-left-radius: 30px !important;
-}
-
-.foto-aluno{
-    width: fit-content;
-}
-
-.conteudo-aluno{
-    padding: 30px 20px !important;
-    display: flex;
-  
-    
+a{
+    text-decoration: none !important;
 }
 
 /*.botao{
@@ -70,6 +43,51 @@ section {
     width: fit-content;
     
 }*/
+
+.container-viagem{
+    width: 100%;
+    /*padding: 1.3rem 2.3rem;*/
+    box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
+    margin-bottom: 30px;
+    transition: box-shadow .3s;
+}
+
+.container-viagem p{
+    font-family: 'Plus Jakarta Sans Medium';
+    font-size: 1rem;
+}
+
+.container-viagem h3{
+    font-family: 'Plus Jakarta Sans Semibold';
+    font-size: 1.2rem;
+}
+
+.container-viagem:hover{
+    box-shadow: 0 0 11px rgba(0,0,0,0.06);
+}
+
+.status{
+    background-color: aqua;
+    padding: 5px 20px;
+    border-radius: 10px;
+    
+}
+
+.titulo-status{
+    width: 100%
+}
+.circle{
+    margin: 0 1.7vw;
+}
+
+.circle-t{
+    margin: 0 1vw 0 0;
+}
+
+.foto-aluno{
+    width: 500px;
+    height: 200px
+}
 
 
 
