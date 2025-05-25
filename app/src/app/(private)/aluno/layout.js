@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import Image from 'next/image'
 
 export default function RootLayout({ children }) {
+
+    // SIDEBAR
     const [sidebarActive, setSidebarActive] = useState(false);
 
     const toggleSidebar = () => {
