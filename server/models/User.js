@@ -11,7 +11,7 @@ const buscarPorEmail = async (email, tipo) => {
     };
 }
 
-// busca o email, senha E tipo requisitados no banco de dados
+//busca o email, senha E tipo requisitados no banco de dados
 const buscarUsuario = async (email, senha, tipo) => {
     try{
         const condicao = `email = '${email.replace(/'/g, "''")}' and senha = '${senha}' and tipo = '${tipo}'`; // escapa aspas simples

@@ -1,7 +1,6 @@
 "use client";
 import { Kings } from 'next/font/google';
 import '../styles/perfil.css';
-import '../../../styles/globals.css';
 import Image from 'next/image'
 
 export default function meuPerfil() {

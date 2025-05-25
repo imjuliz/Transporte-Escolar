@@ -1,11 +1,10 @@
 "use client";
 import { Kings } from 'next/font/google'
-import '../../styles/globals.css'
-import '../../styles/login.css';
+import '../../../styles/globals.css'
+import '../../../styles/login.css';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-// import { redirecionar } from './validação';
-import { useEffect, useState } from "react";// import {BrouwserRouter, Router, Route} from 'react-router-dom';
+import { useEffect, useState } from "react";
 export default function Login() {
 
   const router = useRouter();
@@ -37,34 +36,78 @@ export default function Login() {
   const [loginStatus, setLoginStatus] = useState('');
   const [statusAtual, setStatusAtual] = useState('mensagem')
 
-  const login = (e) => {
-    // evitar envios 
+  // const login = (e) => {
+  //   // evitar envios 
+  //   e.preventDefault();
+  //   //axios vai criar uma api que se conecta ao servidor
+  //   axios.post('http://localhost:3000/login', {
+  //     email: email,
+  //     senha: senha
+  //   })
+  //     .then((response) => {
+  //       console.log();
+  //       if (response.data.mensagem || email == '' || senha == '') {
+  //         router.push('/'); // Redirecionar para login se houver erro
+  //         setLoginStatus('Erro ao realizar login. Tente novamente.')
+  //       } else {
+  //         router.push('/aluno/perfil'); // Redirecionar para página privada em caso de sucesso
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Erro ao tentar fazer login:", error);
+  //     })
+  // };
+
+  const login = async (e) => {
     e.preventDefault();
-    //axios vai criar uma api que se conecta ao servidor
-    axios.post('http://localhost:3000/login', {
-      email: email,
-      senha: senha
-    })
-      .then((response) => {
-        console.log();
-        if (response.data.mensagem || email == '' || senha == '') {
-          router.push('/'); // Redirecionar para login se houver erro
-          setLoginStatus('Erro ao realizar login. Tente novamente.')
-        } else {
-          router.push('/aluno/perfil'); // Redirecionar para página privada em caso de sucesso
+
+    if (!email || !senha || !usuarioAtivo) {
+      setLoginStatus("Preencha todos os campos.");
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:3001/users/login', {
+        email,
+        senha,
+        tipo: usuarioAtivo.toLowerCase()
+      });
+
+      if (response.status === 200) {
+        // 🔹 Salva os dados no localStorage antes de redirecionar
+        const userData = { email, senha, tipo: usuarioAtivo.toLowerCase() };
+        localStorage.setItem("usuario", JSON.stringify(userData));
+
+        // 🔹 Redireciona para a página correspondente ao tipo de usuário
+        switch (usuarioAtivo.toLowerCase()) {
+          case 'administrador':
+            router.replace('/administrador/dashboard');
+            break;
+          case 'aluno':
+            router.replace('/aluno/perfil');
+            break;
+          case 'motorista':
+            router.replace('/motorista');
+            break;
+          case 'responsavel':
+            router.replace('/responsavel/dashboard');
+            break;
         }
-      })
-      .catch((error) => {
-        console.error("Erro ao tentar fazer login:", error);
-      })
+      } else {
+        setLoginStatus(response.data.mensagem);
+      }
+    } catch (error) {
+      setLoginStatus("Erro ao conectar com o servidor.");
+      console.error("Erro ao tentar fazer login:", error);
+    }
   };
 
   // mensagem de erro
-  useEffect(()=>{
-    if(loginStatus !== ''){
+  useEffect(() => {
+    if (loginStatus !== '') {
       setStatusAtual = ('mostrarMensagem') // mostra mensagem
-      setTimeout(()=>{
-      setStatusAtual = ('mensagem') // esconde a mensagem dps de 4seg
+      setTimeout(() => {
+        setStatusAtual = ('mensagem') // esconde a mensagem dps de 4seg
       }, 4000)
     }
   }, [loginStatus])

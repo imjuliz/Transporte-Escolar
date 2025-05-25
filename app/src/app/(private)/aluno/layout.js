@@ -1,11 +1,9 @@
 "use client"
-import "../../styles/globals.css";
+import "../../../styles/globals.css";
 import "./styles/layout.css";
 import { useEffect, useState } from "react";
 import Image from 'next/image'
-
 export default function RootLayout({ children }) {
-
     // SIDEBAR
     const [sidebarActive, setSidebarActive] = useState(false);
 

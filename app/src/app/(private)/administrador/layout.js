@@ -1,4 +1,4 @@
-import "../../styles/globals.css";
+import "../../../styles/globals.css";
 import RotaPrivada from "../../components/RotaPrivada/RotaPrivada.jsx";
 
 export default function RootAdmin({ children }) {
