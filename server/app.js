@@ -1,19 +1,30 @@
 import express from "express";
 import cors from "cors";
-import autenticarUsuario from "./middlewares/authMiddleware.js";
-import rotas from "./routes/appRoutes.js"; // Certifique-se do caminho correto das rotas
+import session from "express-session";
+import { autenticarUsuario } from "./middlewares/authMiddleware.js";
+import rotas from "./routes/appRoutes.js";
 
 const app = express();
 const port = 3001;
 
-// Configuração dos middlewares
-app.use(express.json()); // Permite processamento de JSON no corpo das requisições
-app.use(cors());
+app.use(express.json());
 
-// Aplicação das rotas
-app.use(autenticarUsuario);
-app.use('/',rotas);
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+
+app.use(
+  session({
+    secret: 'segredo-simples',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false } // true se estiver em HTTPS
+  })
+);
+
+app.use('/', rotas);
 
 app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });

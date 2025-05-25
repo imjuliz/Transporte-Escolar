@@ -32,6 +32,8 @@ export default function Login() {
   // useState para armanezar os inputs
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [tipo, setTipo] = useState('');
+
 
   // mostrar mensagem pros usuarios
   const [loginStatus, setLoginStatus] = useState('');
@@ -59,59 +61,43 @@ export default function Login() {
   //     })
   // };
 
-  const login = async (e) => {
-    e.preventDefault();
+const login = async (e) => {
+  e.preventDefault();
 
-    if (!email || !senha || !usuarioAtivo) {
-      setLoginStatus("Preencha todos os campos.");
-      return;
+  if (!email || !senha || !usuarioAtivo) { // usuarioAtivo contém o tipo selecionado
+    setLoginStatus("Preencha todos os campos.");
+    return;
+  }
+
+  try {
+    const response = await axios.post('http://localhost:3001/login', {
+      email,
+      senha,
+      tipo: usuarioAtivo // Definindo o tipo corretamente
+    }, {
+      withCredentials: true
+    });
+
+    if (response.status === 200) {
+      localStorage.setItem("usuario", JSON.stringify({ email, tipo: usuarioAtivo }));
+      router.replace(`/${usuarioAtivo.toLowerCase()}/dashboard`);
+    } else {
+      setLoginStatus(response.data.mensagem);
     }
-
-    try {
-      const response = await axios.post('http://localhost:3001/login', {
-        email,
-        senha,
-        tipo: usuarioAtivo.toLowerCase()
-      });
-
-      if (response.status === 200) {
-        // 🔹 Salva os dados no localStorage antes de redirecionar
-        const userData = { email, senha, tipo: usuarioAtivo.toLowerCase() };
-        localStorage.setItem("usuario", JSON.stringify(userData));
-
-        // 🔹 Redireciona para a página correspondente ao tipo de usuário
-        switch (usuarioAtivo.toLowerCase()) {
-          case 'administrador':
-            router.replace('/administrador/dashboard');
-            break;
-          case 'aluno':
-            router.replace('/aluno/perfil');
-            break;
-          case 'motorista':
-            router.replace('/motorista');
-            break;
-          case 'responsavel':
-            router.replace('/responsavel/dashboard');
-            break;
-        }
-      } else {
-        setLoginStatus(response.data.mensagem);
-      }
-    } catch (error) {
-      setLoginStatus("Erro ao conectar com o servidor.");
-      console.error("Erro ao tentar fazer login:", error);
-    }
-  };
-
+  } catch (error) {
+    console.error("Erro ao tentar fazer login:", error);
+    setLoginStatus("Erro ao conectar com o servidor.");
+  }
+};
   // mensagem de erro
-  useEffect(() => {
-    if (loginStatus !== '') {
-      setStatusAtual = ('mostrarMensagem') // mostra mensagem
-      setTimeout(() => {
-        setStatusAtual = ('mensagem') // esconde a mensagem dps de 4seg
-      }, 4000)
-    }
-  }, [loginStatus])
+  // useEffect(() => {
+  //   if (loginStatus !== '') {
+  //     setStatusAtual = ('mostrarMensagem') // mostra mensagem
+  //     setTimeout(() => {
+  //       setStatusAtual = ('mensagem') // esconde a mensagem dps de 4seg
+  //     }, 4000)
+  //   }
+  // }, [loginStatus])
 
   // limpar o formulario
   const limparForm = () => {
