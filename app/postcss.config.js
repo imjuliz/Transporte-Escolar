@@ -1,5 +1,5 @@
-import { defineConfig } from "vite";
-import tailwindcss from "@tailwindcss/vite";
+//import { defineConfig } from "vite";
+//import tailwindcss from "@tailwindcss/vite";
 // export default defineConfig({
 //   plugins: [
 //     tailwindcss(),
@@ -13,9 +13,16 @@ import tailwindcss from "@tailwindcss/vite";
 //     'autoprefixer',
 //   ] 
 //   }
-module.exports = {
+/*module.exports = {
     plugins: {
         tailwindcss: {},
-        autoprefixador: {},
+        autoprefixer: {},
     },
-  };
+  };*/
+
+  module.exports = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+    autoprefixer: {},
+  },
+};

@@ -79,3 +79,13 @@ INSERT INTO usuarios (cpf, email, senha, tipo) VALUES
 ('88888888888', 'roberto@al.gov.br', 'roberto@aluno', 'aluno'),
 ('99999999999', 'beatriz@al.gov.br', 'beatriz@aluno', 'aluno'),
 ('10101010101', 'marcos@al.gov.br', 'marcos@aluno', 'aluno');
+
+# alteração da tabela veiculos para inserir mais dados
+alter table veiculos
+add column marca varchar(50);
+
+alter table veiculos
+add column placa varchar(10);
+
+alter table veiculos
+add column modelo varchar(50);

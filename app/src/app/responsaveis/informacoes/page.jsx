@@ -3,31 +3,56 @@ import { Kings } from 'next/font/google';
 import Image from 'next/image'
 import '../styles/informacoes.css'
 import '../../../styles/globals.css'
+import { useState } from 'react'
 
-export default function viagens() {
+export default function informacoes() {
 
+    
     //dos alunos, receber os dados que foram criados pelo administrador
 
     const alunos = [
 
         {
+            id: 1,
             nome: 'Sofia',
             escola: 'ETEC Dona Carmin',
-            img: '/img/menina2.jpg'
+            img: '/img/menina2.jpg',
+            infos: (
+                <div className='infos-dropdown'>
+                    <p>Conteudo Adicional</p>
+                </div>
+            )
         },
         {
-            nome: 'Sofia',
+            id: 2,
+            nome: 'Ana',
             escola: 'ETEC Dona Carmin',
-            img: '/img/menina3.png'
+            img: '/img/menina3.png',
+            infos: (
+                <div className='infos-dropdown'>
+                    <p>Conteudo Adicional</p>
+                </div>
+            )
         },
         {
-            nome: 'Sofia',
+            id: 3,
+            nome: 'Carla',
             escola: 'ETEC Dona Carmin',
-            img: '/img/menino.jpg'
+            img: '/img/menina.png',
+            infos: (
+                <div className='infos-dropdown'>
+                    <p>Conteudo Adicional</p>
+                </div>
+            )
         }
     ]
+
+
+
+
     return (
         <>
+        {/**usar collapse do bootstrap ou do tailwind no dropdown */}
 
             <section className='infos'>
 
@@ -38,46 +63,49 @@ export default function viagens() {
 
                 <div className='cards-alunos justify-center'>
 
-                    {/*<a href="" className="aluno-card no-underline text-inherit flex flex-col items-center bg-white border border-gray-200 rounded-[2vw] shadow-sm md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                        <img className=" object-cover w-full rounded-l-[2vw] h-96 md:h-auto md:w-48  " src="/img/menino.jpg" alt=""></img>
-                        <div className="no-underline flex flex-col justify-between p-4 leading-normal">
-                            <h5 className="no-underline text-inherit mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Enzo Souza</h5>
-                            <p className="no-underline mb-3 font-normal text-gray-700 dark:text-gray-400">ETEC Dona Carmem</p>
-                        </div>
-                    </a>
+                    {alunos.map((aluno, index) =>
 
-                    <a href="" className="aluno-card no-underline text-inherit flex flex-col items-center bg-white border border-gray-200 rounded-[2vw] shadow-sm md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                        <img className="no-underline object-cover w-full rounded-l-[2vw] h-96 md:h-auto md:w-48  " src="/img/menino.jpg" alt=""></img>
-                        <div className="no-underline flex flex-col justify-between p-4 leading-normal">
-                            <h5 className="no-underline text-inherit mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Enzo Souza</h5>
-                            <p className="no-underline mb-3 font-normal text-gray-700 dark:text-gray-400">ETEC Dona Carmem</p>
-                        </div>
-                    </a>*/}
+                        <div className='container-viagem flex  bg-[#fff] rounded-[2vw]  ' key={index} onClick={() => toggleCard(card.id)}>
 
-                    <div className='container-viagem flex  justify-between  bg-[#fff] rounded-[2vw] '>
+                            <img className='foto-aluno object-cover rounded-l-[2vw]' src={aluno.img}></img>
 
 
-                        <div className='conteudo-card flex gap-5'>
-                            <img className='foto-aluno object-cover rounded-l-[2vw]' src='/img/menino.jpg'></img>
 
-                            <div className='titulo-status flex items-center justify-between'>
+                            <div className='titulo-status flex items-center '>
 
                                 <div className='texto-card'>
-                                    <h3>Sofia Souza de Oliveira</h3>
-                                    <p>ETEC Dona Carmim</p>
+                                    <h3>{aluno.nome}</h3>
+                                    <p>{aluno.escola}</p>
 
                                 </div>
 
-                                <div className='status'> {/**receber os valores do status - receber a viagem e o status dela */}
-                                    Em andamento
-                                </div>
+                                <a><div className='status'> {/**receber os valores do status - receber a viagem e o status dela */}
+                                    Ver Informações
+                                    <svg className="dropdown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="#ffffff" d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" /></svg>
+                                </div></a>
 
                             </div>
 
+                           
+
+
+
 
                         </div>
 
-                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                    )}
+
 
                 </div>
             </section>

@@ -12,4 +12,16 @@ const registrarUsuario = async (usuarioData) =>{
     }
 }
 
-export { registrarUsuario };
+//funcao que vai registrar veiculos
+
+const registrarVeiculos = async (veiculoData) =>{
+    try{
+        return await create ('veiculos', veiculoData);
+        
+    } catch (error){
+        console.error('Erro ao criar livro: ', error);
+        throw error;
+    }
+}
+
+export { registrarUsuario, registrarVeiculos};

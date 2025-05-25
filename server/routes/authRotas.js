@@ -1,6 +1,6 @@
 import express from "express";
 import { loginController } from "../controllers/LoginController.js"
-import { registrarUsuarioController  } from '../controllers/AdminController.js';
+import { registrarUsuarioController, registrarVeiculosController } from '../controllers/AdminController.js';
 
 const router = express.Router();
 
@@ -27,7 +27,17 @@ const router = express.Router();
 // });
 
 // //admin - registrar usuario
-// router.post("/registrar", /*loginController*/ registrarUsuarioController);
+ router.post("/registrar", /*loginController*/ registrarUsuarioController, (req, res)=>{
+    const { cpf, email, senha, tipo } = req.body;
+    res.json({mensagem: "usuario registrado"});
+ });
+
+ //admin - registrar veiculo
+ router.post("/registrar-veiculo", registrarVeiculosController, (req, res)=>{
+    const {motorista_cpf, fabricacao, placa, modelo, marca} = req.body;
+    res.json ({mensagem: "veículo registrado"});
+ });
+
 // router.post('/administrador/cadastrar', loginController, registrarUsuarioController);
 
 // pagina de login

@@ -50,6 +50,7 @@ a{
     box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
     margin-bottom: 30px;
     transition: box-shadow .3s;
+    
 }
 
 .container-viagem p{
@@ -67,14 +68,28 @@ a{
 }
 
 .status{
-    background-color: aqua;
-    padding: 5px 20px;
-    border-radius: 10px;
+    background-color: #013FF6;
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    gap: 15px;
+    color: white;
+    font-family: 'Plus Jakarta Sans Semibold';
+    transition: all 0.3s ease
     
 }
 
+.status:hover{
+    background-color: #002db3;
+}
+
+
+
 .titulo-status{
-    width: 100%
+    width: 100%;
+    justify-content: space-between;
+    padding-right: 100px;
+    padding-left: 50px;
 }
 .circle{
     margin: 0 1.7vw;
@@ -85,9 +100,17 @@ a{
 }
 
 .foto-aluno{
-    width: 500px;
+    width: 300px;
     height: 200px
 }
+
+.dropdown{
+    width: 15px;
+}
+/*.conteudo-card{
+    width: 100%;
+    justify-content: space-between;
+}*/
 
 
 

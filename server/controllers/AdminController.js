@@ -1,6 +1,6 @@
 //controllers:  cuida da lógica, decide o que fazer com os dados e responde às requisições. nesse caso, estão as funções do administrador
 
-import { registrarUsuario } from "../models/Admin.js";
+import { registrarUsuario, registrarVeiculos } from "../models/Admin.js";
 
 const registrarUsuarioController = async (req, res)=>{
     try{
@@ -23,4 +23,28 @@ const registrarUsuarioController = async (req, res)=>{
     }
 }
 
-export { registrarUsuarioController }
+const registrarVeiculosController = async (req, res)=>{
+    try{
+        const {motorista_cpf, fabricacao, placa, modelo, marca} = req.body;
+
+        //armazena num arquivo json as informações que vamos enviar
+        const veiculoData = {
+            
+            motorista_cpf: motorista_cpf,
+            fabricacao: fabricacao,
+            placa: placa,
+            modelo: modelo,
+            marca: marca
+            
+        }
+
+        const veiculoId = await registrarVeiculos(veiculoData);
+        res.status(201).json({mensagem: 'veículo registrado com sucesso!', veiculoId});
+    }
+    catch(err){
+        console.error('Erro ao registrar veículo: ', err);
+        res.status(500).json({mensagem: 'Erro ao registrar veículo'});
+    }
+}
+
+export { registrarUsuarioController, registrarVeiculosController }

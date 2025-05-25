@@ -2,8 +2,9 @@
 import { useState } from "react";
 
 {/**é preciso ajustar para que as rotas de registrar fiquem separadas para cada tipo de aluno (ex: o admin clica em registrar aluno, e vai ser um formulario só para registrar alunos) */}
-export default function RegistrarUsuario() {
-  const [resposta, setResposta] = useState("");
+export default function RegistrarVeiculo() {
+
+    const [resposta, setResposta] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -11,15 +12,18 @@ export default function RegistrarUsuario() {
     const form = e.target;
 
     // Pegando os dados do formulário
+    //id_veiculo, motorista_cpf, fabricacao, instituicao_id
     const formData = {
-      cpf: form.cpf.value,
-      email: form.email.value,
-      senha: form.senha.value,
-      tipo: form.tipo.value,
+      motorista_cpf: form.cpf.value,
+      fabricacao: form.fabricacao.value,
+      placa: form.placa.value,
+      modelo: form.modelo.value,
+      marca: form.marca.value,
+      
     };
 
     try {
-      const response = await fetch("http://localhost:3001/api/registrar", {
+      const response = await fetch("http://localhost:3001/api/registrar-veiculo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // <-- importante
@@ -36,23 +40,27 @@ export default function RegistrarUsuario() {
     }
   };
 
+
   return (
     <>
-      <h1>Registrar Usuário</h1>
+      <h1>Registrar Veículo</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="cpf">CPF:</label>
+        <label htmlFor="motorista_cpf">CPF do motorista:</label>
         <input type="text" id="cpf" name="cpf" required />
 
-        <label htmlFor="email">Email:</label>
-        <input type="text" id="email" name="email" required />
+        <label htmlFor="fabricacao">Data de fabricação:</label>
+        <input type="text" id="fabricacao" name="fabricacao" required />
 
-        <label htmlFor="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required />
+        <label htmlFor="placa">Placa:</label>
+        <input type="text" id="placa" name="placa" required />
 
-        <label htmlFor="tipo">Tipo de Usuário</label>
-        <input type="text" id="tipo" name="tipo" required />
+        <label htmlFor="modelo">Modelo:</label>
+        <input type="text" id="modelo" name="modelo" required />
 
-        <button type="submit">Registrar Usuário</button>
+        <label htmlFor="marca">Marca:</label>
+        <input type="text" id="marca" name="marca" required />
+
+        <button type="submit">Registrar Veículo</button>
       </form>
 
       <div>
@@ -61,4 +69,5 @@ export default function RegistrarUsuario() {
       </div>
     </>
   );
+
 }
