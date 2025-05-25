@@ -3,7 +3,7 @@ import "../../../styles/globals.css";
 import "./styles/layout.css";
 import { useEffect, useState } from "react";
 import Image from 'next/image'
-export default function RootLayout({ children }) {
+export default function AlunoLayout({ children }) {
     // SIDEBAR
     const [sidebarActive, setSidebarActive] = useState(false);
 
@@ -64,16 +64,14 @@ export default function RootLayout({ children }) {
         { href: '/aluno/perfil', name: 'perfil', page: 'Meu Perfil' }
     ];
 
+    //logout
+    const logout = () => {
+        localStorage.removeItem("usuario"); // remove os dados do usuário
+        window.location.href = "/login"; // redireciona p pag de login
+    };
+
     return (
-        <html lang="pt-br">
-            <head>
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossOrigin="anonymous" />
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true' />
-                <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet"></link>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            </head>
-            <body>
+        <>
                 <header>
                     <div className={`sidebar ${sidebarActive ? 'active' : ''}`}>
                         <div className="logoContent flex flex-nowrap gap-4 items-center">
@@ -108,7 +106,7 @@ export default function RootLayout({ children }) {
                         </ul>
                         <div className="profileContent">
                             <div className="profile">
-                                <button type='submit' className="btn-sair group flex flex-row gap-3 items-center">
+                                <button type='submit' className="btn-sair group flex flex-row gap-3 items-center" onClick={logout}>
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11 1H13C14.1046 1 15 1.89543 15 3L15 13C15 14.1046 14.1046 15 13 15H11M1 8H11M11 8L9 10M11 8L9 6" stroke="#757575" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-[#FF0000] transition-colors duration-200" />
                                     </svg>
@@ -121,9 +119,6 @@ export default function RootLayout({ children }) {
                 <main className={`main-content justify-items-center ${sidebarActive ? 'collapsed' : ''}`}>
                     {children}
                 </main>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossOrigin="anonymous"></script>
-            </body>
-
-        </html>
+                </>
     );
 }

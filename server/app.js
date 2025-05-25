@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import autenticarUsuario from "./middlewares/authMiddleware.js";
 import rotas from "./routes/appRoutes.js"; // Certifique-se do caminho correto das rotas
 
 const app = express();
@@ -10,7 +11,8 @@ app.use(express.json()); // Permite processamento de JSON no corpo das requisiç
 app.use(cors());
 
 // Aplicação das rotas
-app.use(rotas);
+app.use(autenticarUsuario);
+app.use('/',rotas);
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);

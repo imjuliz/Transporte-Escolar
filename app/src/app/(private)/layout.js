@@ -25,5 +25,18 @@ export default function PrivateLayout({ children }) {
                 <p>Carregando...</p>
             </div>
         );
-    }
+    };
+
+
+    //logout
+    const logout = () => {
+        localStorage.removeItem("usuario"); // remove os dados do usuário
+        window.location.href = "/login"; // redireciona p pag de login
+    };
+
+    return (
+        <>
+            {children}
+        </>
+    )
 }
