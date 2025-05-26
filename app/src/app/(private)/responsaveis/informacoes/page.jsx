@@ -2,7 +2,7 @@
 import { Kings } from 'next/font/google';
 import Image from 'next/image'
 import '../styles/informacoes.css'
-import '../../../styles/globals.css'
+import '../../../../styles/globals.css'
 import { useState } from 'react'
 
 export default function informacoes() {
