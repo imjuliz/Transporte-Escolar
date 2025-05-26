@@ -1,5 +1,5 @@
 import express from "express";
-import { autorizarUsuario } from "../middlewares/authMiddleware.js"; 
+import { autorizarAcesso } from "../middlewares/authMiddleware.js"; 
 import { loginController } from "../controllers/LoginController.js";
 
 const router = express.Router();
@@ -8,8 +8,21 @@ const router = express.Router();
 router.post("/login", loginController); // <-- ESTA É A ROTA QUE O FRONT CHAMA
 
 // Exemplo de rota protegida
-router.get('/administrador/dashboard', autorizarUsuario(['Administrador']), (req, res) => {
-  res.send("Área de Administrador");
+router.get('/administrador/dashboard', autorizarAcesso('Administrador'), (req, res) => {
+  res.json({ mensagem: "Área de Administrador" });
 });
+
+router.get('/aluno/perfil', autorizarAcesso('Aluno'), (req, res) => {
+  res.json({ mensagem: "Perfil do Aluno" });
+});
+
+router.get('/motorista/dashboard', autorizarAcesso('Motorista'), (req, res) => {
+  res.json({ mensagem: "Painel do Motorista" });
+});
+
+router.get('/responsavel/home', autorizarAcesso('Responsável'), (req, res) => {
+  res.json({ mensagem: "Área do Responsável" });
+});
+
 
 export default router;

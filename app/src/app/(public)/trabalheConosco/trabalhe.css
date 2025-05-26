@@ -130,8 +130,8 @@ header{
 
 /* candidatar-se */
 .candidate{
+    width: 40%;
     height: 100vh;
-    margin-top: 10%;
 }
 
 .candidate-text h4{
@@ -159,6 +159,14 @@ header{
     border-radius: 10px;
 }
 /* formulario */
+form{
+    width: 100%;
+}
+
+form input{
+    padding: 0.6rem;
+}
+
 .btn-form{
     background-color: #013FF6;
     font-family: "Plus Jakarta Sans Regular";
@@ -166,6 +174,7 @@ header{
     color: #fff;
     text-align: center;
     border-radius: 10px;
+    padding: 1rem;
 }
 .envieCurriculo{
 margin-top: 2%;

@@ -1,42 +1,89 @@
+// "use client"
+// import "../../styles/globals.css";
+// import { useEffect, useState } from "react";
+// import { useRouter } from "next/navigation";
+
+// export default function PrivateLayout({ children }) {
+//     const router = useRouter();
+//     const [usuario, setUsuario] = useState(null);
+//     const [carregando, setCarregando] = useState(true);
+
+//     useEffect(() => {
+//         const user = localStorage.getItem("usuario");
+
+//         if (!user) {
+//             router.replace("/login"); // redireciona para o login
+//         } else {
+//             setUsuario(JSON.parse(user));
+//         }
+//         setTimeout(() => setCarregando(false), 200); // atraso p garantir que o estado atualize antes da renderização
+//     }, []);
+
+//     if (carregando || !usuario) {
+//         return (
+//             <div className="loading-screen">
+//                 <p>Carregando...</p>
+//             </div>
+//         );
+//     };
+
+
+//     //logout
+//     const logout = () => {
+//         localStorage.removeItem("usuario"); // remove os dados do usuário
+//         window.location.href = "/login"; // redireciona p pag de login
+//     };
+
+//     return (
+//         <>
+//             {children}
+//         </>
+//     )
+// }
+
 "use client"
 import "../../styles/globals.css";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function PrivateLayout({ children }) {
-    const router = useRouter();
-    const [usuario, setUsuario] = useState(null);
-    const [carregando, setCarregando] = useState(true);
+  const router = useRouter();
+  const pathname = usePathname();
+  const [usuario, setUsuario] = useState(null);
+  const [carregando, setCarregando] = useState(true);
 
-    useEffect(() => {
-        const user = localStorage.getItem("usuario");
+  useEffect(() => {
+    const user = localStorage.getItem("usuario");
+    if (!user) {
+      router.replace("/login");
+    } else {
+      const userObj = JSON.parse(user);
+      const tipoNaRota = pathname.split("/")[1]; // Ex: 'administrador', 'aluno'
+      if (userObj.tipo.toLowerCase() !== tipoNaRota.toLowerCase()) {
+        router.replace("/login");
+      } else {
+        setUsuario(userObj);
+      }
+    }
+    setTimeout(() => setCarregando(false), 200);
+  }, [pathname]);
 
-        if (!user) {
-            router.replace("/login"); // redireciona para o login
-        } else {
-            setUsuario(JSON.parse(user));
-        }
-        setTimeout(() => setCarregando(false), 200); // atraso p garantir que o estado atualize antes da renderização
-    }, []);
-
-    if (carregando || !usuario) {
-        return (
-            <div className="loading-screen">
-                <p>Carregando...</p>
-            </div>
-        );
-    };
-
-
-    //logout
-    const logout = () => {
-        localStorage.removeItem("usuario"); // remove os dados do usuário
-        window.location.href = "/login"; // redireciona p pag de login
-    };
-
+  if (carregando || !usuario) {
     return (
-        <>
-            {children}
-        </>
-    )
+      <div className="loading-screen">
+        <p>Carregando...</p>
+      </div>
+    );
+  }
+
+  const logout = () => {
+    localStorage.removeItem("usuario");
+    window.location.href = "/login";
+  };
+
+  return (
+    <>
+      {children}
+    </>
+  );
 }

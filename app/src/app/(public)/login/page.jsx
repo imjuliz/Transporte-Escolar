@@ -73,14 +73,14 @@ const login = async (e) => {
     const response = await axios.post('http://localhost:3001/login', {
       email,
       senha,
-      tipo: usuarioAtivo // Definindo o tipo corretamente
+      tipo: usuarioAtivo
     }, {
       withCredentials: true
     });
 
     if (response.status === 200) {
       localStorage.setItem("usuario", JSON.stringify({ email, tipo: usuarioAtivo }));
-      router.replace(`/${usuarioAtivo.toLowerCase()}/dashboard`);
+      router.replace(`/${usuarioAtivo.toLowerCase()}/`);
     } else {
       setLoginStatus(response.data.mensagem);
     }
