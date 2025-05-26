@@ -1,6 +1,7 @@
 import express from "express";
 import { autorizarUsuario } from "../middlewares/authMiddleware.js"; 
 import { loginController } from "../controllers/LoginController.js";
+import { editarPerfilController } from "../controllers/EditarController.js";
 
 const router = express.Router();
 
@@ -12,4 +13,9 @@ router.get('/administrador/dashboard', autorizarUsuario(['Administrador']), (req
   res.send("Área de Administrador");
 });
 
+router.get('/teste', (req, res) => {
+  res.send('Rota de teste funcionando!');
+});
+
+router.patch('/editarPerfil', editarPerfilController);
 export default router;

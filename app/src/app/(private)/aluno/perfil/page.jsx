@@ -1,11 +1,14 @@
 "use client";
 import { Kings } from 'next/font/google';
 import '../styles/perfil.css';
-import Image from 'next/image'
+import Image from 'next/image';
+import { redirect } from '../../redirectEditar';
 
-export default function meuPerfil() {
+export default function meuPerfil() { 
+    const router = useRouter();
     return (
         <>
+
         {/* <main className='justify-items-center content-center'> */}
                 <section>
                     <div className='page-indicador'>
@@ -87,7 +90,7 @@ export default function meuPerfil() {
 
                     <div className='btn-perfil flex flex-wrap gap-6'>
                         <button className='btn-add'>Adicionar contato</button>
-                        <button className='btn-edit'>Editar informações</button>
+                        <button className='btn-edit'> Editar informações</button>
                     </div>
                 </section>
             {/* </main> */}

@@ -1,7 +1,7 @@
 import express from "express";
 import { loginController } from "../controllers/LoginController.js"
 import { registrarUsuarioController, registrarVeiculosController } from '../controllers/AdminController.js';
-
+import { editarPerfilController } from "../controllers/EditarController.js";
 const router = express.Router();
 
 // // Rota privada, protegida pelo middleware
@@ -38,6 +38,13 @@ const router = express.Router();
     res.json ({mensagem: "veículo registrado"});
  });
 
+
+ //atualizar perfil
+ router.patch('/editarPerfil/:email', editarPerfilController, (req,res)=>{
+   const {cpf, email,senha,tipo} = req.body;
+   res.json({mensagem: 'perfil atualizado com sucesso!!!'})
+ })
+ 
 // router.post('/administrador/cadastrar', loginController, registrarUsuarioController);
 
 // pagina de login
