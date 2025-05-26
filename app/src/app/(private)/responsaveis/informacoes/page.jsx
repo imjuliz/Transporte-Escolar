@@ -1,115 +1,105 @@
 "use client";
-import { Kings } from 'next/font/google';
-import Image from 'next/image'
-import '../styles/informacoes.css'
+//import '../styles/informacoes.css'
 import '../../../../styles/globals.css'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import '../styles/infos2.css'
 
-export default function informacoes() {
+const accordionData = [
+  {
+    id: 1,
+    escola: 'ETEC Dona Carmim',
+    img: '/img/menina2.jpg',
+    pergunta: 'What is Material Tailwind?',
+    nomeCompleto: 'Sofia Souza Oliveira',
+    idade: '7',
+    endereco: 'Rua Amazonas 47',
+    rota: 'Ida e Volta',
+    motorista: 'Sônia '
+  },
+  {
+    id: 2,
+    escola: 'ETEC Dona Carmin',
+    img: '/img/menina3.png',
+    nomeCompleto: 'Ana Souza Oliveira',
+    idade: '10',
+    endereco: 'Rua Amazonas 47',
+    rota: 'Ida e Volta',
+    motorista: 'Sônia '
 
-    
-    //dos alunos, receber os dados que foram criados pelo administrador
+  },
+  {
+    id: 3,
+    escola: 'ETEC Dona Carmin',
+    img: '/img/menino.jpg',
+    nomeCompleto: 'Enzo Souza Oliveira',
+    idade: '5',
+    endereco: 'Rua Amazonas 47',
+    rota: 'Ida e Volta',
+    motorista: 'Sônia '
 
-    const alunos = [
+  },
+]
 
-        {
-            id: 1,
-            nome: 'Sofia',
-            escola: 'ETEC Dona Carmin',
-            img: '/img/menina2.jpg',
-            infos: (
-                <div className='infos-dropdown'>
-                    <p>Conteudo Adicional</p>
-                </div>
-            )
-        },
-        {
-            id: 2,
-            nome: 'Ana',
-            escola: 'ETEC Dona Carmin',
-            img: '/img/menina3.png',
-            infos: (
-                <div className='infos-dropdown'>
-                    <p>Conteudo Adicional</p>
-                </div>
-            )
-        },
-        {
-            id: 3,
-            nome: 'Carla',
-            escola: 'ETEC Dona Carmin',
-            img: '/img/menina.png',
-            infos: (
-                <div className='infos-dropdown'>
-                    <p>Conteudo Adicional</p>
-                </div>
-            )
-        }
-    ]
+export default function Accordion() {
+  const [ativo, setAtivo] = useState(null)
 
+  const toggle = (id) => {
+    setAtivo(ativo === id ? null : id)
+  }
 
-
-
-    return (
-        <>
-        {/**usar collapse do bootstrap ou do tailwind no dropdown */}
-
-            <section className='infos'>
-
-                <div className='page-indicador'>
-                    <h1>Informações</h1>
-                    <hr />
-                </div>
-
-                <div className='cards-alunos justify-center'>
-
-                    {alunos.map((aluno, index) =>
-
-                        <div className='container-viagem flex  bg-[#fff] rounded-[2vw]  ' key={index} onClick={() => toggleCard(card.id)}>
-
-                            <img className='foto-aluno object-cover rounded-l-[2vw]' src={aluno.img}></img>
-
-
-
-                            <div className='titulo-status flex items-center '>
-
-                                <div className='texto-card'>
-                                    <h3>{aluno.nome}</h3>
-                                    <p>{aluno.escola}</p>
-
-                                </div>
-
-                                <a><div className='status'> {/**receber os valores do status - receber a viagem e o status dela */}
-                                    Ver Informações
-                                    <svg className="dropdown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="#ffffff" d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" /></svg>
-                                </div></a>
-
-                            </div>
-
-                           
-
-
-
-
-                        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                    )}
-
-
-                </div>
-            </section>
-
-        </>
-    )
+  return (
+    <div className="max-w-1000px justify-items-center mx-auto mt-10">
+      {accordionData.map(({ id, escola, img, resposta, nomeCompleto, idade, endereco, rota }) => (
+        <div key={id} className="container-viagem bg-[#fff] rounded-[2vw] border-b border-slate-200">
+          <div className='flex gap-5'>
+            <img className='foto-aluno object-cover rounded-l-[2vw]' src={img}></img>
+            <button
+              onClick={() => toggle(id)}
+              className="w-full flex justify-between items-center py-5 text-slate-800"
+            >
+              <span className='texto-card'>
+                <h3>{nomeCompleto}</h3>
+                <p>{escola}</p>
+              </span>
+              <div className='ver-mais'> Ver Informações
+                <span
+                  className={`text-slate-800 transition-transform duration-300 ${ativo === id ? 'rotate-180' : ''
+                    }`}
+                >
+                  {/* Ícone seta para cima/baixo */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="#ffffff"
+                    className="w-4 h-4"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </button>
+          </div>
+          <div
+            className={`overflow-hidden transition-all duration-500 ease-in-out ${ativo === id ? 'max-h-500' : 'max-h-0'
+              }`}
+          >
+            <div className="conteudo-escondido pb-5 text-sm text-slate-500">
+              <h3>Informações do Aluno</h3>
+              <hr></hr>
+              <div className='informacoes-aluno flex flex-column'></div>
+              <div className='info flex justify-between items-center'><p>Nome:</p><p> {nomeCompleto}</p> </div><hr></hr>
+              <div className='info flex justify-between items-center'><p>Idade:</p><p> {idade}</p> </div><hr></hr>
+              <div className='info flex justify-between items-center'><p>Escola:</p><p> {escola}</p> </div><hr></hr>
+              <div className='info flex justify-between items-center'><p>Endereço:</p><p> {endereco}</p> </div><hr></hr>
+              <div className='info flex justify-between items-center'><p>Rota:</p><p> {rota}</p> </div><hr></hr>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
 }

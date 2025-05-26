@@ -1,0 +1,48 @@
+.container-viagem{
+    width: 900px;
+    /*padding: 1.3rem 2.3rem;*/
+    box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
+    margin-bottom: 30px;
+    transition: box-shadow .3s;
+   justify-content: center; 
+   
+}
+
+.container-viagem:hover{
+    box-shadow: 0 0 11px rgba(0,0,0,0.06);
+}
+
+.container-viagem h3{
+    font-family: 'Plus Jakarta Sans Semibold';
+    font-size: 1.2rem;
+    color: black;
+}
+
+.texto-card{
+    
+}
+
+.container-viagem p{
+    font-family: 'Plus Jakarta Sans Medium';
+    font-size: 1rem;
+    margin: 0
+}
+
+.ver-mais{
+    background-color: #013FF6;
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    gap: 15px;
+    color: white;
+    font-family: 'Plus Jakarta Sans Semibold';
+    
+}
+.foto-aluno{
+    width: 250px;
+    height: 200px
+}
+
+.conteudo-escondido{
+    padding: 3.3rem 2.3rem
+}

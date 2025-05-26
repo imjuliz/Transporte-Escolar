@@ -75,7 +75,8 @@ a{
     gap: 15px;
     color: white;
     font-family: 'Plus Jakarta Sans Semibold';
-    transition: all 0.3s ease
+    transition: all 0.3s ease;
+    margin-right: 20px;
     
 }
 
