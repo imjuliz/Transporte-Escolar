@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet"></link>
       <link href="/dist/styles.css" rel="stylesheet"></link>
       </head>
-      <body>
+      <body className="body">
         {children}
         <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossOrigin="anonymous"></script>
