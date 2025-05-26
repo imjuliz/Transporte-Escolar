@@ -22,23 +22,18 @@ import { buscarUsuario } from '../models/User.js';
 //     }
 // };
 
-// export default autenticarUsuario;
-const autenticarUsuario = (req, res, next) => {
-  if (req.session && req.session.usuario) {
-    next();
-  } else {
-    res.status(403).json({ mensagem: 'Acesso negado. Faça login primeiro.' });
-  }
-};
-
-const autorizarUsuario = (tiposPermitidos) => {
+const autorizarAcesso = (tipoPermitido) => {
   return (req, res, next) => {
-    if (req.session && req.session.usuario && tiposPermitidos.includes(req.session.usuario.tipo)) {
+      if (!req.session.usuario) {
+          return res.status(403).json({ mensagem: "Faça login primeiro." });
+      }
+
+      if (req.session.usuario.tipo !== tipoPermitido) {
+          return res.status(403).json({ mensagem: "Acesso negado para este tipo de usuário." });
+      }
+
       next();
-    } else {
-      res.status(403).json({ mensagem: 'Acesso negado para este tipo de usuário.' });
-    }
   };
 };
 
-export { autenticarUsuario, autorizarUsuario };
+export { autorizarAcesso };

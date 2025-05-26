@@ -45,17 +45,17 @@ export default function Home() {
         {
             text: 'Nossa missão é transformar a gestão do transporte escolar em um processo transparente e confiável, e estamos comprometidos em desenvolver uma solução eficaz para escolas, pais e alunos.',
             img: './img/sobre1.svg',
-            classe: 'row-left'
+            classNamee: 'row-left'
         },
         {
             text: 'Com tecnologia avançada, organizamos rotas exclusivas para os alunos, além de garantir que nossos usuários tenham acesso às informações necessárias para um transporte mais organizado.',
             img: './img/sobre2.svg',
-            classe: 'row-right'
+            classNamee: 'row-right'
         },
         {
             text: 'Não somos apenas um sistema. Somos a ponte entre a segurança e a inovação no transporte escolar.',
             img: './img/sobre3.svg',
-            classe: 'row-left'
+            classNamee: 'row-left'
         }
     ]
 
@@ -256,7 +256,7 @@ export default function Home() {
                     <h2>Sobre nós</h2>
                     <div className="grid grid-flow-col grid-rows-3 gap-4">
                         {sobreItens.map((sobre, index) => (
-                            <div key={index} className={sobre.classe}>
+                            <div key={index} className={sobre.classNamee}>
                                 <img src={sobre.img} />
                                 <p>{sobre.text}</p>
                             </div>
