@@ -11,7 +11,7 @@ export default function Header() {
         const searchBtn = document.querySelector(".searchBtn");
 
         const toggleSidebar = () => {
-            sidebar.classList.toggle("active");
+            sidebar.classNameList.toggle("active");
         };
         menuBtn.addEventListener("click", toggleSidebar);
         searchBtn.addEventListener("click", toggleSidebar);

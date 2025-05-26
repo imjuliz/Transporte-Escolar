@@ -33,7 +33,7 @@ export default function Viagens() {
 
                     <div className="titulo">
                         <h1 className='' >Viagens</h1>
-                        <hr class="border-t border-gray-300 my-4 " />
+                        <hr className="border-t border-gray-300 my-4 " />
                     </div>
 
                     <div className="alunos flex gap-10">

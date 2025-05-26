@@ -24,7 +24,9 @@ section {
 }
 
 
-
+.navegacao{
+    margin-bottom: 10vh;
+}
 
 
 
@@ -39,6 +41,7 @@ main{
 
 section{
     margin-top: 10vh;
+    margin-bottom: 10vh;
 }
 
 .page-indicador{
@@ -66,7 +69,25 @@ section{
     box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
     margin-bottom: 30px;
     transition: box-shadow .3s;
+    background-color: white;
+    border-radius: 2vw;
 
+}
+
+.ver-mais{
+    background-color: #013FF6;
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    gap: 15px;
+    color: white;
+    font-family: 'Plus Jakarta Sans Semibold';
+    
+    
+}
+
+.drop{
+width: 10px;
 }
 
 .container-viagem p{
@@ -103,7 +124,13 @@ section{
 
 
 
-.foto-aluno img{
-    width: 100px;
+.foto-aluno{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
     border-radius: 50%;
+}
+
+.mounth{
+    margin-bottom: 10vh;
 }

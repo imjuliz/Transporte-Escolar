@@ -25,4 +25,4 @@
     '@tailwindcss/postcss': {},
     autoprefixer: {},
   },
-};
+  };

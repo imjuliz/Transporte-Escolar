@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import session from "express-session";
-import { autenticarUsuario } from "./middlewares/authMiddleware.js";
 import rotas from "./routes/appRoutes.js";
 
 const app = express();
@@ -23,7 +22,21 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  console.log("Sessão atual:", req.session);
+  next();
+});
+
 app.use('/', rotas);
+
+app.use('/administrador/dashboard', (req, res) => {
+  console.log(req.session);
+  res.json(req.session);
+})
+
+app.use((req,res)=>{
+  res.status(404).json({mensagem: 'Rota não encontrada'});
+});
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);

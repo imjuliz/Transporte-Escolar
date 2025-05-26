@@ -1,16 +1,16 @@
 "use client";
 import { Kings } from 'next/font/google'
-import '../../styles/administrador.css'
+import '../../../styles/administrador.css'
 import { usePathname } from 'next/navigation';
+import axios from 'axios';
 import { useRef, useEffect, useState } from "react";
-// import { logout } from '../../../../server/models/logout';
 
 export default function administrador() {
     useEffect(() => {
         const menuBtn = document.querySelector("#btn");
         const sidebar = document.querySelector(".sidebar");
         const toggleSidebar = () => {
-            sidebar.classList.toggle("active");
+            sidebar.classNameList.toggle("active");
         };
         menuBtn.addEventListener("click", toggleSidebar);
 
@@ -90,6 +90,11 @@ export default function administrador() {
     //     { href: '/login', name: 'alunos', page: 'Alunos' },
     //     { href: '/login', name: 'responsaveis', page: 'Responsáveis' }
     // ];
+
+    axios.get('http://localhost:3000/administrador/', {
+        withCredentials: true
+    });
+    
     return (
         <>
             <header>
