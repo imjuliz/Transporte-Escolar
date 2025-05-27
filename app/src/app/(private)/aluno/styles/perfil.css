@@ -14,6 +14,31 @@ section h1{
     height: fit-content;
 }
 
+/* fontes */
+@font-face {
+    font-family: 'Plus Jakarta Sans Bold';
+    src: url('../../../../components/Fonts/PlusJakartaSans-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Plus Jakarta Sans SemiBold';
+    src: url('../../../../components/Fonts/PlusJakartaSans-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: 'Plus Jakarta Sans Medium';
+    src: url('../../../../components/Fonts/PlusJakartaSans-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'Plus Jakarta Sans Regular';
+    src: url('../../../../components/Fonts/PlusJakartaSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Plus Jakarta Sans Light';
+    src: url('../../../../components/Fonts/PlusJakartaSans-Light.ttf');
+}
 .page-indicador, .sec-indicador{
     width: min-content;
     white-space: nowrap;
