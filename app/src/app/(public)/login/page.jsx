@@ -1,7 +1,7 @@
 "use client";
 import { Kings } from 'next/font/google'
 import '../../../styles/globals.css'
-import '../../../styles/login.css';
+import './login.css'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
@@ -192,7 +192,6 @@ const login = async (e) => {
           <div className="login-corpo">
             <h3 className="">Entrar como <span style={{ color: "#FFC01D" }}>{usuarioAtivo}</span></h3>
             <form id='loginForm' onSubmit={limparForm}>
-              {/* {renderFormulario()} */}
               <label htmlFor="email">Email:</label>
               <input type="email" id="email" placeholder="Digite seu email" onChange={event => { setEmail(event.target.value) }} />
               <label htmlFor="senha">Senha:</label>

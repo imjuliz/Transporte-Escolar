@@ -1,42 +1,32 @@
-@import "tailwindcss";
 @tailwind base;
 @tailwind components;
-
-/* @tailwind utilities; */
-@import '../../node_modules/tailwindcss/utilities.css';
-
-/* @plugin "flowbite/plugin"; */
-@import '../../../node_modules/flowbite/plugin.js';
-@import "flowbite/src/themes/default";
-
-/* @source "../node_modules/flowbite"; */
-@import'../../../node_modules/flowbite';
-@import '../../node_modules/preline/variants.css';
+@tailwind utilities;
+@import 'flowbite';
 
 /* fontes */
 @font-face {
     font-family: 'Plus Jakarta Sans Bold';
-    src: url('../components/Fonts/PlusJakartaSans-Bold.ttf');
+    src: url('../components/Fonts/PlusJakartaSans-Bold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Plus Jakarta Sans SemiBold';
-    src: url('../components/Fonts/PlusJakartaSans-SemiBold.ttf');
+    src: url('../components/Fonts/PlusJakartaSans-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Plus Jakarta Sans Medium';
-    src: url('../components/Fonts/PlusJakartaSans-Medium.ttf');
+    src: url('../components/Fonts/PlusJakartaSans-Medium.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Plus Jakarta Sans Regular';
-    src: url('../components/Fonts/PlusJakartaSans-Regular.ttf');
+    src: url('../components/Fonts/PlusJakartaSans-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Plus Jakarta Sans Light';
-    src: url('../components/Fonts/PlusJakartaSans-Light.ttf');
+    src: url('../components/Fonts/PlusJakartaSans-Light.ttf') format('truetype');
 }
 
 /* corpo do site */
