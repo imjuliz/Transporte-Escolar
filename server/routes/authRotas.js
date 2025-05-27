@@ -40,7 +40,7 @@ const router = express.Router();
 
 
  //atualizar perfil
- router.patch('/editarPerfil/:email', editarPerfilController, (req,res)=>{
+ router.patch('/editarPerfil', editarPerfilController, (req,res)=>{
    const {cpf, email,senha,tipo} = req.body;
    res.json({mensagem: 'perfil atualizado com sucesso!!!'})
  })

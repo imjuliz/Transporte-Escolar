@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React, { useRef, useEffect } from 'react';
 
 
+
 export default function EditarPerfil() {
     console.log("Componente EditarPerfil carregado");
     const cpfInputRef = useRef(null);

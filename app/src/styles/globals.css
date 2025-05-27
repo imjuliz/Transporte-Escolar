@@ -1,8 +1,17 @@
 @import "tailwindcss";
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
-@plugin "flowbite/plugin";
+
+/* @tailwind utilities; */
+@import '../../node_modules/tailwindcss/utilities.css';
+
+/* @plugin "flowbite/plugin"; */
+@import '../../../node_modules/flowbite/plugin.js';
+@import "flowbite/src/themes/default";
+
+/* @source "../node_modules/flowbite"; */
+@import'../../../node_modules/flowbite';
+@import '../../node_modules/preline/variants.css';
 
 /* fontes */
 @font-face {

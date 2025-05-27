@@ -4,6 +4,7 @@ const editarPerfilController = async (req, res) => {
     try {
         const { cpf, email, senha } = req.body;
 
+        //armazena no arquivo json as info
         const atualizacoes = {
             cpf: cpf,
             email: email,

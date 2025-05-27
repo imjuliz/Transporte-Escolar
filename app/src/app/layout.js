@@ -3,7 +3,7 @@ import "../styles/globals.css";
 import { usePathname } from 'next/navigation';
 
 export default function RootLayout({ children }) {
-
+ 
   return (
     <html lang="pt-br">
       <head>
