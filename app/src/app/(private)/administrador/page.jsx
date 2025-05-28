@@ -4,6 +4,7 @@ import '../../../styles/administrador.css'
 import { usePathname } from 'next/navigation';
 import axios from 'axios';
 import { useRef, useEffect, useState } from "react";
+import './perfil/page'
 
 export default function administrador() {
     useEffect(() => {
@@ -80,7 +81,7 @@ export default function administrador() {
     };
     const links2 = [
         { href: '/ajuda', name: 'ajuda', page: 'Ajuda' },
-        { href: '/perfil', name: 'perfil', page: 'Meu Perfil' },
+        { href: './administrador/perfil', name: 'perfil', page: 'Meu Perfil' },
         { href: '/notificacoes', name: 'notificacoes', page: 'Notificações' },
         { href: 'logout()', name: 'sair', page: 'Sair' }
     ];

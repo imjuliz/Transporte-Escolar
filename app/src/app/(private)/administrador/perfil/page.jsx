@@ -1,6 +1,6 @@
 "use client";
 import { Kings } from 'next/font/google';
-import '../styles/perfil.css';
+import './perfil.css';
 import '../../../../styles/globals.css'
 import Image from 'next/image';
 import '../../../../../node_modules/preline/dist/preline.js'
