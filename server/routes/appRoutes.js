@@ -4,6 +4,7 @@ import { loginController } from "../controllers/LoginController.js";
 import { editarPerfilController } from "../controllers/EditarController.js";
 import rotaController from '../controllers/RotasController.js';
 import { deletarPerfilController } from "../controllers/DeletarController.js";
+import { verAlunosController } from "../controllers/VerAlunosController.js";
 const router = express.Router();
 
 // Rotas públicas
@@ -13,6 +14,8 @@ router.post("/login", loginController);
 router.get('/administrador/dashboard', autorizarAcesso('Administrador'), (req, res) => {
   res.json({ mensagem: "Área de Administrador" });
 });
+
+router.get('/verAlunos',verAlunosController)
 
 router.patch('/editarPerfil', editarPerfilController);
 

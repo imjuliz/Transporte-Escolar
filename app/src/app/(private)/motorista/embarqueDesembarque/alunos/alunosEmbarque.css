@@ -1,14 +1,15 @@
 .secao1{
-  width:80% ;
-  margin-left: 0%;
+  margin-top: 50%;
+  width:60% ;
+  margin-left: 20%;
 }
 .secao1 .title1 {
-  margin-left: -100%;
+  margin-left: -40%;
   margin-top: -70%;
 }
 
 .secao1 .linha {
-  margin-left: -100%;
+  margin-left: -40%;
   width: 40%;
   border-bottom: 2px solid #D0D0D0;
 }
@@ -39,6 +40,7 @@
 }
 
 .info-escola {
+  margin-top: 10%;
   flex-grow: 1;
   padding: 0 20px;
 }
