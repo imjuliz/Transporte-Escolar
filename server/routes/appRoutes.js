@@ -3,7 +3,7 @@ import { autorizarAcesso } from "../middlewares/authMiddleware.js";
 import { loginController } from "../controllers/LoginController.js";
 import { editarPerfilController } from "../controllers/EditarController.js";
 import rotaController from '../controllers/RotasController.js';
-
+import { deletarPerfilController } from "../controllers/DeletarController.js";
 const router = express.Router();
 
 // Rotas públicas
@@ -15,6 +15,8 @@ router.get('/administrador/dashboard', autorizarAcesso('Administrador'), (req, r
 });
 
 router.patch('/editarPerfil', editarPerfilController);
+
+router.delete('/deletarUsuario', deletarPerfilController);
 
 router.get('/aluno/perfil', autorizarAcesso('Aluno'), (req, res) => {
   res.json({ mensagem: "Perfil do Aluno" });
