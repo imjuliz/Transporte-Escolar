@@ -20,6 +20,16 @@ onibus_id int,
 email varchar(100) not null
 );
 
+#tabela aluno
+create table alunos(
+email varchar(100) not null primary key,
+nomeCompleto varchar(100) not null,
+nomeEscola varchar(100) not null,
+enderecoEscola varchar(100) not null,
+telefonePrinc varchar(9) not null,
+emailPessoal varchar(100) not null
+);
+
 /*
 tabela da instituição/escola
 create table instituicao (
@@ -51,16 +61,6 @@ CREATE TABLE veiculos (
     FOREIGN KEY (motorista_cpf) REFERENCES motoristas(cpf) ON DELETE SET NULL ON UPDATE CASCADE ,
     FOREIGN KEY (instituicao_id) REFERENCES instituicao(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-CREATE TABLE rotas (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    origem VARCHAR(255) NOT NULL,
-    destino VARCHAR(255) NOT NULL,
-    horarioOrigem TIME NOT NULL,
-    horarioDestino TIME NOT NULL,
-    veiculo_id INT,
-    FOREIGN KEY (veiculo_id) REFERENCES veiculos(id_veiculo)
-);
 */
 
 # inserção de dados nas tabelas 
@@ -74,6 +74,11 @@ INSERT INTO usuarios (cpf, email, senha, tipo) VALUES
 ('88888888888', 'roberto@al.gov.br', 'roberto@aluno', 'aluno'),
 ('99999999999', 'beatriz@al.gov.br', 'beatriz@aluno', 'aluno'),
 ('10101010101', 'marcos@al.gov.br', 'marcos@aluno', 'aluno');
+
+INSERT INTO alunos (email, nomeCompleto, nomeEscola, enderecoEscola, telefonePrinc, emailPessoal) VALUES
+('roberto@al.gov.br', 'Roberto Alves Costa', 'EE Bairro Cruzeiro', '', 969903253, 'roberto_costa@gmail.com' ),
+('beatriz@al.gov.br', 'Beatriz Sousa Garcia', 'Espaço Livre Escola de Educação Infantil e Ensino Fund.', '', 929076857, 'beatrizgarcia2010@gmail.com'),
+('marcos@al.gov.br', 'Marcos Correia', 'Cemei Edna Cassiano', '', 956435985, 'marcos_correia@gmail.com');
 
 # rotas e onibus
 CREATE TABLE onibus (
@@ -134,3 +139,23 @@ INSERT INTO pontos_embarque (nome, endereco, latitude, longitude) VALUES
 
 INSERT INTO usuarios (cpf, email, senha, tipo) VALUES
 ('80080808080', 'responsavel@email.com', 'responsavel', 'responsavel');
+
+# triggers - ao inserir um aluno e informar o nomeEscola, o enderecoEscola correspondente é preenchido automaticamente com base na tabela escolas
+DELIMITER $$
+
+CREATE TRIGGER set_endereco_escola
+BEFORE INSERT ON alunos
+FOR EACH ROW
+BEGIN
+  DECLARE endereco_achado VARCHAR(255);
+
+  SELECT endereco
+  INTO endereco_achado
+  FROM escolas
+  WHERE nome = NEW.nomeEscola
+  LIMIT 1;
+
+  SET NEW.enderecoEscola = endereco_achado;
+END $$
+
+DELIMITER ;

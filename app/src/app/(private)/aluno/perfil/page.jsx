@@ -3,9 +3,10 @@ import { Kings } from 'next/font/google';
 import '../styles/perfil.css';
 import '../../../../styles/globals.css'
 import Image from 'next/image';
-import '../../../../../node_modules/preline/dist/preline.js'
 import React, { useRef, useEffect } from 'react';
 import { useState } from "react";
+
+
 export default function meuPerfil() {
 
     function openModal() {
@@ -21,21 +22,25 @@ export default function meuPerfil() {
 
     useEffect(() => {
         const cpfInput = cpfInputRef.current;
+      
+        if (!cpfInput) return; // evita erro se ainda for null
+      
         const handleInput = (e) => {
-            let value = e.target.value;
-            value = value.replace(/\D/g, '');
-            if (value.length > 3) value = value.replace(/^(\d{3})(\d)/, '$1.$2');
-            if (value.length > 6) value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
-            if (value.length > 9) value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{2})/, '$1.$2.$3-$4');
-            e.target.value = value;
+          let value = e.target.value;
+          value = value.replace(/\D/g, '');
+          if (value.length > 3) value = value.replace(/^(\d{3})(\d)/, '$1.$2');
+          if (value.length > 6) value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
+          if (value.length > 9) value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{2})/, '$1.$2.$3-$4');
+          e.target.value = value;
         };
-        
+      
         cpfInput.addEventListener('input', handleInput);
+      
         return () => {
-            cpfInput.removeEventListener('input', handleInput);
+          cpfInput.removeEventListener('input', handleInput);
         };
-    },
-    []);
+      }, []);
+      
     const [resposta, setResposta] = useState("");
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -43,9 +48,9 @@ export default function meuPerfil() {
         const form = e.target;
         const cpfSemFormatacao = cpfInputRef.current?.value.replace(/[.-]/g, '');
         const formData = {
-          cpf: cpfSemFormatacao,
-          email: emailInputRef.current?.value,
-          senha: senhaInputRef.current?.value,
+            cpf: cpfSemFormatacao,
+            email: emailInputRef.current?.value,
+            senha: senhaInputRef.current?.value,
         };
         try {
             const response = await fetch('http://localhost:3001/editarPerfil', {
@@ -66,15 +71,58 @@ export default function meuPerfil() {
             console.error('Erro:', error);
         }
     };
+
+    //limpar formulario
     const limparForm = () => {
         setcpf('');
         setEmail('');
         setSenha('')
-      }
+    }
+
+    // dados do aluno
+    const [aluno, setAluno] = useState(null);
+  const [erro, setErro] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:3001/aluno/perfil", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.mensagem);
+        setAluno(data);
+      })
+      .catch((err) => {
+        console.error("Erro ao buscar dados do aluno:", err.message);
+        setErro("Erro ao carregar perfil do aluno.");
+      });
+  }, []);
+
+  // 1. Enquanto carrega
+  if (erro) {
+    return <p className="text-red-600 p-4">{erro}</p>;
+  }
+
+  if (!aluno) {
+    return <p className="p-4">Carregando...</p>;
+  }
+
+    function pegarPrimeiroEUltimoNome(nome) {
+        if (!nome) return { primeiroNome: "", ultimoNome: "" };
+        const nomes = nome.trim().split(" ");
+        const primeiroNome = nomes[0];
+        const ultimoNome = nomes[nomes.length - 1];
+        return { primeiroNome, ultimoNome };
+    }
+
+    // Só executa se aluno estiver carregado e tiver nomeCompleto
+    const nomeSobrenome = aluno?.nomeCompleto
+        ? pegarPrimeiroEUltimoNome(aluno.nomeCompleto)
+        : { primeiroNome: "", ultimoNome: "" };
+
     return (
         <>
-            <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-            {/* <main className='justify-items-center content-center'> */}
             <section>
                 <div className='page-indicador'>
                     <h1>Meu perfil</h1>
@@ -97,7 +145,7 @@ export default function meuPerfil() {
                         </svg>
                     </div>
                     <div>
-                        <h3>Nome e Sobrenome</h3>
+                        <h3>{nomeSobrenome.primeiroNome} {nomeSobrenome.ultimoNome}</h3>
                         <p>Tipo de usuario</p>
                     </div> <hr /> </div>
                 <div className='sec'>
@@ -108,16 +156,16 @@ export default function meuPerfil() {
                     <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
                         <div className='sec-campos'>
                             <h6>Nome completo:</h6>
-                            <p>Nome completo.</p>
+                            <p>{aluno.nomeCompleto}</p>
                         </div>
                         <div className='sec-campos'>
                             <h6>Escola:</h6>
-                            <p>Nome da escola</p>
-                            <p>Endereço da escola</p>
+                            <p>{aluno.nomeEscola}</p>
+                            <p>{aluno.enderecoEscola}</p>
                         </div>
                         <div className='sec-campos'>
                             <h6>Email institucional:</h6>
-                            <p>Email.</p>
+                            <p>{aluno.email}</p>
                         </div>
                         <div className='sec-campos'>
                             <h6>Endereço:</h6>
@@ -133,12 +181,12 @@ export default function meuPerfil() {
                     <div className='sec-container flex flex-col gap-8'>
                         <div className='sec-campos'>
                             <h6>Email:</h6>
-                            <p>Email pessoal 1.</p>
+                            <p>{aluno.emailPessoal}</p>
                         </div>
                         <div className='sec-campos flex flex-nowrap gap-50'>
                             <div className='sec-campos2'>
                                 <h6>Telefone:</h6>
-                                <p>Telefone pessoal 1</p>
+                                <p>{aluno.telefonePrinc}</p>
                             </div>
                             <div className='sec-campos2'>
                                 <h6>Tipo de telefone:</h6>
@@ -150,7 +198,7 @@ export default function meuPerfil() {
                 <div className='btn-perfil flex flex-wrap gap-6'>
                     <button className='btn-add'>Adicionar contato</button>
                     {/* <button className='btn-edit'><a href='../../editar'>Editar informações</a></button> */}
-                    <button onClick={openModal} className='botaoModal bg-blue-600'>Editar informações</button>
+                    <button onClick={openModal} className='btn-edit'>Editar informações</button>
 
                     <div id="modal" className="modal">
                         <div className="modal-content">
@@ -161,21 +209,20 @@ export default function meuPerfil() {
                                         Editar Informações
                                     </h3>
                                 </div>
-                                {/* <!-- Modal body --> */}
                                 <form onSubmit={handleSubmit} >
                                     <div className="grid gap-6 mb-6 md:grid-cols-2">
                                         <div>
                                             <label htmlFor="company" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CPF</label>
-                                            <input type="text" id="cpf" name="cpf" ref={cpfInputRef}  maxLength="14" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="000.000.000-00"required />
+                                            <input type="text" id="cpf" name="cpf" ref={cpfInputRef} maxLength="14" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="000.000.000-00" required />
                                         </div>
                                     </div>
                                     <div className="mb-6">
                                         <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
-                                        <input type="email" id="email" name="email" ref={emailInputRef}className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required />
+                                        <input type="email" id="email" name="email" ref={emailInputRef} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required />
                                     </div>
                                     <div className="mb-6">
                                         <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
-                                        <input type="password" id="senha" name="senha" ref={senhaInputRef}className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
+                                        <input type="password" id="senha" name="senha" ref={senhaInputRef} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
                                     </div>
 
                                     <button type="submit" onClick={handleSubmit} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button>
@@ -191,4 +238,5 @@ export default function meuPerfil() {
             </section >
             {/* </main> */}
         </>
-    )}
+    )
+}
