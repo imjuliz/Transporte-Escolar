@@ -131,3 +131,6 @@ INSERT INTO pontos_embarque (nome, endereco, latitude, longitude) VALUES
 ('R. Líbero Badaró, 377', 'R. Líbero Badaró, 377-271 - Monte Azul Paulista, SP, 14730-000', -20.90651890283922, -48.64534680550859),
 ('R. Waldomiro Wohnrath, 230', 'R. Waldomiro Wohnrath, 2-230 - Monte Azul Paulista, SP, 14730-000', -20.901914202093067, -48.64759343388823),
 ('R. Machado Morales, 70', 'R. Machado Morales, 2-70 - Monte Azul Paulista, SP, 14730-000', -20.918534101205456, -48.635203935794515);
+
+INSERT INTO usuarios (cpf, email, senha, tipo) VALUES
+('80080808080', 'responsavel@email.com', 'responsavel', 'responsavel');

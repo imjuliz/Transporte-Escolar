@@ -80,7 +80,7 @@ const login = async (e) => {
 
     if (response.status === 200) {
       localStorage.setItem("usuario", JSON.stringify({ email, tipo: usuarioAtivo }));
-      router.replace(`/${usuarioAtivo.toLowerCase()}/`);
+      router.replace(`/${usuarioAtivo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}/`);
     } else {
       setLoginStatus(response.data.mensagem);
     }

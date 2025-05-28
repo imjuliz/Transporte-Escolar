@@ -17,7 +17,8 @@ export default function PrivateLayout({ children }) {
     } else {
       const userObj = JSON.parse(user);
       const tipoNaRota = pathname.split("/")[1]; // Ex: 'administrador', 'aluno'
-      if (userObj.tipo.toLowerCase() !== tipoNaRota.toLowerCase()) {
+      if ( userObj.tipo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") !== 
+      tipoNaRota.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) {
         router.replace("/login");
       } else {
         setUsuario(userObj);
