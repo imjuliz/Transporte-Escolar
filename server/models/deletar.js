@@ -1,4 +1,4 @@
-import { deleteRecord } from "../config/database";
+import { deleteRecord } from "../config/database.js";
 
 const deletarPerfil = async (email)=>{
     try{

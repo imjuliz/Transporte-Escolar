@@ -1,12 +1,11 @@
 "use client";
-import { Kings } from 'next/font/google';
 import './perfil.css';
 import '../../../../styles/globals.css'
 import Image from 'next/image';
-import '../../../../../node_modules/preline/dist/preline.js'
 import React, { useRef, useEffect } from 'react';
 import { useState } from "react";
-export default function meuPerfil() {
+
+export default function Perfil() {
 
     function openModal() {
         document.getElementById("modal").style.display = "block";
@@ -14,7 +13,6 @@ export default function meuPerfil() {
     function closeModal() {
         document.getElementById("modal").style.display = "none";
     }
-    console.log("Componente EditarPerfil carregado");
     const cpfInputRef = useRef(null);
     const emailInputRef = useRef(null);
     const senhaInputRef = useRef(null);
@@ -73,8 +71,6 @@ export default function meuPerfil() {
       }
     return (
         <>
-            <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-            {/* <main className='justify-items-center content-center'> */}
             <section>
                 <div className='page-indicador'>
                     <h1>Meu perfil</h1>
@@ -149,7 +145,6 @@ export default function meuPerfil() {
                 </div>
                 <div className='btn-perfil flex flex-wrap gap-6'>
                     <button className='btn-add'>Adicionar contato</button>
-                    {/* <button className='btn-edit'><a href='../../editar'>Editar informações</a></button> */}
                     <button onClick={openModal} className='botaoModal bg-blue-600'>Editar informações</button>
 
                     <div id="modal" className="modal">
