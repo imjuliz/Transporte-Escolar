@@ -97,7 +97,7 @@ export default function AlunoLayout({ children }) {
                                 className='fotoPerfil'
                             />
                             <div className="logo flex flex-col">
-                                <p className="logoName">Aluno</p>
+                                <p className="logoName">Administrador</p>
                                 <h4 className='nomepessoa'>nome</h4>
                             </div>
                             <i className='bx bx-menu' id="btn" onClick={toggleSidebar}><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">

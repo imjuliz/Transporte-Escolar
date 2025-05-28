@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import Image from 'next/image'
 
 export default function RootLayout({ children }) {
+
+    //sidebar
     const [sidebarActive, setSidebarActive] = useState(false);
 
     const toggleSidebar = () => {
@@ -38,72 +40,67 @@ export default function RootLayout({ children }) {
 
     const links = [
         { href: './navegacao', name: 'navegacao', page: 'Painel de navegação' },
-        { href: './embarqueDesembarque', name: 'embarque', page: 'Embarques/ desembarques' },
-        { href: './viagens', name: 'viagens', page: 'Viagens' },
-        { href: './veiculos', name: 'veiculos', page: 'Veículos' },
-        { href: './incidentes', name: 'incidentes', page: 'Incidentes' },
+        { href: '/motorista/embarqueDesembarque', name: 'embarque', page: 'Embarques/ desembarques' },
+        { href: '/motorista/viagens', name: 'viagens', page: 'Viagens' },
+        { href: '/motorista//veiculos', name: 'veiculos', page: 'Veículos' },
+        { href: './motorista/incidentes', name: 'incidentes', page: 'Incidentes' },
     ];
 
+    //logout
+    const logout = () => {
+        localStorage.removeItem("usuario"); // remove os dados do usuário
+        window.location.href = "/login"; // redireciona p pag de login
+    };
     return (
-        <html lang="pt-br">
-            <head>
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossOrigin="anonymous" />
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true' />
-                <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet"></link>
-            </head>
-            <body>
-                <header>
-                    <div className={`sidebar ${sidebarActive ? 'active' : ''}`}>
-                        <div className="logoContent flex flex-nowrap gap-4 items-center">
-                            <Image
-                                src="/img/fotoPerfil.png"
-                                width={100}
-                                height={100}
-                                alt="Foto de perfil"
-                                className='fotoPerfil'
-                            />
-                            <div className="logo flex flex-col">
-                                <p className="logoName">Motorista</p>
-                                <h4 className='nomepessoa'>nome</h4>
-                            </div>
-                            <i className='bx bx-menu' id="btn" onClick={toggleSidebar}><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="0.5" y="0.5" width="27" height="27" rx="7.5" fill="#161A23" />
-                                <rect x="0.5" y="0.5" width="27" height="27" rx="7.5" stroke="#2D2F39" />
-                                <path d="M16.4715 10.4714C16.7318 10.2111 16.7318 9.78895 16.4715 9.5286C16.2111 9.26825 15.789 9.26825 15.5287 9.5286L11.5287 13.5286C11.2683 13.7889 11.2683 14.2111 11.5287 14.4714L15.5287 18.4714C15.789 18.7318 16.2111 18.7318 16.4715 18.4714C16.7318 18.2111 16.7318 17.7889 16.4715 17.5286L12.9429 14L16.4715 10.4714Z" fill="white" fillOpacity="0.8" />
-                            </svg>
-                            </i>
+        <>
+            <header>
+                <div className={`sidebar ${sidebarActive ? 'active' : ''}`}>
+                    <div className="logoContent flex flex-nowrap gap-4 items-center">
+                        <Image
+                            src="/img/fotoPerfil.png"
+                            width={100}
+                            height={100}
+                            alt="Foto de perfil"
+                            className='fotoPerfil'
+                        />
+                        <div className="logo flex flex-col">
+                            <p className="logoName">Motorista</p>
+                            <h4 className='nomepessoa'>nome</h4>
                         </div>
-                        <ul className="navList">
-                            {links.map(({ href, name, page }) => (
-                                <li className="navList-item text-[#999999] hover:text-[#ffc01d] transition-colors duration-200" key={name}>
-                                    <a href={href}>
-                                        {iconsNav[name]}
-                                        <span className="linksNames">{page}</span>
-                                    </a>
-                                    <span className="tooltip">{page}</span>
-                                </li>
-                            ))}
-                        </ul>
-                        <div className="profileContent">
-                            <div className="profile">
-                                <button type='submit' className="btn-sair group flex flex-row gap-3 items-center">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11 1H13C14.1046 1 15 1.89543 15 3L15 13C15 14.1046 14.1046 15 13 15H11M1 8H11M11 8L9 10M11 8L9 6" stroke="#757575" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-[#FF0000] transition-colors duration-200" />
-                                    </svg>
-                                    <p className="text-[#757575] group-hover:text-[#FF0000] transition-colors duration-200">Sair</p>
-                                </button>
-                            </div>
+                        <i className='bx bx-menu' id="btn" onClick={toggleSidebar}><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0.5" y="0.5" width="27" height="27" rx="7.5" fill="#161A23" />
+                            <rect x="0.5" y="0.5" width="27" height="27" rx="7.5" stroke="#2D2F39" />
+                            <path d="M16.4715 10.4714C16.7318 10.2111 16.7318 9.78895 16.4715 9.5286C16.2111 9.26825 15.789 9.26825 15.5287 9.5286L11.5287 13.5286C11.2683 13.7889 11.2683 14.2111 11.5287 14.4714L15.5287 18.4714C15.789 18.7318 16.2111 18.7318 16.4715 18.4714C16.7318 18.2111 16.7318 17.7889 16.4715 17.5286L12.9429 14L16.4715 10.4714Z" fill="white" fillOpacity="0.8" />
+                        </svg>
+                        </i>
+                    </div>
+                    <ul className="navList">
+                        {links.map(({ href, name, page }) => (
+                            <li className="navList-item text-[#999999] hover:text-[#ffc01d] transition-colors duration-200" key={name}>
+                                <a href={href}>
+                                    {iconsNav[name]}
+                                    <span className="linksNames">{page}</span>
+                                </a>
+                                <span className="tooltip">{page}</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="profileContent">
+                        <div className="profile">
+                            <button type='submit' className="btn-sair group flex flex-row gap-3 items-center" onClick={logout}>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 1H13C14.1046 1 15 1.89543 15 3L15 13C15 14.1046 14.1046 15 13 15H11M1 8H11M11 8L9 10M11 8L9 6" stroke="#757575" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-[#FF0000] transition-colors duration-200" />
+                                </svg>
+                                <p className="text-[#757575] group-hover:text-[#FF0000] transition-colors duration-200">Sair</p>
+                            </button>
                         </div>
                     </div>
-                </header>
-                <main className={`main-content justify-items-center content-center ${sidebarActive ? 'collapsed' : ''}`}>
-                    {children}
-                </main>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossOrigin="anonymous"></script>
-            </body>
-
-        </html>
+                </div>
+            </header>
+            <main className={`main-content justify-items-center content-center ${sidebarActive ? 'collapsed' : ''}`}>
+                {children}
+            </main>
+        </>
     );
 }
 

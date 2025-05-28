@@ -3,6 +3,7 @@ import "../../../styles/globals.css";
 import './styles/layout.css';
 import { useEffect, useState } from "react";
 import Image from 'next/image'
+
 export default function AlunoLayout({ children }) {
     // SIDEBAR
     const [sidebarActive, setSidebarActive] = useState(false);

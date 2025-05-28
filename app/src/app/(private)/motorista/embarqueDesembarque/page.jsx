@@ -4,21 +4,16 @@ import './embarque.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 
-// import { logout } from '../../../../server/models/logout';
 
 export default function embarque() {
 
     const escolas = [
-        { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola X', endereco: 'R. Santo Andre, B. Nova Gerty', qtd: '65' },//qtd vai pegar do banco de dados
+        { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola X', endereco: 'R. Santo Andre, B. Nova Gerty', qtd: '65' },
         { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola Y', endereco: 'R.Boa Vista, B. Nova Gerty', qtd: '12' },
         { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola Z', endereco: 'R. Não Sei, B. Vou Pensar', qtd: '34' },
     ]
     return (
         <>
-            <head>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            </head>
-            
                 <section className='secao1 '>
                     <h1 className='title1 '>Embarques e desembarques</h1>
                     <p className='linha'></p>

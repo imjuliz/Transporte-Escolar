@@ -1,13 +1,11 @@
 "use client";
 import { Kings } from 'next/font/google'
 import './alunosEmbarque.css'
-import '../../../../styles/globals.css'
+import '../../../../../styles/globals.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
-// import embarque from '../page'
 
-export default function embarque() {
-
+export default function embarques() {
     const escolas = [
         { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola X', endereco: 'R. Santo Andre, B. Nova Gerty', qtd: '65' },//qtd vai pegar do banco de dados
         { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola Y', endereco: 'R.Boa Vista, B. Nova Gerty', qtd: '12' },
@@ -15,10 +13,6 @@ export default function embarque() {
     ]
     return (
         <>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <head>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            </head>
             <section className='secao1'>
                 <h1 className='title1'>Embarques e desembarques</h1>
                 <p className='linha'></p>
@@ -46,7 +40,6 @@ export default function embarque() {
                         <tbody>
                             <tr>
                                 <td>aluno1 sobrenome1</td>
-
                                 <td>aluno1@gmail.com</td>
                             </tr>
                         </tbody>

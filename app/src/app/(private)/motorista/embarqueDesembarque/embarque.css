@@ -1,5 +1,9 @@
 /*Body*/
 /*seção 1*/
+.secao1{
+  width: 60%;
+  margin-left: 10%;
+}
 .secao1 .title1 {
   margin-left: -40%;
   margin-top: 10%;
@@ -37,7 +41,8 @@
 
 .info-escola {
   flex-grow: 1;
-  padding: 0 20px;
+  margin-top: 5%;
+  padding: 0% 20px ;
 }
 
 .nome-escola {
