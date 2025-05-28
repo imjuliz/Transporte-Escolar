@@ -3,7 +3,6 @@ import { Kings } from 'next/font/google';
 import './perfil.css';
 import '../../../../styles/globals.css'
 import Image from 'next/image';
-import '../../../../../node_modules/preline/dist/preline.js'
 import React, { useRef, useEffect } from 'react';
 import { useState } from "react";
 export default function meuPerfil() {

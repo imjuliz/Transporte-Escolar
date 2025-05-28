@@ -1,4 +1,4 @@
-import { deletarPerfil } from "../models/deletar";
+import { deletarPerfil } from "../models/deletar.js";
 
 const deletarPerfilController = async(req,res)=>{
     try{

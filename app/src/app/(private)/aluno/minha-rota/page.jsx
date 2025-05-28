@@ -10,7 +10,9 @@ export default function MapaRotas() {
   const [rotas, setRotas] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/aluno/minha-rota')
+    fetch('http://localhost:3001/aluno/minha-rota', {
+      credentials: 'include' // se usa cookie para login
+    })
       .then(res => res.json())
       .then(data => {
         console.log('Resposta da API:', data); // <-- Adicione isso

@@ -4,31 +4,24 @@ import { loginController } from "../controllers/LoginController.js";
 import { editarPerfilController } from "../controllers/EditarController.js";
 import rotaController from '../controllers/RotasController.js';
 import { deletarPerfilController } from "../controllers/DeletarController.js";
+import { obterDadosAluno } from '../controllers/AlunoController.js'
 const router = express.Router();
 
 // Rotas públicas
 router.post("/login", loginController);
 
 // rotas privadas
-router.get('/administrador/dashboard', autorizarAcesso('Administrador'), (req, res) => {
-  res.json({ mensagem: "Área de Administrador" });
-});
+router.get('/administrador/dashboard', autorizarAcesso('Administrador'));
 
 router.patch('/editarPerfil', editarPerfilController);
 
 router.delete('/deletarUsuario', deletarPerfilController);
 
-router.get('/aluno/perfil', autorizarAcesso('Aluno'), (req, res) => {
-  res.json({ mensagem: "Perfil do Aluno" });
-});
+router.get('/aluno/perfil', autorizarAcesso('Aluno'), obterDadosAluno);
 
-router.get('/motorista/dashboard', autorizarAcesso('Motorista'), (req, res) => {
-  res.json({ mensagem: "Painel do Motorista" });
-});
+router.get('/motorista/dashboard', autorizarAcesso('Motorista'));
 
-router.get('/responsavel/home', autorizarAcesso('Responsável'), (req, res) => {
-  res.json({ mensagem: "Área do Responsável" });
-});
+router.get('/responsavel/home', autorizarAcesso('Responsável'));
 
 router.get('/aluno/minha-rota', autorizarAcesso('Aluno'), rotaController.listarRotas);
 router.get('/aluno/minha-rota', autorizarAcesso('Aluno'), rotaController.obterRota);

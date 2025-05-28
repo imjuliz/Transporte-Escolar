@@ -14,14 +14,16 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(
-  session({
-    secret: 'segredo-simples',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false } // true se estiver em HTTPS
-  })
-);
+app.use(session({
+  secret: 'chave_secreta',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // true se usar HTTPS
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 // 1 hora
+  }
+}));
 
 app.use((req, res, next) => {
   console.log("Sessão atual:", req.session);
@@ -36,6 +38,15 @@ app.use('/administrador/dashboard', (req, res) => {
 })
 
 app.use('/aluno/minha-rota', rotasRoute);
+
+
+// teste
+app.get('/debug/sessao', (req, res) => {
+  res.json({
+    sessao: req.session,
+    usuario: req.session.usuario || null
+  });
+});
 
 app.use((req,res)=>{
   res.status(404).json({mensagem: 'Rota não encontrada'});
