@@ -1,7 +1,7 @@
 "use client";
 import './trabalhe.css'
 import { usePathname } from 'next/navigation';
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export default function TrabalheConosco() {
     // formatação de cep
@@ -31,14 +31,35 @@ export default function TrabalheConosco() {
         // Aceita (xx) xxxxx-xxxx, xx xxxxx xxxx, xxxxxxxxxxx, etc.
         const regex = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
         return regex.test(phone);
-      }
+    }
 
-    const pathname = usePathname();
-
+    // nav bar
     const links = [
         { href: '/', page: 'Página Inicial' },
         { href: '/trabalheConosco', page: 'Trabalhe Conosco' }
     ];
+
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const highlightRef = useRef(null);
+    const itemRefs = useRef([]);
+
+    useEffect(() => {
+        const indexToUse = hoveredIndex !== null ? hoveredIndex : activeIndex;
+        moveHighlight(indexToUse);
+
+        const handleResize = () => moveHighlight(indexToUse);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [activeIndex, hoveredIndex]);
+
+    const moveHighlight = (index) => {
+        const el = itemRefs.current[index];
+        if (el && highlightRef.current) {
+            highlightRef.current.style.width = el.offsetWidth + 'px';
+            highlightRef.current.style.left = el.offsetLeft + 'px';
+        }
+    };
 
     const trabalheItens = [
         {
@@ -117,16 +138,19 @@ export default function TrabalheConosco() {
         <>
             {/* navbar */}
             <header>
-                <ul className='linksrapidos'>
-                    <li className='logo'>Nome</li>
-                    <li className='barra'>|</li>
-                    {links.map(({ href, page, index }) => (
-                        <li className="linksrapidos" key={index}>
-                            <a href={href}><span className="linksrapidos">{page}</span></a>
+                <ul className="linksrapidos">
+                    <li className="logo">Nome</li>
+                    <div className="highlight" ref={highlightRef}></div>
+                    {links.map((link, index) => (
+                        <li key={index} className="link-item" ref={(el) => (itemRefs.current[index] = el)} onClick={() => setActiveIndex(index)} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
+                            <a href={link.href} style={{ color: hoveredIndex === index ? '#161A23' : activeIndex === index && hoveredIndex !== null ? '#fff' : activeIndex === index ? '#161A23' : '#fff' }} >
+                                <span>{link.page}</span>
+                            </a>
                         </li>
                     ))}
-                    <li className='barra'>|</li>
-                    <li className='login'><a href='#'>entrar</a></li>
+                    <a href="/login">
+                        <button className="login text-[#fff] bg-[#2D2F39]">Entrar</button>
+                    </a>
                 </ul>
             </header>
 

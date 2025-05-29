@@ -1,4 +1,4 @@
-// import { create, readAll, read, update, deleteRecord } from '../config/database.js';
+import { create, readAll, read, update, deleteRecord } from '../config/database.js';
 
 // const TABLE = 'rotas';
 
@@ -24,7 +24,6 @@
 
 // export default { rotas, rotaPorId, criarRota, atualizarRota, deletarRota };
 
-const readAll = require('../config/database');
 
 const listarViagens = async () => {
     const [results] = await readAll("viagens");

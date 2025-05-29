@@ -2,7 +2,7 @@ import express from "express";
 import { autorizarAcesso } from "../middlewares/authMiddleware.js"; 
 import { loginController } from "../controllers/LoginController.js";
 import { editarPerfilController } from "../controllers/EditarController.js";
-import rotaController from '../controllers/RotasController.js';
+// import rotaController from '../controllers/RotasController.js';
 import { deletarPerfilController } from "../controllers/DeletarController.js";
 import { verAlunosController } from "../controllers/VerAlunosController.js";
 import { obterDadosAluno } from '../controllers/AlunoController.js';
@@ -30,10 +30,10 @@ router.get('/motorista/dashboard', autorizarAcesso('Motorista'));
 
 router.get('/responsavel/home', autorizarAcesso('Responsável'));
 
-router.get('/aluno/minha-rota', autorizarAcesso('Aluno'), rotaController.listarRotas);
-router.get('/aluno/minha-rota', autorizarAcesso('Aluno'), rotaController.obterRota);
-router.post('/', rotaController.criarRota);
-router.put('/:id', rotaController.atualizarRota);
-router.delete('/:id', rotaController.deletarRota);
+router.get('/aluno/minha-rota', autorizarAcesso('Aluno')/*, rotaController.listarRotas*/);
+router.get('/aluno/minha-rota', autorizarAcesso('Aluno')/*, rotaController.obterRota*/);
+// router.post('/'/*, rotaController.criarRota*/);
+// router.put('/:id'/*, rotaController.atualizarRota*/);
+// router.delete('/:id'/*, rotaController.deletarRota*/);
 
 export default router;

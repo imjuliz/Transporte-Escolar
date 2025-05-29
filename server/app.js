@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import session from "express-session";
 import rotas from "./routes/appRoutes.js";
-import rotasRoute from './routes/rotasRoute.js'
+// import rotasRoute from './routes/rotasRoute.js'
 
 const app = express();
 const port = 3001;
@@ -37,7 +37,7 @@ app.use('/administrador/dashboard', (req, res) => {
   res.json(req.session);
 })
 
-app.use('/aluno/minha-rota', rotasRoute);
+// app.use('/aluno/minha-rota', rotasRoute);
 
 
 // teste
