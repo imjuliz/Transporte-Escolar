@@ -6,7 +6,7 @@ import rotaController from '../controllers/RotasController.js';
 import { deletarPerfilController } from "../controllers/DeletarController.js";
 import { verAlunosController } from "../controllers/VerAlunosController.js";
 import { obterDadosAluno } from '../controllers/AlunoController.js';
-import { obterDadosMotorista } from "../controllers/AlunoController.js";
+// import { obterDadosMotorista } from "../controllers/AlunoController.js";
 
 const router = express.Router();
 
@@ -26,7 +26,7 @@ router.get('/aluno/perfil', autorizarAcesso('Aluno'), obterDadosAluno);
 
 router.get('/motorista/dashboard', autorizarAcesso('Motorista'));
 
-router.get('/motorista/perfil', autorizarAcesso('Motorista'), obterDadosMotorista,)
+// router.get('/motorista/perfil', autorizarAcesso('Motorista'), obterDadosMotorista )
 
 router.get('/responsavel/home', autorizarAcesso('Responsável'));
 
