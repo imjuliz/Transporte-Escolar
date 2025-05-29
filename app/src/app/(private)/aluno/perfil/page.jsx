@@ -42,7 +42,6 @@ export default function meuPerfil() {
     const [resposta, setResposta] = useState("");
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const form = e.target;
         const cpfSemFormatacao = cpfInputRef.current?.value.replace(/[.-]/g, '');
         const formData = {
@@ -76,7 +75,6 @@ export default function meuPerfil() {
         setEmail('');
         setSenha('')
     }
-
     // dados do aluno
     const [aluno, setAluno] = useState(null);
     const [erro, setErro] = useState("");
