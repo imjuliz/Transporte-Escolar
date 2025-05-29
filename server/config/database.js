@@ -138,4 +138,16 @@ async function compare(senha, hash) {
     }
 }
 
+// async function testRead() {
+//     try {
+//         const resultado = await read("alunos", "email = 'roberto@al.gov.br'");
+//         console.log("Resultado da função read():", resultado);
+//     } catch (err) {
+//         console.error("Erro ao testar função read():", err);
+//     }
+// }
+
+// // Execute esse teste ao iniciar o servidor
+// testRead();
+
 export { create, readAll,readAll2, read, update, deleteRecord, compare}

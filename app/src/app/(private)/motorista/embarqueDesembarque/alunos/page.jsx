@@ -1,7 +1,6 @@
 "use client";
-import { Kings } from 'next/font/google'
+=
 import './alunosEmbarque.css'
-import '../../../../../styles/globals.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 

@@ -1,6 +1,4 @@
 "use client";
-//import '../styles/informacoes.css'
-import '../../../../styles/globals.css'
 import React, { useState } from 'react'
 import '../styles/infos2.css'
 

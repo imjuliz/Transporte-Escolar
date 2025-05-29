@@ -1,5 +1,4 @@
 "use client";
-import { Kings } from 'next/font/google';
 import Image from 'next/image'
 import '../styles/notificacoes.css'
 import React, { useState } from 'react'

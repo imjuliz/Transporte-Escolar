@@ -1,6 +1,4 @@
 "use client";
-import { Kings } from 'next/font/google'
-import '../../../styles/globals.css'
 import './login.css'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -39,50 +37,47 @@ export default function Login() {
   const [loginStatus, setLoginStatus] = useState('');
   const [statusAtual, setStatusAtual] = useState('mensagem')
 
-  // const login = (e) => {
-  //   // evitar envios 
-  //   e.preventDefault();
-  //   //axios vai criar uma api que se conecta ao servidor
-  //   axios.post('http://localhost:3000/login', {
-  //     email: email,
-  //     senha: senha
-  //   })
-  //     .then((response) => {
-  //       console.log();
-  //       if (response.data.mensagem || email == '' || senha == '') {
-  //         router.push('/'); // Redirecionar para login se houver erro
-  //         setLoginStatus('Erro ao realizar login. Tente novamente.')
-  //       } else {
-  //         router.push('/aluno/perfil'); // Redirecionar para página privada em caso de sucesso
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Erro ao tentar fazer login:", error);
-  //     })
-  // };
-
 const login = async (e) => {
   e.preventDefault();
 
-  if (!email || !senha || !usuarioAtivo) { // usuarioAtivo contém o tipo selecionado
+  if (!email || !senha || !usuarioAtivo) { 
     setLoginStatus("Preencha todos os campos.");
     return;
   }
 
   try {
-    const response = await axios.post('http://localhost:3001/login', {
-      email,
-      senha,
-      tipo: usuarioAtivo
-    }, {
-      withCredentials: true
+    const response = await fetch('http://localhost:3001/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        email,
+        senha,
+        tipo: usuarioAtivo
+      })
     });
 
-    if (response.status === 200) {
+    const data = await response.json();
+
+    if (response.ok) {
       localStorage.setItem("usuario", JSON.stringify({ email, tipo: usuarioAtivo }));
-      router.replace(`/${usuarioAtivo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}/`);
+
+      // redireciona para a página correta com base no tipo de usuário
+      if (usuarioAtivo === "Aluno") {
+        router.replace("/aluno/minha-rota");
+      } else if (usuarioAtivo === "Administrador") {
+        router.replace("/administrador/dashboard");
+      } else if (usuarioAtivo === "Motorista") {
+        router.replace("/motorista/minha-rota");
+      } else if (usuarioAtivo === "Responsável") {
+        router.replace("/responsavel/informacoes");
+      } else {
+        router.replace("/login");
+      }
     } else {
-      setLoginStatus(response.data.mensagem);
+      setLoginStatus(data.mensagem);
     }
   } catch (error) {
     console.error("Erro ao tentar fazer login:", error);
@@ -105,48 +100,6 @@ const login = async (e) => {
     setSenha('')
   }
 
-  // envia credenciais para o backend
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const tipo = usuarioAtivo
-  //       .normalize("NFD") // p deixar sem acento
-  //       .replace(/[\u0300-\u036f]/g, "")
-  //       .toLowerCase(); // p deixar minusculo
-  //     const resposta = await fetch("http://localhost:3001/login", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ email: document.getElementById("email").value, senha: document.getElementById("senha").value, tipo: tipo }),
-  //     });
-
-  //     const dados = await resposta.json();
-
-  //     if (resposta.ok) {
-  //       localStorage.setItem("token", dados.token);
-  //       alert("Login realizado com sucesso!");
-  //       // redirecionar o usuário para a página correta com base no tipo de perfil dele
-  //       switch (dados.tipo) {
-  //         case 'administrador':
-  //           router.push('/administrador/dashboard');
-  //           break;
-  //         case 'aluno':
-  //           router.push('/aluno/perfil');
-  //           break;
-  //         case 'motorista':
-  //           router.push("/motorista")
-  //           redirecionar();
-  //           break;
-  //         case 'responsavel':
-  //           router.push('/responsavel/dashboard');
-  //           break;
-  //       }
-  //     } else {
-  //       alert(dados.mensagem);
-  //     }
-  //   } catch (error) {
-  //     console.error("Erro ao fazer login:", error);
-  //   }
-  // };
 
   /*
     // formatação de cpf

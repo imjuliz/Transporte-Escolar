@@ -1,5 +1,4 @@
 "use client";
-import { Kings } from 'next/font/google'
 import './Header.css';
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect } from "react";

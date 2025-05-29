@@ -1,6 +1,5 @@
 "use client";
 import './perfil.css';
-import '../../../../styles/globals.css'
 import Image from 'next/image';
 import React, { useRef, useEffect } from 'react';
 import { useState } from "react";

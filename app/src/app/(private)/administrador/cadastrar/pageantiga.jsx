@@ -1,17 +1,5 @@
-// criar a pagina aqui - lorena
-
-
-//cpf, email, senha, tipo
-
 "use client";
-import { Kings } from 'next/font/google'
-{/*import '../../styles/globals.css'*/}
-{/*import '../../styles/login.css';*/}
-
-{/*import '../../components/Footer/Footer.jsx';*/}
-
 import { useState } from "react";
-
 export default function RegistrarUsuario() {
 
     document.getElementById('registrarForm').addEventListener('submit', async function (event) {

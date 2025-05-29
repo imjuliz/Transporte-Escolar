@@ -1,5 +1,4 @@
 "use client"
-import "../../../styles/globals.css";
 import './styles/layout.css';
 import { useEffect, useState } from "react";
 import Image from 'next/image'
@@ -152,7 +151,6 @@ export default function AlunoLayout({ children }) {
 
 
 // "use client";
-// import { Kings } from 'next/font/google';
 // import '../../../styles/administrador.css';
 // import './styles/layout.css';
 // import { usePathname } from 'next/navigation';

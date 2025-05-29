@@ -1,11 +1,8 @@
 "use client";
-import { Kings } from 'next/font/google'
 import './veiculos.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 import Image from 'next/image'
-import '../../../styles/globals.css'
-import '../../../styles/globals.css'
 
 export default function veiculos() {
     return (

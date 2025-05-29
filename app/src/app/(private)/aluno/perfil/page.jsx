@@ -1,7 +1,5 @@
 "use client";
-import { Kings } from 'next/font/google';
 import '../styles/perfil.css';
-import '../../../../styles/globals.css'
 import Image from 'next/image';
 import React, { useRef, useEffect } from 'react';
 import { useState } from "react";
@@ -22,25 +20,25 @@ export default function meuPerfil() {
 
     useEffect(() => {
         const cpfInput = cpfInputRef.current;
-      
+
         if (!cpfInput) return; // evita erro se ainda for null
-      
+
         const handleInput = (e) => {
-          let value = e.target.value;
-          value = value.replace(/\D/g, '');
-          if (value.length > 3) value = value.replace(/^(\d{3})(\d)/, '$1.$2');
-          if (value.length > 6) value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
-          if (value.length > 9) value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{2})/, '$1.$2.$3-$4');
-          e.target.value = value;
+            let value = e.target.value;
+            value = value.replace(/\D/g, '');
+            if (value.length > 3) value = value.replace(/^(\d{3})(\d)/, '$1.$2');
+            if (value.length > 6) value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
+            if (value.length > 9) value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{2})/, '$1.$2.$3-$4');
+            e.target.value = value;
         };
-      
+
         cpfInput.addEventListener('input', handleInput);
-      
+
         return () => {
-          cpfInput.removeEventListener('input', handleInput);
+            cpfInput.removeEventListener('input', handleInput);
         };
-      }, []);
-      
+    }, []);
+
     const [resposta, setResposta] = useState("");
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -81,32 +79,32 @@ export default function meuPerfil() {
 
     // dados do aluno
     const [aluno, setAluno] = useState(null);
-  const [erro, setErro] = useState("");
+    const [erro, setErro] = useState("");
 
-  useEffect(() => {
-    fetch("http://localhost:3001/aluno/perfil", {
-      method: "GET",
-      credentials: "include",
-    })
-      .then(async (res) => {
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.mensagem);
-        setAluno(data);
-      })
-      .catch((err) => {
-        console.error("Erro ao buscar dados do aluno:", err.message);
-        setErro("Erro ao carregar perfil do aluno.");
-      });
-  }, []);
+    useEffect(() => {
+        fetch("http://localhost:3001/aluno/perfil", {
+            method: "GET",
+            credentials: "include",
+        })
+            .then(async (res) => {
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.mensagem);
+                setAluno(data);
+            })
+            .catch((err) => {
+                console.error("Erro ao buscar dados do aluno:", err.message);
+                setErro("Erro ao carregar perfil do aluno.");
+            });
+    }, []);
 
-  // 1. Enquanto carrega
-  if (erro) {
-    return <p className="text-red-600 p-4">{erro}</p>;
-  }
+    // 1. Enquanto carrega
+    if (erro) {
+        return <p className="text-red-600 p-4">{erro}</p>;
+    }
 
-  if (!aluno) {
-    return <p className="p-4">Carregando...</p>;
-  }
+    if (!aluno) {
+        return <p className="p-4">Carregando...</p>;
+    }
 
     function pegarPrimeiroEUltimoNome(nome) {
         if (!nome) return { primeiroNome: "", ultimoNome: "" };
@@ -129,7 +127,7 @@ export default function meuPerfil() {
                     <hr />
                 </div>
                 <div className='user flex flex-nowrap items-center gap-3 border-b border-[#D0D0D0]'>
-                    <div className='perfil-img-nome flex justify-end items-end gap-3'>
+                    {/* <div className='perfil-img-nome flex justify-end items-end gap-3'>
                         <Image
                             src="/img/fotoPerfil.png"
                             width={100}
@@ -143,6 +141,45 @@ export default function meuPerfil() {
                             <path d="M24.5 10V12.5M24.5 15V12.5M24.5 12.5H22M24.5 12.5H27" stroke="white" strokeOpacity="0.8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             <circle cx="18" cy="19" r="4" stroke="white" strokeOpacity="0.8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
+                    </div> */}
+
+                    <div data-hs-file-upload='{
+  "url": "/upload",
+  "acceptedFiles": "image/*",
+  "maxFiles": 1,
+  "singleton": true
+}'>
+                        <template data-hs-file-upload-preview="">
+                            <div className="size-20">
+                                <img className="w-full object-contain rounded-full" data-dz-thumbnail="" />
+                            </div>
+                        </template>
+
+                        <div className="flex flex-wrap items-center gap-3 sm:gap-5">
+                            <div className="group" data-hs-file-upload-previews="" data-hs-file-upload-pseudo-trigger="">
+                                <span className="group-has-[div]:hidden flex shrink-0 justify-center items-center size-20 border-2 border-dotted border-gray-300 text-gray-400 cursor-pointer rounded-full hover:bg-gray-50">
+                                    <svg className="shrink-0 size-7" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                        <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
+                                    </svg>
+                                </span>
+                            </div>
+
+                            <div className="grow">
+                                <div className="flex items-center gap-x-2">
+                                    <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" data-hs-file-upload-trigger="">
+                                        <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="17 8 12 3 7 8"></polyline>
+                                            <line x1="12" x2="12" y1="3" y2="15"></line>
+                                        </svg>
+                                        Upload photo
+                                    </button>
+                                    <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-gray-200 bg-white text-gray-500 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" data-hs-file-upload-clear="">Delete</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <h3>{nomeSobrenome.primeiroNome} {nomeSobrenome.ultimoNome}</h3>

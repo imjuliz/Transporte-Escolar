@@ -1,5 +1,4 @@
 "use client";
-import { Kings } from 'next/font/google';
 import '../editar/editar.css'
 import Image from 'next/image';
 import React, { useRef, useEffect } from 'react';

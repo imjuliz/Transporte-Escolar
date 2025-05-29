@@ -1,5 +1,4 @@
 "use client";
-import { Kings } from 'next/font/google';
 import '../styles/perfil.css';
 import Image from 'next/image'
 

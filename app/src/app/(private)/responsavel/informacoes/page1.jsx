@@ -1,13 +1,9 @@
 "use client";
-import { Kings } from 'next/font/google';
 import Image from 'next/image'
 import '../styles/informacoes.css'
-import '../../../../styles/globals.css'
 import { useState } from 'react'
 
 export default function informacoes() {
-
-    
     //dos alunos, receber os dados que foram criados pelo administrador
 
     const alunos = [
