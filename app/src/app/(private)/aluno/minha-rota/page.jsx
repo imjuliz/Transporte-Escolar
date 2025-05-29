@@ -9,17 +9,10 @@ import 'leaflet-routing-machine';
 export default function MapaRotas() {
   const [rotas, setRotas] = useState([]);
 
-  useEffect(() => {
-    fetch('http://localhost:3001/aluno/minha-rota', {
-      credentials: 'include' // se usa cookie para login
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log('Resposta da API:', data); // <-- Adicione isso
-        setRotas(data);
-      })
-      .catch(err => console.error('Erro ao buscar rotas:', err));
-  }, []);
+  fetch('http://localhost:3001/aluno/minha-rota', { credentials: 'include' })
+  .then(res => res.json())
+  .then(data => console.log('Dados retornados pela API:', data))
+  .catch(err => console.error('Erro ao buscar rota:', err));
 
   useEffect(() => {
     if (rotas.length === 0) return;
@@ -43,7 +36,7 @@ export default function MapaRotas() {
       });
 
       const agora = new Date();
-      const [h, m] = rota.horario_embarque.split(':').map(Number);
+      const [h, m] = (rota.horario_embarque || "00:00").split(':').map(Number);
       const horarioAlvo = new Date();
       horarioAlvo.setHours(h, m, 0, 0);
 
@@ -61,9 +54,9 @@ export default function MapaRotas() {
   }, [rotas]);
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-4">Rotas Escolares Simuladas</h2>
-      <div id="mapa" style={{ height: '500px', width: '100%' }}></div>
+    <div style={{ height: '100vh', width: '100vw' }}>
+      <h2 className="text-2xl font-semibold mb-4">Minha rotas</h2>
+      <div id="mapa" style={{ height: '100%', width: '100%' }}></div>
     </div>
   );
 }
