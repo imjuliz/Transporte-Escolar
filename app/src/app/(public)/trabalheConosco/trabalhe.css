@@ -50,7 +50,17 @@ header{
     padding-top: 15%;
     margin-bottom: 10%;
 }
-
+.banner h1{
+    font-size:  3.5rem;
+}
+.banner p{
+    font-family: "Plus Jakarta Sans Medium";
+    text-align: center;
+    margin: 0;
+    font-size: 1.3vw;
+    color: #90A3BF;
+    width: 40%;
+}
 /* trabalhe conosco */
 .sec1{
     width: 75%;

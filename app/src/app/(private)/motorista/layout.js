@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
         { href: '/motorista/embarqueDesembarque', name: 'embarque', page: 'Embarques/ desembarques' },
         { href: '/motorista/viagens', name: 'viagens', page: 'Viagens' },
         { href: '/motorista//veiculos', name: 'veiculos', page: 'Veículos' },
-        { href: './motorista/incidentes', name: 'incidentes', page: 'Incidentes' },
+        { href: '/motorista/incidentes', name: 'incidentes', page: 'Incidentes' },
     ];
 
     //logout

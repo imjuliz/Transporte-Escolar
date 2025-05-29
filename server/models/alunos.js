@@ -2,8 +2,8 @@ import { readAll2 } from "../config/database.js";
 
 const verAlunos = async()=>{
     try{
-        const where =  " tipo = 'aluno' " ;
-        return await readAll2('usuarios ', where , 'email, cpf' )
+        const where =  " veiculo_id=1 " ;
+        return await readAll2('alunos ', where , 'nomeCompleto, nomeEscola, turno' )
     }catch(err){
         console.error('Erro ao listar os alunos!!!')
         throw err;

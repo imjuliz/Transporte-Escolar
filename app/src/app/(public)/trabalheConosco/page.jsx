@@ -37,7 +37,7 @@ export default function TrabalheConosco() {
 
     const links = [
         { href: '/', page: 'Página Inicial' },
-        { href: '/TrabalhoConosco', page: 'Trabalhe Conosco' }
+        { href: '/trabalheConosco', page: 'Trabalhe Conosco' }
     ];
 
     const trabalheItens = [
