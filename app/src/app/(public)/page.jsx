@@ -11,7 +11,7 @@ export default function Home() {
 
     const links = [
         { href: '/', page: 'Página Inicial' },
-        { href: '/TrabalhoConosco', page: 'Trabalhe Conosco' }
+        { href: './trabalheConosco', page: 'Trabalhe Conosco' }
     ];
 
     const cards = [
@@ -111,7 +111,7 @@ export default function Home() {
         },
         {
             name: "Trabalhe Conosco",
-            link: "../#"
+            link: "./trabalheConosco"
         },
         {
             name: "link 3",

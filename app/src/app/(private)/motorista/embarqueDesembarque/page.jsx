@@ -20,7 +20,7 @@ export default function embarque() {
                         <div className="escolas">
                             {escolas.map(({ escolas1, escola, endereco, qtd, img }) => (
                                 <div className="cartao-escola lg:w-48" key={escolas1}>
-                                    <img src={img} alt="Imagem da escola" className="imagem-escola md:w-45 md:h-40 sm:w-40 sm:h-38" />
+                                    <img src={img} alt="Imagem da escola" className="imagem-escola 2xl:h-45 md:w-45 md:h-40 sm:w-40 sm:h-38" />
                                     <div className="info-escola">
                                         <h1 className="nome-escola">{escola}</h1>
                                         <h2 className="endereco-escola">{endereco}</h2>

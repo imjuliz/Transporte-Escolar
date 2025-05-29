@@ -33,8 +33,8 @@ export default function AlunoLayout({ children }) {
     };
 
     const links = [
-        { href: '/navegacao', name: 'dashbord', page: 'Dashbord geral' },
-                { href: '/cadastros', name: 'cadastros', page: 'Cadastros',
+        { href: './navegacao', name: 'dashbord', page: 'Dashbord geral' },
+                { href: './cadastrar', name: 'cadastros', page: 'Cadastros',
                     links3 : [
                         { href: '/login', name: 'motoristas', page: 'Motoristas' },
                         { href: '/login', name: 'veiculos', page: 'Veículos' },
