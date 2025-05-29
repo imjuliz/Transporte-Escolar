@@ -37,7 +37,7 @@ export default function embarques() {
             <p className='linha'></p>
             <div className="escolas">
                 <div className="cartao-escola " >
-                    <img className="imagem-escola " src='/img/motorista/embarque/teste.jfif' alt="Imagem da escola" />
+                    <img className="imagem-escola md:w-35 md:h-35 " src='/img/motorista/embarque/teste.jfif' alt="Imagem da escola" />
                     <div className="info-escola">
                         <h1 className="nome-escola">Escola X</h1>
                         <h2 className="endereco-escola">Endereço X</h2>
@@ -47,7 +47,7 @@ export default function embarques() {
                         <a href='../embarqueDesembarque'><button className="botao-ver @lg:whitespace-nowrap @lg:w-10">Ver menos<img src="/img/motorista/embarque/Vector 108 (1).svg" alt="Ícone seta" /></button>
                         </a></div>
                 </div> </div>
-            <div className='listaAlunos'>
+            <div className='listaAlunos '>
                 <strong>Alunos:</strong>
                 <table className="tabela table-auto" >
                     <thead>
@@ -59,10 +59,10 @@ export default function embarques() {
                         </thead>
                     <pre>{alunos.map((aluno) => (
                         <tbody key={aluno}>
-                            <tr className="grid grid-cols-3 gap-x-8 gap-y-4">
-                                <td>{aluno.nomeCompleto}</td>
-                                <td>{aluno.nomeEscola}</td>
-                                <td>{aluno.turno}</td>
+                            <tr className="grid grid-cols-3 gap-x-8 gap-y-4 2xl:w-220 ">
+                                <td className='nomeAluno'>{aluno.nomeCompleto}</td>
+                                <td className='nomeEscola'>{aluno.nomeEscola}</td>
+                                <td className='turnoEscola'>{aluno.turno}</td>
                             </tr>
                         </tbody>
                 ))}</pre> </table>
