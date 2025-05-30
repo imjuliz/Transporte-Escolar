@@ -61,14 +61,8 @@ const notificacoesAntigas = [
 
 ]
 
-
-
-
-
 export default function notificacoes() {
     //logica para receber as notificações de cada aluno
-
-
     const [ativo, setAtivo] = useState(null)
 
     const toggle = (id) => {

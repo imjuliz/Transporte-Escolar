@@ -51,16 +51,13 @@ ul{
     list-style: circle;
 }
 
-
-
-
-.aluno-active{
+/*.aluno-active{
     background-color:white;
     padding: 1vh 3vh;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     
-}
+}*/
 
 .aluno{
     background-color: rgb(233, 233, 233);
@@ -68,6 +65,13 @@ ul{
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     
+}
+
+.nomeAluno{
+    margin: 0;
+    font-family: 'Plus Jakarta Sans Medium';
+    font-size: 1rem;
+    color: black
 }
 /********************************************************************/
 
@@ -125,9 +129,11 @@ section{
 }
 
 .status{
-    background-color: aqua;
+    background-color:blue;
     padding: 5px 20px;
     border-radius: 10px;
+    width: 170px;
+    justify-content: center;
     
 }
 
@@ -145,3 +151,89 @@ section{
 .barrinha{
     gap: 15px
 }
+@media screen and (max-width: 1536px) {
+    .chrome{
+        height: 70%;
+    }
+    .container-viagem h3{
+        font-size: 1.5rem;
+    }
+    .status{
+        font-size: 1.3rem;
+        white-space: nowrap;
+        margin-right: -30vw;
+        width: 50%;
+    }
+    .titulo-status{
+        width: 65%;
+        justify-content: space-between;
+    }
+  }
+@media screen and (max-width: 1280px) {
+    .chrome{
+        height: 70%;
+    }
+    .container-viagem h3{
+        font-size: 1.3rem;
+    }
+    .status{
+        font-size: 1rem;
+        white-space: nowrap;
+        margin-right: -30vw;
+        width: 50%;
+    }
+    .titulo-status{
+        width: 65%;
+        justify-content: space-between;
+    }
+  }
+@media screen and (max-width: 1024px) {
+    .chrome{
+        height: 70%;
+    }
+    .container-viagem h3{
+        font-size: 1rem;
+    }
+    .status{
+        font-size: 1rem;
+        white-space: nowrap;
+        margin-right: -20vw;
+        width: 50%;
+    }
+    .titulo-status{
+        width: 80%;
+        justify-content: space-between;
+    }
+  }
+@media screen and (max-width: 768px) {
+    .chrome{
+        height: 70%;
+    }
+    .container-viagem h3{
+        font-size: 1rem;
+    }
+    .status{
+        font-size: 0.8rem;
+        white-space: nowrap;
+        margin-right: -25vw;
+        width: 80%;
+    }
+  }
+@media screen and (max-width: 640px) {
+    .chrome{
+        height: 70%;
+    }
+    .container-viagem h3{
+        font-size: 1rem;
+    }
+    .status{
+        font-size: 0.8rem;
+        white-space: nowrap;
+        margin-right: -30vw;
+        width: 85%;
+    }
+    .titulo-status{
+        width: 80%;
+        justify-content: space-between;
+    }
+  }

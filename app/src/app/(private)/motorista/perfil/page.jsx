@@ -75,8 +75,9 @@ export default function meuPerfil() {
         setEmail('');
         setSenha('')
     }
-    // dados do aluno
-    const [aluno, setAluno] = useState(null);
+
+    //dados de perfil
+    const [motorista, setmotorista] = useState(null);
     const [erro, setErro] = useState("");
 
     useEffect(() => {
@@ -87,10 +88,10 @@ export default function meuPerfil() {
             .then(async (res) => {
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.mensagem);
-                setAluno(data);
+                setmotorista(data);
             })
             .catch((err) => {
-                console.error("Erro ao buscar dados do aluno:", err.message);
+                console.error("Erro ao buscar dados do motorista:", err.message);
                 setErro("Erro ao carregar perfil do motorista.");
             });
     }, []);
@@ -99,10 +100,25 @@ export default function meuPerfil() {
     if (erro) {
         return <p className="text-red-600 p-4">{erro}</p>;
     }
-
-    if (!aluno) {
-        return <p className="p-4">Carregando...</p>;
-    }
+    if (!motorista) {
+        return (
+            <div className="text-center">
+                <div role="status">
+                    <svg 
+                        aria-hidden="true" 
+                        className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" 
+                        viewBox="0 0 100 101" 
+                        fill="none" 
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                    </svg>
+                    <span className="sr-only">Carregando...</span>
+                </div>
+            </div>
+        );
+    }    
 
     function pegarPrimeiroEUltimoNome(nome) {
         if (!nome) return { primeiroNome: "", ultimoNome: "" };
@@ -112,124 +128,72 @@ export default function meuPerfil() {
         return { primeiroNome, ultimoNome };
     }
 
-    // Só executa se aluno estiver carregado e tiver nomeCompleto
-    const nomeSobrenome = aluno?.nomeCompleto
-        ? pegarPrimeiroEUltimoNome(aluno.nomeCompleto)
+    // Só executa se motorista estiver carregado e tiver nomeCompleto
+    const nomeSobrenome = motorista?.nome
+        ? pegarPrimeiroEUltimoNome(motorista.nome)
         : { primeiroNome: "", ultimoNome: "" };
 
     return (
         <>
             <section>
-                <div className='page-indicador'>
+            <div className='page-indicador'>
                     <h1>Meu perfil</h1>
                     <hr />
                 </div>
-                <div className='user flex flex-nowrap items-center gap-3 border-b border-[#D0D0D0]'>
-                    {/* <div className='perfil-img-nome flex justify-end items-end gap-3'>
-                        <Image
-                            src="/img/fotoPerfil.png"
-                            width={100}
-                            height={100}
-                            alt="Foto de perfil"
-                            className='fotoPerfil' />
-                        <svg width="26" height="26" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className='z-10 absolute'>
-                            <rect x="0.5" y="0.5" width="35" height="35" rx="7.5" fill="#161A23" />
-                            <rect x="0.5" y="0.5" width="35" height="35" rx="7.5" stroke="#2D2F39" />
-                            <path d="M27 17V24C27 25.1046 26.1046 26 25 26H11C9.89543 26 9 25.1046 9 24V15C9 13.8954 9.89543 13 11 13H12.5C13.1295 13 13.7223 12.7036 14.1 12.2L15.15 10.8C15.5277 10.2964 16.1205 10 16.75 10H19.25" stroke="white" strokeOpacity="0.8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M24.5 10V12.5M24.5 15V12.5M24.5 12.5H22M24.5 12.5H27" stroke="white" strokeOpacity="0.8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <circle cx="18" cy="19" r="4" stroke="white" strokeOpacity="0.8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </div> */}
-
-                    <div data-hs-file-upload='{
-  "url": "/upload",
-  "acceptedFiles": "image/*",
-  "maxFiles": 1,
-  "singleton": true
-}'>
-                        <template data-hs-file-upload-preview="">
-                            <div className="size-20">
-                                <img className="w-full object-contain rounded-full" data-dz-thumbnail="" />
+                <div className='user flex flex-nowrap items-center gap-3 border-b border-[#D0D0D0]'><div className="flex items-center gap-4">
+                        <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt=""/>
+                            <div className="font-medium dark:text-black">
+                                <div><h3>{nomeSobrenome.primeiroNome} {nomeSobrenome.ultimoNome}</h3></div>
+                                <div className="text-sm text-gray-500 dark:text-gray-400"><p>Motorista</p></div>
                             </div>
-                        </template>
-
-                        <div className="flex flex-wrap items-center gap-3 sm:gap-5">
-                            <div className="group" data-hs-file-upload-previews="" data-hs-file-upload-pseudo-trigger="">
-                                <span className="group-has-[div]:hidden flex shrink-0 justify-center items-center size-20 border-2 border-dotted border-gray-300 text-gray-400 cursor-pointer rounded-full hover:bg-gray-50">
-                                    <svg className="shrink-0 size-7" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <circle cx="12" cy="10" r="3"></circle>
-                                        <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
-                                    </svg>
-                                </span>
-                            </div>
-
-                            <div className="grow">
-                                <div className="flex items-center gap-x-2">
-                                    <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" data-hs-file-upload-trigger="">
-                                        <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                            <polyline points="17 8 12 3 7 8"></polyline>
-                                            <line x1="12" x2="12" y1="3" y2="15"></line>
-                                        </svg>
-                                        Upload photo
-                                    </button>
-                                    <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-gray-200 bg-white text-gray-500 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" data-hs-file-upload-clear="">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3>{nomeSobrenome.primeiroNome} {nomeSobrenome.ultimoNome}</h3>
-                        <p>Tipo de usuario</p>
-                    </div> <hr /> </div>
-                <div className='sec'>
-                    <div className='sec-indicador'>
-                        <h4>Dados Pessoais</h4>
-                        <hr />
-                    </div>
-                    <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
-                        <div className='sec-campos'>
-                            <h6>Nome completo:</h6>
-                            <p>{aluno.nomeCompleto}</p>
-                        </div>
-                        <div className='sec-campos'>
-                            <h6>Escola:</h6>
-                            <p>{aluno.nomeEscola}</p>
-                            <p>{aluno.enderecoEscola}</p>
-                        </div>
-                        <div className='sec-campos'>
-                            <h6>Email institucional:</h6>
-                            <p>{aluno.email}</p>
-                        </div>
-                        <div className='sec-campos'>
-                            <h6>Endereço:</h6>
-                            <p>Endereço.</p>
-                        </div>
                     </div>
                 </div>
-                <div className='sec'>
-                    <div className='sec-indicador'>
-                        <h4>Contatos</h4>
-                        <hr />
+            <div className='sec'>
+                <div className='sec-indicador'>
+                    <h4>Dados Pessoais</h4>
+                    <hr />
+                </div>
+                <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
+                    <div className='sec-campos'>
+                        <h6>Nome completo:</h6>
+                        <p>{motorista.nome}</p>
                     </div>
-                    <div className='sec-container flex flex-col gap-8'>
-                        <div className='sec-campos'>
+                    <div className='sec-campos'>
+                        <h6>CPF:</h6>
+                        <p>{motorista.cpf}</p>
+                    </div>
+                    <div className='sec-campos'>
+                        <h6>CNH:</h6>
+                        <p>{motorista.cnh}</p>
+                    </div>
+                    <div className='sec-campos'>
+                        <h6>Endereço:</h6>
+                        <p>Endereço!!!</p>
+                    </div>
+                </div>
+            </div>
+            <div className='sec'>
+                <div className='sec-indicador'>
+                    <h4>Contatos</h4>
+                    <hr />
+                </div>
+                <div className='sec-container flex flex-col gap-8'>
+                    <div className='sec-campos'>
+                        <h6>Telefone:</h6>
+                        <p>{motorista.telefone}</p>
+                    </div>
+                    <div className='sec-campos flex flex-nowrap gap-50'>
+                        <div className='sec-campos2'>
                             <h6>Email:</h6>
-                            <p>{aluno.emailPessoal}</p>
+                            <p>{motorista.email}</p>
                         </div>
-                        <div className='sec-campos flex flex-nowrap gap-50'>
-                            <div className='sec-campos2'>
-                                <h6>Telefone:</h6>
-                                <p>{aluno.telefonePrinc}</p>
-                            </div>
-                            <div className='sec-campos2'>
-                                <h6>Tipo de telefone:</h6>
-                                <p>Recado ou principal</p>
-                            </div>
+                        <div className='sec-campos2'>
+                            <h6>Tipo de telefone:</h6>
+                            <p>Recado ou principal</p>
                         </div>
                     </div>
                 </div>
+            </div>
                 <div className='btn-perfil flex flex-wrap gap-6'>
                     <button className='btn-add'>Adicionar contato</button>
                     {/* <button className='btn-edit'><a href='../../editar'>Editar informações</a></button> */}

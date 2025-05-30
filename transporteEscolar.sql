@@ -10,6 +10,7 @@ CREATE TABLE usuarios (
     tipo ENUM('administrador', 'motorista', 'aluno', 'responsavel') NOT NULL
 );
 
+-- motoristas
 CREATE TABLE motoristas (
     cpf VARCHAR(11) NOT NULL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,

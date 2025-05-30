@@ -175,6 +175,7 @@ main {
   padding: 0;
   padding-top: 20%;
   border-top: 1px solid #2D2F39;
+ 
 }
 
 .sidebar .navList .navList-item {
@@ -546,3 +547,15 @@ main {
   width: 100%;
 }
 }
+
+@media screen and (max-width: 640px) {
+  .sidebar.active {
+    width: 30%;
+  }
+  .sidebar #btn{
+    margin-left: 55%;
+  }
+  .sidebar.active .logoContent .logo .logoName {
+    font-size: 0.8rem;
+  }
+  }
