@@ -54,13 +54,13 @@ ul{
 
 
 
-.aluno-active{
+/*.aluno-active{
     background-color:white;
     padding: 1vh 3vh;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     
-}
+}*/
 
 .aluno{
     background-color: rgb(233, 233, 233);
@@ -68,6 +68,13 @@ ul{
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     
+}
+
+.nomeAluno{
+    margin: 0;
+    font-family: 'Plus Jakarta Sans Medium';
+    font-size: 1rem;
+    color: black
 }
 /********************************************************************/
 
@@ -125,9 +132,11 @@ section{
 }
 
 .status{
-    background-color: aqua;
+    background-color:blue;
     padding: 5px 20px;
     border-radius: 10px;
+    width: 170px;
+    justify-content: center;
     
 }
 

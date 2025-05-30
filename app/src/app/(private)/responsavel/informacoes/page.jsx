@@ -7,7 +7,6 @@ const accordionData = [
     id: 1,
     escola: 'ETEC Dona Carmim',
     img: '/img/menina2.jpg',
-    pergunta: 'What is Material Tailwind?',
     nomeCompleto: 'Sofia Souza Oliveira',
     idade: '7',
     endereco: 'Rua Amazonas 47',

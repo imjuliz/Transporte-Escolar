@@ -17,30 +17,22 @@ export default function Viagens() {
           tipo: 'Embarque de Saída',
           horaEmbarque: '12:30',
           horaSaída: '12:50',
-          status: [{
-            status: 'Em andamento',
-            cor: 'FFC01D'
-          }]
+          status:'Em andamento'
+          
         },
         {
           data: 'Hoje',
           tipo: 'Embarque de Entrada',
           horaEmbarque: '6:30',
           horaSaída: '7:00',
-          status: [{
-            status: 'Concluído',
-            cor: 'B7D046'
-          }]
+          status: 'Concluído'
         },
         {
           data: 'Ontem',
           tipo: 'Embarque de Saída',
           horaEmbarque: '12:35',
           horaSaída: '12:57',
-          status: [{
-            status: 'Concluído',
-            cor: 'B7D046'
-          }]
+          status: 'Concluído'
         }]
     },
     {
@@ -53,30 +45,21 @@ export default function Viagens() {
           tipo: 'Embarque de Saída',
           horaEmbarque: '17:30',
           horaSaída: '17:40',
-          status: [{
-            status: 'Em andamento',
-            cor: 'FFC01D'
-          }]
+          status: 'Em andamento'
         },
         {
           data: 'Hoje',
           tipo: 'Embarque de Entrada',
           horaEmbarque: '12:45',
           horaSaída: '13:05',
-          status: [{
-            status: 'Concluído',
-            cor: 'B7D046'
-          }]
+          status: 'Concluído'
         },
         {
           data: 'Ontem',
           tipo: 'Embarque de Saída',
           horaEmbarque: '17:25',
           horaSaída: '17:45',
-          status: [{
-            status: 'Concluído',
-            cor: 'B7D046'
-          }]
+          status: 'Concluído'
         }]
     }
   ]
@@ -101,7 +84,7 @@ export default function Viagens() {
                   aria-selected={index === 0 ? 'true' : 'false'}
                 >
                   <img src={aluno.img} alt="" className='fotodeperfil'/>
-                  {aluno.nome}
+                  <p className='nomeAluno'>{aluno.nome}</p>
                 </button>
               </li>
             ))}
@@ -133,7 +116,7 @@ export default function Viagens() {
 
                                         <h3>{viagem.tipo}</h3>
                                         <div className='status'>
-                                            Em andamento
+                                            {viagem.status}
                                         </div>
 
                                     </div>
