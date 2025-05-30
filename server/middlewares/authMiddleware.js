@@ -1,5 +1,4 @@
 //validaçao dos usuarios antes de acessar rotas privadas
-import { buscarUsuario } from '../models/User.js';
 
 // const autenticarUsuario = async (req, res, next) => {
 //     const { email, senha, tipo } = req.body;
@@ -22,18 +21,16 @@ import { buscarUsuario } from '../models/User.js';
 //     }
 // };
 
-const autorizarAcesso = (tipoPermitido) => {
+export function autorizarAcesso(tipoPermitido) {
   return (req, res, next) => {
-      if (!req.session.usuario) {
-          return res.status(403).json({ mensagem: "Faça login primeiro." });
-      }
+    if (!req.session.usuario) {
+      return res.status(401).json({ erro: 'Não autenticado' });
+    }
 
-      if (req.session.usuario.tipo !== tipoPermitido) {
-          return res.status(403).json({ mensagem: "Acesso negado para este tipo de usuário." });
-      }
+    if (req.session.usuario.tipo !== tipoPermitido) {
+      return res.status(403).json({ erro: 'Acesso negado' });
+    }
 
-      next();
+    next();
   };
-};
-
-export { autorizarAcesso };
+}

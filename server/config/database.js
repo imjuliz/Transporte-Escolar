@@ -1,5 +1,4 @@
 import mysql from 'mysql2/promise'; // npm install mysql2
-import bcrypt from 'bcryptjs'; //npm install bcryptjs
 
 const pool = mysql.createPool({
     host: 'localhost',

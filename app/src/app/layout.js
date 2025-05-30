@@ -1,6 +1,7 @@
 "use client";
 import "./globals.css";
 import { usePathname } from 'next/navigation';
+import 'leaflet/dist/leaflet.css';
 
 export default function RootLayout({ children }) {
  
