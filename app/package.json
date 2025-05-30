@@ -17,7 +17,6 @@
     "leaflet-routing-machine": "^3.2.12",
     "next": "^15.3.2",
     "postcss": "^8.5.4",
-    "preline": "^3.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.0",

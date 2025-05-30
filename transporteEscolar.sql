@@ -18,13 +18,40 @@ CREATE TABLE motoristas (
     email VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE pontos_embarque (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    endereco TEXT NOT NULL,
+    latitude DECIMAL(9,6) NOT NULL,
+    longitude DECIMAL(9,6) NOT NULL
+);
+
+CREATE TABLE escolas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    endereco TEXT NOT NULL,
+    latitude DECIMAL(9,6) NOT NULL,
+    longitude DECIMAL(9,6) NOT NULL
+);
+
 CREATE TABLE veiculos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     placa VARCHAR(10) UNIQUE NOT NULL,
     capacidade INT NOT NULL,
     motorista_cpf VARCHAR(11),
     motorista_nome VARCHAR(100),
-    FOREIGN KEY (motorista_cpf) REFERENCES motoristas(cpf) ON DELETE SET NULL ON UPDATE CASCADE
+    -- dados da escola
+    escola_id int not null,
+    nomeEscola VARCHAR(100) NOT NULL,
+    enderecoEscola VARCHAR(255) NOT NULL,
+     -- dados de seu ponto de embarque
+	ponto_embarque_id int not null,
+    ponto_embarque_nome varchar(100) not null,
+    ponto_embarque_endereco varchar(200) not null,
+    -- chaves estrangeiras
+    FOREIGN KEY (motorista_cpf) REFERENCES motoristas(cpf) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY (escola_id) REFERENCES escolas(id) ON DELETE CASCADE,
+    FOREIGN KEY (ponto_embarque_id) REFERENCES pontos_embarque(id) ON DELETE CASCADE
 );
 
 -- trigger p preencher automaticamente o nome do motorista baseado no cpf
@@ -44,39 +71,11 @@ END $$
 
 DELIMITER ;
 
-CREATE TABLE alunos (
-    email VARCHAR(100) NOT NULL PRIMARY KEY,
-    nomeCompleto VARCHAR(100) NOT NULL,
-    nomeEscola VARCHAR(100) NOT NULL,
-    enderecoEscola VARCHAR(100) NOT NULL,
-    telefonePrinc VARCHAR(9) NOT NULL,
-    emailPessoal VARCHAR(100) NOT NULL,
-    turno ENUM('manhã', 'tarde', 'noite') NOT NULL,
-    veiculo_id INT NOT NULL,
-    FOREIGN KEY (veiculo_id) REFERENCES veiculos(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE pontos_embarque (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(255) NOT NULL,
-    endereco TEXT NOT NULL,
-    latitude DECIMAL(9,6) NOT NULL,
-    longitude DECIMAL(9,6) NOT NULL
-);
-
-CREATE TABLE escolas (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(255) NOT NULL UNIQUE,
-    endereco TEXT NOT NULL,
-    latitude DECIMAL(9,6) NOT NULL,
-    longitude DECIMAL(9,6) NOT NULL
-);
-
--- trigger p preencher automaticamente o endereço da escola baseado no nome
+-- trigger p preencher automaticamente o endereço da escola baseado no nome que for inserido na tabela de veiculos
 DELIMITER $$
 
 CREATE TRIGGER set_endereco_escola
-BEFORE INSERT ON alunos
+BEFORE INSERT ON veiculos
 FOR EACH ROW
 BEGIN
     DECLARE endereco_escola VARCHAR(255);
@@ -88,40 +87,78 @@ BEGIN
 END $$
 
 DELIMITER ;
-
-CREATE TABLE viagens (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    veiculo_id INT NOT NULL,
-    escola_id INT NOT NULL,
-    ponto_embarque_id INT NOT NULL,
-    data DATE NOT NULL,
-    horario_embarque TIME NOT NULL,
-    horario_chegada_escola TIME NOT NULL,
-    horario_retorno_escola TIME NOT NULL,
-    horario_desembarque TIME NOT NULL,
-    FOREIGN KEY (veiculo_id) REFERENCES veiculos(id) ON DELETE CASCADE,
-    FOREIGN KEY (escola_id) REFERENCES escolas(id) ON DELETE CASCADE,
-    FOREIGN KEY (ponto_embarque_id) REFERENCES pontos_embarque(id) ON DELETE CASCADE
-);
-
--- data do dia em que a viagem for criada
+/*
+-- trigger p preencher automaticamente as coordenadas da escola baseado no nome que for inserido na tabela de veiculos
 DELIMITER $$
 
-CREATE TRIGGER set_data_viagem
-BEFORE INSERT ON viagens
+CREATE TRIGGER set_coordenadas_escola
+BEFORE INSERT ON veiculos
 FOR EACH ROW
 BEGIN
-    SET NEW.data = CURDATE();
+    DECLARE escola_lat DECIMAL(9,6);
+    DECLARE escola_long DECIMAL(9,6);
+
+    SELECT latitude, longitude INTO escola_lat, escola_long FROM escolas
+    WHERE nome = NEW.nomeEscola LIMIT 1;
+
+    SET NEW.escola_lat = IFNULL(escola_lat, 0);
+    SET NEW.escola_long = IFNULL(escola_long, 0);
 END $$
 
 DELIMITER ;
 
-/*-- Tabela de rotas
-CREATE TABLE rotas (
+-- trigger p preencher automaticamente o endereço do ponto de embarque baseado no nome que for inserido na tabela de veiculos
+DELIMITER $$
+
+CREATE TRIGGER set_endereco_embarque
+BEFORE INSERT ON veiculos
+FOR EACH ROW
+BEGIN
+    DECLARE endereco_embarque VARCHAR(255);
+
+    SELECT endereco INTO endereco_embarque FROM pontos_embarque
+    WHERE nome = NEW.ponto_embarque_nome LIMIT 1;
+
+    SET NEW.enderecoEscola = endereco_embarque;
+END $$
+
+DELIMITER ;
+
+--
+DELIMITER $$
+
+CREATE TRIGGER set_coordenadas_pontos
+BEFORE INSERT ON veiculos
+FOR EACH ROW
+BEGIN
+    DECLARE embarque_lat DECIMAL(9,6);
+    DECLARE embarque_long DECIMAL(9,6);
+
+    SELECT latitude, longitude INTO embarque_lat, embarque_long FROM pontos_embarques
+    WHERE nome = NEW.ponto_embarque_nome LIMIT 1;
+
+    SET NEW.embarque_lat = IFNULL(embarque_lat, 0);
+    SET NEW.embarque_long = IFNULL(embarque_long, 0);
+END $$
+
+DELIMITER ;
+*/
+
+CREATE TABLE viagens (
     id INT PRIMARY KEY AUTO_INCREMENT,
     veiculo_id INT NOT NULL,
+    -- informacoes das escolas
     escola_id INT NOT NULL,
+    enderecoEscola VARCHAR(255) NOT NULL,
+    escola_lat DECIMAL(9,6) NOT NULL,
+    escola_long DECIMAL(9,6) NOT NULL,
+    -- informacoes dos pontos de embarque
     ponto_embarque_id INT NOT NULL,
+    ponto_embarque_endereco varchar(200) not null,
+    ponto_embarque_lat DECIMAL(9,6) NOT NULL,
+    ponto_embarque_long DECIMAL(9,6) NOT NULL,
+    -- horarios e data
+    dataViagem DATE NOT NULL,
     horario_embarque TIME NOT NULL,
     horario_chegada_escola TIME NOT NULL,
     horario_retorno_escola TIME NOT NULL,
@@ -131,32 +168,161 @@ CREATE TABLE rotas (
     FOREIGN KEY (ponto_embarque_id) REFERENCES pontos_embarque(id) ON DELETE CASCADE
 );
 
--- trigger p preencher automaticamente o nome da escola na tabela de rotas
+-- trigger p preencher automaticamente o endereço da escola baseado no id que for inserido na tabela de viagens
 DELIMITER $$
 
-CREATE TRIGGER set_nome_escola
-BEFORE INSERT ON rotas
+CREATE TRIGGER set_endereco_escola
+BEFORE INSERT ON viagens
 FOR EACH ROW
 BEGIN
-    DECLARE nome_escola VARCHAR(255);
+    DECLARE endereco_escola VARCHAR(255);
 
-    SELECT nome INTO nome_escola FROM escolas
+    SELECT endereco INTO endereco_escola FROM escolas
     WHERE id = NEW.escola_id LIMIT 1;
 
-    SET NEW.nome_escola = nome_escola;
+    SET NEW.enderecoEscola = endereco_escola;
 END $$
 
-DELIMITER ; */
+DELIMITER ;
 
--- tabela de localização dos veiculos p rastreamento em tempo real
-CREATE TABLE localizacao_veiculos (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+-- trigger p preencher automaticamente as coordenadas da escola baseado no id que for inserido na tabela de viagens
+DELIMITER $$
+
+CREATE TRIGGER set_coordenadas_escola
+BEFORE INSERT ON viagens
+FOR EACH ROW
+BEGIN
+    DECLARE escola_lat DECIMAL(9,6);
+    DECLARE escola_long DECIMAL(9,6);
+
+    SELECT latitude, longitude INTO escola_lat, escola_long FROM escolas
+    WHERE id = NEW.escola_id LIMIT 1;
+
+    SET NEW.escola_lat = IFNULL(escola_lat, 0);
+    SET NEW.escola_long = IFNULL(escola_long, 0);
+END $$
+
+DELIMITER ;
+
+-- trigger p preencher automaticamente o endereço do ponto de embarque baseado no id que for inserido na tabela de viagens
+DELIMITER $$
+
+CREATE TRIGGER set_endereco_embarque
+BEFORE INSERT ON viagens
+FOR EACH ROW
+BEGIN
+    DECLARE endereco_embarque VARCHAR(255);
+
+    SELECT endereco INTO endereco_embarque FROM pontos_embarque
+    WHERE nome = NEW.ponto_embarque_id LIMIT 1;
+
+    SET NEW.ponto_embarque_endereco = endereco_embarque;
+END $$
+
+DELIMITER ;
+
+-- trigger p preencher automaticamente as coordenadas do ponto de embarque baseado no id que for inserido na tabela de viagens
+DELIMITER $$
+
+CREATE TRIGGER set_coordenadas_pontos
+BEFORE INSERT ON viagens
+FOR EACH ROW
+BEGIN
+    DECLARE embarque_lat DECIMAL(9,6);
+    DECLARE embarque_long DECIMAL(9,6);
+
+    SELECT latitude, longitude INTO embarque_lat, embarque_long FROM pontos_embarques
+    WHERE nome = NEW.ponto_embarque_nome LIMIT 1;
+
+    SET NEW.embarque_lat = IFNULL(embarque_lat, 0);
+    SET NEW.embarque_long = IFNULL(embarque_long, 0);
+END $$
+
+DELIMITER ;
+
+CREATE TABLE alunos (
+    email VARCHAR(100) NOT NULL PRIMARY KEY,
+    nomeCompleto VARCHAR(100) NOT NULL,
+    telefonePrinc VARCHAR(9) NOT NULL,
+    emailPessoal VARCHAR(100) NOT NULL,
+    idade int not null,
+    endereco varchar(200) not null,
+    -- dados da escola
+    escola_id INT NOT NULL,
+    nomeEscola VARCHAR(100) NOT NULL,
+    enderecoEscola VARCHAR(255) NOT NULL,
+    -- dados de seu ponto de embarque
+    ponto_embarque_id INT NOT NULL,
+    ponto_embarque_nome varchar(100) not null,
+    ponto_embarque_endereco varchar(200) not null,
+    -- chaves secundarias
     veiculo_id INT NOT NULL,
-    latitude DECIMAL(9,6) NOT NULL,
-    longitude DECIMAL(9,6) NOT NULL,
-    horario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (veiculo_id) REFERENCES veiculos(id) ON DELETE CASCADE
+    viagem_id int not null,
+    FOREIGN KEY (veiculo_id) REFERENCES veiculos(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (escola_id) REFERENCES escolas(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (viagem_id) REFERENCES viagens(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ponto_embarque_id) REFERENCES pontos_embarque(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+# escola -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
+-- trigger p preencher automaticamente as coordenadas da escola baseado no nome que for inserido na tabela de alunos
+DELIMITER $$
+
+CREATE TRIGGER set_coordenadas_escola
+BEFORE INSERT ON alunos
+FOR EACH ROW
+BEGIN
+    DECLARE escola_lat DECIMAL(9,6);
+    DECLARE escola_long DECIMAL(9,6);
+
+    SELECT latitude, longitude INTO escola_lat, escola_long FROM escolas
+    WHERE nome = NEW.nomeEscola LIMIT 1;
+
+    SET NEW.escola_lat = IFNULL(escola_lat, 0);
+    SET NEW.escola_long = IFNULL(escola_long, 0);
+END $$
+
+DELIMITER ;
+
+
+# ponto de embarque -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- trigger p preencher automaticamente o endereço do ponto de embarque baseado no nome que for inserido na tabela de alunos
+DELIMITER $$
+
+CREATE TRIGGER set_endereco_embarque
+BEFORE INSERT ON alunos
+FOR EACH ROW
+BEGIN
+    DECLARE endereco_embarque VARCHAR(255);
+
+    SELECT endereco INTO endereco_embarque FROM pontos_embarque
+    WHERE nome = NEW.ponto_embarque_nome LIMIT 1;
+
+    SET NEW.enderecoEscola = endereco_embarque;
+END $$
+
+DELIMITER ;
+
+-- trigger p preencher automaticamente as coordenadas do ponto de embarque baseado no nome que for inserido na tabela de alunos
+DELIMITER $$
+
+CREATE TRIGGER set_coordenadas_escola
+BEFORE INSERT ON alunos
+FOR EACH ROW
+BEGIN
+    DECLARE escola_lat DECIMAL(9,6);
+    DECLARE escola_long DECIMAL(9,6);
+
+    SELECT latitude, longitude INTO escola_lat, escola_long FROM escolas
+    WHERE nome = NEW.nomeEscola LIMIT 1;
+
+    SET NEW.escola_lat = IFNULL(escola_lat, 0);
+    SET NEW.escola_long = IFNULL(escola_long, 0);
+END $$
+
+DELIMITER ;
+*/
 
 INSERT INTO usuarios (cpf, email, senha, tipo) VALUES
 ('11111111111', 'julia@gmail.com', 'julia@adm', 'administrador'),
@@ -193,10 +359,10 @@ INSERT INTO veiculos (placa, capacidade, motorista_cpf) VALUES
 ('GHI-9012', 40, '77777777777'),
 ('JKL-3456', 40, '12345678901');
 
-INSERT INTO alunos (email, nomeCompleto, nomeEscola, enderecoEscola, telefonePrinc, emailPessoal, turno, veiculo_id) VALUES
-('roberto@al.gov.br', 'Roberto Alves Costa', 'EE Bairro Cruzeiro', '', 969903253, 'roberto_costa@gmail.com', 'manha', 4),
-('beatriz@al.gov.br', 'Beatriz Sousa Garcia', 'Espaço Livre Escola de Educação Infantil e Ensino Fund.', '', 929076857, 'beatrizgarcia2010@gmail.com', 'tarde', 3),
-('marcos@al.gov.br', 'Marcos Correia', 'Cemei Edna Cassiano', '', 956435985, 'marcos_correia@gmail.com', 'noite', 1);
+INSERT INTO alunos (email, nomeCompleto, telefonePrinc, emailPessoal, idade, endereco, nomeEscola, ponto_embarque_nome) VALUES
+('roberto@al.gov.br', 'Roberto Alves Costa', 969903253, 'roberto_costa@gmail.com', 15, 'rua tal', 'EE Bairro Cruzeiro', 'Praça Barão do Rio Branco'),
+('beatriz@al.gov.br', 'Beatriz Sousa Garcia', 929076857, 'beatrizgarcia2010@gmail.com', 'rua x', 'Espaço Livre Escola de Educação Infantil e Ensino Fund.', 'Rua Cristóvão Colombo'),
+('marcos@al.gov.br', 'Marcos Correia', 956435985, 'marcos_correia@gmail.com', 'rua y', 'Cemei Edna Cassiano', 'Avenida Theodoro Rodas');
 
 INSERT INTO pontos_embarque (nome, endereco, latitude, longitude) VALUES
 ('Praça Barão do Rio Branco', 'Praça Rio Branco, 75 - Monte Azul Paulista, SP, 14730-000', -20.9068, -48.6413),
@@ -234,6 +400,7 @@ INSERT INTO viagens (veiculo_id, escola_id, ponto_embarque_id, horario_embarque,
 (4, 7, 7, '16:00:00', '16:50:00', '17:10:00', '17:30:00'),
 (4, 8, 8, '16:00:00', '16:50:00', '17:10:00', '17:30:00');
 
+/*
 INSERT INTO localizacao_veiculos (veiculo_id, latitude, longitude, horario) VALUES
 (1, -20.9068, -48.6413, NOW()), -- Praça Barão do Rio Branco
 (1, -20.9022, -48.6420, NOW()), -- Rua Cristóvão Colombo
@@ -243,3 +410,18 @@ INSERT INTO localizacao_veiculos (veiculo_id, latitude, longitude, horario) VALU
 (3, -20.9090, -48.6412, NOW()), -- Rua Sebastião de Souza Lima
 (4, -20.9127, -48.6429, NOW()), -- Residencial Baraldi
 (4, -20.9087, -48.6521, NOW()); -- Jardim São Felipe
+*/
+
+-- organizar e adicionar esses dados
+INSERT INTO usuarios (cpf, email, senha, tipo) VALUES
+('13131313131', 'teste@gmail.com', 'teste@adm', 'administrador');
+
+INSERT INTO alunos (email, nomeCompleto, nomeEscola, enderecoEscola, telefonePrinc, emailPessoal, turno, veiculo_id) VALUES
+('marcos@al.gov.br', 'Marcos Correia', 'Cemei Edna Cassiano', '', 956435985, 'marcos_correia@gmail.com', 'noite', 1),
+('ana.julia@al.gov.br', 'Ana Julia Oliveira', 'Cemei Edna Cassiano', ' ', 987654321, 'ana.j.oliveira@hotmail.com', 'tarde', 1),
+('carlos.eduardo@al.gov.br', 'Carlos Eduardo Pereira', 'Emef Professora Alzira de Freitas Casseb', ' ', 998877665, 'cadu_pereira@gmail.com.br', 'manhã', 1),
+('beatriz.santos@al.gov.br', 'Beatriz Santos Lima', 'EE Professora Nena Giannasi Buck', ' ', 912345678, 'bia_lima_santos@outlook.com', 'tarde', 1),
+('lucas.mendes@al.gov.br', 'Lucas Mendes Ferreira', 'EE Bairro Cruzeiro', ' ', 955554444, 'lucas.ferreira.m@gmail.com', 'noite', 1),
+('fernanda.almeida@al.gov.br', 'Fernanda Almeida Goncalves', 'EE Bairro Cruzeiro', ' ', 943218765, 'fernanda_goncalves@outlook.com', 'tarde', 1),
+('gustavo.ribeiro@al.gov.br', 'Gustavo Ribeiro Azevedo', 'Centro Educacional Municipal Minhocao', ' ', 988881111, 'guga_ribeiro@icloud.com', 'manhã', 1),
+('mariana.souza@al.gov.br', 'Mariana Souza Carvalho', 'Espaço Livre Escola de Educação Infantil e Ensino Fund.', ' ', 977772222, 'mari_carvalho88@gmail.com', 'noite', 1);

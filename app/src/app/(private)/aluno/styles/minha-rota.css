@@ -2,7 +2,12 @@ main{
     padding: 0 !important;
 }
 
-.mapContainer{
+.mapa-container{
     width: 100%;
-    height: 100vh;
+    height: 100%;
+}
+
+.mapa{
+    width: 100%;
+    height: 100%;
 }

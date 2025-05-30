@@ -57,7 +57,7 @@ export default function AlunoLayout({ children }) {
     };
 
     const links = [
-        { href: '/aluno/minhaRota', name: 'rota', page: 'Minha Rota' },
+        { href: '/aluno/minha-rota', name: 'rota', page: 'Minha Rota' },
         { href: '/aluno/viagens', name: 'viagens', page: 'Viagens' },
         { href: '/aluno/motoristas', name: 'motoristas', page: 'Motoristas' },
         { href: '/ajuda', name: 'ajuda', page: 'Ajuda' },
