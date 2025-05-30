@@ -9,6 +9,7 @@ CREATE TABLE usuarios (
     tipo ENUM('administrador', 'motorista', 'aluno', 'responsavel') NOT NULL
 );
 
+-- motoristas
 CREATE TABLE motoristas (
     cpf VARCHAR(11) NOT NULL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -121,12 +122,9 @@ BEGIN
 
     SET NEW.enderecoEscola = endereco_embarque;
 END $$
-
 DELIMITER ;
-
 --
 DELIMITER $$
-
 CREATE TRIGGER set_coordenadas_pontos
 BEFORE INSERT ON veiculos
 FOR EACH ROW
@@ -140,7 +138,6 @@ BEGIN
     SET NEW.embarque_lat = IFNULL(embarque_lat, 0);
     SET NEW.embarque_long = IFNULL(embarque_long, 0);
 END $$
-
 DELIMITER ;
 */
 

@@ -5,7 +5,7 @@ import { editarPerfilController } from "../controllers/EditarController.js";
 // import rotaController from '../controllers/RotasController.js';
 import { deletarPerfilController } from "../controllers/DeletarController.js";
 import { verAlunosController } from "../controllers/VerAlunosController.js";
-import { obterDadosAluno } from '../controllers/AlunoController.js';
+import { obterDadosAluno, obterDadosMotorista } from '../controllers/AlunoController.js';
 // import { obterDadosMotorista } from "../controllers/AlunoController.js";
 
 const router = express.Router();
@@ -14,21 +14,23 @@ const router = express.Router();
 router.post("/login", loginController);
 
 // rotas privadas
-router.get('/administrador/dashboard', autorizarAcesso('Administrador'));
-
-router.get('/verAlunos',verAlunosController)
-
 router.patch('/editarPerfil', editarPerfilController);
+
+//rota adm
+router.get('/administrador/dashboard', autorizarAcesso('Administrador'));
 
 router.delete('/deletarUsuario', deletarPerfilController);
 
-router.get('/aluno/perfil', autorizarAcesso('Aluno'), obterDadosAluno);
-
+//rotas motorista
 router.get('/motorista/dashboard', autorizarAcesso('Motorista'));
+router.get('/motorista/perfil', autorizarAcesso('Motorista'), obterDadosMotorista )
+router.get('/verAlunos',verAlunosController)
 
-// router.get('/motorista/perfil', autorizarAcesso('Motorista'), obterDadosMotorista )
-
+//rotas responsavel
 router.get('/responsavel/home', autorizarAcesso('Responsável'));
+
+//rotas aluno
+router.get('/aluno/perfil', autorizarAcesso('Aluno'), obterDadosAluno);
 
 router.get('/aluno/minha-rota', autorizarAcesso('Aluno')/*, rotaController.listarRotas*/);
 router.get('/aluno/minha-rota', autorizarAcesso('Aluno')/*, rotaController.obterRota*/);
