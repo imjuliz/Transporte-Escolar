@@ -547,3 +547,15 @@ main {
   width: 100%;
 }
 }
+
+@media screen and (max-width: 640px) {
+  .sidebar.active {
+    width: 30%;
+  }
+  .sidebar #btn{
+    margin-left: 55%;
+  }
+  .sidebar.active .logoContent .logo .logoName {
+    font-size: 0.8rem;
+  }
+  }

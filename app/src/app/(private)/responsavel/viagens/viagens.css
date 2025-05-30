@@ -54,3 +54,20 @@ section{
 .circle-t{
     margin: 0 1vw 0 0;
 }
+@media screen and (max-width: 640px) {
+    .chrome{
+        height: 80%;
+    }
+    .container-viagem{
+        height: 16vw;
+    }
+    .titulo-status h1{
+        font-family: 'Plus Jakarta Sans Bold';
+        font-size: 20px;
+    }
+    .ver-mais{
+       font-size: 70%;
+       height: 40%;
+       margin-bottom: -50%;
+    }
+  }

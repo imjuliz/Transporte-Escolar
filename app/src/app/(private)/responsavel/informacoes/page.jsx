@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from 'react'
-import '../styles/infos2.css'
+import React, { useState } from 'react';
+import '../styles/infos2.css';
+import '../../../globals.css';
 
 const accordionData = [
   {
@@ -32,7 +33,6 @@ const accordionData = [
     }),
     horaEmbarque: '6:30',
     horaDesembarque: '12:30'
-
   },
   {
     id: 3,
@@ -48,7 +48,6 @@ const accordionData = [
     }),
     horaEmbarque: '6:30',
     horaDesembarque: '12:30'
-
   },
 ]
 
@@ -61,14 +60,11 @@ export default function Accordion() {
 
   return (
     <section className='informacoes'>
-
       <div className='page-indicador'>
         <h1>Informações</h1>
         <hr />
       </div>
-
-
-      <div className="max-w-1000px justify-items-center mx-auto mt-10">
+      <div className="max-w-1000px justify-items-center mx-auto mt-10 md:w-10">
         {accordionData.map(({ id, escola, img, nomeCompleto, idade, endereco, rota, horaDesembarque, horaEmbarque, motorista }) => (
           <div key={id} className="container-viagem bg-[#fff] rounded-[2vw] border-b border-slate-200">
             <div className='flex '>

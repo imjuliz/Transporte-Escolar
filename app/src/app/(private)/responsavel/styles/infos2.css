@@ -20,12 +20,9 @@ section{
     font-family: 'Plus Jakarta Sans Bold';
 }
 
-
 hr{
     width:auto
 }
-
-
 
 .container-viagem{
     width: 900px;
@@ -46,11 +43,6 @@ hr{
     font-size: 1.2rem;
     color: black;
 }
-
-/*.texto-card{
-    
-}*/
-
 .container-viagem p{
     font-family: 'Plus Jakarta Sans Medium';
     font-size: 1rem;
@@ -81,7 +73,6 @@ hr{
     padding: 3.3rem 2.3rem
 }
 
-
 .cards-horario{
     display: flex;
     justify-content: space-between;
@@ -109,3 +100,20 @@ hr{
 .drop{
     width: 10px
 }
+
+@media screen and (max-width: 768px) {
+    .container-viagem{
+        width: 600px;
+       
+    }
+    .foto-aluno{
+        width: 200px;
+        height: 174px
+    }
+    .ver-mais{
+        width: 50%;
+        height: 70%;
+        margin-bottom: -20%;
+        margin-right: -5%;
+    }
+  }
