@@ -99,7 +99,6 @@ export default function meuPerfil() {
     if (erro) {
         return <p className="text-red-600 p-4">{erro}</p>;
     }
-
     if (!aluno) {
         return (
             <div className="text-center">

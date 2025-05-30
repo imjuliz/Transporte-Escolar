@@ -45,28 +45,28 @@ export const obterDadosAluno = async (req, res) => {
     }
 };
 
-// export const obterDadosMotorista = async (req, res) => {
-//     try {
-//         if (!req.session.usuario || req.session.usuario.tipo !== 'Motorista') {
-//             return res.status(401).json({ mensagem: "Faça login primeiro." });
-//         }
+export const obterDadosMotorista = async (req, res) => {
+    try {
+        if (!req.session.usuario || req.session.usuario.tipo !== 'Motorista') {
+            return res.status(401).json({ mensagem: "Faça login primeiro." });
+        }
 
-//         const email = req.session.usuario.email;
+        const email = req.session.usuario.email;
 
-//         const resultado = await read("motoristas", `email = '${email.replace(/'/g, "''")}'`);
+        const resultado = await read("motoristas", `email = '${email.replace(/'/g, "''")}'`);
 
-//         if (!resultado) {
-//             console.log("Erro na função read(): resultado é undefined.");
-//             return res.status(500).json({ mensagem: "Erro interno ao buscar perfil do motorista." });
-//         }
+        if (!resultado) {
+            console.log("Erro na função read(): resultado é undefined.");
+            return res.status(500).json({ mensagem: "Erro interno ao buscar perfil do motorista." });
+        }
 
-//         if (Object.keys(resultado).length === 0) { // verifica se está vazio
-//             console.log("Nenhum motorista encontrado no banco.");
-//             return res.status(404).json({ mensagem: "motorista não encontrado." });
-//         }
-//         res.json(resultado);
-//     } catch (err) {
-//         console.error("Erro ao buscar perfil do motorista:", err);
-//         res.status(500).json({ mensagem: "Erro ao buscar perfil do motorista.", erro: err.message });
-//     }
-// };
+        if (Object.keys(resultado).length === 0) { // verifica se está vazio
+            console.log("Nenhum motorista encontrado no banco.");
+            return res.status(404).json({ mensagem: "motorista não encontrado." });
+        }
+        res.json(resultado);
+    } catch (err) {
+        console.error("Erro ao buscar perfil do motorista:", err);
+        res.status(500).json({ mensagem: "Erro ao buscar perfil do motorista.", erro: err.message });
+    }
+};
