@@ -1,5 +1,6 @@
-import Perfil from '../models/Perfil.js';
+import { obterDadosDoUsuario, editarPerfil } from '../models/Perfil.js';
 
+// obter dados do perfil do usuario
 const obterPerfilUsuario = async (req, res) => {
     try {
         const { tipo, id } = req.session.usuario;
@@ -17,4 +18,25 @@ const obterPerfilUsuario = async (req, res) => {
     }
 };
 
-export default { obterPerfilUsuario };
+// editar informaçoes do perfil
+const editarPerfilController = async (req, res) => {
+    try {
+        const { cpf, email, senha } = req.body;
+
+        //armazena no arquivo json as info
+        const atualizacoes = {
+            cpf: cpf,
+            email: email,
+            senha: senha,
+        };
+
+        await editarPerfil(email, atualizacoes);
+
+        res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!!!', email });
+    } catch (err) {
+        console.error('Erro ao atualizar perfil!!!', err);
+        res.status(500).json({ mensagem: 'Erro ao atualizar perfil!!!' });
+    }
+}
+
+export { obterPerfilUsuario, editarPerfilController };

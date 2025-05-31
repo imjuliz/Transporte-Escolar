@@ -52,7 +52,7 @@ export async function loginController(req, res) {
       tipo: tipo.toLowerCase()
     };
 
-    console.log("✅ Usuário autenticado:", req.session.usuario);
+    console.log("Usuário autenticado:", req.session.usuario);
 
     res.json({ mensagem: 'Login realizado com sucesso', tipo: req.session.usuario.tipo });
 

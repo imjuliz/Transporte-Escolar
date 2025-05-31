@@ -294,12 +294,12 @@ CREATE TABLE viagens (
 
 CREATE TABLE alunos (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    cpf VARCHAR(11) not null unique,
     email varchar(100) not null unique,
-    nomeCompleto varchar(100) not null,
+    nome varchar(100) not null,
     telefonePrinc VARCHAR(9) NOT NULL,
     emailPessoal VARCHAR(100) NOT NULL,
-    idade INT NOT NULL,
-    endereco VARCHAR(200) NOT NULL,
+    dataNascimento date NOT NULL,
     senha VARCHAR(255) NOT NULL,
     escola_id INT NOT NULL,
     ponto_embarque_id INT NOT NULL,
@@ -413,14 +413,16 @@ INSERT INTO viagens (veiculo_id, data_viagem, hora_saida, hora_chegada_prevista,
 (4, CURDATE(), '17:30:00', '19:00:00', 'escola', 5, 'ponto_embarque', 7, 'volta', 'agendada', 90),
 (4, CURDATE(), '17:30:00', '19:00:00', 'escola', 7, 'ponto_embarque', 8, 'volta', 'agendada', 90);
 
-INSERT INTO alunos (email, nomeCompleto, telefonePrinc, emailPessoal, idade, endereco, senha, escola_id, ponto_embarque_id, veiculo_id, viagem_id) VALUES
-('roberto@al.gov.br', 'Roberto Alves Costa', '969903253', 'roberto_costa@gmail.com', 15, 'Rua tal', 'roberto@aluno', 6, 1, 1, 1),
-('beatriz@al.gov.br', 'Beatriz Sousa Garcia', '929076857', 'beatrizgarcia2010@gmail.com', 14, 'Rua X', 'beatriz@aluno', 5, 2, 2, 2),
-('marcos@al.gov.br', 'Marcos Correia', '956435985', 'marcos_correia@gmail.com', 13, 'Rua Y', 'marcos@aluno', 1, 3, 3, 3),
-('ana.julia@al.gov.br', 'Ana Julia Oliveira', '987654321', 'ana.j.oliveira@hotmail.com', 7, 'Rua Z', 'ana@aluno', 1, 4, 1, 1),
-('carlos.eduardo@al.gov.br', 'Carlos Eduardo Pereira', '998877665', 'cadu_pereira@gmail.com.br', 9, 'Rua W', 'carlos@aluno', 2, 5, 1, 1),
-('beatriz.santos@al.gov.br', 'Beatriz Santos Lima', '912345678', 'bia_lima_santos@outlook.com', 12, 'Rua A', 'beatriz@aluno', 4, 6, 1, 1),
-('lucas.mendes@al.gov.br', 'Lucas Mendes Ferreira', '955554444', 'lucas.ferreira.m@gmail.com', 13, 'Rua B', 'lucas@aluno', 6, 7, 1, 1),
-('fernanda.almeida@al.gov.br', 'Fernanda Almeida Goncalves', '943218765', 'fernanda_goncalves@outlook.com', 12, 'Rua C', 'fernanda@aluno', 6, 8, 1, 1),
-('gustavo.ribeiro@al.gov.br', 'Gustavo Ribeiro Azevedo', '988881111', 'guga_ribeiro@icloud.com', 10, 'Rua D', 'gustavo@aluno', 8, 1, 2, 2),
-('mariana.souza@al.gov.br', 'Mariana Souza Carvalho', '977772222', 'mari_carvalho88@gmail.com', 13, 'Rua E', 'mariana@aluno', 5, 2, 2, 2);
+INSERT INTO alunos (cpf, email, nome, telefonePrinc, emailPessoal, dataNascimento, senha, escola_id, ponto_embarque_id, veiculo_id, viagem_id) VALUES
+('88888888888', 'roberto@al.gov.br', 'Roberto Alves Costa', '969903253', 'roberto_costa@gmail.com', '2010-05-20', 'roberto@aluno', 6, 1, 1, 1),
+('99999999999', 'beatriz@al.gov.br', 'Beatriz Sousa Garcia', '929076857', 'beatrizgarcia2010@gmail.com', '2011-08-15', 'beatriz@aluno', 5, 2, 2, 2),
+('10101010101', 'marcos@al.gov.br', 'Marcos Correia', '956435985', 'marcos_correia@gmail.com', '2012-03-10', 'marcos@aluno', 1, 3, 3, 3),
+('11121211121', 'ana.julia@al.gov.br', 'Ana Julia Oliveira', '987654321', 'ana.j.oliveira@hotmail.com', '2018-11-05', 'ana@aluno', 1, 4, 1, 1),
+('12131213121', 'carlos.eduardo@al.gov.br', 'Carlos Eduardo Pereira', '998877665', 'cadu_pereira@gmail.com.br', '2016-06-01', 'carlos@aluno', 2, 5, 1, 1),
+('13131414131', 'beatriz.santos@al.gov.br', 'Beatriz Santos Lima', '912345678', 'bia_lima_santos@outlook.com', '2013-09-22', 'beatriz@aluno', 4, 6, 1, 1),
+('14141515141', 'lucas.mendes@al.gov.br', 'Lucas Mendes Ferreira', '955554444', 'lucas.ferreira.m@gmail.com', '2012-01-30', 'lucas@aluno', 6, 7, 1, 1),
+('15141514151', 'fernanda.almeida@al.gov.br', 'Fernanda Almeida Goncalves', '943218765', 'fernanda_goncalves@outlook.com', '2013-05-17', 'fernanda@aluno', 6, 8, 1, 1),
+('16151615161', 'gustavo.ribeiro@al.gov.br', 'Gustavo Ribeiro Azevedo', '988881111', 'guga_ribeiro@icloud.com', '2015-07-09', 'gustavo@aluno', 8, 1, 2, 2),
+('17161716171', 'mariana.souza@al.gov.br', 'Mariana Souza Carvalho', '977772222', 'mari_carvalho88@gmail.com', '2012-12-01', 'mariana@aluno', 5, 2, 2, 2);
+
+SELECT * FROM motoristas;
