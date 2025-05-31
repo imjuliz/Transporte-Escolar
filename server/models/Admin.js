@@ -26,9 +26,8 @@
 
 // export { registrarUsuario, registrarVeiculos};
 
-import { create, readAll, read, readQuery } from '../config/database.js';
-
-// criar usuarios
+import { create, readAll, read, readQuery, deleteRecord } from '../config/database.js';
+// registrar novos usuarios, veiculos, escolas e pontos de
 export const criarRegistro = async (tabela, dados) => {
   return create(tabela, dados);
 };
@@ -39,6 +38,7 @@ export const buscarEscolasPorNome = async (nome) => {
   return await readAll('escolas', where);
 };
 
+// busca o ponto de embarque relacionado a escola informada - revisar
 export async function buscarPontoDeEmbarquePorEscola(escolaId) {
   return await readQuery(
     `
@@ -50,3 +50,14 @@ export async function buscarPontoDeEmbarquePorEscola(escolaId) {
     [escolaId]
   );
 }
+
+// deleta o perfil do USUARIO
+const deletarPerfil = async (tabela, cpf)=>{
+const usuario = await read(tabela, `cpf = '${cpf}'`);
+    if (!usuario) return null;
+
+    const resultado = await deleteRecord(tabela, `cpf = '${cpf}'`);
+    return resultado;
+}
+
+export {deletarPerfil}

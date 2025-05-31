@@ -181,7 +181,7 @@ export default function RegistroPage() {
                           const ponto = await res.json();
                           if (res.ok) {
                             handleChange({ target: { name: 'ponto_embarque_id', value: ponto.id } });
-                            setPontoNome(ponto.nome);
+                            setPontoNome(ponto?.nome || '');
                           }
                         } catch (err) {
                           console.error('Erro ao buscar ponto de embarque:', err);
@@ -200,7 +200,7 @@ export default function RegistroPage() {
               <input
                 type="text"
                 name="ponto_embarque_nome"
-                value={pontoNome}
+                defaultValue={pontoNome}
                 disabled
                 className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-gray-100 border-b-2 border-gray-300 appearance-none cursor-not-allowed peer"
                 placeholder=" "

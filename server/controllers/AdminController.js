@@ -49,36 +49,36 @@
 
 // export { registrarUsuarioController, registrarVeiculosController }
 
-import { criarRegistro, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola } from '../models/Admin.js';
+import { criarRegistro, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil } from '../models/Admin.js';
 
 export const registrar = (tabela, entidadeNome) => {
-    return async (req, res) => {
-        const dados = req.body;
-        try {
-            await criarRegistro(tabela, dados);
-            console.log(`Dados recebidos para tabela ${tabela}:`, dados);
-            res.status(201).json({ mensagem: `${entidadeNome} cadastrado com sucesso` });
-        } catch (err) {
-            res.status(500).json({ erro: err.message });
-        }
-    };
+  return async (req, res) => {
+    const dados = req.body;
+    try {
+      await criarRegistro(tabela, dados);
+      console.log(`Dados recebidos para tabela ${tabela}:`, dados);
+      res.status(201).json({ mensagem: `${entidadeNome} cadastrado com sucesso` });
+    } catch (err) {
+      res.status(500).json({ erro: err.message });
+    }
+  };
 };
 
 // busca a escola pelo nome
 export const buscarEscolas = async (req, res) => {
-    const { nome } = req.query;
+  const { nome } = req.query;
 
-    if (!nome || typeof nome !== 'string') {
-        return res.status(400).json({ erro: 'Parâmetro "nome" é obrigatório e deve ser uma string.' });
-    }
+  if (!nome || typeof nome !== 'string') {
+    return res.status(400).json({ erro: 'Parâmetro "nome" é obrigatório e deve ser uma string.' });
+  }
 
-    try {
-        const escolas = await buscarEscolasPorNome(nome);
-        res.json(escolas);
-    } catch (erro) {
-        console.error(erro);
-        res.status(500).json({ erro: 'Erro ao buscar escolas.' });
-    }
+  try {
+    const escolas = await buscarEscolasPorNome(nome);
+    res.json(escolas);
+  } catch (erro) {
+    console.error(erro);
+    res.status(500).json({ erro: 'Erro ao buscar escolas.' });
+  }
 };
 
 // busca o ponto de embarque baseado na escola
@@ -90,17 +90,47 @@ export const buscarPontoPorEscola = async (req, res) => {
   }
 
   try {
-    const ponto = await buscarPontoDeEmbarquePorEscola(escolaId);
-    if (!ponto) {
+    const pontos = await buscarPontoDeEmbarquePorEscola(escolaId);
+
+    if (!pontos || pontos.length === 0) {
       return res.status(404).json({ erro: 'Nenhum ponto de embarque encontrado para essa escola.' });
     }
-    res.json(ponto);
+
+    res.json(pontos[0]);
   } catch (err) {
-    console.error(err);
     res.status(500).json({ erro: 'Erro ao buscar ponto de embarque.' });
   }
 };
 
+// deleta perfil do usuario - revisar
+const tabelasPermitidas = ['alunos', 'responsaveis', 'motoristas', 'adm'];
+
+const deletarPerfilController = async (req, res) => {
+   const { tabela, cpf } = req.body;
+
+  if (!tabelasPermitidas.includes(tabela)) {
+    return res.status(400).json({ erro: 'Tipo de usuário inválido.' });
+  }
+
+  try {
+    const resultado = await deletarPerfil(tabela, cpf);
+
+    if (resultado === null) {
+      return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
+    }
+
+    if (resultado === 0) {
+      return res.status(500).json({ mensagem: 'Erro ao excluir usuário.' });
+    }
+
+    res.status(200).json({ mensagem: 'Usuário excluído com sucesso.' });
+  } catch (erro) {
+    console.error('Erro ao excluir usuário:', erro);
+    res.status(500).json({ erro: 'Erro interno do servidor.' });
+  }
+};
+
+export { deletarPerfilController }
 export const aluno = registrar('alunos', 'Aluno');
 export const motorista = registrar('motoristas', 'Motorista');
 export const responsavel = registrar('responsaveis', 'Responsável');
