@@ -49,7 +49,7 @@
 
 // export { registrarUsuarioController, registrarVeiculosController }
 
-import { criarRegistro, buscarEscolasPorNome } from '../models/Admin.js';
+import { criarRegistro, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola } from '../models/Admin.js';
 
 export const registrar = (tabela, entidadeNome) => {
     return async (req, res) => {
@@ -65,7 +65,6 @@ export const registrar = (tabela, entidadeNome) => {
 };
 
 // busca a escola pelo nome
-// No seu controller
 export const buscarEscolas = async (req, res) => {
     const { nome } = req.query;
 
@@ -82,6 +81,25 @@ export const buscarEscolas = async (req, res) => {
     }
 };
 
+// busca o ponto de embarque baseado na escola
+export const buscarPontoPorEscola = async (req, res) => {
+  const { escolaId } = req.query;
+
+  if (!escolaId) {
+    return res.status(400).json({ erro: 'Parâmetro escolaId é obrigatório.' });
+  }
+
+  try {
+    const ponto = await buscarPontoDeEmbarquePorEscola(escolaId);
+    if (!ponto) {
+      return res.status(404).json({ erro: 'Nenhum ponto de embarque encontrado para essa escola.' });
+    }
+    res.json(ponto);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ erro: 'Erro ao buscar ponto de embarque.' });
+  }
+};
 
 export const aluno = registrar('alunos', 'Aluno');
 export const motorista = registrar('motoristas', 'Motorista');

@@ -292,6 +292,16 @@ CREATE TABLE viagens (
     FOREIGN KEY (veiculo_id) REFERENCES veiculos(id)
 );
 
+# associação entre escola e ponto de embarque
+CREATE TABLE escola_ponto_embarque (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    escola_id INT NOT NULL,
+    ponto_embarque_id INT NOT NULL,
+    FOREIGN KEY (escola_id) REFERENCES escolas(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ponto_embarque_id) REFERENCES pontos_embarque(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    UNIQUE KEY (escola_id, ponto_embarque_id) -- evita duplicações
+);
+
 CREATE TABLE alunos (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     cpf VARCHAR(11) not null unique,
@@ -413,6 +423,14 @@ INSERT INTO viagens (veiculo_id, data_viagem, hora_saida, hora_chegada_prevista,
 (4, CURDATE(), '17:30:00', '19:00:00', 'escola', 5, 'ponto_embarque', 7, 'volta', 'agendada', 90),
 (4, CURDATE(), '17:30:00', '19:00:00', 'escola', 7, 'ponto_embarque', 8, 'volta', 'agendada', 90);
 
+INSERT INTO escola_ponto_embarque (escola_id, ponto_embarque_id) VALUES
+(6, 1),
+(8, 2),
+(1, 3),
+(2, 4),
+(3, 5),
+(4, 6);
+
 INSERT INTO alunos (cpf, email, nome, telefonePrinc, emailPessoal, dataNascimento, senha, escola_id, ponto_embarque_id, veiculo_id, viagem_id) VALUES
 ('88888888888', 'roberto@al.gov.br', 'Roberto Alves Costa', '969903253', 'roberto_costa@gmail.com', '2010-05-20', 'roberto@aluno', 6, 1, 1, 1),
 ('99999999999', 'beatriz@al.gov.br', 'Beatriz Sousa Garcia', '929076857', 'beatrizgarcia2010@gmail.com', '2011-08-15', 'beatriz@aluno', 5, 2, 2, 2),
@@ -424,5 +442,3 @@ INSERT INTO alunos (cpf, email, nome, telefonePrinc, emailPessoal, dataNasciment
 ('15141514151', 'fernanda.almeida@al.gov.br', 'Fernanda Almeida Goncalves', '943218765', 'fernanda_goncalves@outlook.com', '2013-05-17', 'fernanda@aluno', 6, 8, 1, 1),
 ('16151615161', 'gustavo.ribeiro@al.gov.br', 'Gustavo Ribeiro Azevedo', '988881111', 'guga_ribeiro@icloud.com', '2015-07-09', 'gustavo@aluno', 8, 1, 2, 2),
 ('17161716171', 'mariana.souza@al.gov.br', 'Mariana Souza Carvalho', '977772222', 'mari_carvalho88@gmail.com', '2012-12-01', 'mariana@aluno', 5, 2, 2, 2);
-
-SELECT * FROM motoristas;

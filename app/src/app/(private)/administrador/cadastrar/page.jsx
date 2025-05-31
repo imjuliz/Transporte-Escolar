@@ -102,6 +102,7 @@ export default function RegistroPage() {
         alert(resultado.mensagem);
         setForm({});
         setNomeEscola('');
+        setPontoNome('');
         formRef.current.reset();
       } else {
         alert(resultado.erro || 'Erro ao registrar.');
@@ -113,6 +114,7 @@ export default function RegistroPage() {
 
   const [nomeEscola, setNomeEscola] = useState('');
   const [escolas, setEscolas] = useState([]);
+  const [pontoNome, setPontoNome] = useState('');
 
   const buscarEscolas = async (nome) => {
     if (!nome || nome.length < 2) return setEscolas([]);
@@ -153,25 +155,37 @@ export default function RegistroPage() {
                 }}
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-b-2 border-gray-300 appearance-none peer"
                 placeholder=" "
+                autoComplete="off"
                 required
               />
               <label
-                htmlFor="escola_id"
-                className="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]"
+                htmlFor="escola_nome"
+                className="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-6 transition-all"
               >
                 Nome da escola
               </label>
 
               {escolas.length > 0 && (
-                <ul className="absolute z-10 w-full bg-white border border-gray-300 max-h-40 overflow-y-auto">
+                <ul className="absolute z-20 w-full mt-2 bg-white border border-gray-300 max-h-40 overflow-y-auto rounded shadow">
                   {escolas.map((escola) => (
                     <li
                       key={escola.id}
-                      className="cursor-pointer px-2 py-1 hover:bg-gray-200"
-                      onClick={() => {
+                      className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+                      onClick={async () => {
                         setNomeEscola(escola.nome);
                         setEscolas([]);
                         handleChange({ target: { name: 'escola_id', value: escola.id } });
+
+                        try {
+                          const res = await fetch(`http://localhost:3001/ponto-por-escola?escolaId=${escola.id}`);
+                          const ponto = await res.json();
+                          if (res.ok) {
+                            handleChange({ target: { name: 'ponto_embarque_id', value: ponto.id } });
+                            setPontoNome(ponto.nome);
+                          }
+                        } catch (err) {
+                          console.error('Erro ao buscar ponto de embarque:', err);
+                        }
                       }}
                     >
                       {escola.nome}
@@ -181,7 +195,24 @@ export default function RegistroPage() {
               )}
             </div>
 
-            <input name="ponto_embarque_id" placeholder="ID do ponto de embarque" onChange={handleChange} required />
+            {/* Campo preenchido automaticamente com o nome do ponto */}
+            <div className="relative z-0 w-full mb-5 group">
+              <input
+                type="text"
+                name="ponto_embarque_nome"
+                value={pontoNome}
+                disabled
+                className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-gray-100 border-b-2 border-gray-300 appearance-none cursor-not-allowed peer"
+                placeholder=" "
+              />
+              <label
+                htmlFor="ponto_embarque_nome"
+                className="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-6 transition-all"
+              >
+                Ponto de embarque
+              </label>
+            </div>
+
             <input name="viagem_id" placeholder="ID da viagem" onChange={handleChange} required />
             <input name="veiculo_id" placeholder="ID do veículo" onChange={handleChange} required />
             <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required />
@@ -248,3 +279,4 @@ export default function RegistroPage() {
     </div>
   );
 }
+

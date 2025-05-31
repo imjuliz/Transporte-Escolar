@@ -68,6 +68,20 @@ async function read(table, where) {
     }
 }
 
+// funcao para executar qualquer consulta SQL 
+async function readQuery(query, values = []) {
+    const connection = await getConnection();
+    try {
+        const [rows] = await connection.execute(query, values);
+        return rows;
+    } catch (err) {
+        console.error('Erro ao executar query: ', err);
+        throw err;
+    } finally {
+        connection.release();
+    }
+}
+
 //Função para inserir dados
 async function create(table, data) {
     const connection = await getConnection();
@@ -127,26 +141,4 @@ async function deleteRecord(table, where) {
     }
 }
 
-// compara senha 
-async function compare(senha, hash) {
-    try{
-        return await bcrypt.compare(senha, hash);
-    } catch(err){
-        console.error('Erro ao comparar a senha com o hash', err);
-        return false;
-    }
-}
-
-// async function testRead() {
-//     try {
-//         const resultado = await read("alunos", "email = 'roberto@al.gov.br'");
-//         console.log("Resultado da função read():", resultado);
-//     } catch (err) {
-//         console.error("Erro ao testar função read():", err);
-//     }
-// }
-
-// // Execute esse teste ao iniciar o servidor
-// testRead();
-
-export { create, readAll,readAll2, read, update, deleteRecord, compare}
+export { create, readAll, readAll2, read, readQuery, update, deleteRecord }

@@ -26,13 +26,27 @@
 
 // export { registrarUsuario, registrarVeiculos};
 
-import { create, readAll } from '../config/database.js';
+import { create, readAll, read, readQuery } from '../config/database.js';
 
+// criar usuarios
 export const criarRegistro = async (tabela, dados) => {
   return create(tabela, dados);
 };
 
+// busca o nome da escola
 export const buscarEscolasPorNome = async (nome) => {
   const where = `nome LIKE "%${nome}%" LIMIT 10`;
   return await readAll('escolas', where);
 };
+
+export async function buscarPontoDeEmbarquePorEscola(escolaId) {
+  return await readQuery(
+    `
+    SELECT pe.*
+    FROM pontos_embarque pe
+    JOIN escola_ponto_embarque epe ON pe.id = epe.ponto_embarque_id
+    WHERE epe.escola_id = ?
+    `,
+    [escolaId]
+  );
+}

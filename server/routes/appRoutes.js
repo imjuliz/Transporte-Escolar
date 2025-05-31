@@ -5,7 +5,7 @@ import { deletarPerfilController } from "../controllers/DeletarController.js";
 import { verAlunosController } from "../controllers/VerAlunosController.js";
 import { obterPerfilUsuario, editarPerfilController } from '../controllers/PerfilController.js';
 import { getViagemUsuario } from '../controllers/ViagensController.js';
-import { aluno, motorista, responsavel, administrador, escola, pontoEmbarque, veiculo, buscarEscolas } from '../controllers/AdminController.js';
+import { aluno, motorista, responsavel, administrador, escola, pontoEmbarque, veiculo, buscarEscolas, buscarPontoPorEscola } from '../controllers/AdminController.js';
 
 const router = express.Router();
 
@@ -43,5 +43,7 @@ router.post('/pontos-embarque', pontoEmbarque);
 router.post('/veiculos', veiculo);
 
 router.get('/escolas', buscarEscolas)
+router.get('/ponto-por-escola', buscarPontoPorEscola);
+
 
 export default router;
