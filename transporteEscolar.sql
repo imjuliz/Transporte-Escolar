@@ -458,7 +458,6 @@ INSERT INTO alunos (cpf, email, nome, telefonePrinc, emailPessoal, dataNasciment
 ('16151615161', 'gustavo.ribeiro@al.gov.br', 'Gustavo Ribeiro Azevedo', '988881111', 'guga_ribeiro@icloud.com', '2015-07-09', 'gustavo@aluno', 8, 1, 2, 2),
 ('17161716171', 'mariana.souza@al.gov.br', 'Mariana Souza Carvalho', '977772222', 'mari_carvalho88@gmail.com', '2012-12-01', 'mariana@aluno', 5, 2, 2, 2);
 
-
 INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
 (1, 1),
 (2, 2),

@@ -253,7 +253,10 @@ export default function RegistroPage() {
                 Ponto de embarque
               </label>
             </div>
-
+            {/* ainda é preciso revisar os campos abaixo */}
+            <input name="viagem_id" placeholder="ID da viagem" onChange={handleChange} required />
+            <input name="veiculo_id" placeholder="ID do veículo" onChange={handleChange} required />
+            <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required />
             {/* Campos do Responsável */}
             <h2 className="text-lg font-semibold mt-6">Responsável</h2>
             <input name="cpf_responsavel" placeholder="CPF do responsável" onChange={handleChange} required />
@@ -262,10 +265,6 @@ export default function RegistroPage() {
             <input name="telefone_responsavel" placeholder="Telefone do responsável" onChange={handleChange} required />
             <input name="senha_responsavel" placeholder="Senha do responsável" type="password" onChange={handleChange} required />
             <input name="grau_parentesco" placeholder="Grau de parentesco" onChange={handleChange} required />
-            {/* ainda é preciso revisar os campos abaixo */}
-            <input name="viagem_id" placeholder="ID da viagem" onChange={handleChange} required />
-            <input name="veiculo_id" placeholder="ID do veículo" onChange={handleChange} required />
-            <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required />
           </>
         );
 
