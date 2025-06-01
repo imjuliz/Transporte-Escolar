@@ -62,7 +62,7 @@ export async function cadastrarAlunoComResponsavel(req, res) {
     let responsavel_id;
 
     if (existentes.length > 0) {
-      // Procura um registro que bata exatamente com todas as informações
+      // procura um registro que bata exatamente com todas as informações
       const r = existentes.find(r =>
         r.cpf === responsavel.cpf &&
         r.nome === responsavel.nome &&
@@ -79,7 +79,7 @@ export async function cadastrarAlunoComResponsavel(req, res) {
       responsavel_id = r.id;
 
     } else {
-      // cria novo responsável
+      // se nenhum dado bate, cria novo responsável
       responsavel_id = await criarResponsavel(responsavel);
     }
 
