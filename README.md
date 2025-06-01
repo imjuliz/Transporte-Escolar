@@ -47,7 +47,7 @@ Você pode acessar o site executando localmente, seguindo as instruções abaixo
 4. Execute o servidor front-end e instale as dependências
     ```bash
     cd app
-    npm install @tailwindcss/postcss autoprefixer leaflet leaflet-routing-machine flowbite
+    npm install next react react-dom @tailwindcss/postcss autoprefixer leaflet leaflet-routing-machine flowbite
     npm run dev
     ```
 5. Configure o banco de dados e inicie o módulo MySQL
