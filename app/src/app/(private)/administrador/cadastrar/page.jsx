@@ -85,16 +85,57 @@ export default function RegistroPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!tipo) return alert('Selecione um tipo de usuário.');
-
-    if (tipo === 'aluno' && !form.escola_id) {
-      return alert('Selecione uma escola da lista.');
-    }
+    if (tipo === 'aluno' && !form.escola_id) return alert('Selecione uma escola da lista.');
 
     try {
-      const resposta = await fetch(`http://localhost:3001/${tipo}s`, {
+      let url = '';
+      let corpo = {};
+
+      switch (tipo) {
+        case 'aluno':
+          url = 'http://localhost:3001/cadastro/aluno-com-responsavel';
+          corpo = {
+            aluno: {
+              cpf: form.cpf,
+              nome: form.nome,
+              email: form.email,
+              telefonePrinc: form.telefonePrinc,
+              dataNascimento: form.dataNascimento,
+              escola_id: form.escola_id,
+              ponto_embarque_id: form.ponto_embarque_id,
+              viagem_id: form.viagem_id,
+              veiculo_id: form.veiculo_id,
+              senha: form.senha
+            },
+            responsavel: {
+              cpf: form.cpf_responsavel,
+              nome: form.nome_responsavel,
+              email: form.email_responsavel,
+              telefone: form.telefone_responsavel,
+              senha: form.senha_responsavel,
+              grau_parentesco: form.grau_parentesco
+            }
+          };
+          break;
+
+        case 'motorista':
+          url = 'http://localhost:3001/cadastro/motorista';
+          corpo = form;
+          break;
+
+        case 'administrador':
+          url = 'http://localhost:3001/cadastro/administrador';
+          corpo = form;
+          break;
+
+        default:
+          return alert('Tipo de cadastro não suportado.');
+      }
+
+      const resposta = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(corpo),
       });
 
       const resultado = await resposta.json();
@@ -136,7 +177,7 @@ export default function RegistroPage() {
               <input name="cpf" onChange={handleChange} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-b-2 border-gray-300 appearance-none peer" placeholder=" " required maxLength={11} />
               <label htmlFor="cpf" className="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]">CPF</label>
             </div>
-            <input name="email" placeholder="Email institucional" onChange={handleChange} required />
+            <input name="email" pattern="^[a-zA-Z0-9._%+-]+@al\.gov\.br$" placeholder="Email institucional" onChange={handleChange} required />
             <input name="nome" placeholder="Nome completo" onChange={handleChange} required />
             <input name="telefonePrinc" placeholder="Telefone" onChange={handleChange} required />
             <input name="dataNascimento" placeholder="Data de nascimento" onChange={handleChange} required />
@@ -213,6 +254,15 @@ export default function RegistroPage() {
               </label>
             </div>
 
+            {/* Campos do Responsável */}
+            <h2 className="text-lg font-semibold mt-6">Responsável</h2>
+            <input name="cpf_responsavel" placeholder="CPF do responsável" onChange={handleChange} required />
+            <input name="nome_responsavel" placeholder="Nome do responsável" onChange={handleChange} required />
+            <input name="email_responsavel" placeholder="Email do responsável" onChange={handleChange} required />
+            <input name="telefone_responsavel" placeholder="Telefone do responsável" onChange={handleChange} required />
+            <input name="senha_responsavel" placeholder="Senha do responsável" type="password" onChange={handleChange} required />
+            <input name="grau_parentesco" placeholder="Grau de parentesco" onChange={handleChange} required />
+            {/* ainda é preciso revisar os campos abaixo */}
             <input name="viagem_id" placeholder="ID da viagem" onChange={handleChange} required />
             <input name="veiculo_id" placeholder="ID do veículo" onChange={handleChange} required />
             <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required />

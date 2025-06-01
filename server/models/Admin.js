@@ -27,9 +27,58 @@
 // export { registrarUsuario, registrarVeiculos};
 
 import { create, readAll, read, readQuery, deleteRecord } from '../config/database.js';
-// registrar novos usuarios, veiculos, escolas e pontos de
-export const criarRegistro = async (tabela, dados) => {
-  return create(tabela, dados);
+// registrar novos usuarios
+export const criarAluno = async (dados) => {
+  try {
+    return await create('alunos', dados);
+  } catch (err) {
+    console.error('Erro ao cadastrar aluno', err);
+    throw err;
+  }
+};
+
+export const criarResponsavel = async (dados) => {
+  try {
+    return await create('responsaveis', dados);
+  } catch (err) {
+    console.error('Erro ao cadastrar responsavel', err);
+    throw err;
+  }
+};
+
+export const criarMotorista = async (dados) => {
+  try {
+    return await create('motoristas', dados);
+  } catch (err) {
+    console.error('Erro ao cadastrar motorista', err);
+    throw err;
+  }
+};
+
+export const criarAdministrador = async (dados) => {
+  try {
+    return await create('adm', dados);
+  } catch (err) {
+    console.error('Erro ao cadastrar administrador', err);
+    throw err;
+  }
+};
+
+// verifica se o responsavel ja existe
+export async function verificarResponsavelExistente({ cpf, email, telefone }) {
+  const where = `cpf = ? OR email = ? OR telefone = ?`;
+  const values = [cpf, email, telefone];
+  const responsaveis = await readAll('responsaveis', where, values);
+  return responsaveis;
+}
+
+// associa responsavel ao aluno
+export const associarResponsavelAluno = async (responsavelId, alunoId, grau) => {
+  return await create('responsaveis_alunos', {
+    responsavel_id: responsavelId,
+    aluno_id: alunoId,
+    grau_parentesco: grau
+  });
 };
 
 // busca o nome da escola
@@ -52,12 +101,10 @@ export async function buscarPontoDeEmbarquePorEscola(escolaId) {
 }
 
 // deleta o perfil do USUARIO
-const deletarPerfil = async (tabela, cpf)=>{
-const usuario = await read(tabela, `cpf = '${cpf}'`);
-    if (!usuario) return null;
+export const deletarPerfil = async (tabela, cpf) => {
+  const usuario = await read(tabela, `cpf = '${cpf}'`);
+  if (!usuario) return null;
 
-    const resultado = await deleteRecord(tabela, `cpf = '${cpf}'`);
-    return resultado;
+  const resultado = await deleteRecord(tabela, `cpf = '${cpf}'`);
+  return resultado;
 }
-
-export {deletarPerfil}

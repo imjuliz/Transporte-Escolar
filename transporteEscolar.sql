@@ -321,6 +321,14 @@ CREATE TABLE alunos (
     FOREIGN KEY (viagem_id) REFERENCES viagens(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE responsaveis_alunos (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    responsavel_id INT NOT NULL,
+    aluno_id INT NOT NULL,
+    FOREIGN KEY (responsavel_id) REFERENCES responsaveis(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (aluno_id) REFERENCES alunos(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 /*
 INSERT INTO usuarios (cpf, email, senha, tipo) VALUES
 ('11111111111', 'julia@gmail.com', 'julia@adm', 'administrador'),
@@ -357,7 +365,14 @@ INSERT INTO adm (cpf, nome, email, senha) VALUES
 ('13131313131', 'Teste', 'teste@gmail.com', 'teste@adm');
 
 INSERT INTO responsaveis (cpf, nome, email, senha, telefone) VALUES
-('80080808080', 'Responsável Genérico', 'responsavel@email.com', 'responsavel', '11912345678');
+('80011111111', 'Ana Paula Costa', 'ana.costa@email.com', 'ana@responsavel', '11990001111'),
+('80022222222', 'Bruno Henrique Lima', 'bruno.lima@email.com', 'bruno@responsavel', '11990002222'),
+('80033333333', 'Camila dos Santos', 'camila.santos@email.com', 'camila@responsavel', '11990003333'),
+('80044444444', 'Daniel Almeida', 'daniel.almeida@email.com', 'daniel@responsavel', '11990004444'),
+('80055555555', 'Eduarda Ribeiro', 'eduarda.ribeiro@email.com', 'eduarda@responsavel', '11990005555'),
+('80066666666', 'Felipe Martins', 'felipe.martins@email.com', 'felipe@responsavel', '11990006666'),
+('80077777777', 'Gabriela Fernandes', 'gabriela.fernandes@email.com', 'gabriela@responsavel', '11990007777'),
+('80088888888', 'Henrique Souza', 'henrique.souza@email.com', 'henrique@responsavel', '11990008888');
 
 insert into escolas(nome, endereco, latitude, longitude) value
 ('Cemei Edna Cassiano', 'R. Mal. Deodoro da Fonseca - Monte Azul Paulista, SP, 14730-000', -20.9070, -48.6392),
@@ -442,3 +457,15 @@ INSERT INTO alunos (cpf, email, nome, telefonePrinc, emailPessoal, dataNasciment
 ('15141514151', 'fernanda.almeida@al.gov.br', 'Fernanda Almeida Goncalves', '943218765', 'fernanda_goncalves@outlook.com', '2013-05-17', 'fernanda@aluno', 6, 8, 1, 1),
 ('16151615161', 'gustavo.ribeiro@al.gov.br', 'Gustavo Ribeiro Azevedo', '988881111', 'guga_ribeiro@icloud.com', '2015-07-09', 'gustavo@aluno', 8, 1, 2, 2),
 ('17161716171', 'mariana.souza@al.gov.br', 'Mariana Souza Carvalho', '977772222', 'mari_carvalho88@gmail.com', '2012-12-01', 'mariana@aluno', 5, 2, 2, 2);
+
+
+INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(6, 7),  -- responsavel 6 tem dois filhos
+(7, 8),
+(8, 9);

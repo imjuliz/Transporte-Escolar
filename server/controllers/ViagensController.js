@@ -4,15 +4,14 @@ export async function getViagemUsuario(req, res) {
   try {
     const usuarioLogado = req.session.usuario;
 
-    // Verifica se o usuário está autenticado
     if (!usuarioLogado) {
       return res.status(401).json({ erro: 'Usuário não autenticado' });
     }
 
     const { id } = usuarioLogado;
-    const tipo = usuarioLogado.tipo?.toLowerCase().trim(); // 🔧 Normaliza o tipo
+    const tipo = usuarioLogado.tipo?.toLowerCase().trim();
 
-    console.log('Usuário logado:', { id, tipo }); // Debug útil
+    console.log('Usuário logado:', { id, tipo });
 
     switch (tipo) {
       case 'aluno': {
