@@ -2,9 +2,10 @@
 import "./motorista.css";
 import { useEffect, useState } from "react";
 import Image from 'next/image'
+import { usePathname } from 'next/navigation';
 
 export default function RootLayout({ children }) {
-
+    const isMapa = pathname.includes('minha-rota');
     //sidebar
     const [sidebarActive, setSidebarActive] = useState(false);
 
@@ -100,7 +101,7 @@ export default function RootLayout({ children }) {
                     </div>
                 </div>
             </header>
-            <main className={`main-content justify-items-center content-center ${sidebarActive ? 'collapsed' : ''}`}>
+            <main className={`main-content justify-items-center ${sidebarActive ? 'collapsed' : ''} ${isMapa ? 'p-0' : 'px-[12%]'}`}>
                 {children}
             </main>
         </>

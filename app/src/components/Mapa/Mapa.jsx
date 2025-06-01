@@ -1,41 +1,51 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import MapaAluno from './MapaAluno.jsx';
 import MapaMotorista from './MapaMotorista.jsx';
 import MapaResponsavel from './MapaResponsavel.jsx';
 
-export default function Mapa() {
-    const [tipo, setTipo] = useState(null);
+export default function Mapa({ usuarioId, tipoUsuario }) {
     const [dados, setDados] = useState(null);
     const [erro, setErro] = useState(null);
 
+    const tipoUsuarioFormatado = tipoUsuario?.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() ?? "";
+
     useEffect(() => {
-        fetch('http://localhost:3001/usuarios/minha-rota', { credentials: 'include' })
-            .then(res => res.json())
-            .then(data => {
-                if (data.erro || data.mensagem) {
-                    setErro(data.erro || data.mensagem);
+        if (!usuarioId || !tipoUsuarioFormatado) {
+            setErro("Erro: tipoUsuario ou usuarioId estão indefinidos.");
+            return;
+        }
+
+        async function carregarDados() {
+            try {
+                const response = await fetch(`http://localhost:3001/viagem/${tipoUsuarioFormatado}/${usuarioId}`, { credentials: 'include' });
+                const data = await response.json();
+
+                if (data.erro) {
+                    setErro(data.erro);
                 } else {
-                    setTipo(data.tipo);
-                    setDados(data.dados || data.viagens);
+                    setDados(data.dados);
                 }
+            } catch (error) {
+                console.error("Erro ao carregar viagem:", error);
+                setErro("Erro ao buscar dados da viagem.");
+            }
+        }
+        carregarDados();
+    }, [usuarioId, tipoUsuarioFormatado]);
 
-            })
-            .catch(err => {
-                console.error('Erro na requisição:', err);
-                setErro('Erro ao carregar dados do mapa');
-            });
-    }, []);
+    if (erro) {
+        return <p style={{ color: 'red' }}>{erro}</p>;
+    }
 
-    if (erro) return <p>{erro}</p>;
-    if (!tipo || !dados) return <p>Carregando mapa...</p>;
-
+    if (!dados) {
+        return <p>Carregando informações da viagem...</p>;
+    }
     return (
         <>
-            {tipo === 'aluno' && <MapaAluno ponto={dados.ponto} escola={dados.escola} />}
-            {tipo === 'motorista' && <MapaMotorista viagens={dados} />}
-            {tipo === 'responsável' && <MapaResponsavel viagens={dados} />}
+            {tipoUsuarioFormatado === 'aluno' && dados?.ponto && dados?.escola && (<MapaAluno ponto={dados.ponto} escola={dados.escola} />)}
+            {tipoUsuarioFormatado === 'motorista' && <MapaMotorista motoristaId={usuarioId} />}
+            {tipoUsuarioFormatado === 'responsavel' && <MapaResponsavel viagens={dados} />}
         </>
     );
 }

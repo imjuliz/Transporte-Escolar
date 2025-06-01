@@ -3,8 +3,10 @@ import "./styles/layout.css";
 import { useEffect, useState } from "react";
 import Image from 'next/image'
 import informacoes from "./informacoes/page1";
+import { usePathname } from 'next/navigation';
 
 export default function RootLayout({ children }) {
+    const isMapa = pathname.includes('minha-rota');
     const [sidebarActive, setSidebarActive] = useState(false);
 
     const toggleSidebar = () => {
@@ -53,7 +55,7 @@ export default function RootLayout({ children }) {
             <path fillRule="evenodd" clipRule="evenodd" d="M10 2.5C8.89497 2.5 7.83516 2.93899 7.05376 3.72039C6.27236 4.50179 5.83337 5.5616 5.83337 6.66667C5.83337 7.77174 6.27236 8.83154 7.05376 9.61294C7.10873 9.66791 7.16507 9.72119 7.22272 9.77273C6.50895 10.0998 5.85185 10.5534 5.286 11.1193C4.03575 12.3695 3.33337 14.0652 3.33337 15.8333V16.6667C3.33337 17.1269 3.70647 17.5 4.16671 17.5C4.62694 17.5 5.00004 17.1269 5.00004 16.6667V15.8333C5.00004 14.5073 5.52682 13.2355 6.46451 12.2978C7.40219 11.3601 8.67396 10.8333 10 10.8333C11.3261 10.8333 12.5979 11.3601 13.5356 12.2978C14.4733 13.2355 15 14.5073 15 15.8333V16.6667C15 17.1269 15.3731 17.5 15.8334 17.5C16.2936 17.5 16.6667 17.1269 16.6667 16.6667V15.8333C16.6667 14.0652 15.9643 12.3695 14.7141 11.1193C14.1482 10.5534 13.4911 10.0998 12.7774 9.77273C12.835 9.72119 12.8914 9.66791 12.9463 9.61294C13.7277 8.83154 14.1667 7.77174 14.1667 6.66667C14.1667 5.5616 13.7277 4.50179 12.9463 3.72039C12.1649 2.93899 11.1051 2.5 10 2.5ZM8.23227 4.8989C8.70111 4.43006 9.337 4.16667 10 4.16667C10.6631 4.16667 11.299 4.43006 11.7678 4.8989C12.2366 5.36774 12.5 6.00363 12.5 6.66667C12.5 7.32971 12.2366 7.96559 11.7678 8.43443C11.299 8.90327 10.6631 9.16667 10 9.16667C9.337 9.16667 8.70111 8.90327 8.23227 8.43443C7.76343 7.96559 7.50004 7.32971 7.50004 6.66667C7.50004 6.00363 7.76343 5.36774 8.23227 4.8989Z" fill="currentColor" />
         </svg>
         ),
-        notificacoes: (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fillRule="evenodd" clipRule="evenodd"  fill="currentColor" d="M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416l384 0c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8l0-18.8c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg>)
+        notificacoes: (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fillRule="evenodd" clipRule="evenodd" fill="currentColor" d="M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416l384 0c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8l0-18.8c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z" /></svg>)
 
     };
 
@@ -61,7 +63,7 @@ export default function RootLayout({ children }) {
         { href: '/navegacao', name: 'navegacao', page: 'Rotas' },
         { href: '/responsavel/viagens', name: 'viagens', page: 'Viagens' },
         { href: '/responsavel/informacoes', name: 'informacoes', page: 'Informações' },
-        {href: '/responsavel/notificacoes', name: 'notificacoes', page: 'Notificações'},
+        { href: '/responsavel/notificacoes', name: 'notificacoes', page: 'Notificações' },
         { href: '/ajuda', name: 'ajuda', page: 'Ajuda' },
     ];
 
@@ -117,7 +119,7 @@ export default function RootLayout({ children }) {
                     </div>
                 </div>
             </header>
-            <main className={`main-content justify-items-center ${sidebarActive ? 'collapsed' : ''}`}>
+            <main className={`main-content justify-items-center ${sidebarActive ? 'collapsed' : ''} ${isMapa ? 'p-0' : 'px-[12%]'}`}>
                 {children}
             </main>
         </>

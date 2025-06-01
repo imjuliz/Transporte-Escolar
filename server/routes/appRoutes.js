@@ -3,7 +3,8 @@ import { autorizarAcesso } from "../middlewares/authMiddleware.js";
 import { loginController } from "../controllers/LoginController.js";
 import { verAlunosController } from "../controllers/VerAlunosController.js";
 import { obterPerfilUsuario, editarPerfilController } from '../controllers/PerfilController.js';
-import { getViagemUsuario } from '../controllers/ViagensController.js';
+// import { getViagemUsuario } from '../controllers/ViagensController.js';
+import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
 import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController } from '../controllers/AdminController.js';
 
 const router = express.Router();
@@ -30,7 +31,8 @@ router.patch('/editarPerfil', editarPerfilController);
 
 
 // ver informaçoes das rotas
-router.get('/usuarios/minha-rota', getViagemUsuario);
+// router.get('/usuarios/minha-rota', getViagemUsuario);
+router.get('/viagem/:tipo/:id', obterViagemPorUsuario);
 
 // ADM ------------------------------------------------------------------------------------------
 // cadastro de usuarios

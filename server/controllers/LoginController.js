@@ -54,7 +54,7 @@ export async function loginController(req, res) {
 
     console.log("Usuário autenticado:", req.session.usuario);
 
-    res.json({ mensagem: 'Login realizado com sucesso', tipo: req.session.usuario.tipo });
+    res.json({ id: usuario.id, mensagem: 'Login realizado com sucesso', tipo: req.session.usuario.tipo });
 
   } catch (erro) {
     console.error("Erro no login:", erro.stack || erro);

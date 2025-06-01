@@ -69,7 +69,7 @@ export default function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem("usuario", JSON.stringify({ email, tipo: usuarioAtivo }));
+        localStorage.setItem("usuario", JSON.stringify({id: data.id, email: email, tipo: usuarioAtivo }));
 
         // redireciona para a página correta com base no tipo de usuário
         if (usuarioAtivo === "Aluno") {
