@@ -66,6 +66,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import '../styles/cadastrar.css';
 
 export default function RegistroPage() {
   const [tipo, setTipo] = useState('');
@@ -174,8 +175,8 @@ export default function RegistroPage() {
         return (
           <>
             <div className="relative z-0 w-full mb-5 group">
-              <input name="cpf" onChange={handleChange} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-b-2 border-gray-300 appearance-none peer" placeholder=" " required maxLength={11} />
-              <label htmlFor="cpf" className="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]">CPF</label>
+              <input name="cpf" onChange={handleChange} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-b-2 border-gray-300 appearance-none peer" placeholder="CPF " required maxLength={11} />
+              <label htmlFor="cpf" className="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]"></label>
             </div>
             <input name="email" pattern="^[a-zA-Z0-9._%+-]+@al\.gov\.br$" placeholder="Email institucional" onChange={handleChange} required />
             <input name="nome" placeholder="Nome completo" onChange={handleChange} required />
@@ -195,7 +196,7 @@ export default function RegistroPage() {
                   setForm((prev) => ({ ...prev, escola_id: null }));
                 }}
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-b-2 border-gray-300 appearance-none peer"
-                placeholder=" "
+                placeholder=""
                 autoComplete="off"
                 required
               />
@@ -309,23 +310,30 @@ export default function RegistroPage() {
 
   return (
     <div className='w-full'>
-      <h1>Cadastrar</h1>
+      <section className='cadastrar'>
+        <div className='page-indicador'>
+          <h1>Cadastrar Usuário</h1>
+          <hr />
+        </div>
 
-      <select onChange={(e) => setTipo(e.target.value)} value={tipo} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500">
-        <option value="">Selecionar tipo</option>
-        <option value="aluno">Aluno</option>
-        <option value="motorista">Motorista</option>
-        <option value="responsavel">Responsável</option>
-        <option value="administrador">Administrador</option>
-      </select>
 
-      {tipo && (
-        <form onSubmit={handleSubmit} ref={formRef} className='flex flex-col gap-10 mt-6'>
-          {renderCamposEspecificos()}
-          <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Registrar</button>
-        </form>
-      )}
-    </div>
+        <select onChange={(e) => setTipo(e.target.value)} value={tipo} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 mb-5">
+          <option value="">Selecionar tipo</option>
+          <option value="aluno">Aluno</option>
+          <option value="motorista">Motorista</option>
+          <option value="responsavel">Responsável</option>
+          <option value="administrador">Administrador</option>
+        </select>
+
+        {tipo && (
+          <form onSubmit={handleSubmit} ref={formRef} className='flex flex-col gap-6 mt-6'>
+            {renderCamposEspecificos()}
+            <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded mb-5 hover:bg-blue-700 transition duration-300 ease">Registrar</button>
+          </form>
+        )}
+    </section >
+    </div> 
+    
   );
 }
 
