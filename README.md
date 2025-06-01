@@ -12,7 +12,7 @@ Para garantir padronização, qualidade e coerência técnica, adotamos as segui
 * **MySQL Workbench**: Ferramenta utilizada para o gerenciamento do banco de dados.
 * **Node.js**: Responsável pelo desenvolvimento do back-end, facilitando a criação de APIs.
   * **Express.js**: Framework para Node.js, usado para criar rotas e gerenciar requisições HTTP.
-  * **express-session**: Middleware que gerencia sessões de usuário no back-end, essencial para autenticação e persistência de login.
+  * **Express-session**: Middleware que gerencia sessões de usuário no back-end, essencial para autenticação e persistência de login.
 * **Next.js**: Framework para o front-end baseado em React, que otimiza o desempenho e facilita a implementação de páginas dinâmicas.
 * **Tailwind CSS**: Framework de utilitários CSS que permite maior flexibilidade e eficiência na construção da interface visual.
   * **Flowbite**: Biblioteca de componentes UI baseada em Tailwind.
@@ -28,7 +28,7 @@ Você pode acessar o site executando localmente, seguindo as instruções abaixo
 1. Clone o repositório:
 
     ```bash
-    https://github.com/imjuliz/Transporte-Escolar.git
+    git clone https://github.com/imjuliz/Transporte-Escolar.git
     ```
 
 2. Navegue até o diretório do projeto:
