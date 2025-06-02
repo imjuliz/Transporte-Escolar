@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation';
 
 export default function RootLayout({ children }) {
+    const pathname = usePathname();
     const isMapa = pathname.includes('minha-rota');
     //sidebar
     const [sidebarActive, setSidebarActive] = useState(false);
