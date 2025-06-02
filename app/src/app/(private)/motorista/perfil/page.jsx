@@ -246,7 +246,7 @@ import Image from 'next/image';
 import React, { useRef, useEffect, useState } from 'react';
 
 export default function MeuPerfil() {
-    const cpfInputRef = useRef(null);
+    const cpfRef = useRef(null);
     const emailInputRef = useRef(null);
     const senhaInputRef = useRef(null);
 
@@ -255,7 +255,7 @@ export default function MeuPerfil() {
     const [resposta, setResposta] = useState("");
 
     useEffect(() => {
-        const cpfInput = cpfInputRef.current;
+        const cpfInput = cpfRef.current;
         if (!cpfInput) return;
 
         const handleInput = (e) => {
@@ -290,7 +290,7 @@ export default function MeuPerfil() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = {
-            cpf: cpfInputRef.current?.value.replace(/[.-]/g, ''),
+            cpf: cpfRef.current?.value.replace(/[.-]/g, ''),
             email: emailInputRef.current?.value,
             senha: senhaInputRef.current?.value,
         };
@@ -367,7 +367,7 @@ export default function MeuPerfil() {
                     <div className='sec-campos'><h6>Nome completo:</h6><p>{usuario.nomeCompleto}</p></div>
                     <div className='sec-campos'><h6>CPF:</h6><p>{usuario.cpf}</p></div>
                     <div className='sec-campos'><h6>CNH:</h6><p>{usuario.cnh}</p></div>
-                    <div className='sec-campos'><h6>Veiculo:</h6><p>{usuario.veiculo}</p></div>
+                    <div className='sec-campos'><h6>Vencimento da habilitação:</h6><p>{usuario.vencimento_habilitacao}</p></div>
                 </div>
             </div>
             <div className='sec'>
@@ -392,7 +392,7 @@ export default function MeuPerfil() {
                                 <div className="grid gap-6 mb-6 md:grid-cols-2">
                                     <div>
                                         <label htmlFor="cpf">CPF</label>
-                                        <input type="text" id="cpf" ref={cpfInputRef} maxLength="14" className="input" placeholder="000.000.000-00" required />
+                                        <input type="text" id="cpf" ref={cpfRef} maxLength="11" className="input" placeholder="000.000.000-00" required />
                                     </div>
                                 </div>
                                 <div className="mb-6">

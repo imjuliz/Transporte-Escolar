@@ -9,24 +9,30 @@ const tabelas = {
 };
 
 const obterDadosDoUsuario = async (tipo, id) => {
-  const tabela = tabelas[tipo];
+  try{
+    const tabela = tabelas[tipo];
   if (!tabela) return null;
 
   const where = `id = ${id}`;
   const usuario = await read(tabela, where);
 
   return usuario;
+  }catch(err){
+    console.error('Erro ao atualizar informações do perfil!!!', err);
+    throw err;
+  }
+
 };
 
 // editar perfil
-const editarPerfil = async (email, data) => {
+const editarPerfilMotorista = async (email, data) => {
   try {
     const where = `email = '${email}'`;
-    return await update('usuarios', data, where);
+    return await update('motoristas', data, where);
   } catch (err) {
     console.error('Erro ao atualizar informações do perfil!!!', err);
     throw err;
   }
 }
 
-export { obterDadosDoUsuario, editarPerfil };
+export { obterDadosDoUsuario, editarPerfilMotorista };

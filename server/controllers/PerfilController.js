@@ -1,11 +1,12 @@
-import { obterDadosDoUsuario, editarPerfil } from '../models/Perfil.js';
+import { obterDadosDoUsuario, editarPerfilMotorista } from '../models/Perfil.js';
 
 // obter dados do perfil do usuario
 const obterPerfilUsuario = async (req, res) => {
     try {
-        const { tipo, id } = req.session.usuario;
+        const { tipo } = req.session.usuario;
+        const {id} = req.session.usuario;
 
-        const dados = await Perfil.obterDadosDoUsuario(tipo, id);
+        const dados = await obterDadosDoUsuario( tipo, id);
 
         if (!dados) {
             return res.status(404).json({ erro: 'Usuário não encontrado.' });
@@ -19,7 +20,7 @@ const obterPerfilUsuario = async (req, res) => {
 };
 
 // editar informaçoes do perfil
-const editarPerfilController = async (req, res) => {
+const editarPerfilMotoristaController = async (req, res) => {
     try {
         const { cpf, email, senha } = req.body;
 
@@ -30,7 +31,7 @@ const editarPerfilController = async (req, res) => {
             senha: senha,
         };
 
-        await editarPerfil(email, atualizacoes);
+        await editarPerfilMotorista(email, atualizacoes);
 
         res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!!!', email });
     } catch (err) {
@@ -39,4 +40,4 @@ const editarPerfilController = async (req, res) => {
     }
 }
 
-export { obterPerfilUsuario, editarPerfilController };
+export { obterPerfilUsuario, editarPerfilMotoristaController };

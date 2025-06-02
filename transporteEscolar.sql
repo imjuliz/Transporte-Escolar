@@ -338,6 +338,7 @@ CREATE TABLE alunos_viagens (
     FOREIGN KEY (viagem_id) REFERENCES viagens(id) ON DELETE CASCADE
 );
 
+
 /*
 INSERT INTO usuarios (cpf, email, senha, tipo) VALUES
 ('11111111111', 'julia@gmail.com', 'julia@adm', 'administrador'),
@@ -545,3 +546,21 @@ INSERT INTO alunos_viagens (aluno_id, viagem_id) VALUES
 -- teste
 (11, 57),
 (11, 61);
+
+-- Criada dia 02/06
+drop table incidentes; 
+#tabela incidentes
+CREATE TABLE incidentes (
+id INT AUTO_INCREMENT PRIMARY KEY,
+remetente VARCHAR(100),
+tipo VARCHAR (50),
+mensagem text,
+dataDaMensagem date,
+hora time
+);
+insert into incidentes (remetente, tipo, mensagem)values ('maria@gmail.com', "transito", "muito transito na avenida");
+insert into incidentes (remetente, tipo, mensagem, dataDaMensagem, hora)
+value('maria@gmail.com', "transito", "muito transito", curdate(), curtime());
+select * from incidentes; 
+
+select * from motoristas;

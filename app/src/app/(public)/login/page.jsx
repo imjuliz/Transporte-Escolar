@@ -126,7 +126,7 @@ export default function Login() {
   */
   return (
     <section className="login">
-      <div className="imgLogin">
+      <div id="particles-container" className="imgLogin">
         {/* <img src="" /> */}
       </div>
       {!usuarioAtivo ? (
