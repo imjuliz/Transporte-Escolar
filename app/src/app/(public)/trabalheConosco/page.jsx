@@ -4,6 +4,11 @@ import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 
 export default function TrabalheConosco() {
+    // titulo da guia
+    useEffect(() => {
+        document.title = 'EduTrip - Trabalhe Conosco';
+    }, []);
+
     // formatação de cep
     const cepRef = useRef(null);
 

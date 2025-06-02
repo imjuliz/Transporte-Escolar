@@ -68,10 +68,22 @@ export default function AlunoLayout({ children }) {
     ];
 
     //logout
+    useEffect(() => {
+        console.log("Tentativa de remoção do localStorage:");
+        console.log("Antes:", localStorage.getItem("usuario"));
+    }, []);
+
     const logout = () => {
-        localStorage.removeItem("usuario"); // remove os dados do usuário
-        window.location.href = "/login"; // redireciona p pag de login
+        console.log("Logout chamado. Antes de remover:", localStorage.getItem("usuario"));
+        localStorage.removeItem("usuario");
+        console.log("Depois de remover:", localStorage.getItem("usuario"));
+        window.location.href = "/login";
     };
+
+    useEffect(() => {
+    console.log("Dados do usuário no localStorage ao montar:");
+    console.log(localStorage.getItem("usuario"));
+}, []);
 
     return (
         <>

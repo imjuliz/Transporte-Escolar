@@ -5,6 +5,11 @@ import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 
 export default function Home() {
+    // titulo da guia
+    useEffect(() => {
+        document.title = 'EduTrip - Página Inicial';
+      }, []);
+
     /* nav bar */
     const links = [
         { href: '/', page: 'Página Inicial' },

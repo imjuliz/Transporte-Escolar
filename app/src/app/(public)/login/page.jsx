@@ -4,6 +4,10 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 
 export default function Login() {
+  // titulo da guia
+  useEffect(() => {
+    document.title = 'EduTrip - Login';
+  }, []);
 
   const router = useRouter();
   // senha
@@ -67,6 +71,11 @@ export default function Login() {
       });
 
       const data = await response.json();
+
+      setTimeout(() => {
+        console.log(localStorage.getItem('usuario'));
+      }, 500)
+
 
       if (response.ok) {
         localStorage.setItem("usuario", JSON.stringify({ id: data.id, email: email, tipo: usuarioAtivo }));

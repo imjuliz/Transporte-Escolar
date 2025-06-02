@@ -564,3 +564,8 @@ value('maria@gmail.com', "transito", "muito transito", curdate(), curtime());
 select * from incidentes; 
 
 select * from motoristas;
+
+select count(*)from alunos_viagem;
+/*
+JOIN viagens ON alunos_viagens.viagem_id = viagens.id
+WHERE alunos_viagens.aluno_id = 1 AND viagens.data_viagem = CURDATE();*/

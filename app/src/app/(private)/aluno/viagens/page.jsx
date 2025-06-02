@@ -3,6 +3,11 @@ import Image from 'next/image'
 import '../styles/viagens.css'
 
 export default function viagens() {
+    // titulo da guia
+    useEffect(() => {
+        document.title = 'EduTrip - Minhas Rotas';
+    }, []);
+
     const viagens = [
         {
             tipo: 'Embarque',
