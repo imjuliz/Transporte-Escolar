@@ -1,6 +1,6 @@
 import { create } from "../config/database.js";
 
-const adicionarIncidente = async (dados)=>{
+const adicionarIncidente = async (colunas, dados)=>{
 try{
     return await create('incidentes', dados)
 }
