@@ -548,8 +548,8 @@ INSERT INTO alunos_viagens (aluno_id, viagem_id) VALUES
 (11, 61);
 
 -- Criada dia 02/06
+drop table incidentes; 
 #tabela incidentes
-
 CREATE TABLE incidentes (
 id INT AUTO_INCREMENT PRIMARY KEY,
 remetente VARCHAR(100),
@@ -558,3 +558,9 @@ mensagem text,
 dataDaMensagem date,
 hora time
 );
+insert into incidentes (remetente, tipo, mensagem)values ('maria@gmail.com', "transito", "muito transito na avenida");
+insert into incidentes (remetente, tipo, mensagem, dataDaMensagem, hora)
+value('maria@gmail.com', "transito", "muito transito", curdate(), curtime());
+select * from incidentes; 
+
+select * from motoristas;

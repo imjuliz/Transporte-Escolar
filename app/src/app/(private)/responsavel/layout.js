@@ -6,6 +6,7 @@ import informacoes from "./informacoes/page1";
 import { usePathname } from 'next/navigation';
 
 export default function RootLayout({ children }) {
+    const pathname = usePathname();
     const isMapa = pathname.includes('minha-rota');
     const [sidebarActive, setSidebarActive] = useState(false);
 

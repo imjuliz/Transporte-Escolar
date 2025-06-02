@@ -3,42 +3,29 @@
 // import Image from 'next/image';
 // import React, { useRef, useEffect } from 'react';
 // import { useState } from "react";
-
-
 // export default function meuPerfil() {
-
 //     function openModal() {
-//         document.getElementById("modal").style.display = "block";
-//     }
+//         document.getElementById("modal").style.display = "block";}
 //     function closeModal() {
-//         document.getElementById("modal").style.display = "none";
-//     }
+//         document.getElementById("modal").style.display = "none";}
 //     console.log("Componente EditarPerfil carregado");
 //     const cpfInputRef = useRef(null);
 //     const emailInputRef = useRef(null);
 //     const senhaInputRef = useRef(null);
-
 //     useEffect(() => {
 //         const cpfInput = cpfInputRef.current;
-
 //         if (!cpfInput) return; // evita erro se ainda for null
-
 //         const handleInput = (e) => {
 //             let value = e.target.value;
 //             value = value.replace(/\D/g, '');
 //             if (value.length > 3) value = value.replace(/^(\d{3})(\d)/, '$1.$2');
 //             if (value.length > 6) value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
 //             if (value.length > 9) value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{2})/, '$1.$2.$3-$4');
-//             e.target.value = value;
-//         };
-
+//             e.target.value = value;};
 //         cpfInput.addEventListener('input', handleInput);
-
 //         return () => {
 //             cpfInput.removeEventListener('input', handleInput);
-//         };
-//     }, []);
-
+//         };}, []);
 //     const [resposta, setResposta] = useState("");
 //     const handleSubmit = async (e) => {
 //         e.preventDefault();
@@ -47,28 +34,21 @@
 //         const formData = {
 //             cpf: cpfSemFormatacao,
 //             email: emailInputRef.current?.value,
-//             senha: senhaInputRef.current?.value,
-//         };
+//             senha: senhaInputRef.current?.value,};
 //         try {
 //             const response = await fetch('http://localhost:3001/editarPerfil', {
 //                 method: 'PATCH',
 //                 headers: { 'Content-Type': 'application/json', },
-//                 body: JSON.stringify(formData),
-//             });
-
+//                 body: JSON.stringify(formData),});
 //             const data = await response.json();
 //             setResposta(JSON.stringify(data, null, 2));
-
 //             if (response.ok) {
 //                 console.log('Perfil atualizado com sucesso!');
 //             } else {
 //                 console.error('Erro ao atualizar perfil');
-//             }
-//         } catch (error) {
+//             }} catch (error) {
 //             console.error('Erro:', error);
-//         }
-//     };
-
+//         }};
 //     //limpar formulario
 //     const limparForm = () => {
 //         setcpf('');
@@ -78,7 +58,6 @@
 //     // dados do aluno
 //     const [aluno, setAluno] = useState(null);
 //     const [erro, setErro] = useState("");
-
 //     useEffect(() => {
 //         fetch("http://localhost:3001/aluno/perfil", {
 //             method: "GET",
@@ -368,10 +347,10 @@ export default function MeuPerfil() {
             <div className='sec'>
                 <div className='sec-indicador'><h4>Dados Pessoais</h4><hr /></div>
                 <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
-                    <div className='sec-campos'><h6>Nome completo:</h6><p>{usuario.nomeCompleto}</p></div>
+                    <div className='sec-campos'><h6>Nome completo:</h6><p>{usuario.nome}</p></div>
                     <div className='sec-campos'><h6>Email institucional:</h6><p>{usuario.email}</p></div>
                     <div className='sec-campos'><h6>Endereço:</h6><p>{usuario.endereco || "Não informado"}</p></div>
-                    <div className='sec-campos'><h6>Escola:</h6><p>{usuario.nomeEscola || "-"}</p><p>{usuario.enderecoEscola || "-"}</p></div>
+                    <div className='sec-campos'><h6>Escola ID e Ponto ID:</h6><p>{usuario.escola_id || "-"}</p><p>{usuario.ponto_embarque_id || "-"}</p></div>
                 </div>
             </div>
             <div className='sec'>
