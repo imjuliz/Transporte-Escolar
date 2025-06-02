@@ -368,7 +368,7 @@ export default function MeuPerfil() {
             <div className='sec'>
                 <div className='sec-indicador'><h4>Dados Pessoais</h4><hr /></div>
                 <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
-                    <div className='sec-campos'><h6>Nome completo:</h6><p>{usuario.nomeCompleto}</p></div>
+                    <div className='sec-campos'><h6>Nome completo:</h6><p>{usuario.nome}</p></div>
                     <div className='sec-campos'><h6>Email institucional:</h6><p>{usuario.email}</p></div>
                     <div className='sec-campos'><h6>Endereço:</h6><p>{usuario.endereco || "Não informado"}</p></div>
                     <div className='sec-campos'><h6>Escola:</h6><p>{usuario.nomeEscola || "-"}</p><p>{usuario.enderecoEscola || "-"}</p></div>
@@ -393,17 +393,15 @@ export default function MeuPerfil() {
                         <div className='conteudoModal'>
                             <h3 className="text-lg font-semibold">Editar Informações</h3>
                             <form onSubmit={handleSubmit}>
-                                <div className="grid gap-6 mb-6 md:grid-cols-2">
-                                    <div>
+                                    <div className='flex flex-col'>
                                         <label htmlFor="cpf">CPF</label>
                                         <input type="text" id="cpf" ref={cpfInputRef} maxLength="14" className="input" placeholder="000.000.000-00" required />
                                     </div>
-                                </div>
-                                <div className="mb-6">
+                                <div className="mb-6 flex flex-col">
                                     <label htmlFor="email">E-mail</label>
                                     <input type="email" id="email" ref={emailInputRef} className="input" placeholder="seu@email.com" required />
                                 </div>
-                                <div className="mb-6">
+                                <div className="mb-6 flex flex-col">
                                     <label htmlFor="senha">Senha</label>
                                     <input type="password" id="senha" ref={senhaInputRef} className="input" placeholder="•••••••••" required />
                                 </div>

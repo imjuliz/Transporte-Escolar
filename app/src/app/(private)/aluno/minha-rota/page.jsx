@@ -197,7 +197,7 @@ export default function MinhaRotaAluno() {
         if (usuarioSalvo) {
             try {
                 const usuarioObj = JSON.parse(usuarioSalvo);
-                console.log("Dados recuperados do localStorage:", usuarioObj); // Teste no console!
+                console.log("Dados recuperados do localStorage:", usuarioObj);
                 
                 if (usuarioObj.id) {
                     setUsuario(usuarioObj);
