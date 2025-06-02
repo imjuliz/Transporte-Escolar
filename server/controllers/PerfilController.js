@@ -1,12 +1,13 @@
-import { obterDadosDoUsuario, editarPerfil } from '../models/Perfil.js';
+import { obterDadosDoUsuario, editarPerfilMotorista } from '../models/Perfil.js';
 
 // obter dados do perfil do usuario
 const obterPerfilUsuario = async (req, res) => {
     try {
-        const { tipo, id } = req.session.usuario;
+        const { tipo } = req.session.usuario;
+        const {id} = req.session.usuario;
 
-        const dados = await obterDadosDoUsuario(tipo, id);
-        console.log(dados)
+        const dados = await obterDadosDoUsuario( tipo, id);
+
         if (!dados) {
             return res.status(404).json({ erro: 'Usuário não encontrado.' });
         }
@@ -36,7 +37,7 @@ const obterPerfilUsuario = async (req, res) => {
 //   };
 
 // editar informaçoes do perfil
-const editarPerfilController = async (req, res) => {
+const editarPerfilMotoristaController = async (req, res) => {
     try {
         const { cpf, email, senha } = req.body;
         const { tipo, id } = req.session.usuario;
@@ -48,7 +49,7 @@ const editarPerfilController = async (req, res) => {
             senha: senha,
         };
 
-        await editarPerfil(tipo, id, atualizacoes);
+        await editarPerfilMotorista(email, atualizacoes);
 
         res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!!!', email });
     } catch (err) {
@@ -57,45 +58,4 @@ const editarPerfilController = async (req, res) => {
     }
 }
 
-
-export { obterPerfilUsuario, editarPerfilController };
-
-// subir foto de perfil
-// const uploadFotoPerfil = async (req, res) => {
-//     //   try {
-//     //     const { tipo, id } = req.session.usuario;
-//     // // criar a pasta fotoPerfil dentro de /public/img
-//     //     const filePath = /img/fotosfotoPerfil/${req.file.filename};
-
-//     //     await editarPerfil(tipo, id, { fotoPerfil: filePath });
-//     //     res.status(200).json({ mensagem: 'Foto enviada com sucesso!', url: filePath });
-//     //   } catch (err) {
-//     //     console.error('Erro no upload da imagem:', err);
-//     //     res.status(500).json({ mensagem: 'Erro ao fazer upload da imagem.' });
-//     //   }
-
-//     try{
-//         const { tipo, id } = req.session.usuario;
-//         let fotoPerfil = null;
-
-//         // se existir o arquivo, ele pega o nome completo e armazena em capaPath
-//         if (req.file){ 
-//             fotoPerfil = req.file.path.replace(__dirname.replace('\\controllers', ''), '');
-//         }
-
-//         // armazena num arquivo json as informações que vamos enviar
-//         const atualizarFoto = {
-//             foto: fotoPerfil
-//         }
-
-//         await atualizarLivro(tipo, id, atualizarFoto);
-//         res.status(201).json({ mensagem: 'Foto atualizada com sucesso'});
-//     } catch(err){
-//         console.error('Erro ao atualizar foto: ', err);
-//         res.status(500).json({ mensagem: 'Erro ao atualizar foto'})
-//     }
-// };
-
-
-
-// export { uploadFotoPerfil };
+export { obterPerfilUsuario, editarPerfilMotoristaController };

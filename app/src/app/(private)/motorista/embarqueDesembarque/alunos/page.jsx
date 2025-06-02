@@ -51,21 +51,21 @@ export default function embarques() {
                 <strong>Alunos:</strong>
                 <table className="tabela table-auto" >
                     <thead>
-                            <tr className='titulos grid grid-cols-3 gap-x-8 gap-y-4'>
-                                <th className='titulo1'>Nome</th>
-                                <th className='titulo2'>Escola</th>
-                                <th className='titulo3'>Turno</th>
-                            </tr>
-                        </thead>
-                    <pre>{alunos.map((aluno) => (
-                        <tbody key={aluno}>
-                            <tr className="grid grid-cols-3 gap-x-8 gap-y-4 2xl:w-220 ">
-                                <td className='nomeAluno'>{aluno.nomeCompleto}</td>
-                                <td className='nomeEscola'>{aluno.nomeEscola}</td>
-                                <td className='turnoEscola'>{aluno.turno}</td>
-                            </tr>
-                        </tbody>
-                ))}</pre> </table>
+                        <tr className='titulos grid grid-cols-3 gap-x-8 gap-y-4'>
+                            <th className='titulo1'>Nome</th>
+                            <th className='titulo2'>E-mail</th>
+                            <th className='titulo3'>Ponto de Embarque</th>
+                        </tr>
+                    </thead>
+                    <tbody>{alunos.map((aluno) => (
+                        <tr className="grid grid-cols-3 gap-x-8 gap-y-4 2xl:w-220 " key={aluno}>
+                            <td className='nomeAluno'>{aluno.nome}</td>
+                            <td className='nomeEscola'>{aluno.email}</td>
+                            <td className='turnoEscola'>{aluno.ponto_embarque_id}</td>
+                        </tr>))}
+                    </tbody>
+                </table>
                 {/* {resposta} */}
             </div>
-        </section> </>)}
+        </section> </>)
+}

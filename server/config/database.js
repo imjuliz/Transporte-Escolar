@@ -57,7 +57,6 @@ async function read(table, where) {
         if (where) {
             sql += ` WHERE ${where}`;
         }
-
         const [rows] = await connection.execute(sql);
         return rows[0] || null; // garante que so vai receber um registro
     } catch (err) {
@@ -106,6 +105,31 @@ async function create(table, data) {
     } finally {
         connection.release();
     }}
+    
+    async function create2(table, data) {
+        const connection = await getConnection();
+        try {
+            const columns = Object.keys(data).join(', ');
+            //(nome, email, endereco)
+    
+            const placeholders = Array(Object.keys(data).length).fill('?').join(', ');
+            //VALUES (?, ?, ?)
+    
+            const sql = `INSERT INTO ${table} (${columns}) VALUES (${placeholders}, curdate(), curtime())`;
+            //INSERT INTO clientes (nome, email, endereco) VALUES (?, ?, ?)
+    
+            const values = Object.values(data);
+    
+            const [result] = await connection.execute(sql, values);
+    
+            return result.insertId;
+        } catch (err) {
+            console.error('Erro ao inserir registros: ', err);
+            throw err;
+        } finally {
+            connection.release();
+        }}
+        
 //Função para atualizar um registro
 async function update(table, data, where) {
     const connection = await getConnection();
@@ -141,4 +165,4 @@ async function deleteRecord(table, where) {
     }
 }
 
-export { create, readAll, readAll2, read, readQuery, update, deleteRecord }
+export { create,create2, readAll, readAll2, read, readQuery, update, deleteRecord }

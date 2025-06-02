@@ -22,7 +22,12 @@ app.use(session({
     httpOnly: true,
     maxAge: 1000 * 60 * 60 // 1 hora
   }
-}));
+}
+));
+app.use((req, res, next) => {
+  console.log("Tipo de Usuário:", req.session.usuario);
+  next();
+});
 
 app.use((req, res, next) => {
   console.log("Sessão atual:", req.session);
