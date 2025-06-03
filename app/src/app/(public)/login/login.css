@@ -1,10 +1,61 @@
-.login{
+/* #particles-js {
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    background-color: #161a23;
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.count-particles {
+    background: #000022;
+    position: absolute;
+    top: 48px;
+    left: 0;
+    width: 80px;
+    color: #13E8E9;
+    font-size: .8em;
+    text-align: left;
+    text-indent: 4px;
+    line-height: 14px;
+    padding-bottom: 2px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+.js-count-particles {
+    font-size: 1.1em;
+}
+
+#stats,
+.count-particles {
+    -webkit-user-select: none;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+#stats {
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+}
+
+.count-particles {
+    border-radius: 0 0 3px 3px;
+} */
+
+.seta:hover path{
+    stroke: #FFC01D;
+}
+
+.login {
     width: 100%;
     height: 100vh;
     display: flex;
 }
 
-.login-corpo{
+.login-corpo {
     width: 70%;
 }
 
@@ -15,13 +66,13 @@
     font-size: 1.8rem;
 }
 
-.imgLogin{
+.imgLogin {
     width: 40%;
     height: 100%;
     background-color: white;
 }
 
-.login-btn{
+.login-btn {
     height: 100%;
     width: 60%;
     background-color: #161A23;
@@ -30,24 +81,24 @@
     align-content: center;
 }
 
-.user{
+.user {
     color: #fff;
     margin: 0;
     font-family: "Plus Jakarta Sans Medium";
     font-size: 1.3rem;
 }
 
-.login-btn-cont{
+.login-btn-cont {
     justify-items: center;
 }
 
-.container-itens-login{
- display: flex;
- width: 50%;
- justify-content: space-between;
+.container-itens-login {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
 }
 
-.container-login{
+.container-login {
     justify-items: end;
     width: 100%;
     padding: 4vh 3vw;
@@ -56,38 +107,38 @@
 }
 
 /* formulario */
-form{
+form {
     display: flex;
     flex-direction: column;
 }
 
-form label{
+form label {
     color: #fff;
     font-family: "Plus Jakarta Sans SemiBold";
     margin-bottom: 1.2vh;
     font-size: 1.3rem;
 }
 
-form label:not(:first-child){
+form label:not(:first-child) {
     margin-top: 6vh;
 }
 
-form input{
+form input {
     color: #000;
     padding: 0.7rem;
     border-bottom: 0.5px solid #FFFFFF61;
 }
 
 form input:focus {
-    outline: 0px; 
+    outline: 0px;
 }
 
-form input::placeholder{
+form input::placeholder {
     font-family: "Plus Jakarta Sans Regular";
     color: #FFFFFF61;
 }
 
-.btn-entrar{
+.btn-entrar {
     background-color: #FFC01D;
     width: 100%;
     border-radius: 10px;
@@ -97,19 +148,19 @@ form input::placeholder{
     margin-top: 8vh;
 }
 
-.campo-senha{
+.campo-senha {
     display: flex;
     align-items: center;
     width: 100%;
     justify-content: space-between;
 }
 
-.campo-senha input{
+.campo-senha input {
     width: 90%;
 }
 
 input[type="password"]::-webkit-credentials-auto-fill-button,
 input[type="password"]::-webkit-password-toggle-button,
 input[type="password"]::-ms-reveal {
-  display: none;
+    display: none;
 }

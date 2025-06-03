@@ -116,27 +116,10 @@ export default function Login() {
     setSenha('')
   }
 
-
-  /*
-    // formatação de cpf
-    const cpfRef = useRef(null); // referência para o input de CPF para que seja possivel fazer a validação/formatação depois da renderização
-    useEffect(() => {
-      if (cpfRef.current) {
-        cpfRef.current.addEventListener("input", (e) => {
-          let value = e.target.value.replace(/\D/g, ""); // remove caracteres nao numericos
-          value = value.slice(0, 11); // limite de 11 digitos
-          value = value.replace(/^(\d{3})(\d)/, "$1.$2"); // adiciona o primeiro ponto
-          value = value.replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3"); // adiciona o segundo ponto
-          value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4"); // adiciona o traço
-          e.target.value = value;
-        });
-      }
-    }, [usuarioAtivo]);
-  */
   return (
     <section className="login">
       <div id="particles-container" className="imgLogin">
-        {/* <img src="" /> */}
+        {/* <div id="particles-js"></div><div className="count-particles"> <span className="js-count-particles"></span></div> */}
       </div>
       {!usuarioAtivo ? (
         <div className="login-btn">
@@ -147,8 +130,12 @@ export default function Login() {
                 <div key={index} className="container-login">
                   <div className="container-itens-login">
                     <p className="user">{usuario.nome}</p>
-                    <button onClick={() => handleUserClick(usuario.nome)}>
-                      <img src="./img/btn-user.svg" />
+                    <button className='seta' onClick={() => handleUserClick(usuario.nome)}>
+                      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 14L22 14M22 14L16 20M22 14L16 8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <circle cx="14" cy="14" r="14" fill="white" fillOpacity="0.5" />
+                      </svg>
+
                     </button>
                   </div>
                 </div>
