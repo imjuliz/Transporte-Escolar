@@ -49,6 +49,7 @@ export default function Perfil() {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json', },
                 body: JSON.stringify(formData),
+                credentials: "include"
             });
             const data = await response.json();
             setResposta(JSON.stringify(data, null, 2));

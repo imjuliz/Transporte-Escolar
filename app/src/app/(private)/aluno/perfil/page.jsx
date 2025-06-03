@@ -225,7 +225,7 @@
 import '../styles/perfil.css';
 import Image from 'next/image';
 import React, { useRef, useEffect, useState } from 'react';
-
+const port = 'http://localhost:3001';
 export default function MeuPerfil() {
     // titulo da guia
     useEffect(() => {
@@ -287,6 +287,7 @@ export default function MeuPerfil() {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
+                credentials: 'include'
             });
 
             const data = await response.json();
@@ -343,7 +344,11 @@ export default function MeuPerfil() {
                 <hr />
             </div>
             <div className='user flex items-center gap-3 border-b border-[#D0D0D0]'>
-                <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="" />
+                {/* <img
+    className="w-10 h-10 rounded-full object-cover"
+    src={${port}${usuario.fotoPerfil || '/uploads/fotos/default.png'}}
+    alt="Foto de perfil"
+/> */}
                 <div className="font-medium">
                     <h3>{nomeSobrenome.primeiroNome} {nomeSobrenome.ultimoNome}</h3>
                     <p className="text-sm text-gray-500">{usuario.tipo || "Tipo de usuário"}</p>
@@ -354,7 +359,7 @@ export default function MeuPerfil() {
                 <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
                     <div className='sec-campos'><h6>Nome completo:</h6><p>{usuario.nome}</p></div>
                     <div className='sec-campos'><h6>Email institucional:</h6><p>{usuario.email}</p></div>
-                    <div className='sec-campos'><h6>Endereço:</h6><p>{usuario.endereco || "Não informado"}</p></div>
+                    <div className='sec-campos'><h6>CPF:</h6><p>{usuario.cpf || "Não informado"}</p></div>
                     <div className='sec-campos'><h6>Escola ID e Ponto ID:</h6><p>{usuario.escola_id || "-"}</p><p>{usuario.ponto_embarque_id || "-"}</p></div>
                 </div>
             </div>
@@ -377,17 +382,22 @@ export default function MeuPerfil() {
                         <div className='conteudoModal'>
                             <h3 className="text-lg font-semibold">Editar Informações</h3>
                             <form onSubmit={handleSubmit}>
+                                <div className="grid gap-6 mb-6 md:grid-cols-2">
+                                    <div>
+                                        <label htmlFor="cpf">CPF</label>
+                                        <input type="text" id="cpf" ref={cpfInputRef} defaultValue={usuario?.cpf || ""} maxLength="14" className="input" placeholder="000.000.000-00" required />
+                                    </div>
                                 <div className='flex flex-col'>
                                     <label htmlFor="cpf">CPF</label>
                                     <input type="text" id="cpf" ref={cpfInputRef} maxLength="14" className="input" placeholder="000.000.000-00" required />
                                 </div>
                                 <div className="mb-6 flex flex-col">
                                     <label htmlFor="email">E-mail</label>
-                                    <input type="email" id="email" ref={emailInputRef} className="input" placeholder="seu@email.com" required />
+                                    <input type="email" id="email" ref={emailInputRef} defaultValue={usuario?.email || ""} className="input" placeholder="seu@email.com" required />
                                 </div>
                                 <div className="mb-6 flex flex-col">
                                     <label htmlFor="senha">Senha</label>
-                                    <input type="password" id="senha" ref={senhaInputRef} className="input" placeholder="•••••••••" required />
+                                    <input type="password" id="senha" ref={senhaInputRef} defaultValue={usuario?.senha || ""} className="input" placeholder="•••••••••" required />
                                 </div>
                                 <button type="submit" className="btn-salvar">Salvar</button>
                                 <div><strong>Resposta do servidor:</strong><pre>{resposta}</pre></div>

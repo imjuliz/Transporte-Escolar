@@ -115,7 +115,6 @@ export default function Login() {
     setEmail('');
     setSenha('')
   }
-
   return (
     <section className="login">
       <div id="particles-container" className="imgLogin">
