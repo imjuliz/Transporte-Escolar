@@ -1,6 +1,7 @@
 "use client";
 import '../styles/perfil.css';
-import Image from 'next/image'
+import Image from 'next/image';
+import React, { useRef, useEffect, useState } from 'react';
 
 export default function motoristas() {
     // titulo da guia
