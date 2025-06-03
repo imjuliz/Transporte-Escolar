@@ -108,17 +108,17 @@ export default function Home() {
 
     const cards5 = [
         {
-            img: './img/sessao5/icon1.svg',
+            img: './img/gestao.svg',
             title: 'Gestão inteligente',
             text: 'Acompanhamento em tempo real o trajeto do transporte escolar, garantindo mais segurança e tranquilidade.'
         },
         {
-            img: './img/sessao5/icon2.svg',
+            img: './img/comunicacao.svg',
             title: 'Comunicação eficiente',
             text: 'Notificações instantâneas sobre atrasos, mudanças de rota e horários, evitando preocupações e incertezas.'
         },
         {
-            img: './img/sessao5/icon3.svg',
+            img: './img/previsibilidade.svg',
             title: 'Previsibilidade e controle',
             text: 'Dados acessíveis para planejamento preciso, permitindo ajustes rápidos e garantindo pontualidade.'
         }

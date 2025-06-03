@@ -2,6 +2,7 @@
 import './trabalhe.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
+import '../../../styles/Footer.css'
 
 export default function TrabalheConosco() {
     // titulo da guia
@@ -323,7 +324,7 @@ export default function TrabalheConosco() {
 
             {/* candidatar-se */}
             <section className='sec1 candidate flex flex-col items-center justify-center'>
-                <div className='candidate-text'>
+                <div className='candidate-text flex flex-col justify-center items-center'>
                     <h4>Contato</h4>
                     <h2>Candidate-se</h2>
                     <p>Preencha o formulário abaixo ou entre em contato conosco pelos canais disponíveis. Nossa equipe entrará em contato para seguir com o processo de seleção.</p>
@@ -379,8 +380,49 @@ export default function TrabalheConosco() {
                 <div className='contatos'>
                 </div>
 
-                {/* footer */}
+                
             </section>
+            {/* footer */}
+            <footer className=''>
+                    <div className="container">
+                        <div className='cont-footer'>
+                            <h1 className='logo'>Logo</h1>
+                            <div className="cont-1 flex flex-row md:flex-col md:gap-4 justify-between">
+                                <div className="f-col">
+                                    <h1>Outros conteúdos relevantes</h1>
+                                    {conteudos.map((cont, index) => (
+                                        <div className='col' key={index}>
+                                            <a href={cont.link}><p>{cont.name}</p></a>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="f-col">
+                                    <h1>Contatos</h1>
+                                    {ctts.map((ctt, index) => (
+                                        <div key={index}>
+                                            <a href={ctt.link}><p>{ctt.end}</p></a>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="f-col col-redes">
+                                    <h1>Siga-nos</h1>
+                                    <div className='cont-redes flex flex-row gap-4'>
+                                        {msociais.map((social, index) => (
+                                            <div key={index}>
+                                                <a href={social.link}>{social.img}</a>
+                                            </div>
+                                        ))
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='cont-2'>
+                                <p>© 2025. Feito por Julia Alves, Lorena Oshiro e Maria Brito.</p>
+                                <p>Baixe o APP</p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
         </>
     );
 }
