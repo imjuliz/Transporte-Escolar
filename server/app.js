@@ -16,7 +16,8 @@ app.use(cors({
 app.use(session({
   secret: 'chave_secreta',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
+  rolling: true,
   cookie: {
     secure: false, // true se usar HTTPS
     httpOnly: true,
@@ -44,9 +45,12 @@ app.get('/debug/sessao', (req, res) => {
   });
 });
 
-app.use((req,res)=>{
-  res.status(404).json({mensagem: 'Rota não encontrada'});
+app.use((req, res) => {
+  res.status(404).json({ mensagem: 'Rota não encontrada' });
 });
+
+//foto de perfil
+app.use('/uploads', express.static('uploads')); // serve imagens
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);

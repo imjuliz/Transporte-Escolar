@@ -2,11 +2,12 @@ import express from "express";
 import { autorizarAcesso } from "../middlewares/authMiddleware.js";
 import { loginController } from "../controllers/LoginController.js";
 import { verAlunosController } from "../controllers/VerAlunosController.js";
-import { obterPerfilUsuario, editarPerfilMotoristaController} from '../controllers/PerfilController.js';
+import { obterPerfilUsuario, editarPerfilController, uploadFotoPerfil} from '../controllers/PerfilController.js';
 // import { getViagemUsuario } from '../controllers/ViagensController.js';
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
 import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController } from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
+import multer from 'multer';
 const router = express.Router();
 
 // Rotas públicas
@@ -28,7 +29,7 @@ router.get('/perfil', obterPerfilUsuario, autorizarAcesso('Motorista', 'Aluno', 
 //
 router.get('/verAlunos', verAlunosController)
 
-router.patch('/editarPerfil', editarPerfilMotoristaController);
+router.patch('/editarPerfil', editarPerfilController);
 
 
 
@@ -46,5 +47,22 @@ router.delete('/deletarUsuario', deletarPerfilController);
 router.get('/escolas', buscarEscolas)
 router.get('/ponto-por-escola', buscarPontoPorEscola);
 
+//foto de perfil
+// Configurar armazenamento de arquivos
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      const dir = 'uploads/fotos';
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (req, file, cb) => {
+      const ext = path.extname(file.originalname);
+      const filename = `perfil_${Date.now()}${ext}`;
+      cb(null, filename);
+    },
+  });
+  
+  const upload = multer({ storage });
+  router.post('fotoPerfil', upload.single('foto'), uploadFotoPerfil);
 
 export default router;

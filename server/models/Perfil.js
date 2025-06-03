@@ -25,14 +25,17 @@ const obterDadosDoUsuario = async (tipo, id) => {
 };
 
 // editar perfil
-const editarPerfilMotorista = async (email, data) => {
+const editarPerfil = async (tipo, id, dadosAtualizados) => {
   try {
-    const where = `email = '${email}'`;
-    return await update('motoristas', data, where);
+    const tabela = tabelas[tipo];
+    if (!tabela) throw new Error('Tipo de usuário inválido');
+
+    const where = `id = ${id}`;
+    return await update(tabela, dadosAtualizados, where);
   } catch (err) {
     console.error('Erro ao atualizar informações do perfil!!!', err);
     throw err;
   }
-}
+};
 
-export { obterDadosDoUsuario, editarPerfilMotorista };
+export { obterDadosDoUsuario, editarPerfil };
