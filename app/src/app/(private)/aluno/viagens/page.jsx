@@ -1,6 +1,7 @@
 "use client";
 import Image from 'next/image'
 import '../styles/viagens.css'
+import { useEffect, useState } from 'react';
 
 export default function viagens() {
     // titulo da guia

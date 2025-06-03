@@ -1,11 +1,11 @@
 @font-face {
-    font-family: 'Plus Jakarta Sans Bold';
-    src: url('../components/Fonts/PlusJakartaSans-Bold.ttf');
+  font-family: 'Plus Jakarta Sans Bold';
+  src: url('../components/Fonts/PlusJakartaSans-Bold.ttf');
 }
 
 @font-face {
-    font-family: 'Plus Jakarta Sans Medium';
-    src: url('../components/Fonts/PlusJakartaSans-Medium.ttf');
+  font-family: 'Plus Jakarta Sans Medium';
+  src: url('../components/Fonts/PlusJakartaSans-Medium.ttf');
 }
 
 .notFoundContent {
@@ -27,4 +27,41 @@
   font-family: 'Plus Jakarta Sans Medium';
   margin-top: 2vh;
   font-size: 1.6rem;
+}
+
+.voltar {
+  margin-top: 3vh;
+  padding: 0.4rem 3rem;
+  background-color: #161A23;
+  border-radius: 20px;
+  position: relative;
+  transition: 300ms;
+}
+
+.voltar a p {
+  font-family: 'Plus Jakarta Sans Medium';
+  text-decoration: none !important;
+  transition: 300ms;
+}
+
+.voltar a {
+  text-decoration: none !important;
+}
+
+.voltar .setaVoltar {
+  opacity: 0;
+  position: absolute;
+  right: 10px;
+  height: 25px;
+  transition: 300ms;
+  transform: translateX(10px);
+}
+
+.voltar:hover p {
+  transform: translateX(-12px);
+}
+
+.voltar:hover .setaVoltar {
+  opacity: 1;
+  transform: translateX(-10px);
 }

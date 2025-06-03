@@ -30,6 +30,7 @@ export default function RegistrarVeiculo() {
           ///*"Authorization": "Bearer SEU_TOKEN_AQUI"
         },
         body: JSON.stringify(formData),
+        credentials: "include",
       });
 
       const data = await response.json();
