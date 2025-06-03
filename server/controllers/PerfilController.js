@@ -4,6 +4,13 @@ import session from "express-session";
 // obter dados do perfil do usuario
 const obterPerfilUsuario = async (req, res) => {
     try {
+        req.session.save(err=>{
+            if (err) {
+                console.error('erro ao sanvar sessão', err)
+                return res.send('erro interno')
+            }
+            res.send('Sessão salva e resposta enviada')
+        })
         const { tipo } = req.session.usuario;
         const { id } = req.session.usuario;
         console.log("obterPerfilUsuario: ", req.session)
@@ -44,7 +51,7 @@ const editarPerfilController = async (req, res) => {
     try {
         const { cpf, email, senha } = req.body;
         const { tipo, id } = req.session.usuario;
-        let fotoPerfil = null;
+        // let fotoPerfil = null;
 
         if (req.file) {
             fotoPerfil = req.file.path.replace(__dirname.replace('\\controllers', ''), '');
@@ -55,10 +62,10 @@ const editarPerfilController = async (req, res) => {
             cpf: cpf,
             email: email,
             senha: senha,
-            foto: fotoPerfil
+            // foto: fotoPerfil
         };
 
-        await editarPerfilMotorista(tipo, id, atualizacoes);
+        await editarPerfil(tipo, id, atualizacoes);
 
         res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!!!', email });
     } catch (err) {

@@ -66,7 +66,7 @@ export default function RegistroPage() {
               ponto_embarque_id: form.ponto_embarque_id,
               viagem_id: form.viagem_id,
               veiculo_id: form.veiculo_id,
-              senha: form.senha
+              senha: form.senha,
             },
             responsavel: {
               cpf: form.cpf_responsavel,
@@ -74,14 +74,15 @@ export default function RegistroPage() {
               email: form.email_responsavel,
               telefone: form.telefone_responsavel,
               senha: form.senha_responsavel,
-              grau_parentesco: form.grau_parentesco
-            }
+              grau_parentesco: form.grau_parentesco,
+            },
           };
           break;
 
         case 'motorista':
           url = 'http://localhost:3001/cadastro/motorista';
           corpo = form;
+          
           break;
 
         case 'administrador':
