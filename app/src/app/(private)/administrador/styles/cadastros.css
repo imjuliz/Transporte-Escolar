@@ -1,0 +1,32 @@
+body{
+    background-color: #F5F5F5 !important;
+    
+}
+
+main{
+    align-content: start;
+}
+
+section{
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+}
+
+.page-indicador{
+    width: fit-content;
+    margin-bottom: 8vh;
+}
+
+.page-indicador h1{
+    font-family: 'Plus Jakarta Sans Bold';
+}
+
+hr{
+    width:auto
+}
+
+p{
+    font-family: 'Plus Jakarta Sans Medium';
+    font-size: 1rem;
+    margin: 0
+}

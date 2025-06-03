@@ -368,6 +368,13 @@ INSERT INTO motoristas (cpf, nome, cnh, telefone, vencimento_habilitacao, email,
 ('77777777777', 'Fernanda Oliveira', '5678901234', '11977777777', '2027-09-10', 'fernanda@gmail.com', 'fernanda@motorista'),
 ('12345678901', 'Carlos Mendes', '3456789012', '11966666666', '2028-03-12', 'carlos@gmail.com', 'carlos@motorista');
 
+alter table motoristas
+add status varchar(50);
+
+update motoristas
+set status = 'Ativo'
+where id<10;
+
 INSERT INTO adm (cpf, nome, email, senha) VALUES
 ('11111111111', 'Julia', 'julia@gmail.com', 'julia@adm'),
 ('22222222222', 'Lorena', 'lorena@gmail.com', 'lorena@adm'),
@@ -500,6 +507,14 @@ INSERT INTO alunos (cpf, email, nome, telefonePrinc, emailPessoal, dataNasciment
 ('16151615161', 'gustavo.ribeiro@al.gov.br', 'Gustavo Ribeiro Azevedo', '988881111', 'guga_ribeiro@icloud.com', '2015-07-09', 'gustavo@aluno', 8, 1),
 ('17161716171', 'mariana.souza@al.gov.br', 'Mariana Souza Carvalho', '977772222', 'mari_carvalho88@gmail.com', '2012-12-01', 'mariana@aluno', 5, 2),
 ('12345678900', 'novo.email@exemplo.com', 'Novo Aluno', '99999-9999', 'email.pessoal@exemplo.com', '2005-07-20', 'senhaSegura', 5, 7);
+
+update alunos
+set turno = 'manhã'
+where id<20;
+
+update alunos
+set status = 'ativo'
+where id< 20;
 
 INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
 (1, 1),
