@@ -151,14 +151,6 @@ export default function Home() {
         {
             end: "(11) 23456-7890",
             link: "tellto:1123456-7890"
-        },
-        {
-            end: "lalalalalaa",
-            link: "tellto:1123456-7890"
-        },
-        {
-            end: "lalalaa",
-            link: "tellto:1123456-7890"
         }
     ]
 
@@ -291,7 +283,7 @@ export default function Home() {
                 </div>
             </section>
             <section className='secão5 justify-items-center content-center'>
-                <h2 className='title5_2'>Por que usar o -nome-?</h2>
+                <h2 className='title5_2'>Por que usar EduTrip?</h2>
                 <h1 className='title5_1'>Simples, fácil e rápido</h1>
                 <h3 className='title5_3'>Nossa plataforma te ajuda a ter controle total e otimizar uma experiência organizada e confiável com o transporte escolar!</h3>
                 <div className='cards5 flex flex-row lg:flex-col justify-between'>

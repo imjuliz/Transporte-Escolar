@@ -24,11 +24,11 @@ const obterPerfilUsuario = async (req, res) => {
 // busca a escola pelo id
 // export const buscarEscolas = async (req, res) => {
 //     const { id } = req.query;
-  
+
 //     if (!id || !isNaN(id)) {
 //       return res.status(400).json({ erro: 'Parâmetro "id" é obrigatório e deve ser um numero.' });
 //     }
-  
+
 //     try {
 //       const escolas = await buscarEscolasPorNome(id);
 //       res.json(escolas);
@@ -44,15 +44,22 @@ const editarPerfilController = async (req, res) => {
     try {
         const { cpf, email, senha } = req.body;
         const { tipo, id } = req.session.usuario;
+        let fotoPerfil = null;
+
+        if (req.file) {
+            fotoPerfil = req.file.path.replace(__dirname.replace('\\controllers', ''), '');
+        }
 
         //armazena no arquivo json as info
         const atualizacoes = {
-            cpf,
-            email,
-            senha,
+            cpf: cpf,
+            email: email,
+            senha: senha,
+            foto: fotoPerfil
         };
 
-        await editarPerfil(tipo, id, atualizacoes);
+        await editarPerfilMotorista(tipo, id, atualizacoes);
+
         res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!!!', email });
     } catch (err) {
         console.error('Erro ao atualizar perfil!!!', err);
