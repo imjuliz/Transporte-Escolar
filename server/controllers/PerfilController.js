@@ -21,12 +21,31 @@ const obterPerfilUsuario = async (req, res) => {
     }
 };
 
+// busca a escola pelo id
+// export const buscarEscolas = async (req, res) => {
+//     const { id } = req.query;
+  
+//     if (!id || !isNaN(id)) {
+//       return res.status(400).json({ erro: 'Parâmetro "id" é obrigatório e deve ser um numero.' });
+//     }
+  
+//     try {
+//       const escolas = await buscarEscolasPorNome(id);
+//       res.json(escolas);
+//     } catch (erro) {
+//       console.error(erro);
+//       res.status(500).json({ erro: 'Erro ao buscar escolas.' });
+//     }
+//   };
+
 // editar informaçoes do perfil
 const editarPerfilController = async (req, res) => {
     console.log("editarPerfilController: ", req.session)
     try {
         const { cpf, email, senha } = req.body;
         const { tipo, id } = req.session.usuario;
+
+        //armazena no arquivo json as info
         const atualizacoes = {
             cpf,
             email,
@@ -40,6 +59,7 @@ const editarPerfilController = async (req, res) => {
         res.status(500).json({ mensagem: 'Erro ao atualizar perfil!!!' });
     }
 };
+
 
 //upload foto
 const uploadFotoPerfil = async (req, res) => {
@@ -56,5 +76,5 @@ const uploadFotoPerfil = async (req, res) => {
     }
 };
 
-
 export { obterPerfilUsuario, editarPerfilController, uploadFotoPerfil };
+

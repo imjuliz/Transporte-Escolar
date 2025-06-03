@@ -24,6 +24,12 @@ const obterDadosDoUsuario = async (tipo, id) => {
 
 };
 
+// busca escola por id
+// export const buscarEscolasPorNome = async (id) => {
+//   const where = `escola_id = ${id} LIMIT 1`;
+//   return await readAll('alunos', where);
+// };
+
 // editar perfil
 const editarPerfil = async (tipo, id, dadosAtualizados) => {
   try {

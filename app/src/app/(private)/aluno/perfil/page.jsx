@@ -227,6 +227,11 @@ import Image from 'next/image';
 import React, { useRef, useEffect, useState } from 'react';
 const port = 'http://localhost:3001';
 export default function MeuPerfil() {
+    // titulo da guia
+    useEffect(() => {
+        document.title = 'EduTrip - Meu Perfil';
+    }, []);
+    
     const cpfInputRef = useRef(null);
     const emailInputRef = useRef(null);
     const senhaInputRef = useRef(null);
@@ -382,12 +387,15 @@ export default function MeuPerfil() {
                                         <label htmlFor="cpf">CPF</label>
                                         <input type="text" id="cpf" ref={cpfInputRef} defaultValue={usuario?.cpf || ""} maxLength="14" className="input" placeholder="000.000.000-00" required />
                                     </div>
+                                <div className='flex flex-col'>
+                                    <label htmlFor="cpf">CPF</label>
+                                    <input type="text" id="cpf" ref={cpfInputRef} maxLength="14" className="input" placeholder="000.000.000-00" required />
                                 </div>
-                                <div className="mb-6">
+                                <div className="mb-6 flex flex-col">
                                     <label htmlFor="email">E-mail</label>
                                     <input type="email" id="email" ref={emailInputRef} defaultValue={usuario?.email || ""} className="input" placeholder="seu@email.com" required />
                                 </div>
-                                <div className="mb-6">
+                                <div className="mb-6 flex flex-col">
                                     <label htmlFor="senha">Senha</label>
                                     <input type="password" id="senha" ref={senhaInputRef} defaultValue={usuario?.senha || ""} className="input" placeholder="•••••••••" required />
                                 </div>

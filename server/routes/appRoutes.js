@@ -5,7 +5,7 @@ import { verAlunosController } from "../controllers/VerAlunosController.js";
 import { obterPerfilUsuario, editarPerfilController, uploadFotoPerfil} from '../controllers/PerfilController.js';
 // import { getViagemUsuario } from '../controllers/ViagensController.js';
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
-import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController } from '../controllers/AdminController.js';
+import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
 import multer from 'multer';
 const router = express.Router();
@@ -47,6 +47,7 @@ router.delete('/deletarUsuario', deletarPerfilController);
 router.get('/escolas', buscarEscolas)
 router.get('/ponto-por-escola', buscarPontoPorEscola);
 
+
 //foto de perfil
 // Configurar armazenamento de arquivos
 const storage = multer.diskStorage({
@@ -64,5 +65,13 @@ const storage = multer.diskStorage({
   
   const upload = multer({ storage });
   router.post('fotoPerfil', upload.single('foto'), uploadFotoPerfil);
+
+//ver registros - adm
+router.get('/cadastros-alunos', verTodosController);
+router.get('/cadastros-responsaveis', verResponsaveisController );
+router.get('/cadastros-motoristas', verMotoristasController);
+router.get('/cadastros-admins', verAdminsController);
+
+
 
 export default router;

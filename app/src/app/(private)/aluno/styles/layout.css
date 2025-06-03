@@ -15,6 +15,11 @@ main {
   align-content: start;
 }
 
+.page-indicador, .sec-indicador{
+  width: min-content;
+  white-space: nowrap;
+}
+
 .main-content {
   height: 100vh;
   width: calc(100% - 78px);

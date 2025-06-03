@@ -3,6 +3,10 @@ import '../styles/perfil.css';
 import Image from 'next/image'
 
 export default function motoristas() {
+    // titulo da guia
+    useEffect(() => {
+        document.title = 'EduTrip - Motoristas';
+    }, []);
     return (
         <>
             {/* <main className='justify-items-center content-center'> */}
