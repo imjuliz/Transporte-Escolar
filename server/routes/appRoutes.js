@@ -5,7 +5,7 @@ import { verAlunosController } from "../controllers/VerAlunosController.js";
 import { obterPerfilUsuario, editarPerfilMotoristaController} from '../controllers/PerfilController.js';
 // import { getViagemUsuario } from '../controllers/ViagensController.js';
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
-import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController } from '../controllers/AdminController.js';
+import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
 const router = express.Router();
 
@@ -45,6 +45,12 @@ router.delete('/deletarUsuario', deletarPerfilController);
 
 router.get('/escolas', buscarEscolas)
 router.get('/ponto-por-escola', buscarPontoPorEscola);
+
+//ver registros - adm
+router.get('/cadastros-alunos', verTodosController);
+router.get('/cadastros-responsaveis', verResponsaveisController );
+router.get('/cadastros-motoristas', verMotoristasController);
+router.get('/cadastros-admins', verAdminsController);
 
 
 export default router;

@@ -49,7 +49,7 @@
 
 // export { registrarUsuarioController, registrarVeiculosController }
 
-import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil } from '../models/Admin.js';
+import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins } from '../models/Admin.js';
 
 // cadastro dos usuarios
 export async function cadastrarAlunoComResponsavel(req, res) {
@@ -182,3 +182,58 @@ const deletarPerfilController = async (req, res) => {
 };
 
 export { deletarPerfilController }
+
+//--------------------------------
+//funcoes de ver registros
+
+//ver todos os alunos
+const verTodosController = async (req, res) =>{
+  try{
+    const alunos = await VerTodos();
+    res.json(alunos);
+  }
+  catch (error){
+    console.error ('Erro ao listar todos os alunos: ', error);
+    res.status(500).json({mensagem: 'Erro ao listar alunos'})
+  }
+};
+
+
+
+//ver todos os responsaveis
+const verResponsaveisController = async (req, res) =>{
+  try{
+    const responsaveis = await VerResponsaveis();
+    res.json(responsaveis);
+  }
+  catch (error){
+    console.error ('Erro ao listar todos os responsáveis: ', error);
+    res.status(500).json({mensagem: 'Erro ao listar responsáveis '})
+  }
+};
+
+
+//ver todos os motoristas
+const verMotoristasController = async (req, res) =>{
+  try{
+    const motoristas = await VerMotoristas();
+    res.json(motoristas);
+  }
+  catch(error){
+    console.error('Erro ao listar todos os motoristas: ', error);
+    res.status(500).json({mensagem: 'Erro ao listar motoristas'})
+  }
+};
+
+const verAdminsController = async (req, res) =>{
+  try{
+    const admins = await VerAdmins();
+    res.json (admins);
+  }
+  catch (error){
+    console.error('Erro ao listar todos os administradores: ', error);
+    res.status(500).json({mensagem: 'Erro ao listar administradores'})
+  }
+};
+
+export {verTodosController, verResponsaveisController, verMotoristasController, verAdminsController};
