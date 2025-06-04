@@ -116,7 +116,7 @@ export default function embarques() {
 
     return (
         <>
-            <section className='cadastros'>
+            <section className='pagina-cadastros'>
                 <div className='page-indicador'>
                     <h1>Usuários</h1>
                     <hr />
@@ -276,34 +276,26 @@ export default function embarques() {
                         <div className='telefone'>
                         <p className='text-black/50 '>Telefone</p>
                         <hr></hr>
-                            {alunos.map(({telefonePrinc, id}) =>(
+                            {responsaveis.map(({telefone, id}) =>(
                                 <div className='flex flex-column gap-3' key={id}>
-                                <p>{telefonePrinc}</p>
+                                <p>{telefone}</p>
                             </div>
                             ))}
                         </div>
                         <div className="email">
                         <p className='text-black/50 '>Email</p>
                         <hr></hr>
-                            {alunos.map(({email, id}) =>(
+                            {responsaveis.map(({email, id}) =>(
                                 <div className='flex flex-column gap-3' key={id}>
                                 <p>{email}</p>
                             </div>
                             ))}
                         </div>
-                        <div className="turno">
-                        <p className='text-black/50 '>Turno</p>
-                        <hr></hr>
-                            {alunos.map(({turno, id}) =>(
-                                <div className='flex flex-column gap-3' key={id}>
-                                <p>{turno}</p>
-                            </div>
-                            ))}
-                        </div>
+                        
                         <div className='status'>
                         <p className='text-black/50 '>Status</p>
                         <hr></hr>
-                            {alunos.map(({status, id})=>(
+                            {responsaveis.map(({status, id})=>(
                                 <div className='flex flex-column gap-3' key={id}>
                                 <p>{status}</p>
                                 </div>
@@ -312,14 +304,66 @@ export default function embarques() {
                     </div>
                 </div>
 
-                <hr></hr>
-                <div>{JSON.stringify(alunos)}</div>;
-                <hr></hr>
-                <div>{JSON.stringify(responsaveis)}</div>
-                <hr></hr>
+                {/**admins */}
+                <div className="admins bg-white p-5 rounded-[2vw] mb-5">
+                    <h3>Administradores</h3>
+                    <div className='cadastros pt-3 flex justify-between'>
+                        <div className='nomee'>
+                            <p className='text-black/50'>Nome</p>
+                            <hr></hr>
+                            {admins.map(({ nome, id }) => (
+                                <div className='flex flex-column gap-3' key={id}>
+                                    <p>{nome}</p>
+                                </div>
+                            ))}
+                            
+                        </div>
+                        
+                        <div className='cpff'>
+                        <p className='text-black/50 '>CPF</p>
+                        <hr></hr>
+                            {admins.map(({ cpf, id }) => (
+                                <div className='flex flex-column gap-3' key={id}>
+                                    <p>{cpf}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <div className='telefone'>
+                        <p className='text-black/50 '>Telefone</p>
+                        <hr></hr>
+                            {admins.map(({telefone, id}) =>(
+                                <div className='flex flex-column gap-3' key={id}>
+                                <p>{telefone}</p>
+                            </div>
+                            ))}
+                        </div>
+                        <div className="email">
+                        <p className='text-black/50 '>Email</p>
+                        <hr></hr>
+                            {admins.map(({email, id}) =>(
+                                <div className='flex flex-column gap-3' key={id}>
+                                <p>{email}</p>
+                            </div>
+                            ))}
+                        </div>
+                        
+                        <div className='status'>
+                        <p className='text-black/50 '>Status</p>
+                        <hr></hr>
+                            {admins.map(({status, id})=>(
+                                <div className='flex flex-column gap-3' key={id}>
+                                <p>{status}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
 
-                <hr></hr>
-                <div>{JSON.stringify(admins)}</div>
+                <div className="botao-cadastrar">
+                    <a href='/administrador/cadastrar'><button className="bg-blue-600 text-white px-4 py-2 rounded mb-5 hover:bg-blue-700 transition duration-300 ease">Cadastrar Usuário</button></a>
+                </div>
+
+                
             </section>
 
 

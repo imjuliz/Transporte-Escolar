@@ -131,7 +131,7 @@ export default function RegistroPage() {
   };
 
   // formatação de cpf
-  const cpfRef = useRef(null); // referência para o input de CPF para que seja possivel fazer a validação/formatação depois da renderização
+ /* const cpfRef = useRef(null); // referência para o input de CPF para que seja possivel fazer a validação/formatação depois da renderização
   useEffect(() => {
     if (cpfRef.current) {
       cpfRef.current.addEventListener("input", (e) => {
@@ -143,7 +143,7 @@ export default function RegistroPage() {
         e.target.value = value;
       });
     }
-  });
+  });*/
 
   // ao digitar nomes, ele nao permite caracteres numericos
   const textRef = useRef(null);
@@ -201,13 +201,13 @@ export default function RegistroPage() {
         return (
           <>
             <div className="relative z-0 w-full mb-5 group">
-              <input name="cpf" onChange={handleChange} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-b-2 border-gray-300 appearance-none peer" placeholder="CPF " required ref={cpfRef}/>
+              <input name="cpf" onChange={handleChange} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-b-2 border-gray-300 appearance-none peer" placeholder="CPF " required maxLength={11}  />{/*ref={cpfRef}*/}
               <label htmlFor="cpf" className="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]"></label>
             </div>
             <input name="email" pattern="^[a-zA-Z0-9._%+-]+@al\.gov\.br$" placeholder="Email institucional" onChange={handleChange} required />
-            <input name="nome" placeholder="Nome completo" onChange={handleChange} required ref={textRef}/>
-            <input name="telefonePrinc" placeholder="Telefone" onChange={handleChange} required ref={tellRef}/>
-            <input name="dataNascimento" placeholder="Data de nascimento" onChange={handleChange} required ref={dataRef}/>
+            <input name="nome" placeholder="Nome completo" onChange={handleChange} required />{/*ref={textRef}*/}
+            <input name="telefonePrinc" placeholder="Telefone" onChange={handleChange} required  maxLength={11}/>{/*ref={tellRef}*/}
+            <input name="dataNascimento" placeholder="Data de nascimento" onChange={handleChange} required />{/*ref={dataRef}*/}
 
             {/* Autocomplete da escola */}
             <div className="relative z-0 w-full mb-5 group">
@@ -286,8 +286,8 @@ export default function RegistroPage() {
             <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required />
             {/* Campos do Responsável */}
             <h2 className="text-lg font-semibold mt-6">Responsável</h2>
-            <input name="cpf_responsavel" placeholder="CPF do responsável" onChange={handleChange} required ref={cpfRef}/>
-            <input name="nome_responsavel" placeholder="Nome do responsável" onChange={handleChange} required ref={textRef}/>
+            <input name="cpf_responsavel" placeholder="CPF do responsável" onChange={handleChange} required />{/*ref={cpfRef} - tirei a máscara para testar*/} 
+            <input name="nome_responsavel" placeholder="Nome do responsável" onChange={handleChange} required />{/*ref={textRef}*/}
             <input type='email' name="email_responsavel" placeholder="Email do responsável" onChange={handleChange} required />
             <input name="telefone_responsavel" placeholder="Telefone do responsável" onChange={handleChange} required ref={tellRef}/>
             <input name="senha_responsavel" placeholder="Senha do responsável" type="password" onChange={handleChange} required />
@@ -298,11 +298,11 @@ export default function RegistroPage() {
       case 'motorista':
         return (
           <>
-            <input name="cpf" placeholder="CPF" onChange={handleChange} required maxLength={11} ref={cpfRef}/>
-            <input name="nome" placeholder="Nome completo" onChange={handleChange} required ref={textRef}/>
-            <input name="cnh" placeholder="CNH" onChange={handleChange} required ref={cnhRef}/>
-            <input name="telefone" placeholder="Telefone" onChange={handleChange} required ref={tellRef}/>
-            <input name="vencimento_habilitacao" placeholder="Vencimento da habilitação" onChange={handleChange} required ref={dataRef}/>
+            <input name="cpf" placeholder="CPF" onChange={handleChange} required maxLength={11} />{/*ref={cpfRef}*/}
+            <input name="nome" placeholder="Nome completo" onChange={handleChange} required/>{/*ref={textRef}*/}
+            <input name="cnh" placeholder="CNH" onChange={handleChange} required />{/*ref={cnhRef}*/}
+            <input name="telefone" placeholder="Telefone" onChange={handleChange} required maxLength={11} />{/*ref={tellRef}*/}
+            <input name="vencimento_habilitacao" placeholder="Vencimento da habilitação" onChange={handleChange} required />{/*ref={dataRef}*/}
             <input type='email' name="email" placeholder="Email" onChange={handleChange} required />
             <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required />
           </>
@@ -311,8 +311,8 @@ export default function RegistroPage() {
       case 'responsavel':
         return (
           <>
-            <input name="cpf" placeholder="CPF" onChange={handleChange} required ref={cpfRef}/>
-            <input name="nome" placeholder="Nome completo" onChange={handleChange} required ref={tellRef}/>
+            <input name="cpf" placeholder="CPF" onChange={handleChange} required maxLength={11}/>{/*ref={cpfRef}*/}
+            <input name="nome" placeholder="Nome completo" onChange={handleChange} required />{/*ref={tellRef}*/}
             <input type='email' name="email" placeholder="Email" onChange={handleChange} required />
             <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required />
             <input name="cpf_filhos" placeholder="CPF dos filhos (separado por vírgulas)" onChange={handleChange} required />
@@ -322,8 +322,8 @@ export default function RegistroPage() {
       case 'administrador':
         return (
           <>
-            <input name="cpf" placeholder="CPF" onChange={handleChange} required maxLength={11} ref={cpfRef}/>
-            <input name="nome" placeholder="Nome completo" onChange={handleChange} required ref={textRef}/>
+            <input name="cpf" placeholder="CPF" onChange={handleChange} required maxLength={11} />{/*ref={cpfRef}*/}
+            <input name="nome" placeholder="Nome completo" onChange={handleChange} required />{/*ref={textRef}*/}
             <input name="email" placeholder="Email" onChange={handleChange} required />
             <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required />
           </>

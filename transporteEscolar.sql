@@ -381,6 +381,22 @@ INSERT INTO adm (cpf, nome, email, senha) VALUES
 ('33333333333', 'Maria', 'maria@gmail.com', 'maria@adm'),
 ('13131313131', 'Teste', 'teste@gmail.com', 'teste@adm');
 
+alter table adm
+add telefone varchar (20);
+
+update adm
+set telefone = '11912233344'
+where id<10;
+
+alter table adm
+add status varchar(50);
+
+update adm
+set status = 'ativo'
+where id<10;
+
+
+
 INSERT INTO responsaveis (cpf, nome, email, senha, telefone) VALUES
 ('80011111111', 'Ana Paula Costa', 'ana.costa@email.com', 'ana@responsavel', '11990001111'),
 ('80022222222', 'Bruno Henrique Lima', 'bruno.lima@email.com', 'bruno@responsavel', '11990002222'),
@@ -390,6 +406,13 @@ INSERT INTO responsaveis (cpf, nome, email, senha, telefone) VALUES
 ('80066666666', 'Felipe Martins', 'felipe.martins@email.com', 'felipe@responsavel', '11990006666'),
 ('80077777777', 'Gabriela Fernandes', 'gabriela.fernandes@email.com', 'gabriela@responsavel', '11990007777'),
 ('80088888888', 'Henrique Souza', 'henrique.souza@email.com', 'henrique@responsavel', '11990008888');
+
+alter table responsaveis
+add status varchar(50);
+
+update responsaveis
+set status = "ativo"
+where id<10;
 
 insert into escolas(nome, endereco, latitude, longitude) value
 ('Cemei Edna Cassiano', 'R. Mal. Deodoro da Fonseca - Monte Azul Paulista, SP, 14730-000', -20.9070, -48.6392),
@@ -507,6 +530,13 @@ INSERT INTO alunos (cpf, email, nome, telefonePrinc, emailPessoal, dataNasciment
 ('16151615161', 'gustavo.ribeiro@al.gov.br', 'Gustavo Ribeiro Azevedo', '988881111', 'guga_ribeiro@icloud.com', '2015-07-09', 'gustavo@aluno', 8, 1),
 ('17161716171', 'mariana.souza@al.gov.br', 'Mariana Souza Carvalho', '977772222', 'mari_carvalho88@gmail.com', '2012-12-01', 'mariana@aluno', 5, 2),
 ('12345678900', 'novo.email@exemplo.com', 'Novo Aluno', '99999-9999', 'email.pessoal@exemplo.com', '2005-07-20', 'senhaSegura', 5, 7);
+
+
+alter table alunos
+add turno varchar(50);
+
+alter table alunos
+add status varchar(50);
 
 update alunos
 set turno = 'manhã'

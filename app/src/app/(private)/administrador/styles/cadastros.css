@@ -1,6 +1,5 @@
 body{
     background-color: #F5F5F5 !important;
-    
 }
 
 main{
@@ -9,8 +8,9 @@ main{
 
 section{
     margin-top: 10vh;
-    margin-bottom: 5vh;
+    
 }
+
 
 .page-indicador{
     width: fit-content;
@@ -22,7 +22,7 @@ section{
 }
 
 hr{
-    width:auto
+    width:100%
 }
 
 p{
@@ -30,3 +30,4 @@ p{
     font-size: 1rem;
     margin: 0
 }
+
