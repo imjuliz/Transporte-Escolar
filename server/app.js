@@ -32,13 +32,13 @@ app.use((req, res, next) => {
 
 app.use('/', rotas);
 
-// // teste
-// app.get('/debug/sessao', (req, res) => {
-//   res.json({
-//     sessao: req.session,
-//     usuario: req.session.usuario || null
-//   });
-// });
+// teste
+app.get('/debug/sessao', (req, res) => {
+  res.json({
+    sessao: req.session,
+    usuario: req.session.usuario || null
+  });
+});
 
 app.get('/validar-sessao', (req, res) => {
   if (req.session?.usuario) {
