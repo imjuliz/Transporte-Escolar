@@ -9,7 +9,7 @@ export default function dashboard() {
     useEffect(() => {
         async function qtdViagensAndamento() {
             try {
-                const res = await fetch('http://localhost:3001/viagens/em-andamento/quantidade');
+                const res = await fetch('http://localhost:3001/em-andamento/quantidade');
                 const data = await res.json();
                 setQtdViagens(data.total);
             } catch (error) {
@@ -28,7 +28,7 @@ export default function dashboard() {
             try {
                 const res = await fetch('http://localhost:3001/qtd-usuarios');
                 const data = await res.json();
-                setQtdUsuarios(data.total_geral);
+                setQtdUsuarios(data);
             } catch (error) {
                 console.error('Erro ao buscar total de usuários:', error);
             }
@@ -190,8 +190,8 @@ export default function dashboard() {
                     <div key={index} className='box-infos flex flez-row rounded-xl bg-[#fff] shadow-xl'>
                         <img src={info.img} alt='icones' />
                         <div className='flex flex-col'>
-                            <p>{info.informação}</p>
-                            <p>{info.nome}</p>
+                            <p className='informacao'>{info.informacao}</p>
+                            <p className='info-nome'>{info.nome}</p>
                         </div>
                     </div>
                 ))}

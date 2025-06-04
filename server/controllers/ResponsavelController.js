@@ -2,7 +2,7 @@ import { verFilhos } from '../models/Responsavel.js'
 
 const obterInformacoesFilhosController = async (req, res) => {
     try {
-        const responsavelId = req.session.usuarioId;
+        const responsavelId = req.session.usuario?.id;
         const infoFilhos = await verFilhos(responsavelId);
         if (!infoFilhos) {
             return res.status(404).json({ mensagem: 'Nenhum filho vinculado encontrado.' });

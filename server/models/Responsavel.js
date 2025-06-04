@@ -12,8 +12,8 @@ const verFilhos = async (responsavelId) => {
                 escolas.endereco AS endereco_escola,
                 pontos_embarque.nome AS nome_ponto_embarque,
                 pontos_embarque.endereco AS endereco_ponto_embarque,
-                pontos_embarque.horario_embarque,
-                pontos_embarque.horario_desembarque
+                viagens.horario_embarque,
+                viagens.horario_desembarque
             FROM responsaveis_alunos
             INNER JOIN alunos ON responsaveis_alunos.aluno_id = alunos.id
             INNER JOIN escolas ON alunos.escola_id = escolas.id
