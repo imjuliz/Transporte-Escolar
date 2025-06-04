@@ -2,7 +2,6 @@
 import "./styles/layout.css";
 import { useEffect, useState } from "react";
 import Image from 'next/image'
-import informacoes from "./informacoes/page1";
 import { usePathname } from 'next/navigation';
 
 export default function RootLayout({ children }) {

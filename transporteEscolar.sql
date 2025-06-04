@@ -542,9 +542,6 @@ update alunos
 set turno = 'manhã'
 where id<20;
 
-update alunos
-set status = 'ativo'
-where id< 20;
 
 INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
 (1, 1),
@@ -593,7 +590,7 @@ INSERT INTO alunos_viagens (aluno_id, viagem_id) VALUES
 (11, 61);
 
 -- Criada dia 02/06
-drop table incidentes; 
+-- drop table incidentes; 
 #tabela incidentes
 CREATE TABLE incidentes (
 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -611,6 +608,18 @@ select * from incidentes;
 select * from motoristas;
 
 select count(*)from alunos_viagem;
+
+update alunos
+set turno = 'manhã'
+where id<20;
+
+update alunos
+set status = 'ativo'
+where id< 20;
 /*
 JOIN viagens ON alunos_viagens.viagem_id = viagens.id
 WHERE alunos_viagens.aluno_id = 1 AND viagens.data_viagem = CURDATE();*/
+
+SELECT * FROM responsaveis_alunos WHERE responsavel_id = 1;
+
+select * from sessions;

@@ -7,6 +7,8 @@ import { obterPerfilUsuario, editarPerfilController, uploadFotoPerfil} from '../
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
 import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
+import { obterInformacoesFilhosController } from '../controllers/ResponsavelController.js'
+import { verVeiculoController } from "../controllers/VerVeiculosController.js";
 import multer from 'multer';
 const router = express.Router();
 
@@ -15,24 +17,25 @@ router.post("/login", loginController);
 
 // rotas privadas
 
-router.get('/administrador', autorizarAcesso('Administrador'));
+router.get('/administrador', autorizarAcesso('administrador'));
 
-router.get('/responsavel', autorizarAcesso('Responsável'));
+router.get('/responsavel', autorizarAcesso('responsavel'));
 
-router.get('/aluno', autorizarAcesso('Aluno'));
+router.get('/aluno', autorizarAcesso('aluno'));
 
 router.get('/motorista', autorizarAcesso('Motorista'));
+router.get('/verVeiculo',verVeiculoController, autorizarAcesso('Motorista'));
 
 router.post('/incidente',adicionarIncidenteController);
 // ver informaçoes na pagina "meu perfil"
-router.get('/perfil', obterPerfilUsuario, autorizarAcesso('Motorista', 'Aluno', 'Responsável'));
+router.get('/perfil', obterPerfilUsuario);
+router.get('/perfil', obterPerfilUsuario, autorizarAcesso('motorista', 'aluno', 'responsavel'));
 //
 router.get('/verAlunos', verAlunosController)
 
 router.patch('/editarPerfil', editarPerfilController);
 
 // ver informaçoes das rotas
-// router.get('/usuarios/minha-rota', getViagemUsuario);
 router.get('/viagem/:tipo/:id', obterViagemPorUsuario);
 
 // ADM ------------------------------------------------------------------------------------------
@@ -45,33 +48,19 @@ router.delete('/deletarUsuario', deletarPerfilController);
 router.get('/escolas', buscarEscolas)
 router.get('/ponto-por-escola', buscarPontoPorEscola);
 
-
-//foto de perfil
-// Configurar armazenamento de arquivos
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      const dir = 'uploads/fotos';
-      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-      cb(null, dir);
-    },
-    filename: (req, file, cb) => {
-      const ext = path.extname(file.originalname);
-      const filename = `perfil_${Date.now()}${ext}`;
-      cb(null, filename);
-    },
-  });
-  
-  const upload = multer({ storage });
-  router.post('fotoPerfil', upload.single('foto'), uploadFotoPerfil);
-
 //ver registros - adm
 router.get('/cadastros-alunos', verTodosController);
 router.get('/cadastros-responsaveis', verResponsaveisController );
 router.get('/cadastros-motoristas', verMotoristasController);
 router.get('/cadastros-admins', verAdminsController);
 router.get('/em-andamento', viagensEmAndamentoController)
+
 router.get('/em-andamento/quantidade', quantidadeViagensEmAndamentoController);
 router.get('/qtd-usuarios', contarUsuariosController)
 router.get('/qtd-escolas', contarEscolasController)
+
+// responsavel
+router.get('/filhos', obterInformacoesFilhosController)
+
 
 export default router;

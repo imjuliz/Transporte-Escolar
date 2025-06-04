@@ -1,13 +1,12 @@
 'use client';
-
 import { useRef, useState, useEffect } from 'react';
 import '../styles/cadastrar.css';
 
 export default function RegistroPage() {
   // titulo da guia
-    useEffect(() => {
-        document.title = 'EduTrip - Cadastrar';
-    }, []);
+  useEffect(() => {
+    document.title = 'EduTrip - Cadastrar';
+  }, []);
 
   const cpfInputRef = useRef(null);
   const [tipo, setTipo] = useState('');
@@ -30,17 +29,17 @@ export default function RegistroPage() {
     if (!cpfInput) return;
 
     const handleInput = (e) => {
-        let value = e.target.value;
-        value = value.replace(/\D/g, '');
-        if (value.length > 3) value = value.replace(/^(\d{3})(\d)/, '$1.$2');
-        if (value.length > 6) value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
-        if (value.length > 9) value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{2})/, '$1.$2.$3-$4');
-        e.target.value = value;
+      let value = e.target.value;
+      value = value.replace(/\D/g, '');
+      if (value.length > 3) value = value.replace(/^(\d{3})(\d)/, '$1.$2');
+      if (value.length > 6) value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
+      if (value.length > 9) value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{2})/, '$1.$2.$3-$4');
+      e.target.value = value;
     };
 
     cpfInput.addEventListener('input', handleInput);
     return () => cpfInput.removeEventListener('input', handleInput);
-}, []);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,7 +56,7 @@ export default function RegistroPage() {
           corpo = {
             aluno: {
               // cpf: form.cpf,
-              cpf:cpfInputRef.current?.value.replace(/[.-]/g, ''),
+              cpf: cpfInputRef.current?.value.replace(/[.-]/g, ''),
               nome: form.nome,
               email: form.email,
               telefonePrinc: form.telefonePrinc,
@@ -82,7 +81,7 @@ export default function RegistroPage() {
         case 'motorista':
           url = 'http://localhost:3001/cadastro/motorista';
           corpo = form;
-          
+
           break;
 
         case 'administrador':
@@ -98,6 +97,7 @@ export default function RegistroPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(corpo),
+        credentials: 'include'
       });
 
       const resultado = await resposta.json();
@@ -122,7 +122,9 @@ export default function RegistroPage() {
   const buscarEscolas = async (nome) => {
     if (!nome || nome.length < 2) return setEscolas([]);
     try {
-      const res = await fetch(`http://localhost:3001/escolas?nome=${encodeURIComponent(nome)}`);
+      const res = await fetch(`http://localhost:3001/escolas?nome=${encodeURIComponent(nome)}`, {
+        credentials: 'include'
+      });
       const data = await res.json();
       setEscolas(data);
     } catch (err) {
@@ -147,9 +149,9 @@ export default function RegistroPage() {
 
   // ao digitar nomes, ele nao permite caracteres numericos
   const textRef = useRef(null);
-  useEffect(() =>{
-    if (textRef.current){
-      textRef.current.addEventListener("input", (e)=>{
+  useEffect(() => {
+    if (textRef.current) {
+      textRef.current.addEventListener("input", (e) => {
         let value = e.target.value.replace(/[0-9]/g, '') // remove caracteres numericos
         e.target.value = value;
       })
@@ -163,8 +165,8 @@ export default function RegistroPage() {
       tellRef.current.addEventListener("input", (e) => {
         let value = e.target.value.replace(/\D/g, ""); // remove caracteres nao numericos
         value = value.slice(0, 11); // limite de 11 digitos
-        value = value.replace(/^(\d\d)(\d)/g,"($1)$2"); // regex no padrão de telefone brasileiro
-        value = value.replace(/(\d{5})(\d)/,"$1-$2");
+        value = value.replace(/^(\d\d)(\d)/g, "($1)$2"); // regex no padrão de telefone brasileiro
+        value = value.replace(/(\d{5})(\d)/, "$1-$2");
         e.target.value = value;
       });
     }
@@ -177,7 +179,7 @@ export default function RegistroPage() {
       dataRef.current.addEventListener("input", (e) => {
         let value = e.target.value.replace(/\D/g, ""); // remove caracteres nao numericos
         value = value.slice(0, 8); // limite de 8 digitos
-        value = value.replace(/(\d{2})(\d)/,"$1/$2"); 
+        value = value.replace(/(\d{2})(\d)/, "$1/$2");
         e.target.value = value;
       });
     }
@@ -245,7 +247,10 @@ export default function RegistroPage() {
                         handleChange({ target: { name: 'escola_id', value: escola.id } });
 
                         try {
-                          const res = await fetch(`http://localhost:3001/ponto-por-escola?escolaId=${escola.id}`);
+                          const res = await fetch(`http://localhost:3001/ponto-por-escola?escolaId=${escola.id}`, {
+                            credentials: 'include'
+                          });
+
                           const ponto = await res.json();
                           if (res.ok) {
                             handleChange({ target: { name: 'ponto_embarque_id', value: ponto.id } });
@@ -289,7 +294,7 @@ export default function RegistroPage() {
             <input name="cpf_responsavel" placeholder="CPF do responsável" onChange={handleChange} required />{/*ref={cpfRef} - tirei a máscara para testar*/} 
             <input name="nome_responsavel" placeholder="Nome do responsável" onChange={handleChange} required />{/*ref={textRef}*/}
             <input type='email' name="email_responsavel" placeholder="Email do responsável" onChange={handleChange} required />
-            <input name="telefone_responsavel" placeholder="Telefone do responsável" onChange={handleChange} required ref={tellRef}/>
+            <input name="telefone_responsavel" placeholder="Telefone do responsável" onChange={handleChange} required ref={tellRef} />
             <input name="senha_responsavel" placeholder="Senha do responsável" type="password" onChange={handleChange} required />
             <input name="grau_parentesco" placeholder="Grau de parentesco" onChange={handleChange} required />
           </>
@@ -357,9 +362,9 @@ export default function RegistroPage() {
             <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded mb-5 hover:bg-blue-700 transition duration-300 ease">Registrar</button>
           </form>
         )}
-    </section >
-    </div> 
-    
+      </section >
+    </div>
+
   );
 }
 

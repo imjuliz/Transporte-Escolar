@@ -24,7 +24,9 @@ export default function embarques() {
 
     async function verAlunos() {
         try {
-            const response = await fetch('http://localhost:3001/verAlunos');
+            const response = await fetch('http://localhost:3001/verAlunos', {
+                credentials: "include"
+            });
             const data = await response.json();
             setResposta(JSON.stringify(data, null, 2));
             if (Array.isArray(data)) {
@@ -43,7 +45,7 @@ export default function embarques() {
             <p className='linha'></p>
             <div className="escolas">
                 <div className="cartao-escola " >
-                    <img className="imagem-escola md:w-35 md:h-35 " src='/img/motorista/embarque/teste.jfif' alt="Imagem da escola" />
+                    <img className="imagem-escola " src='/img/motorista/embarque/teste.jfif' alt="Imagem da escola" />
                     <div className="info-escola">
                         <h1 className="nome-escola">Escola X</h1>
                         <h2 className="endereco-escola">Endereço X</h2>

@@ -1,8 +1,9 @@
-.secao1{
+.secao1 {
   margin-top: 65%;
-  width:60% ;
+  width: 60%;
   margin-left: 0%;
 }
+
 .secao1 .title1 {
   margin-left: -40%;
   margin-top: -100%;
@@ -92,59 +93,64 @@
   height: 12px;
   transform: scaleY(-1);
 }
-.tabela .titulos{
+
+.tabela .titulos {
   justify-content: space-between;
-  width: 100%;
+  width: 185%;
 }
 
 .listaAlunos {
   margin-left: -10vw;
   width: 120%;
-  background-color: #f9f9f9; 
+  background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 20px; 
-  margin-top: 20px; 
+  padding: 20px;
+  margin-top: 20px;
   margin-left: -10%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  font-family:"Plus Jakarta Sans", sans-serif; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
-.titulos .titulo3{
+
+.titulos .titulo3 {
   margin-left: 20%;
 }
+
 .listaAlunos strong {
   display: block;
-  font-size: 1em; 
-  color: #333; 
-  margin-bottom: 15px; 
-  padding-bottom: 10px; 
-  border-bottom: 2px solid #eee; 
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
 }
 
 .listaAlunos .alunoNome {
   font-size: 1.3em;
-  padding: 15px; 
-  font-family: "Plus Jakarta Sans", sans-serif; 
+  padding: 15px;
+  font-family: "Plus Jakarta Sans", sans-serif;
   border-bottom: none;
 }
+
 .listaAlunos .turnoEscola {
   margin-left: 30%;
 }
-.listaAlunos pre {
-  width: 100%;
+
+.listaAlunos tr {
+  width: 185%;
   background-color: #fff;
   border: 1px solid #eee;
-  border-radius: 4px; 
-  padding: 15px; 
-  font-family: "Plus Jakarta Sans", sans-serif; 
+  border-radius: 4px;
+  padding: 15px;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 0.9em;
-  word-wrap: break-word; 
+  word-wrap: break-word;
   max-height: 400px;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
-.listaAlunos tbody{
-  border-bottom: 2px solid #eee; 
+.listaAlunos tbody {
+  border-bottom: 2px solid #eee;
 }
 
 @media screen and (max-width:1536px) {
@@ -152,81 +158,184 @@
     margin-left: -60%;
     margin-top: -90%;
   }
+
   .secao1 .linha {
     margin-left: -60%;
     margin-bottom: 30%;
     width: 40%;
     border-bottom: 2px solid #D0D0D0;
   }
+
   .cartao-escola {
-    margin-left: -10%;
+    margin-top: -20%;
+    margin-left:0%;
+    width: 120%;
+    height: 100%;
   }
+  .imagem-escola {
+    height: 13vw;
+    width: 13vw;
+  }
+  .listaAlunos{
+    margin-left: -50%;
+    width: 203%;
+  }
+  .listaAlunos tr {
+    width: 220%;
+    font-size: 17px;
+  }
+.tabela .titulos{
+  width: 220%;
 }
-@media screen and (max-width:1024px) {
+}
+@media screen and (max-width:1280px) {
  
-  .listaAlunos pre {
+  .listaAlunos{
+    margin-left: -50%;
+    width: 203%;
+  }
+  .listaAlunos tr {
+    width: 200%;
+  }
+.tabela .titulos{
+  width: 200%;
+}
+.cartao-escola{
+  height: 120%;
+  margin-left: -15%;
+  margin-top: -15%;
+  width: 150%;
+}
+.imagem-escola {
+  height: 15vw;
+  width: 15vw;
+}
+}
+
+
+@media screen and (max-width:1024px) {
+
+  .listaAlunos{
+    margin-left: -60%;
+    width: 220%;
+  }
+  .listaAlunos tr {
     word-break: break-word;
     font-size: 0.7em;
     line-height: 50px;
+    width: 210%;
   }
+.tabela .titulos{
+  width: 210%;
 }
+.cartao-escola{
+  height: 120%;
+  margin-left: -10%;
+  margin-top: -15%;
+  width: 150%;
+}
+.imagem-escola {
+  height: 15vw;
+  width: 15vw;
+}
+}
+
 @media screen and (max-width:768px) {
   .secao1 .title1 {
     margin-left: -40%;
-    margin-top: -70%;
+    margin-top: -80%;
+    white-space: nowrap;
   }
-  
+
   .secao1 .linha {
     margin-left: -40%;
     margin-bottom: 8%;
     width: 40%;
     border-bottom: 2px solid #D0D0D0;
   }
+.cartao-escola{
+  height: 100%;
+  margin-left: -10%;
+}
+  .escolas {
+    width: 250%;
+  }
+
+  .imagem-escola {
+    height: 19vw;
+    width: 19vw;
+  }
   .nome-escola {
-    margin-top: -50%;
-    font-size: 150%;
+    margin-top: -30%;
+    font-size: 180%;
+    font-weight: bold;
   }
   
-  .listaAlunos{
-  width: 220%;
-  margin-left: -60%;
- }
- .titulos .titulo3{
-  margin-left: 40%;
-}
- .listaAlunos .turnoEscola {
-  margin-left: 60%;
-}
-.botao-ver {
-  width: 100%;
-  margin-top:-10%;
-  gap: 8px;
-}
+  .endereco-escola {
+    margin: 4px 0 0 0;
+    font-size: 14px;
+    color: #666;
   }
-  @media screen and (max-width:640px) {
-    .secao1 .title1 {
-      margin-left: -70%;
-      margin-top: -60%;
-    }
-    
-    .secao1 .linha {
-      margin-left: -70%;
-      margin-bottom: 8%;
-      width: 70%;
-    }
-    .cartao-escola {
-      margin-left: -45%;
-      width: 184%;
-      height: 20%;
-    }
-    .imagem-escola {
-     height: 22vw;
-    }
-    .nome-escola {
-      margin-top: -45%;
-    }
-     .listaAlunos{
-      width: 250%;
-      margin-left: -90%;
-     }
+
+  .tabela .titulos {
+    width: 125%;
   }
+
+  .listaAlunos tr {
+    width: 125%;
+    padding: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .listaAlunos {
+    width: 220%;
+    margin-left: -60%;
+  }
+
+  .titulos .titulo3 {
+    margin-left: 40%;
+  }
+
+  .listaAlunos .turnoEscola {
+    margin-left: 60%;
+  }
+
+  .botao-ver {
+    width: 100%;
+    margin-top: -10%;
+    gap: 8px;
+  }
+}
+
+@media screen and (max-width:640px) {
+  .secao1 .title1 {
+    margin-left: -70%;
+    margin-top: -60%;
+  }
+
+  .secao1 .linha {
+    margin-left: -70%;
+    margin-bottom: 8%;
+    width: 70%;
+  }
+
+  .cartao-escola {
+    margin-left: -45%;
+    width: 184%;
+    height: 20%;
+  }
+
+  .imagem-escola {
+    height: 22vw;
+  }
+
+  .nome-escola {
+    margin-top: -45%;
+  }
+
+  .listaAlunos {
+    width: 250%;
+    margin-left: -90%;
+  }
+}

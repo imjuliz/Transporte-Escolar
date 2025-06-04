@@ -92,7 +92,7 @@ export default function Home() {
         {
             img1: './img/sessao4/bolinha1.svg',
             img2: './img/sessao4/card4_1.svg',
-            text: 'Ser de Monte Azul (?)'
+            text: 'Clique no botão de "Entrar"'
         },
         {
             img1: './img/sessao4/bolinha2.svg',
@@ -102,7 +102,7 @@ export default function Home() {
         {
             img1: './img/sessao4/bolinha3.svg',
             img2: './img/sessao4/card4_3.svg',
-            text: 'Tenha total controle na palma da mão.'
+            text: 'Tenha total acesso a todas as funcionalidades do seu tipo de perfil'
         }
     ];
 
@@ -216,56 +216,11 @@ export default function Home() {
                         {banners.map((banner, index) => (
                             <div className='banner1img flex justify-center' key={index}>
                                 <img src={banner.img1} className='montanha z-10 absolute bottom-0' />
-                                <img src={banner.img2} className='onibus z-10 absolute bottom-0' />
-                                <img src={banner.img3} className='arvores z-10 absolute bottom-0 right-60' />
+                                <img src={banner.img2} className='onibus z-10 absolute bottom-0 ' />
+                                <img src={banner.img3} className='arvores z-10 absolute bottom-0 right-100' />
                                 <img src={banner.img5} className='circulo' />
                             </div>
                         ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className='secão2'>
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-                    <div className="carousel-inner">
-                        <div className="carousel-item active" data-bs-interval="3000">
-                            <div className="imgpai">
-                                <div className="img1">
-                                    <img src='/img/card4.svg' />
-                                </div>
-                            </div>
-                        </div>
-                        {cards.map((card, index) => (
-                            <div key={index}>
-                                <div className="carousel-item" data-bs-interval="3000">
-                                    <div className="imgpai">
-                                        <div className="img1">
-                                            <img src={card.img} />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))};
-                    </div>
-                    <div className="div-carousel-control-prev">
-                        <button className="carousel-control-prev s6" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-                            <span className="carousel-control-prev-icon"><svg width="2rem" height="2rem" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="16" cy="16" r="15.5" fill="white" stroke="#D5D5D5" />
-                                <path d="M11.2929 15.2929C10.9024 15.6834 10.9024 16.3166 11.2929 16.7071L17.6569 23.0711C18.0474 23.4616 18.6805 23.4616 19.0711 23.0711C19.4616 22.6805 19.4616 22.0474 19.0711 21.6569L13.4142 16L19.0711 10.3431C19.4616 9.95262 19.4616 9.31946 19.0711 8.92893C18.6805 8.53841 18.0474 8.53841 17.6569 8.92893L11.2929 15.2929ZM12 17H13V15H12V17Z" fill="#9A1E22" />
-                            </svg>
-                            </span>
-                            <span className="visually-hidden">Previous</span>
-                        </button>
-                    </div>
-                    <div className="div-carousel-control-next">
-                        <button className="carousel-control-next s6" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-                            <span className="carousel-control-next-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="16" cy="16" r="15.5" fill="white" stroke="#D5D5D5" />
-                                <path d="M20.7071 16.7071C21.0976 16.3166 21.0976 15.6834 20.7071 15.2929L14.3431 8.92893C13.9526 8.53841 13.3195 8.53841 12.9289 8.92893C12.5384 9.31946 12.5384 9.95262 12.9289 10.3431L18.5858 16L12.9289 21.6569C12.5384 22.0474 12.5384 22.6805 12.9289 23.0711C13.3195 23.4616 13.9526 23.4616 14.3431 23.0711L20.7071 16.7071ZM19 17H20V15H19V17Z" fill="#9A1E22" />
-                            </svg>
-                            </span>
-                            <span className="visually-hidden">Next</span>
-                        </button>
                     </div>
                 </div>
             </section>
@@ -298,13 +253,13 @@ export default function Home() {
                             </div>
                         ))}
                     </div>
-                    <img src='./img/sessao5/Content.svg' className='rounded banner2 xl:w-5/6' />
+                    <img src='/img/fotoInicio.svg' className='rounded banner2 xl:w-5/6' />
                 </div>
             </section>
             <section className='secão4 justify-items-center content-center'>
                 <h2 className='title2'>Como funciona?</h2>
                 <h1 className='title'>Entenda em poucos passos</h1>
-                <h3 className='title3'>Em apenas algumas etapas fáceis, você está pronto para gerenciar suas viagens com nosso transporte escolar. Tudo me um só lugar.</h3>
+                <h3 className='title3'>Em apenas algumas etapas fáceis, você está pronto para gerenciar suas viagens com nosso transporte escolar. Tudo em um só lugar.</h3>
                 <div className='cards4'>
                     {cards4.map((card4, index) => (
                         <div className="cards42" key={index}>

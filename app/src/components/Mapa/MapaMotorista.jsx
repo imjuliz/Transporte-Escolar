@@ -11,7 +11,9 @@ export default function MapaMotorista({ motoristaId }) {
     useEffect(() => {
         async function carregarViagemAtual() {
             try {
-                const response = await fetch(`http://localhost:3001/viagem/motorista/${motoristaId}`);
+                const response = await fetch(`http://localhost:3001/viagem/motorista/${motoristaId}`,{
+                    credentials: "include"
+                });
                 const data = await response.json();
 
                 console.log("Resposta da API no front-end:", data); 

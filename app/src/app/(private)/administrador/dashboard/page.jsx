@@ -9,7 +9,9 @@ export default function dashboard() {
     useEffect(() => {
         async function qtdViagensAndamento() {
             try {
-                const res = await fetch('http://localhost:3001/viagens/em-andamento/quantidade');
+                const res = await fetch('http://localhost:3001/em-andamento/quantidade',{
+                    credentials: 'include'
+                });
                 const data = await res.json();
                 setQtdViagens(data.total);
             } catch (error) {
@@ -26,9 +28,11 @@ export default function dashboard() {
     useEffect(() => {
         async function qtdUsuarios() {
             try {
-                const res = await fetch('http://localhost:3001/qtd-usuarios');
+                const res = await fetch('http://localhost:3001/qtd-usuarios', {
+                    credentials: 'include'
+                });
                 const data = await res.json();
-                setQtdUsuarios(data.total_geral);
+                setQtdUsuarios(data);
             } catch (error) {
                 console.error('Erro ao buscar total de usuários:', error);
             }
@@ -42,7 +46,9 @@ export default function dashboard() {
     useEffect(() => {
         async function qtdEscolas() {
             try {
-                const res = await fetch('http://localhost:3001/qtd-escolas');
+                const res = await fetch('http://localhost:3001/qtd-escolas', {
+                    credentials: 'include'
+                });
                 const data = await res.json();
                 setQtdEscolas(data.total_geral);
             } catch (error) {
@@ -79,7 +85,7 @@ export default function dashboard() {
             </svg>
             ),
             nome: 'Motoristas ativos',
-            //informacao: comentei pq está sem valor
+            informacao: qtdUsuarios !== null ? qtdUsuarios : 'Carregando...'
         },
         {
             img: (<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -190,8 +196,8 @@ export default function dashboard() {
                     <div key={index} className='box-infos flex flez-row rounded-xl bg-[#fff] shadow-xl'>
                         <img src={info.img} alt='icones' />
                         <div className='flex flex-col'>
-                            <p>{info.informação}</p>
-                            <p>{info.nome}</p>
+                            <p className='informacao'>{info.informacao}</p>
+                            <p className='info-nome'>{info.nome}</p>
                         </div>
                     </div>
                 ))}

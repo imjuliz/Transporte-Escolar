@@ -8,4 +8,6 @@ const verAlunos = async()=>{
         console.error('Erro ao listar os alunos!!!')
         throw err;
     }};
+
+    
 export {verAlunos}

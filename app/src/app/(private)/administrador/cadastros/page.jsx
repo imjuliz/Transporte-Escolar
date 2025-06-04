@@ -50,10 +50,11 @@ export default function embarques() {
         []);
 
     //fazer uma função só para mostrar todos os dados a partir de vários fetch
-
     async function VerTodos() {
         try {
-            const response = await fetch('http://localhost:3001/cadastros-alunos');
+            const response = await fetch('http://localhost:3001/cadastros-alunos', {
+                credentials: 'include'
+            });
             const data = await response.json();
             setResposta(JSON.stringify(data, null, 2));
             if (Array.isArray(data)) {
@@ -68,15 +69,16 @@ export default function embarques() {
 
     async function VerResponsaveis() {
         try {
-            const response = await fetch('http://localhost:3001/cadastros-responsaveis');
+            const response = await fetch('http://localhost:3001/cadastros-responsaveis', {
+                credentials: 'include'
+            });
             const data = await response.json();
             setRespostaResponsavel(JSON.stringify(data, null, 2));
             if (Array.isArray(data)) {
                 setResponsaveis(data);
             }
             return data;
-        }
-        catch (err) {
+        } catch (err) {
             console.error('Erro ao listar responsáveis!!', err);
             return ['deu erro vei'];
         }
@@ -84,15 +86,16 @@ export default function embarques() {
 
     async function VerMotoristas() {
         try {
-            const response = await fetch('http://localhost:3001/cadastros-motoristas');
+            const response = await fetch('http://localhost:3001/cadastros-motoristas', {
+                credentials: 'include'
+            });
             const data = await response.json();
             setRespostaMotorista(JSON.stringify(data, null, 2));
             if (Array.isArray(data)) {
                 setMotoristas(data);
             }
             return data;
-        }
-        catch (err) {
+        } catch (err) {
             console.error('Erro ao listar motoristas!!', err);
             return ['deu erro vei'];
         }
@@ -100,17 +103,18 @@ export default function embarques() {
 
     async function VerAdmins() {
         try {
-            const response = await fetch('http://localhost:3001/cadastros-admins');
+            const response = await fetch('http://localhost:3001/cadastros-admins', {
+                credentials: 'include'
+            });
             const data = await response.json();
             setRespostaAdmin(JSON.stringify(data, null, 2));
             if (Array.isArray(data)) {
                 setAdmins(data);
             }
             return data;
-        }
-        catch (err) {
+        } catch (err) {
             console.error('Erro ao listar admins! ', err);
-            returm['deu erro vei']
+            return ['deu erro vei'];
         }
     }
 
@@ -121,7 +125,7 @@ export default function embarques() {
                     <h1>Usuários</h1>
                     <hr />
                 </div>
-               
+
                 {/**NAO ESQUECER DE CRIAR UMA FUNÇÃO PARA DEIXAR ATIVO / INATIVO */}
 
                 {/**motoristas */}
@@ -136,12 +140,12 @@ export default function embarques() {
                                     <p>{nome}</p>
                                 </div>
                             ))}
-                            
+
                         </div>
-                        
+
                         <div className='cpff'>
-                        <p className='text-black/50 '>CPF</p>
-                        <hr></hr>
+                            <p className='text-black/50 '>CPF</p>
+                            <hr></hr>
                             {motoristas.map(({ cpf, id }) => (
                                 <div className='flex flex-column gap-3' key={id}>
                                     <p>{cpf}</p>
@@ -149,45 +153,45 @@ export default function embarques() {
                             ))}
                         </div>
                         <div className='telefone'>
-                        <p className='text-black/50 '>Telefone</p>
-                        <hr></hr>
-                            {motoristas.map(({telefone, id}) =>(
+                            <p className='text-black/50 '>Telefone</p>
+                            <hr></hr>
+                            {motoristas.map(({ telefone, id }) => (
                                 <div className='flex flex-column gap-3' key={id}>
-                                <p>{telefone}</p>
-                            </div>
+                                    <p>{telefone}</p>
+                                </div>
                             ))}
                         </div>
                         <div className="email">
-                        <p className='text-black/50 '>Email</p>
-                        <hr></hr>
-                            {motoristas.map(({email, id}) =>(
+                            <p className='text-black/50 '>Email</p>
+                            <hr></hr>
+                            {motoristas.map(({ email, id }) => (
                                 <div className='flex flex-column gap-3' key={id}>
-                                <p>{email}</p>
-                            </div>
+                                    <p>{email}</p>
+                                </div>
                             ))}
                         </div>
                         <div className="cnh">
-                        <p className='text-black/50 '>CNH</p>
-                        <hr></hr>
-                            {motoristas.map(({cnh, id}) =>(
+                            <p className='text-black/50 '>CNH</p>
+                            <hr></hr>
+                            {motoristas.map(({ cnh, id }) => (
                                 <div className='flex flex-column gap-3' key={id}>
-                                <p>{cnh}</p>
-                            </div>
+                                    <p>{cnh}</p>
+                                </div>
                             ))}
                         </div>
                         <div className='status'>
-                        <p className='text-black/50 '>Status</p>
-                        <hr></hr>
-                            {motoristas.map(({status, id})=>(
+                            <p className='text-black/50 '>Status</p>
+                            <hr></hr>
+                            {motoristas.map(({ status, id }) => (
                                 <div className='flex flex-column gap-3' key={id}>
-                                <p>{status}</p>
+                                    <p>{status}</p>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
 
-{/**alunos */}
+                {/**alunos */}
                 <div className="alunos bg-white p-5 rounded-[2vw] mb-5">
                     <h3>Alunos</h3>
                     <div className='cadastros pt-3 flex justify-between'>
@@ -199,12 +203,12 @@ export default function embarques() {
                                     <p>{nome}</p>
                                 </div>
                             ))}
-                            
+
                         </div>
-                        
+
                         <div className='cpff'>
-                        <p className='text-black/50 '>CPF</p>
-                        <hr></hr>
+                            <p className='text-black/50 '>CPF</p>
+                            <hr></hr>
                             {alunos.map(({ cpf, id }) => (
                                 <div className='flex flex-column gap-3' key={id}>
                                     <p>{cpf}</p>
@@ -212,38 +216,38 @@ export default function embarques() {
                             ))}
                         </div>
                         <div className='telefone'>
-                        <p className='text-black/50 '>Telefone</p>
-                        <hr></hr>
-                            {alunos.map(({telefonePrinc, id}) =>(
+                            <p className='text-black/50 '>Telefone</p>
+                            <hr></hr>
+                            {alunos.map(({ telefonePrinc, id }) => (
                                 <div className='flex flex-column gap-3' key={id}>
-                                <p>{telefonePrinc}</p>
-                            </div>
+                                    <p>{telefonePrinc}</p>
+                                </div>
                             ))}
                         </div>
                         <div className="email">
-                        <p className='text-black/50 '>Email</p>
-                        <hr></hr>
-                            {alunos.map(({email, id}) =>(
+                            <p className='text-black/50 '>Email</p>
+                            <hr></hr>
+                            {alunos.map(({ email, id }) => (
                                 <div className='flex flex-column gap-3' key={id}>
-                                <p>{email}</p>
-                            </div>
+                                    <p>{email}</p>
+                                </div>
                             ))}
                         </div>
                         <div className="turno">
-                        <p className='text-black/50 '>Turno</p>
-                        <hr></hr>
-                            {alunos.map(({turno, id}) =>(
+                            <p className='text-black/50 '>Turno</p>
+                            <hr></hr>
+                            {alunos.map(({ turno, id }) => (
                                 <div className='flex flex-column gap-3' key={id}>
-                                <p>{turno}</p>
-                            </div>
+                                    <p>{turno}</p>
+                                </div>
                             ))}
                         </div>
                         <div className='status'>
-                        <p className='text-black/50 '>Status</p>
-                        <hr></hr>
-                            {alunos.map(({status, id})=>(
+                            <p className='text-black/50 '>Status</p>
+                            <hr></hr>
+                            {alunos.map(({ status, id }) => (
                                 <div className='flex flex-column gap-3' key={id}>
-                                <p>{status}</p>
+                                    <p>{status}</p>
                                 </div>
                             ))}
                         </div>
@@ -261,12 +265,12 @@ export default function embarques() {
                                     <p>{nome}</p>
                                 </div>
                             ))}
-                            
+
                         </div>
-                        
+
                         <div className='cpff'>
-                        <p className='text-black/50 '>CPF</p>
-                        <hr></hr>
+                            <p className='text-black/50 '>CPF</p>
+                            <hr></hr>
                             {responsaveis.map(({ cpf, id }) => (
                                 <div className='flex flex-column gap-3' key={id}>
                                     <p>{cpf}</p>
@@ -287,8 +291,8 @@ export default function embarques() {
                         <hr></hr>
                             {responsaveis.map(({email, id}) =>(
                                 <div className='flex flex-column gap-3' key={id}>
-                                <p>{email}</p>
-                            </div>
+                                    <p>{email}</p>
+                                </div>
                             ))}
                         </div>
                         
@@ -297,7 +301,7 @@ export default function embarques() {
                         <hr></hr>
                             {responsaveis.map(({status, id})=>(
                                 <div className='flex flex-column gap-3' key={id}>
-                                <p>{status}</p>
+                                    <p>{status}</p>
                                 </div>
                             ))}
                         </div>

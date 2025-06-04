@@ -4,16 +4,15 @@ import session from "express-session";
 // obter dados do perfil do usuario
 const obterPerfilUsuario = async (req, res) => {
     try {
-        req.session.save(err=>{
-            if (err) {
-                console.error('erro ao sanvar sessão', err)
-                return res.send('erro interno')
-            }
-            res.send('Sessão salva e resposta enviada')
-        })
-        const { tipo } = req.session.usuario;
-        const { id } = req.session.usuario;
-        console.log("obterPerfilUsuario: ", req.session)
+        await new Promise((resolve, reject) => {
+            req.session.save(err => {
+                if (err) reject(err);
+                else resolve();
+            });
+        });
+
+        const { tipo, id } = req.session.usuario;
+        console.log("obterPerfilUsuario: ", req.session);
 
         const dados = await obterDadosDoUsuario(tipo, id);
 
@@ -22,11 +21,13 @@ const obterPerfilUsuario = async (req, res) => {
         }
 
         res.status(200).json(dados);
+
     } catch (erro) {
         console.error('Erro ao obter dados do perfil:', erro);
         res.status(500).json({ erro: 'Erro ao obter dados do perfil.' });
     }
 };
+
 
 // busca a escola pelo id
 // export const buscarEscolas = async (req, res) => {
