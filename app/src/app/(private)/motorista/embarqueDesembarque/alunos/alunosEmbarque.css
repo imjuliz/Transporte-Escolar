@@ -96,7 +96,7 @@
 
 .tabela .titulos {
   justify-content: space-between;
-  width: 100%;
+  width: 185%;
 }
 
 .listaAlunos {
@@ -137,7 +137,7 @@
 }
 
 .listaAlunos tr {
-  width: 100%;
+  width: 185%;
   background-color: #fff;
   border: 1px solid #eee;
   border-radius: 4px;
@@ -167,17 +167,77 @@
   }
 
   .cartao-escola {
-    margin-left: -10%;
+    margin-top: -20%;
+    margin-left:0%;
+    width: 120%;
+    height: 100%;
   }
+  .imagem-escola {
+    height: 13vw;
+    width: 13vw;
+  }
+  .listaAlunos{
+    margin-left: -50%;
+    width: 203%;
+  }
+  .listaAlunos tr {
+    width: 220%;
+    font-size: 17px;
+  }
+.tabela .titulos{
+  width: 220%;
 }
+}
+@media screen and (max-width:1280px) {
+ 
+  .listaAlunos{
+    margin-left: -50%;
+    width: 203%;
+  }
+  .listaAlunos tr {
+    width: 200%;
+  }
+.tabela .titulos{
+  width: 200%;
+}
+.cartao-escola{
+  height: 120%;
+  margin-left: -15%;
+  margin-top: -15%;
+  width: 150%;
+}
+.imagem-escola {
+  height: 15vw;
+  width: 15vw;
+}
+}
+
 
 @media screen and (max-width:1024px) {
 
-  .listaAlunos pre {
+  .listaAlunos{
+    margin-left: -60%;
+    width: 220%;
+  }
+  .listaAlunos tr {
     word-break: break-word;
     font-size: 0.7em;
     line-height: 50px;
+    width: 210%;
   }
+.tabela .titulos{
+  width: 210%;
+}
+.cartao-escola{
+  height: 120%;
+  margin-left: -10%;
+  margin-top: -15%;
+  width: 150%;
+}
+.imagem-escola {
+  height: 15vw;
+  width: 15vw;
+}
 }
 
 @media screen and (max-width:768px) {
