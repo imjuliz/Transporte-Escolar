@@ -1,13 +1,11 @@
 import { obterDadosDoUsuario, editarPerfil } from '../models/Perfil.js';
-import session from "express-session";
 
 // obter dados do perfil do usuario
 const obterPerfilUsuario = async (req, res) => {
     try {
         req.session.save(err=>{
             if (err) {
-                console.error('erro ao sanvar sessão', err)
-                return res.send('erro interno')
+                console.error('erro ao salvar sessão', err)
             }
             res.send('Sessão salva e resposta enviada')
         })
@@ -16,12 +14,10 @@ const obterPerfilUsuario = async (req, res) => {
         console.log("obterPerfilUsuario: ", req.session)
 
         const dados = await obterDadosDoUsuario(tipo, id);
-
         if (!dados) {
             return res.status(404).json({ erro: 'Usuário não encontrado.' });
         }
-
-        res.status(200).json(dados);
+        // res.status(200).json(dados);
     } catch (erro) {
         console.error('Erro ao obter dados do perfil:', erro);
         res.status(500).json({ erro: 'Erro ao obter dados do perfil.' });
