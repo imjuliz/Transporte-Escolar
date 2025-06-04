@@ -1,37 +1,34 @@
 import { readQuery } from "../config/database.js";
 
 const verFilhos = async (responsavelId) => {
-    try {
-        const consulta = `
-            SELECT 
-                alunos.id AS id_aluno,
-                alunos.nome AS nome_aluno,
-                alunos.dataNascimento AS aluno_dataNascimento,
-                alunos.email AS email_aluno,
-                escolas.nome AS nome_escola,
-                escolas.endereco AS endereco_escola,
-                pontos_embarque.nome AS nome_ponto_embarque,
-                pontos_embarque.endereco AS endereco_ponto_embarque,
-                viagens.horario_embarque,
-                viagens.horario_desembarque
-            FROM responsaveis_alunos
-            INNER JOIN alunos ON responsaveis_alunos.aluno_id = alunos.id
-            INNER JOIN escolas ON alunos.escola_id = escolas.id
-            INNER JOIN pontos_embarque ON alunos.ponto_embarque_id = pontos_embarque.id
-            WHERE responsaveis_alunos.responsavel_id = ?
-        `;
-
-        const filhos = await readQuery(consulta, [responsavelId]);
-
-        if (!filhos || filhos.length === 0) {
-            console.warn('O usuário não possui filhos vinculados.');
-            return null;
-        }
-        return filhos;
-    } catch (err) {
-        console.error('Erro ao obter informações dos filhos', err);
-        throw err;
-    }
-}
+  try {
+    const consulta = `
+      SELECT 
+        a.id AS id_aluno,
+        a.nome AS nome_aluno,
+        TIMESTAMPDIFF(YEAR, a.dataNascimento, CURDATE()) AS idade,
+        e.nome AS nome_escola,
+        pe.endereco AS endereco_embarque,
+        v.tipo_viagem,
+        TIME_FORMAT(v.hora_saida, '%H:%i') AS hora_saida,
+        TIME_FORMAT(v.hora_chegada_prevista, '%H:%i') AS hora_chegada_prevista,
+        m.nome AS nome_motorista
+      FROM responsaveis_alunos ra
+      JOIN alunos a ON ra.aluno_id = a.id
+      JOIN alunos_viagens av ON av.aluno_id = a.id
+      JOIN viagens v ON v.id = av.viagem_id
+      JOIN motoristas m ON m.id = v.motorista_id
+      JOIN escolas e ON e.id = a.escola_id
+      JOIN pontos_embarque pe ON pe.id = a.ponto_embarque_id
+      WHERE ra.responsavel_id = ?
+      ORDER BY a.nome, v.tipo_viagem
+    `;
+    const resultado = await readQuery(consulta, [responsavelId]);
+    return resultado;
+  } catch (error) {
+    console.error("Erro ao buscar filhos do responsável:", error);
+    throw error;
+  }
+};
 
 export { verFilhos }

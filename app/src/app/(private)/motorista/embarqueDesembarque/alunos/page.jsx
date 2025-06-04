@@ -24,7 +24,9 @@ export default function embarques() {
 
     async function verAlunos() {
         try {
-            const response = await fetch('http://localhost:3001/verAlunos');
+            const response = await fetch('http://localhost:3001/verAlunos', {
+                credentials: "include"
+            });
             const data = await response.json();
             setResposta(JSON.stringify(data, null, 2));
             if (Array.isArray(data)) {

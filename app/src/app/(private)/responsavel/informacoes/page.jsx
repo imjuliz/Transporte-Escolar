@@ -83,11 +83,31 @@ export default function informacoes() {
   //   validarSessao();
   // }, []);
 
+  const [filhos, setFilhos] = useState([]);
   const [ativo, setAtivo] = useState(null)
 
   const toggle = (id) => {
     setAtivo(ativo === id ? null : id)
   }
+
+  useEffect(() => {
+    async function fetchFilhos() {
+      try {
+        const response = await fetch('http://localhost:3001/filhos', {
+          credentials: "include"
+        });
+        if (!response.ok) {
+          throw new Error('Erro ao buscar os filhos');
+        }
+        const data = await response.json();
+        setFilhos(data.infoFilhos);
+      } catch (error) {
+        console.error('Erro:', error.message);
+      }
+    }
+
+    fetchFilhos();
+  }, []);
 
   return (
     <section className='informacoes'>
@@ -96,21 +116,25 @@ export default function informacoes() {
         <hr />
       </div>
       <div className="max-w-1000px justify-items-center mx-auto mt-10 md:w-10">
-        {accordionData.map(({ id, escola, img, nomeCompleto, idade, endereco, rota, horaDesembarque, horaEmbarque, motorista }) => (
-          <div key={id} className="container-viagem bg-[#fff] rounded-[2vw] border-b border-slate-200">
+        {filhos.map((filho) => (
+          <div key={filho.aluno_id} className="container-viagem bg-[#fff] rounded-[2vw] border-b border-slate-200">
             <div className='flex '>
-              <img className='foto-aluno object-cover rounded-l-[2vw]' src={img}></img>
+              <img
+                className='foto-aluno object-cover rounded-l-[2vw]'
+                src={filho.img || "/imgs/default-aluno.png"}
+                alt="Foto do aluno"
+              />
               <button
-                onClick={() => toggle(id)}
+                onClick={() => toggle(filho.aluno_id)}
                 className="conteudo-card w-full flex justify-between items-center py-5 text-slate-800"
               >
                 <span className='texto-card'>
-                  <h3>{nomeCompleto}</h3>
-                  <p>{escola}</p>
+                  <h3>{filho.nome_completo}</h3>
+                  <p>{filho.nome_escola}</p>
                 </span>
                 <div className='ver-mais items-center'> Ver Informações
                   <span
-                    className={`text-slate-800 transition-transform duration-300 ${ativo === id ? 'rotate-180' : ''
+                    className={`text-slate-800 transition-transform duration-300 ${ativo === filho.aluno_id ? 'rotate-180' : ''
                       }`}
                   >
                     {/* Ícone para cima/baixo */}
@@ -120,37 +144,37 @@ export default function informacoes() {
               </button>
             </div>
             {/**Conteudo escondido */}
-            <div
-              className={`overflow-hidden transition-all duration-500 ease-in-out ${ativo === id ? 'max-h-500' : 'max-h-0'
-                }`}
-            >
+            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${ativo === filho.aluno_id ? 'max-h-500' : 'max-h-0'}`}>
               <div className="conteudo-escondido pb-5 text-sm text-slate-500">
                 <h3>Informações do Aluno</h3>
                 <hr></hr>
                 <div className='informacoes-aluno flex flex-column'>
-                  <div className='info flex justify-between items-center'><p>Nome:</p><p> {nomeCompleto}</p> </div><hr></hr>
-                  <div className='info flex justify-between items-center'><p>Idade:</p><p> {idade}</p> </div><hr></hr>
-                  <div className='info flex justify-between items-center'><p>Escola:</p><p> {escola}</p> </div><hr></hr>
-                  <div className='info flex justify-between items-center'><p>Endereço:</p><p> {endereco}</p> </div><hr></hr>
-                  <div className='info flex justify-between items-center'><p>Rota:</p><p> {rota}</p> </div><hr></hr>
+                  <div className='info flex justify-between items-center'><p>Nome:</p><p>{filho.nome_completo}</p></div><hr />
+                  <div className='info flex justify-between items-center'><p>Idade:</p><p>{filho.idade}</p></div><hr />
+                  <div className='info flex justify-between items-center'><p>Escola:</p><p>{filho.nome_escola}</p></div><hr />
+                  <div className='info flex justify-between items-center'><p>Endereço:</p><p>{filho.endereco}</p></div><hr />
+                  <div className='info flex justify-between items-center'><p>Rota:</p><p>{filho.rota_nome}</p></div><hr />
                 </div>
 
                 <div className='cards-horario'>
                   <div className="card-hora bg-[#fffff] rounded-[1vw] ">
                     <h3>Horário de Embarque</h3>
-                    <p>{horaEmbarque}</p>
+                    <p>{filho.horario_embarque}</p>
                   </div>
                   <div className="card-hora bg-[#fffff] rounded-[1vw] ">
                     <h3>Horário de Desembarque</h3>
-                    <p>{horaDesembarque}</p>
+                    <p>{filho.horario_desembarque}</p>
                   </div>
                 </div>
                 {/**Colocar aqui o mapa da rota de cada aluno - linkar na const */}
                 <h3>Motorista</h3>
                 <div className='info-motorista flex items-center gap-5 pt-3'>
-                  <img className='img-motorista' src={motorista.img}></img>
-                  <h3>{motorista.nome}</h3>
-
+                  <img
+                    className='img-motorista'
+                    src={filho.motorista_img || "/imgs/default-motorista.png"}
+                    alt="Foto do motorista"
+                  />
+                  <h3>{filho.motorista_nome}</h3>
                 </div>
               </div>
             </div>

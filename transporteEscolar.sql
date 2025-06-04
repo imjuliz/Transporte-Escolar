@@ -1,4 +1,7 @@
 /* tabela de antes 
+CREATE DATABASE transporteEscolar;
+USE transporteEscolar;
+-- drop database transporteescolar;
 -- tabela p o login
 CREATE TABLE usuarios (
     cpf VARCHAR(11) NOT NULL PRIMARY KEY,
@@ -6,6 +9,7 @@ CREATE TABLE usuarios (
     senha VARCHAR(255) NOT NULL,
     tipo ENUM('administrador', 'motorista', 'aluno', 'responsavel') NOT NULL
 );
+
 -- motoristas
 CREATE TABLE motoristas (
     cpf VARCHAR(11) NOT NULL PRIMARY KEY,
@@ -15,6 +19,7 @@ CREATE TABLE motoristas (
     vencimento_habilitacao DATE NOT NULL,
     email VARCHAR(100) NOT NULL
 );
+
 CREATE TABLE pontos_embarque (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
@@ -22,6 +27,7 @@ CREATE TABLE pontos_embarque (
     latitude DECIMAL(9,6) NOT NULL,
     longitude DECIMAL(9,6) NOT NULL
 );
+
 CREATE TABLE escolas (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
@@ -29,6 +35,7 @@ CREATE TABLE escolas (
     latitude DECIMAL(9,6) NOT NULL,
     longitude DECIMAL(9,6) NOT NULL
 );
+
 CREATE TABLE veiculos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     placa VARCHAR(10) UNIQUE NOT NULL,
@@ -36,6 +43,7 @@ CREATE TABLE veiculos (
     motorista_cpf VARCHAR(11),
     FOREIGN KEY (motorista_cpf) REFERENCES motoristas(cpf) ON DELETE SET NULL ON UPDATE CASCADE
 );
+
 CREATE TABLE viagens (
     id INT PRIMARY KEY AUTO_INCREMENT,
     veiculo_id INT NOT NULL,
@@ -51,6 +59,7 @@ CREATE TABLE viagens (
     tempo_estimado_viagem INT,
     FOREIGN KEY (veiculo_id) REFERENCES veiculos(id)
 );
+
 CREATE TABLE alunos (
     email VARCHAR(100) NOT NULL PRIMARY KEY,
     nomeCompleto VARCHAR(100) NOT NULL,
@@ -204,6 +213,7 @@ INSERT INTO alunos (email, nomeCompleto, telefonePrinc, emailPessoal, idade, end
 CREATE DATABASE transporteEscolar;
 USE transporteEscolar;
 -- drop database transporteescolar;
+
 /*
 -- tabela p o login
 CREATE TABLE usuarios (
@@ -327,6 +337,8 @@ CREATE TABLE alunos_viagens (
     FOREIGN KEY (aluno_id) REFERENCES alunos(id) ON DELETE CASCADE,
     FOREIGN KEY (viagem_id) REFERENCES viagens(id) ON DELETE CASCADE
 );
+
+
 /*
 INSERT INTO usuarios (cpf, email, senha, tipo) VALUES
 ('11111111111', 'julia@gmail.com', 'julia@adm', 'administrador'),
@@ -496,13 +508,7 @@ INSERT INTO alunos (cpf, email, nome, telefonePrinc, emailPessoal, dataNasciment
 ('17161716171', 'mariana.souza@al.gov.br', 'Mariana Souza Carvalho', '977772222', 'mari_carvalho88@gmail.com', '2012-12-01', 'mariana@aluno', 5, 2),
 ('12345678900', 'novo.email@exemplo.com', 'Novo Aluno', '99999-9999', 'email.pessoal@exemplo.com', '2005-07-20', 'senhaSegura', 5, 7);
 
-update alunos
-set turno = 'manhã'
-where id<20;
 
-update alunos
-set status = 'ativo'
-where id< 20;
 
 INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
 (1, 1),
@@ -551,7 +557,7 @@ INSERT INTO alunos_viagens (aluno_id, viagem_id) VALUES
 (11, 61);
 
 -- Criada dia 02/06
-drop table incidentes; 
+-- drop table incidentes; 
 #tabela incidentes
 CREATE TABLE incidentes (
 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -566,18 +572,21 @@ insert into incidentes (remetente, tipo, mensagem, dataDaMensagem, hora)
 value('maria@gmail.com', "transito", "muito transito", curdate(), curtime());
 select * from incidentes; 
 
-select * from veiculos;
+select * from motoristas;
 
 select count(*)from alunos_viagem;
+
+update alunos
+set turno = 'manhã'
+where id<20;
+
+update alunos
+set status = 'ativo'
+where id< 20;
 /*
 JOIN viagens ON alunos_viagens.viagem_id = viagens.id
 WHERE alunos_viagens.aluno_id = 1 AND viagens.data_viagem = CURDATE();*/
 
--- 04/06
-alter table veiculos
-add modelo VARCHAR(50), add marca VARCHAR(50), add anoFabricacao INT;
-insert into veiculos (placa, capacidade, motorista_id, modelo, marca, anoFabricacao)
-values ( "MNO-5432", 40, 1, " LO 916 R/ LO 916", "Mercedes-Benz", 2019),
-("PQR-8765", 40, 2, " LO 916 R/ LO 916", "Mercedes-Benz", 2020),
-("STU-6846", 40, 3, " LO 916 R/ LO 916", "Mercedes-Benz", 2019),
-("VWX-7356", 40, 4, " LO 916 R/ LO 916", "Mercedes-Benz", 2019)
+SELECT * FROM responsaveis_alunos WHERE responsavel_id = 1;
+
+select * from sessions;

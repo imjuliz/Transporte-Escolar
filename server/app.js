@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
-import session from "express-session";
+import session from 'express-session';
+import mysqlSession from 'express-mysql-session';
 import rotas from "./routes/appRoutes.js";
-
 const app = express();
 const port = 3001;
 
@@ -13,14 +13,25 @@ app.use(cors({
 
 app.use(express.json());
 
+const MySQLStore = mysqlSession(session);
+
+const sessionStore = new MySQLStore({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'transporteEscolar',
+});
+
 app.use(session({
-  secret: 'chave_secreta',
+  secret: 'chaveSecreta',
+  store: sessionStore,
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false,
     httpOnly: true,
-    maxAge: 1000 * 60 * 60
+    secure: false,           // em produção, coloque true se usar HTTPS
+    maxAge: 24 * 60 * 60 * 1000, // 1 dia
+    sameSite: 'lax',
   }
 }));
 

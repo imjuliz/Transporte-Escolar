@@ -9,7 +9,6 @@ import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrado
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
 import { obterInformacoesFilhosController } from '../controllers/ResponsavelController.js'
 import { verVeiculoController } from "../controllers/VerVeiculosController.js";
-import { obterInformacoesFilhosController } from "../controllers/ResponsavelController.js";
 import multer from 'multer';
 const router = express.Router();
 
@@ -18,11 +17,11 @@ router.post("/login", loginController);
 
 // rotas privadas
 
-// router.get('/administrador', autorizarAcesso('administrador'));
+router.get('/administrador', autorizarAcesso('administrador'));
 
-// router.get('/responsavel', autorizarAcesso('responsavel'));
+router.get('/responsavel', autorizarAcesso('responsavel'));
 
-// router.get('/aluno', autorizarAcesso('aluno'));
+router.get('/aluno', autorizarAcesso('aluno'));
 
 router.get('/motorista', autorizarAcesso('Motorista'));
 router.get('/verVeiculo',verVeiculoController, autorizarAcesso('Motorista'));

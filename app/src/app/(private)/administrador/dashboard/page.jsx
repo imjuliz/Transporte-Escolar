@@ -9,7 +9,9 @@ export default function dashboard() {
     useEffect(() => {
         async function qtdViagensAndamento() {
             try {
-                const res = await fetch('http://localhost:3001/em-andamento/quantidade');
+                const res = await fetch('http://localhost:3001/em-andamento/quantidade',{
+                    credentials: 'include'
+                });
                 const data = await res.json();
                 setQtdViagens(data.total);
             } catch (error) {
@@ -26,7 +28,9 @@ export default function dashboard() {
     useEffect(() => {
         async function qtdUsuarios() {
             try {
-                const res = await fetch('http://localhost:3001/qtd-usuarios');
+                const res = await fetch('http://localhost:3001/qtd-usuarios', {
+                    credentials: 'include'
+                });
                 const data = await res.json();
                 setQtdUsuarios(data);
             } catch (error) {
@@ -42,7 +46,9 @@ export default function dashboard() {
     useEffect(() => {
         async function qtdEscolas() {
             try {
-                const res = await fetch('http://localhost:3001/qtd-escolas');
+                const res = await fetch('http://localhost:3001/qtd-escolas', {
+                    credentials: 'include'
+                });
                 const data = await res.json();
                 setQtdEscolas(data.total_geral);
             } catch (error) {
