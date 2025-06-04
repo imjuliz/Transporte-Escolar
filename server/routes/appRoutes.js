@@ -7,6 +7,7 @@ import { obterPerfilUsuario, editarPerfilController, uploadFotoPerfil} from '../
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
 import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
+import { verVeiculoController } from "../controllers/VerVeiculosController.js";
 import multer from 'multer';
 const router = express.Router();
 
@@ -22,6 +23,7 @@ router.get('/responsavel', autorizarAcesso('Responsável'));
 router.get('/aluno', autorizarAcesso('Aluno'));
 
 router.get('/motorista', autorizarAcesso('Motorista'));
+router.get('/verVeiculo',verVeiculoController, autorizarAcesso('Motorista'));
 
 router.post('/incidente',adicionarIncidenteController);
 // ver informaçoes na pagina "meu perfil"
