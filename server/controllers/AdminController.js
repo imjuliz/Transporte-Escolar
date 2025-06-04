@@ -49,7 +49,7 @@
 
 // export { registrarUsuarioController, registrarVeiculosController }
 
-import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins } from '../models/Admin.js';
+import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdEscolas} from '../models/Admin.js';
 
 // cadastro dos usuarios
 export async function cadastrarAlunoComResponsavel(req, res) {
@@ -198,8 +198,6 @@ const verTodosController = async (req, res) =>{
   }
 };
 
-
-
 //ver todos os responsaveis
 const verResponsaveisController = async (req, res) =>{
   try{
@@ -211,7 +209,6 @@ const verResponsaveisController = async (req, res) =>{
     res.status(500).json({mensagem: 'Erro ao listar responsáveis '})
   }
 };
-
 
 //ver todos os motoristas
 const verMotoristasController = async (req, res) =>{
@@ -225,6 +222,7 @@ const verMotoristasController = async (req, res) =>{
   }
 };
 
+// ver todos os adms
 const verAdminsController = async (req, res) =>{
   try{
     const admins = await VerAdmins();
@@ -236,4 +234,54 @@ const verAdminsController = async (req, res) =>{
   }
 };
 
-export {verTodosController, verResponsaveisController, verMotoristasController, verAdminsController};
+// ver qtnd de todos os usuarios
+const contarUsuariosController = async (req, res) => {
+  try {
+    const totais = await qtdUsuarios();
+    const total_geral = 
+      totais.total_alunos +
+      totais.total_responsaveis +
+      totais.total_motoristas +
+      totais.total_administradores;
+      res.status(200).json(total_geral);
+  } catch (error) {
+    console.error('Erro ao contar usuários:', error);
+    res.status(500).json({ mensagem: 'Erro ao contar usuários' });
+  }
+};
+
+// ver qtnd total de escolas
+const contarEscolasController = async (req, res) => {
+  try {
+    const totais = await qtdEscolas();
+    const total_geral = totais.total_escolas;
+    res.status(200).json({ total_escolas: total_geral });
+  } catch (error) {
+    console.error('Erro ao contar escolas:', error);
+    res.status(500).json({ mensagem: 'Erro ao contar escolas' });
+  }
+};
+
+// ver todas as viagens em andamento
+async function viagensEmAndamentoController(req, res) {
+    try {
+        const viagens = await buscarViagensEmAndamento();
+
+        return res.status(200).json(viagens);
+    } catch (error) {
+        console.error('Erro ao buscar viagens em andamento:', error);
+        return res.status(500).json({ erro: 'Erro interno ao buscar viagens em andamento' });
+    }
+}
+
+async function quantidadeViagensEmAndamentoController(req, res) {
+  try {
+    const total = await buscarQuantidadeViagensEmAndamento();
+    return res.status(200).json({ total });
+  } catch (error) {
+    console.error('Erro ao contar viagens em andamento:', error);
+    return res.status(500).json({ erro: 'Erro ao contar viagens em andamento' });
+  }
+}
+
+export {verTodosController, verResponsaveisController, verMotoristasController, verAdminsController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController};

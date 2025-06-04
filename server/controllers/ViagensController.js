@@ -1,4 +1,4 @@
-import { obterDadosDaViagemDoAluno, obterDadosDaViagemDoMotorista, obterDadosDasViagensDoResponsavel } from '../models/Viagens.js'
+import { obterDadosDaViagemDoAluno, obterDadosDaViagemDoMotorista, obterDadosDasViagensDoResponsavel, buscarViagensDoAluno } from '../models/Viagens.js'
 
 async function obterViagemPorUsuario(req, res) {
     try {
@@ -29,4 +29,19 @@ async function obterViagemPorUsuario(req, res) {
     }
 }
 
-export { obterViagemPorUsuario };
+async function listarViagensDoAluno(req, res) {
+  try {
+    const alunoId = req.params.alunoId; // Supondo que venha na URL como /viagens/aluno/:alunoId
+    if (!alunoId) {
+      return res.status(400).json({ error: 'ID do aluno é obrigatório.' });
+    }
+
+    const viagens = await buscarViagensDoAluno(alunoId);
+    return res.status(200).json(viagens);
+  } catch (error) {
+    console.error('Erro ao listar viagens do aluno:', error);
+    return res.status(500).json({ error: 'Erro interno do servidor.' });
+  }
+};
+
+export { obterViagemPorUsuario, listarViagensDoAluno };

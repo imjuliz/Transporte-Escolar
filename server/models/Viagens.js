@@ -241,4 +241,54 @@ async function obterDadosDasViagensDoResponsavel(responsavelId) {
     return viagens.length > 0 ? viagens : null;
 }
 
-export { obterDadosDaViagemDoAluno, obterDadosDaViagemDoMotorista, obterDadosDasViagensDoResponsavel };
+async function buscarViagensDoAluno(alunoId) {
+  const query = `
+    SELECT 
+      viagens.data_viagem,
+      viagens.hora_saida,
+      viagens.hora_chegada_prevista,
+      
+      CASE
+        WHEN viagens.ponto_inicial_tipo = 'ponto_embarque' THEN
+          (SELECT pontos_embarque.endereco FROM pontos_embarque WHERE pontos_embarque.id = viagens.ponto_inicial_id)
+        WHEN viagens.ponto_inicial_tipo = 'escola' THEN
+          (SELECT escolas.endereco FROM escolas WHERE escolas.id = viagens.ponto_inicial_id)
+        ELSE
+          'Endereço não encontrado'
+      END AS endereco_de_ida,
+      
+      CASE
+        WHEN viagens.ponto_final_tipo = 'ponto_embarque' THEN
+          (SELECT pontos_embarque.endereco FROM pontos_embarque WHERE pontos_embarque.id = viagens.ponto_final_id)
+        WHEN viagens.ponto_final_tipo = 'escola' THEN
+          (SELECT escolas.endereco FROM escolas WHERE escolas.id = viagens.ponto_final_id)
+        ELSE
+          'Endereço não encontrado'
+      END AS endereco_de_destino,
+      
+      CASE
+        WHEN viagens.data_viagem = CURDATE() 
+             AND CURTIME() BETWEEN viagens.hora_saida AND viagens.hora_chegada_prevista THEN
+          'em andamento'
+        WHEN viagens.data_viagem = CURDATE() 
+             AND CURTIME() < viagens.hora_saida THEN
+          'ainda hoje'
+        WHEN viagens.data_viagem = CURDATE() 
+             AND CURTIME() > viagens.hora_chegada_prevista THEN
+          'já aconteceu'
+        ELSE
+          'fora do período analisado'
+      END AS status_viagem
+      
+    FROM viagens
+    INNER JOIN alunos_viagens ON alunos_viagens.viagem_id = viagens.id
+    WHERE alunos_viagens.aluno_id = ?
+      AND viagens.data_viagem >= CURDATE()
+    ORDER BY viagens.data_viagem, viagens.hora_saida;
+  `;
+  
+  const viagens = await readQuery(query, [alunoId]);
+  return viagens;
+}
+
+export { obterDadosDaViagemDoAluno, obterDadosDaViagemDoMotorista, obterDadosDasViagensDoResponsavel, buscarViagensDoAluno };

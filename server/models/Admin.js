@@ -88,46 +88,93 @@ export const deletarPerfil = async (tabela, cpf) => {
 
 //ver todos os alunos
 //ver todos os alunos
-export const VerTodos = async() =>{
-    try{
-        return await readAll('alunos');
+export const VerTodos = async () => {
+  try {
+    return await readAll('alunos');
 
-    }
-    catch (error){
-        console.error ('Erro ao listar todos os alunos!: ', error);
-        throw error;
-    }
+  }
+  catch (error) {
+    console.error('Erro ao listar todos os alunos!: ', error);
+    throw error;
+  }
 }
 
 //ver todos os responsaveis
-export const VerResponsaveis = async ()=>{
-  try{
-    return await readAll ('responsaveis');
+export const VerResponsaveis = async () => {
+  try {
+    return await readAll('responsaveis');
   }
-  catch (error){
-    console.error ('Erro ao ver todos os responsáveis:', error);
+  catch (error) {
+    console.error('Erro ao ver todos os responsáveis:', error);
     throw error;
   }
 }
 
 //ver todos os motoristas
-export const VerMotoristas = async () =>{
-  try{
-    return await readAll ('motoristas');
+export const VerMotoristas = async () => {
+  try {
+    return await readAll('motoristas');
   }
-  catch (error){
+  catch (error) {
     console.error('Erro ao ver motoristas: ', error);
     throw error;
   }
 }
 
 //ver todos os admins
-export const VerAdmins = async () =>{
-  try{
-    return await readAll ('adm');
+export const VerAdmins = async () => {
+  try {
+    return await readAll('adm');
   }
-  catch (error){
+  catch (error) {
     console.error('Erro ao ver administradores: ', error);
     throw error;
   }
 }
+
+// ver qntd de usuarios no total
+async function qtdUsuarios() {
+  const sql = `
+    SELECT
+      (SELECT COUNT(*) FROM alunos) AS total_alunos,
+      (SELECT COUNT(*) FROM responsaveis) AS total_responsaveis,
+      (SELECT COUNT(*) FROM motoristas) AS total_motoristas,
+      (SELECT COUNT(*) FROM adm) AS total_administradores
+  `;
+  const resultado = await readQuery(sql);
+  return resultado[0]; // retorna um objeto com os totais
+}
+
+// ver qntd de escolas no total
+async function qtdEscolas() {
+  const sql = `
+    SELECT COUNT(*) AS total_escolas FROM escolas;
+  `;
+  const resultado = await readQuery(sql);
+  return resultado[0];
+}
+
+// ver viagens em andamento
+const buscarViagensEmAndamento = async () => {
+  const sql = `
+        SELECT * FROM viagens
+        WHERE data_viagem = CURDATE()
+        AND CURTIME() BETWEEN hora_saida AND hora_chegada_prevista
+        AND status = 'agendada'
+    `;
+  return await readQuery(sql);
+}
+
+// ver qtd de viagens em andamento
+const buscarQuantidadeViagensEmAndamento = async () => {
+  const sql = `
+    SELECT COUNT(*) AS total FROM viagens
+    WHERE data_viagem = CURDATE()
+    AND CURTIME() BETWEEN hora_saida AND hora_chegada_prevista
+    AND status = 'agendada'
+  `;
+  const resultado = await readQuery(sql);
+  return resultado[0].total; // retorna apenas o número
+};
+
+export { buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdEscolas };
