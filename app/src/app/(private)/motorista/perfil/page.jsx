@@ -66,16 +66,12 @@
 //             }
 //         } catch (error) {
 //             console.error('Erro:', error);
-//         }
-//     };
-
+//         }};
 //     //limpar formulario
 //     const limparForm = () => {
 //         setcpf('');
 //         setEmail('');
-//         setSenha('')
-//     }
-
+//         setSenha('')}
 //     //dados de perfil
 //     const [motorista, setmotorista] = useState(null);
 //     const [erro, setErro] = useState("");
@@ -93,13 +89,10 @@
 //             .catch((err) => {
 //                 console.error("Erro ao buscar dados do motorista:", err.message);
 //                 setErro("Erro ao carregar perfil do motorista.");
-//             });
-//     }, []);
-
+//             });}, []);
 //     // 1. Enquanto carrega
 //     if (erro) {
-//         return <p className="text-red-600 p-4">{erro}</p>;
-//     }
+//         return <p className="text-red-600 p-4">{erro}</p>;}
 //     if (!motorista) {
 //         return (
 //             <div className="text-center">
@@ -117,17 +110,13 @@
 //                     <span className="sr-only">Carregando...</span>
 //                 </div>
 //             </div>
-//         );
-//     }    
-
+//         );}    
 //     function pegarPrimeiroEUltimoNome(nome) {
 //         if (!nome) return { primeiroNome: "", ultimoNome: "" };
 //         const nomes = nome.trim().split(" ");
 //         const primeiroNome = nomes[0];
 //         const ultimoNome = nomes[nomes.length - 1];
-//         return { primeiroNome, ultimoNome };
-//     }
-
+//         return { primeiroNome, ultimoNome };}
 //     // Só executa se motorista estiver carregado e tiver nomeCompleto
 //     const nomeSobrenome = motorista?.nome
 //         ? pegarPrimeiroEUltimoNome(motorista.nome)
