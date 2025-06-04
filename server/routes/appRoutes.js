@@ -8,6 +8,7 @@ import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
 import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
 import { verVeiculoController } from "../controllers/VerVeiculosController.js";
+import { obterInformacoesFilhosController } from "../controllers/ResponsavelController.js";
 import multer from 'multer';
 const router = express.Router();
 
