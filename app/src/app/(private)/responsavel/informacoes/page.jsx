@@ -1,7 +1,9 @@
-"use client";
-import React, { useState } from 'react';
+"use client"
+import React, { useState, useEffect } from 'react';
 import '../styles/infos2.css';
 import '../../../globals.css';
+import { useRouter } from 'next/navigation';
+
 
 const accordionData = [
   {
@@ -51,7 +53,36 @@ const accordionData = [
   },
 ]
 
-export default function Accordion() {
+export default function informacoes() {
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   const validarSessao = async () => {
+  //     try {
+  //       const res = await fetch('http://localhost:3001/validar-sessao', {
+  //         credentials: 'include',
+  //       });
+
+  //       if (res.status !== 200) {
+  //         router.replace('/login');
+  //         return;
+  //       }
+
+  //       const data = await res.json();
+
+  //       if (data.usuario.tipo !== 'responsavel') {
+  //         router.replace('/login');
+  //       }
+
+  //     } catch (err) {
+  //       console.error('Erro na validação de sessão:', err);
+  //       router.replace('/login');
+  //     }
+  //   };
+
+  //   validarSessao();
+  // }, []);
+
   const [ativo, setAtivo] = useState(null)
 
   const toggle = (id) => {
@@ -83,7 +114,7 @@ export default function Accordion() {
                       }`}
                   >
                     {/* Ícone para cima/baixo */}
-                    <svg className='drop'xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="#ffffff" d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+                    <svg className='drop' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="#ffffff" d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" /></svg>
                   </span>
                 </div>
               </button>

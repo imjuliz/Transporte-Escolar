@@ -10,20 +10,38 @@ export default function PrivateLayout({ children }) {
   const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
-    const user = localStorage.getItem("usuario");
-    if (!user) {
-      router.replace("/login");
-    } else {
-      const userObj = JSON.parse(user);
-      const tipoNaRota = pathname.split("/")[1]; // Ex: 'administrador', 'aluno'
-      if ( userObj.tipo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") !== 
-      tipoNaRota.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) {
+    const validarSessao = async () => {
+      try {
+        const res = await fetch("http://localhost:3001/validar-sessao", {
+          credentials: "include", // ESSENCIAL para cookies de sessão
+        });
+
+        if (!res.ok) {
+          router.replace("/login");
+          return;
+        }
+
+        const data = await res.json();
+        const tipoNaRota = pathname.split("/")[1];
+
+        const tipoNormalizado = (str) =>
+          str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+        if (tipoNormalizado(data.usuario.tipo) !== tipoNormalizado(tipoNaRota)) {
+          router.replace("/login");
+          return;
+        }
+
+        setUsuario(data.usuario);
+      } catch (error) {
+        console.error("Erro ao validar sessão:", error);
         router.replace("/login");
-      } else {
-        setUsuario(userObj);
+      } finally {
+        setTimeout(() => setCarregando(false), 200);
       }
-    }
-    setTimeout(() => setCarregando(false), 200);
+    };
+
+    validarSessao();
   }, [pathname]);
 
   if (carregando || !usuario) {

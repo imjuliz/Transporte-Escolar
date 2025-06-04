@@ -1,36 +1,42 @@
-//validaçao dos usuarios antes de acessar rotas privadas
-
-// const autenticarUsuario = async (req, res, next) => {
-//     const { email, senha, tipo } = req.body;
-//     // se não preencher os campos bloqueia a requisição
-//     if (!email || !senha || !tipo) {
-//         return res.status(400).json({ mensagem: 'Preencha todos os campos.' });
+// export function autorizarAcesso(tipoPermitido) {
+//   return (req, res, next) => {
+//     if (!req.session.usuario) {
+//       return res.status(401).json({ erro: 'Não autenticado' });
 //     }
-//     try {
-//         const usuario = await buscarUsuario(email, senha, tipo);
-//         // se o usuário não for encontrado, bloqueia a requisição
-//         if (!usuario) {
-//             return res.status(401).json({ mensagem: 'Acesso negado: credenciais inválidas.' });
-//         }
 
-//         req.usuario = usuario; // guarda os dados do usuário autenticado na requisição
-//         next(); // permite acesso à rota privada
-//     } catch (err) {
-//         console.error('Erro na autenticação:', err);
-//         res.status(500).json({ mensagem: 'Erro interno ao autenticar usuário.' });
+//     if (req.session.usuario.tipo !== tipoPermitido) {
+//       return res.status(403).json({ erro: 'Acesso negado' });
 //     }
-// };
 
-export function autorizarAcesso(tipoPermitido) {
+//     next();
+//   };
+// }
+
+export function autorizarAcesso(...tiposPermitidos) {
   return (req, res, next) => {
     if (!req.session.usuario) {
+      console.log('Não autenticado');
       return res.status(401).json({ erro: 'Não autenticado' });
     }
 
-    if (req.session.usuario.tipo !== tipoPermitido) {
+    const tipoUsuario = req.session.usuario.tipo
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    const tiposNorm = tiposPermitidos.map(t =>
+      t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    );
+
+    console.log('Tipo do usuário:', tipoUsuario);
+    console.log('Tipos permitidos:', tiposNorm);
+
+    if (!tiposNorm.includes(tipoUsuario)) {
+      console.log('Acesso negado para tipo:', tipoUsuario);
       return res.status(403).json({ erro: 'Acesso negado' });
     }
 
+    console.log('Acesso permitido para tipo:', tipoUsuario);
     next();
   };
 }

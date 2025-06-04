@@ -87,7 +87,6 @@ export const deletarPerfil = async (tabela, cpf) => {
 //funcoes de ver todos os registros
 
 //ver todos os alunos
-//ver todos os alunos
 export const VerTodos = async () => {
   try {
     return await readAll('alunos');

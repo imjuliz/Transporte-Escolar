@@ -6,33 +6,26 @@ import rotas from "./routes/appRoutes.js";
 const app = express();
 const port = 3001;
 
-app.use(express.json());
-
 app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true
 }));
 
+app.use(express.json());
+
 app.use(session({
   secret: 'chave_secreta',
   resave: false,
-  saveUninitialized: true,
-  rolling: true,
+  saveUninitialized: false,
   cookie: {
-    secure: false, // true se usar HTTPS
+    secure: false,
     httpOnly: true,
-    maxAge: 1000 * 60 * 60, // 1 hora
-    sameSite: 'lax'
-
+    maxAge: 1000 * 60 * 60
   }
-}
-));
+}));
+
 app.use((req, res, next) => {
   console.log("Tipo de Usuário:", req.session.usuario);
-  next();
-});
-
-app.use((req, res, next) => {
   console.log("Sessão atual:", req.session);
   next();
 });
@@ -47,12 +40,17 @@ app.get('/debug/sessao', (req, res) => {
   });
 });
 
+app.get('/validar-sessao', (req, res) => {
+  if (req.session?.usuario) {
+    res.status(200).json({ usuario: req.session.usuario });
+  } else {
+    res.status(401).json({ erro: 'Usuário não autenticado' });
+  }
+});
+
 app.use((req, res) => {
   res.status(404).json({ mensagem: 'Rota não encontrada' });
 });
-
-//foto de perfil
-app.use('/uploads', express.static('uploads')); // serve imagens
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
