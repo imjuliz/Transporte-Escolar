@@ -9,6 +9,7 @@ import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrado
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
 import { obterInformacoesFilhosController } from '../controllers/ResponsavelController.js'
 import { verVeiculoController } from "../controllers/VerVeiculosController.js";
+import { obterInformacoesFilhosController } from "../controllers/ResponsavelController.js";
 import multer from 'multer';
 const router = express.Router();
 

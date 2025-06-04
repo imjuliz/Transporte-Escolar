@@ -236,3 +236,151 @@ margin-top: 2%;
     padding: 2.5%;
     border-radius: 10px;
 }
+
+/* responsividade */
+@media screen and (max-width: 1536px){
+
+    /*Banner*/
+    .banner-textos{
+      margin-top: 15vh;
+    }
+    .banner1img .arvores{
+      width: 30%;
+      margin-right: 40%;
+      }
+      
+  /* seção 5 */
+  
+  .secão5 {
+    background-color: #161A23;
+    width: 100%;
+    height: 70vh;
+  }
+  
+  .secão5 h1 {
+    font-family: "Plus Jakarta Sans Bold";
+    color: white;
+    margin-bottom: 3vh;
+  }
+  
+  .secão5 h2 {
+    margin-top: 5%;
+  }
+  
+  .secão5 .banner2{
+    width: 40vw;
+  }
+  
+  /* seção 4 */
+  .secão4{
+    height: 70vh;
+  }
+  .secão4 h2 {
+    margin-top: -10%;
+  }
+  
+  .secão4 .text4{
+    font-size: 20px;
+    width: 160%;
+  }
+  }
+  
+  
+  @media screen and (max-width: 1280px) {
+    .secão5{
+      height: 60vw;
+      margin-bottom: 5%;
+    }
+  .secão5 .title5 {
+    font-family: "Plus Jakarta Sans semibold";
+    text-align: left;
+    color: white;
+    font-size: 24px;
+    white-space: nowrap;
+  }
+  
+  .secão5 .text5 {
+    font-family: "Plus Jakarta Sans SemiBold";
+    color: #e8edf786;
+    text-align: left;
+  }
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .secão5{
+      height: 80vw;
+      margin-bottom: 5%;
+    }
+  
+    .secão5 .banner2 {
+      width: 40vw;
+    }
+  
+    .container-cards{
+      width: 100%;
+  }
+  .secão4 .cards42 .text4{
+    font-size: 15px;
+  }
+  .secão4 .bolinha{
+    width: 5vw;
+  }
+  
+  }
+  
+  @media screen and (max-width: 768px) {
+    .secão4 .bolinha {
+      width: 40px;
+    }
+  
+    .secão4 .cards4 {
+      width: 80%;
+    }
+  
+    .secão4 .cards42 {
+      margin-bottom: 15%;
+      width: 10vw;
+    }
+  
+    .secão4 .text4 {
+      margin-top: 8vw;
+      width: 20vw;
+    }
+  
+    .secão4 .card4 {
+      width: 10vw;
+      height: 10vw;
+    }
+  
+    /* seção 5 */
+    .secão5 {
+      height: 90vw;
+      padding-top: -5%;
+    }
+  
+    .secão5 .title5_3 {
+      width: 55%;
+      margin-left: 0%;
+      margin-bottom: 7%;
+      font-size: 15px;
+    }
+  
+    .secão5 .card5 {
+      width: 5vw;
+    }
+    .secão5 .title5 {
+      font-size: 15px;
+    }
+    .secão5 .text5 {
+      width: 130%;
+      margin-left: 0vw;
+      font-size: 15px;
+    }
+  .container-cards{
+    margin-left: -5%;
+  }
+    .secão5 .banner2 {
+      width: 40vw;
+      margin-right: -10%;
+    }
+  }
