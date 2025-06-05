@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
 
     const iconsNav =
     {
-        navegacao: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        rotas: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_94_753" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
                 <path d="M0 0H20V20H0V0Z" fill="white" />
             </mask>
@@ -60,7 +60,7 @@ export default function RootLayout({ children }) {
     };
 
     const links = [
-        { href: '/navegacao', name: 'navegacao', page: 'Rotas' },
+        { href: '/responsavel/rotas', name: 'rotas', page: 'Rotas' },
         { href: '/responsavel/viagens', name: 'viagens', page: 'Viagens' },
         { href: '/responsavel/filhos', name: 'filhos', page: 'Filhos' },
         { href: '/responsavel/notificacoes', name: 'notificacoes', page: 'Notificações' },
