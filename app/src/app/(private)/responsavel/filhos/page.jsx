@@ -56,33 +56,6 @@ const accordionData = [
 export default function informacoes() {
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const validarSessao = async () => {
-  //     try {
-  //       const res = await fetch('http://localhost:3001/validar-sessao', {
-  //         credentials: 'include',
-  //       });
-
-  //       if (res.status !== 200) {
-  //         router.replace('/login');
-  //         return;
-  //       }
-
-  //       const data = await res.json();
-
-  //       if (data.usuario.tipo !== 'responsavel') {
-  //         router.replace('/login');
-  //       }
-
-  //     } catch (err) {
-  //       console.error('Erro na validação de sessão:', err);
-  //       router.replace('/login');
-  //     }
-  //   };
-
-  //   validarSessao();
-  // }, []);
-
   const [filhos, setFilhos] = useState([]);
   const [ativo, setAtivo] = useState(null)
 
@@ -116,8 +89,8 @@ export default function informacoes() {
         <hr />
       </div>
       <div className="max-w-1000px justify-items-center mx-auto mt-10 md:w-10">
-        {filhos.map((filho) => (
-          <div key={filho.aluno_id} className="container-viagem bg-[#fff] rounded-[2vw] border-b border-slate-200">
+        {filhos.map((filho, index) => (
+          <div key={index} className="container-viagem bg-[#fff] rounded-[2vw] border-b border-slate-200">
             <div className='flex '>
               <img
                 className='foto-aluno object-cover rounded-l-[2vw]'
@@ -129,7 +102,7 @@ export default function informacoes() {
                 className="conteudo-card w-full flex justify-between items-center py-5 text-slate-800"
               >
                 <span className='texto-card'>
-                  <h3>{filho.nome_completo}</h3>
+                  <h3>{filho.nome_aluno}</h3>
                   <p>{filho.nome_escola}</p>
                 </span>
                 <div className='ver-mais items-center'> Ver Informações
@@ -149,21 +122,21 @@ export default function informacoes() {
                 <h3>Informações do Aluno</h3>
                 <hr></hr>
                 <div className='informacoes-aluno flex flex-column'>
-                  <div className='info flex justify-between items-center'><p>Nome:</p><p>{filho.nome_completo}</p></div><hr />
+                  <div className='info flex justify-between items-center'><p>Nome:</p><p>{filho.nome_aluno}</p></div><hr />
                   <div className='info flex justify-between items-center'><p>Idade:</p><p>{filho.idade}</p></div><hr />
                   <div className='info flex justify-between items-center'><p>Escola:</p><p>{filho.nome_escola}</p></div><hr />
-                  <div className='info flex justify-between items-center'><p>Endereço:</p><p>{filho.endereco}</p></div><hr />
-                  <div className='info flex justify-between items-center'><p>Rota:</p><p>{filho.rota_nome}</p></div><hr />
+                  <div className='info flex justify-between items-center'><p>Ponto de embarque:</p><p>{filho.endereco_embarque}</p></div><hr />
+                  <div className='info flex justify-between items-center'><p>Rota:</p><p>Ida e volta</p></div><hr />
                 </div>
 
                 <div className='cards-horario'>
                   <div className="card-hora bg-[#fffff] rounded-[1vw] ">
                     <h3>Horário de Embarque</h3>
-                    <p>{filho.horario_embarque}</p>
+                    <p>{filho.viagens[0]?.hora_saida}</p>
                   </div>
                   <div className="card-hora bg-[#fffff] rounded-[1vw] ">
                     <h3>Horário de Desembarque</h3>
-                    <p>{filho.horario_desembarque}</p>
+                    <p>{filho.viagens[0]?.hora_chegada_prevista}</p>
                   </div>
                 </div>
                 {/**Colocar aqui o mapa da rota de cada aluno - linkar na const */}
@@ -174,7 +147,7 @@ export default function informacoes() {
                     src={filho.motorista_img || "/imgs/default-motorista.png"}
                     alt="Foto do motorista"
                   />
-                  <h3>{filho.motorista_nome}</h3>
+                  <h3>{filho.viagens[0]?.nome_motorista}</h3>
                 </div>
               </div>
             </div>
