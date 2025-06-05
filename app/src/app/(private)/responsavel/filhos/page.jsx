@@ -1,59 +1,9 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import '../styles/infos2.css';
-import '../../../globals.css';
+import '../styles/filhos.css';
 import { useRouter } from 'next/navigation';
 
-
-const accordionData = [
-  {
-    id: 1,
-    escola: 'ETEC Dona Carmim',
-    img: '/img/menina2.jpg',
-    nomeCompleto: 'Sofia Souza Oliveira',
-    idade: '7',
-    endereco: 'Rua Amazonas 47',
-    rota: 'Ida e Volta',
-    motorista: ({
-      nome: 'Sônia Silva',
-      img: '/img/motorista1.jpg',
-    }),
-    horaEmbarque: '6:30',
-    horaDesembarque: '12:30'
-  },
-  {
-    id: 2,
-    escola: 'ETEC Dona Carmin',
-    img: '/img/menina3.png',
-    nomeCompleto: 'Ana Souza Oliveira',
-    idade: '10',
-    endereco: 'Rua Amazonas 47',
-    rota: 'Ida e Volta',
-    motorista: ({
-      nome: 'Sônia Silva',
-      img: '/img/motorista1.jpg',
-    }),
-    horaEmbarque: '6:30',
-    horaDesembarque: '12:30'
-  },
-  {
-    id: 3,
-    escola: 'ETEC Dona Carmin',
-    img: '/img/menino.jpg',
-    nomeCompleto: 'Enzo Souza Oliveira',
-    idade: '5',
-    endereco: 'Rua Amazonas 47',
-    rota: 'Ida e Volta',
-    motorista: ({
-      nome: 'Sônia Silva',
-      img: '/img/motorista1.jpg',
-    }),
-    horaEmbarque: '6:30',
-    horaDesembarque: '12:30'
-  },
-]
-
-export default function informacoes() {
+export default function filhos() {
   const router = useRouter();
 
   const [filhos, setFilhos] = useState([]);
@@ -84,6 +34,7 @@ export default function informacoes() {
 
   return (
     <section className='informacoes'>
+      <div className='div-section'>
       <div className='page-indicador'>
         <h1>Informações</h1>
         <hr />
@@ -117,7 +68,7 @@ export default function informacoes() {
               </button>
             </div>
             {/**Conteudo escondido */}
-            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${ativo === filho.aluno_id ? 'max-h-500' : 'max-h-0'}`}>
+            <div className={`container-escondido overflow-hidden transition-all duration-500 ease-in-out ${ativo === filho.aluno_id ? 'max-h-500' : 'max-h-0'}`}>
               <div className="conteudo-escondido pb-5 text-sm text-slate-500">
                 <h3>Informações do Aluno</h3>
                 <hr></hr>
@@ -153,6 +104,7 @@ export default function informacoes() {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </section>
   )

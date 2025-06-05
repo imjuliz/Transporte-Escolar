@@ -7,9 +7,9 @@ main{
     align-content: start;
 }
 
-section{
+.div-section{
     margin-top: 10vh;
-    margin-bottom: 5vh;
+    margin-bottom: 10vh;
 }
 
 .page-indicador{
@@ -27,12 +27,8 @@ hr{
 
 .container-viagem{
     width: 900px;
-    /*padding: 1.3rem 2.3rem;*/
-    box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
     margin-bottom: 30px;
-    transition: box-shadow .3s;
    justify-content: center; 
-   
 }
 
 .container-viagem:hover{

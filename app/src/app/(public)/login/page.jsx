@@ -86,7 +86,7 @@ export default function Login() {
       } else if (tipoUsuario === "motorista") {
         router.replace("/motorista/minha-rota");
       } else if (tipoUsuario === "responsavel") {
-        router.replace("/responsavel/informacoes");
+        router.replace("/responsavel/filhos");
       } else {
         router.replace("/login");
       }

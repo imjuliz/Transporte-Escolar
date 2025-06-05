@@ -8,10 +8,10 @@ export default function MeuPerfil() {
     useEffect(() => {
         document.title = 'EduTrip - Meu Perfil';
     }, []);
-    
+
     const cpfInputRef = useRef(null);
     const emailInputRef = useRef(null);
-    const senhaInputRef = useRef(null);
+    const telefoneInputRef = useRef(null);
 
     // BUSCAR DADOS DO USUARIO NO BANCO DE DADOS
     const [usuario, setUsuario] = useState(null);
@@ -55,9 +55,8 @@ export default function MeuPerfil() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = {
-            cpf: cpfInputRef.current?.value.replace(/[.-]/g, ''),
             email: emailInputRef.current?.value,
-            senha: senhaInputRef.current?.value,
+            telefone: telefoneInputRef.current?.value,
         };
         try {
             const response = await fetch('http://localhost:3001/editarPerfil', {
@@ -160,25 +159,17 @@ export default function MeuPerfil() {
                             <h3 className="text-lg font-semibold">Editar Informações</h3>
                             <form onSubmit={handleSubmit}>
                                 <div className="grid gap-6 mb-6 md:grid-cols-2">
-                                    <div>
-                                        <label htmlFor="cpf">CPF</label>
-                                        <input type="text" id="cpf" ref={cpfInputRef} defaultValue={usuario?.cpf || ""} maxLength="14" className="input" placeholder="000.000.000-00" required />
+                                    <div className="mb-6 flex flex-col">
+                                        <label htmlFor="email">E-mail</label>
+                                        <input type="email" id="email" ref={emailInputRef} defaultValue={usuario?.email || ""} className="input" placeholder="seu@email.com" required />
                                     </div>
-                                <div className='flex flex-col'>
-                                    <label htmlFor="cpf">CPF</label>
-                                    <input type="text" id="cpf" ref={cpfInputRef} maxLength="14" className="input" placeholder="000.000.000-00" required />
+                                    <div className="mb-6 flex flex-col">
+                                        <label htmlFor="telefone">telefone</label>
+                                        <input type="text" id="telefone" maxLength="9" ref={telefoneInputRef} defaultValue={usuario?.senha || ""} className="input" placeholder="" required />
+                                    </div>
+                                    <button type="submit" className="btn-salvar">Salvar</button>
+                                    <div><strong>Resposta do servidor:</strong><pre>{resposta}</pre></div>
                                 </div>
-                                <div className="mb-6 flex flex-col">
-                                    <label htmlFor="email">E-mail</label>
-                                    <input type="email" id="email" ref={emailInputRef} defaultValue={usuario?.email || ""} className="input" placeholder="seu@email.com" required />
-                                </div>
-                                <div className="mb-6 flex flex-col">
-                                    <label htmlFor="senha">Senha</label>
-                                    <input type="password" id="senha" ref={senhaInputRef} defaultValue={usuario?.senha || ""} className="input" placeholder="•••••••••" required />
-                                </div>
-                                <button type="submit" className="btn-salvar">Salvar</button>
-                                <div><strong>Resposta do servidor:</strong><pre>{resposta}</pre></div>
-                            </div>
                             </form>
                         </div>
                     </div>
