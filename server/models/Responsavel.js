@@ -12,7 +12,7 @@ const verFilhos = async (responsavelId) => {
       v.tipo_viagem,
       v.hora_saida,
       v.hora_chegada_prevista,
-      DATE(v.data_viagem) AS data,
+      DATE_FORMAT(v.data_viagem, '%d/%m/%Y') AS data,
       m.nome AS nome_motorista,
 
       CASE

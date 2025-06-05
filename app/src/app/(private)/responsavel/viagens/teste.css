@@ -1,6 +1,18 @@
+/* bolinha piscando quando a viagem estiver ativa*/
+.blink {
+    animation: piscar 1s infinite;
+  }
+  
+  @keyframes piscar {
+    0% { opacity: 1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+  }
+  
+
 .chrome{
     background-color: white;
-    height: 500px;
+    height: fit-content;
     border-radius: 30px;
 }
 
@@ -10,6 +22,7 @@
 
 .container-viagem{
     width: 100%;
+    height: fit-content;
     padding: 1.3rem 2.3rem;
     box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
     margin-bottom: 30px;
@@ -81,6 +94,8 @@ body{
 
 main{
     align-content: start;
+    height: 100vh !important;
+    overflow: hidden;
 }
 
 section{
@@ -129,16 +144,18 @@ section{
 }
 
 .status{
-    background-color:blue;
-    padding: 5px 20px;
-    border-radius: 10px;
-    width: 170px;
-    justify-content: center;
-    
+    width: fit-content;
+    padding: 0.4rem 2rem;
+    font-family: 'Plus Jakarta Sans Medium';
+    font-size: 1rem;
+    text-align: center;
 }
 
 .titulo-status{
     width: 100%
+}
+.titulo-status h3{
+    margin: 0;
 }
 .circle{
     margin: 0 1.7vw;
@@ -152,88 +169,45 @@ section{
     gap: 15px
 }
 @media screen and (max-width: 1536px) {
-    .chrome{
-        height: 70%;
-    }
     .container-viagem h3{
         font-size: 1.5rem;
     }
-    .status{
-        font-size: 1.3rem;
-        white-space: nowrap;
-        margin-right: -30vw;
-        width: 50%;
-    }
     .titulo-status{
-        width: 65%;
         justify-content: space-between;
     }
   }
 @media screen and (max-width: 1280px) {
-    .chrome{
-        height: 70%;
-    }
     .container-viagem h3{
         font-size: 1.3rem;
     }
-    .status{
-        font-size: 1rem;
-        white-space: nowrap;
-        margin-right: -30vw;
-        width: 50%;
-    }
     .titulo-status{
-        width: 65%;
         justify-content: space-between;
     }
   }
 @media screen and (max-width: 1024px) {
-    .chrome{
-        height: 70%;
-    }
     .container-viagem h3{
         font-size: 1rem;
     }
-    .status{
-        font-size: 1rem;
-        white-space: nowrap;
-        margin-right: -20vw;
-        width: 50%;
-    }
     .titulo-status{
-        width: 80%;
         justify-content: space-between;
     }
   }
 @media screen and (max-width: 768px) {
-    .chrome{
-        height: 70%;
-    }
     .container-viagem h3{
         font-size: 1rem;
-    }
-    .status{
-        font-size: 0.8rem;
-        white-space: nowrap;
-        margin-right: -25vw;
-        width: 80%;
     }
   }
 @media screen and (max-width: 640px) {
-    .chrome{
-        height: 70%;
-    }
     .container-viagem h3{
         font-size: 1rem;
     }
-    .status{
-        font-size: 0.8rem;
-        white-space: nowrap;
-        margin-right: -30vw;
-        width: 85%;
-    }
     .titulo-status{
-        width: 80%;
         justify-content: space-between;
     }
   }
+
+@media screen and (max-width: 600px) {
+    .titulo-status{
+        flex-direction: column;
+    }
+}
