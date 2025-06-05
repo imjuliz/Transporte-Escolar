@@ -219,6 +219,8 @@ const verAdminsController = async (req, res) =>{
   }
 };
 
+//------------------------------dashboard
+
 // ver qtnd de todos os usuarios
 const contarUsuariosController = async (req, res) => {
   try {

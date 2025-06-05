@@ -1,7 +1,56 @@
-body{
-    background-color: #D0D0D0;
+hr {
+    width: 300px;
 }
 
-.box-infos{
-    padding: 1rem 2rem;
+body {
+    background-color: #F5F5F5 !important;
 }
+
+main {
+    align-content: start;
+}
+
+section {
+    margin-top: 10vh;
+}
+
+.page-indicador {
+    width: fit-content;
+    margin-bottom: 8vh;
+}
+
+.page-indicador h1 {
+    font-family: 'Plus Jakarta Sans Bold';
+    font-size:2.5rem
+}
+
+p{
+    font-family: 'Plus Jakarta Sans Medium';
+    font-size: 1rem;
+    margin:0 !important;
+}
+
+h3{
+    font-family: 'Plus Jakarta Sans Semibold';
+    font-size: 1.2rem;
+}
+
+.icone{
+    width: 70px;
+    height: 70px;
+    background-color:#ffbf1d3a;
+    align-items: center center;
+    justify-items: center;
+    border-radius: 50%;
+    padding: 15px
+}
+
+.icone img{
+    width: 30px
+}
+
+.informacao{
+    font-size: 25px;
+    font-family: 'Plus Jakarta Sans Bold';
+}
+
