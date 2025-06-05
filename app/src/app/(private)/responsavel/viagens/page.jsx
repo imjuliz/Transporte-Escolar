@@ -1,68 +1,29 @@
 "use client";
 import './viagens.css'
-//import Footer from '../../../components/Footer/Footer.jsx'
 import './teste.css'
-import { usePathname } from 'next/navigation';
-//import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export default function Viagens() {
-  const alunos = [
-    {
-      id: 1,
-      nome: 'Sofia Souza',
-      img: '/img/menina2.jpg',
-      viagens: [
-        {
-          data: 'Hoje',
-          tipo: 'Embarque de Saída',
-          horaEmbarque: '12:30',
-          horaSaída: '12:50',
-          status:'Em andamento'
-          
-        },
-        {
-          data: 'Hoje',
-          tipo: 'Embarque de Entrada',
-          horaEmbarque: '6:30',
-          horaSaída: '7:00',
-          status: 'Concluído'
-        },
-        {
-          data: 'Ontem',
-          tipo: 'Embarque de Saída',
-          horaEmbarque: '12:35',
-          horaSaída: '12:57',
-          status: 'Concluído'
-        }]
-    },
-    {
-      id: 2,
-      nome: 'Ana Clara',
-      img: '/img/menina2.jpg',
-      viagens: [
-        {
-          data: 'Hoje',
-          tipo: 'Embarque de Saída',
-          horaEmbarque: '17:30',
-          horaSaída: '17:40',
-          status: 'Em andamento'
-        },
-        {
-          data: 'Hoje',
-          tipo: 'Embarque de Entrada',
-          horaEmbarque: '12:45',
-          horaSaída: '13:05',
-          status: 'Concluído'
-        },
-        {
-          data: 'Ontem',
-          tipo: 'Embarque de Saída',
-          horaEmbarque: '17:25',
-          horaSaída: '17:45',
-          status: 'Concluído'
-        }]
-    }
-  ]
+  const [alunos, setAlunos] = useState([]);
+
+  useEffect(() => {
+    // Substitua pela URL correta do seu back-end
+    fetch('http://localhost:3001/filhos', {
+      credentials: 'include'
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Erro ao buscar dados');
+        return res.json();
+      })
+      .then((data) => {
+        setAlunos(data.infoFilhos || []);
+      })
+      .catch((error) => {
+        console.error('Erro ao carregar alunos:', error);
+        setAlunos([]);
+      });
+  }, []);
+
   return (
     <>
       <section className='navegacao'>
@@ -72,34 +33,34 @@ export default function Viagens() {
         </div>
         <div className='chrome'>
           <ul className="nav nav-tabs" id="myTab" role="tablist">
-            {alunos.map((aluno, id, index) => (
-              <li className="nav-item" role="presentation" key={id}>
-                <button className={`barrinha nav-link ${index === 0 ? 'active' : ''}`}
-                  id={`tab-${aluno.id}`}
+           {(alunos || []).map((aluno, id, index) => (
+              <li className="nav-item" role="presentation" key={index}>
+                <button className={`barrinha nav-link ${id === 0 ? 'active' : ''}`}
+                  id={`tab-${aluno.id_aluno}`}
                   data-bs-toggle="tab"
-                  data-bs-target={`#content-${aluno.id}`}
+                  data-bs-target={`#content-${aluno.id_aluno}`}
                   type="button"
                   role="tab"
-                  aria-controls={`content-${aluno.id}`}
-                  aria-selected={index === 0 ? 'true' : 'false'}
+                  aria-controls={`content-${aluno.id_aluno}`}
+                  aria-selected={id === 0 ? 'true' : 'false'}
                 >
-                  <img src={aluno.img} alt="" className='fotodeperfil'/>
-                  <p className='nomeAluno'>{aluno.nome}</p>
+                  <img src={aluno.img || '/default-profile.png'}alt="" className='fotodeperfil'/>
+                  <p className='nomeAluno'>{aluno.nome_aluno}</p>
                 </button>
               </li>
             ))}
           </ul>
           {/**Conteudo das tabs */}
           <div className="conteudo tab-content" id="myTabContent">
-            {alunos.map((aluno, id, index) => (
+            {(alunos || []).map((aluno, id, index) => (
               <div
                 key={id}
-                className={`tab-pane fade ${index === 0 ? 'show active' : ''}`}
-                id={`content-${aluno.id}`}
+                className={`tab-pane fade ${id === 0 ? 'show active' : ''}`}
+                id={`content-${aluno.id_aluno}`}
                 role="tabpanel"
-                aria-labelledby={`tab-${aluno.id}`}
+                aria-labelledby={`tab-${aluno.id_aluno}`}
               >
-                {aluno.viagens.map((viagem, i) => (
+                 {(aluno.viagens || []).map((viagem, i) => (
                   <div key={i} className="container-viagem border ">
                     <div className='flex flex-row items-center'>
                                         <svg className='circle-t' width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +71,7 @@ export default function Viagens() {
                                             <circle cx="1.5" cy="1.5" r="1.5" fill="#8F9BB3" />
                                         </svg>
 
-                                        <p className='m-0 text-[#8F9BB3]'>{viagem.horaEmbarque} - {viagem.horaSaída}</p>
+                                        <p className='m-0 text-[#8F9BB3]'>{viagem.horaEmbarque} - {viagem.horaSaida}</p>
                                     </div>
                                     <div className='titulo-status flex items-center justify-between'>
 
