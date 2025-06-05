@@ -50,7 +50,7 @@ const obterPerfilUsuario = async (req, res) => {
 const editarPerfilController = async (req, res) => {
     console.log("editarPerfilController: ", req.session)
     try {
-        const { cpf, email, senha } = req.body;
+        const { telefone, telefonePrinc, email, emailPessoal} = req.body;
         const { tipo, id } = req.session.usuario;
         // let fotoPerfil = null;
 
@@ -60,9 +60,8 @@ const editarPerfilController = async (req, res) => {
 
         //armazena no arquivo json as info
         const atualizacoes = {
-            cpf: cpf,
-            email: email,
-            senha: senha,
+            telefone: telefone,
+            email: email
             // foto: fotoPerfil
         };
 

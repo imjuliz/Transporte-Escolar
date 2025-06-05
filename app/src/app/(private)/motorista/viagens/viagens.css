@@ -1,156 +1,73 @@
-/*seção 1*/
-.secao1 .title1 {
-    margin-left: -100%;
-    margin-top: 10%;
+/*css da julia*/
+
+body{
+  background-color: #F5F5F5 !important;
+}
+
+main{
+  align-content: start;
+}
+
+section{
+  margin-top: 10vh;
+}
+
+.page-indicador{
+  width: fit-content;
+  margin-bottom: 8vh;
+}
+
+.page-indicador h1{
+  font-family: 'Plus Jakarta Sans Bold';
+}
+
+.days, section{
+  width: 100%;
+}
+
+.days h2{
+  font-family: 'Plus Jakarta Sans Semibold';
+  margin-bottom: 3vh;
+  font-size: 1.5rem;
+}
+
+.container-viagem{
+  width: 100%;
+  padding: 1.3rem 2.3rem;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+}
+
+.container-viagem p{
+  font-family: 'Plus Jakarta Sans Medium';
+  font-size: 1rem;
+}
+
+.container-viagem h3{
+  font-family: 'Plus Jakarta Sans Semibold';
+  font-size: 1.2rem;
+}
+
+.circle{
+  margin: 0 1.7vw;
+}
+
+.circle-t{
+  margin: 0 1vw 0 0;
+}
+@media screen and (max-width: 640px) {
+  .chrome{
+      height: 80%;
   }
-  
-  .secao1 .linha {
-    margin-left: -100%;
-    margin-bottom: 10%;
-    width: 55%;
-    border-bottom: 2px solid #D0D0D0;
+  .container-viagem{
+      height: 16vw;
   }
-  .botaoEditar{
-    margin-left: 170%;
-    white-space: nowrap;
-  }
-  .teste-scroll{
-    margin-left: -60%;
-    width: 280%;
-    overflow-x: scroll;
-  }
-  .escolas{
-    width: 100%;
-    margin-left: -90%;
-  }
-  .cartao-escola{
-  margin-bottom: 4%;
-  }
-  .cartao-escola :hover{
-    transform: scale(1.03); 
-  }
-  .escolas1{
-    border-left: 10px solid #6688FF;
-    height: 80%;
-    width: 200%;
-    background-color:#d9d9da2f ;
-    border-radius:15px ;
-    padding-left: 5%;
-  }
-  .hoje{
-    background-color: #ffffff;
-    width: 80px;
-    height: 60px;
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 10%;
-    padding-top: 1%; 
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  .escolas .horarios{
-    background-color: #6687ff5d;
-    width: 80px;
-    height: 60px;
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 10%;
-    padding-top: 4%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  @media screen and (max-width:1536px) {
-    .botaoEditar{
-      margin-left: 35%;
-      white-space: nowrap;
-    }
-  }
-  @media screen and (max-width:1280px) {
-    .secao1 .title1 {
-      margin-left: -100%;
-      margin-top: 10%;
-      font-size: 30px;
-    }
-    
-    .secao1 .linha {
-      margin-left: -100%;
-      margin-bottom: 10%;
-      width: 55%;
-      border-bottom: 2px solid #D0D0D0;
-    }
-    .botaoEditar{
-      margin-left: 20%;
-      white-space: nowrap;
-    }
-  }
-  @media screen and (max-width:1024px) {
-    .secao1 .title1 {
-      margin-left: -100%;
-      margin-top: 10%;
-      font-size: 25px;
-    }
-    
-    .secao1 .linha {
-      margin-left: -100%;
-      margin-bottom: 10%;
-      width: 55%;
-    }
-    .botaoEditar{
-      margin-left: 20%;
-    }
-    .hoje{
-      padding-top: 5%; 
-    }
-    .escola-nome{
+  .titulo-status h1{
+      font-family: 'Plus Jakarta Sans Bold';
       font-size: 20px;
-    }
-    .escola-endereco{
-      font-size: 13px;
-    }
   }
-  @media screen and (max-width:768px) {
-    .secao1 .title1 {
-      margin-left: -60%;
-      margin-top: 10%;
-      font-size: 25px;
-    }
-    
-    .secao1 .linha {
-      margin-left: -60%;
-      margin-bottom: 10%;
-      width: 55%;
-    }
-    .botaoEditar{
-      margin-left: 15%;
-      width: 60%;
-    }
-    
-  .cartao-escola{
-    margin-bottom: 4%;
-    width: 80%;
-    margin-left: 30%;
-    }
-    .escolas .horarios{
-      width: 60px;
-      height: 40px;
-      margin-bottom: 10%;
-      padding-top: 4%;
-    }
-    .hoje{
-      margin-left: 30%;
-      width: 60px;
-      height: 40px;
-      margin-bottom: 10%;
-      padding-top: 1%; 
-    }
+  .ver-mais{
+     font-size: 70%;
+     height: 40%;
+     margin-bottom: -50%;
   }
-  @media screen and (max-width:640px) {
-    
-    .botaoEditar{
-      margin-left: 5%;
-      width: 60%;
-    }
-    
-  .cartao-escola{
-    width: 75%;
-    margin-left: 30%;
-    }
-  }
+}

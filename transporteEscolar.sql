@@ -398,8 +398,22 @@ where id< 20;
 JOIN viagens ON alunos_viagens.viagem_id = viagens.id
 WHERE alunos_viagens.aluno_id = 1 AND viagens.data_viagem = CURDATE();*/
 
-SELECT * FROM responsaveis_alunos WHERE responsavel_id = 1;
 
+select ponto_inicial_id , ponto_inicial_tipo, veiculo_id
+from viagens
+inner join escolas on viagens.ponto_inicial_tipo = 'escola' 
+WHERE viagens.veiculo_id = 1;
+
+
+
+select id 
+from veiculos
+where motorista_id = ? ;
+select * from tipo_inicial_escola;
+select * from motoristas;
+select *  from veiculos;
+select * from viagens;
+SELECT * FROM responsaveis_alunos WHERE responsavel_id = 1;
 select * from sessions;
 
 SELECT id, ponto_inicial_tipo, ponto_inicial_id FROM viagens;

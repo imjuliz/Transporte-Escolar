@@ -8,7 +8,8 @@ import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
 import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
 import { obterInformacoesFilhosController } from '../controllers/ResponsavelController.js'
-import { verVeiculoController } from "../controllers/VerVeiculosController.js";
+import { verVeiculoController, obterInformacoesviagensController } from "../controllers/VerVeiculosController.js";
+
 import multer from 'multer';
 const router = express.Router();
 
@@ -31,6 +32,8 @@ router.post('/incidente',adicionarIncidenteController);
 router.get('/perfil', obterPerfilUsuario);
 router.get('/perfil', obterPerfilUsuario, autorizarAcesso('motorista', 'aluno', 'responsavel'));
 //
+router.get('/viagens', obterInformacoesviagensController)
+
 router.get('/verAlunos', verAlunosController)
 
 router.patch('/editarPerfil', editarPerfilController);
