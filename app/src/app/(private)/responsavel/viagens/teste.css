@@ -64,14 +64,6 @@ ul{
     list-style: circle;
 }
 
-/*.aluno-active{
-    background-color:white;
-    padding: 1vh 3vh;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    
-}*/
-
 .aluno{
     background-color: rgb(233, 233, 233);
     padding: 1vh 3vh;
@@ -166,8 +158,21 @@ section{
 }
 
 .barrinha{
-    gap: 15px
+    gap: 15px;
 }
+
+/* guia de filhos */
+.nav-link {
+    background-color: #E8E8E8; /* inativa */
+    border: 1px solid #ccc;
+    color: #333;
+  }
+  
+  .nav-link.active {
+    background-color: #ffffff; /* ativa */
+    color: #000;
+  }
+  
 @media screen and (max-width: 1536px) {
     .container-viagem h3{
         font-size: 1.5rem;
