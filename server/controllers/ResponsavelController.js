@@ -50,4 +50,5 @@ const obterInformacoesFilhosController = async (req, res) => {
     }
 };
 
+
 export { obterInformacoesFilhosController }
