@@ -16,7 +16,11 @@ export default function Viagens() {
         return res.json();
       })
       .then((data) => {
-        setAlunos(data.infoFilhos || []);
+        const filhos = data.infoFilhos || [];
+        setAlunos(filhos);
+        if (filhos.length > 0) {
+          setAbaAtiva(filhos[0].id_aluno); // ativa a primeira aba ao carregar
+        }
       })
       .catch((error) => {
         console.error('Erro ao carregar alunos:', error);
@@ -29,7 +33,9 @@ export default function Viagens() {
     if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
-  
+
+  // aba ativa
+  const [abaAtiva, setAbaAtiva] = useState(null);
 
   return (
     <>
@@ -39,17 +45,20 @@ export default function Viagens() {
           <hr />
         </div>
         <div className='chrome'>
-          <ul className="nav nav-tabs" id="myTab" role="tablist">
+          <ul className="nav nav-tabs" id="myTab" role="tablist" style={{
+            backgroundColor: abaAtiva === null ? '#E8E8E8' : 'transparent',
+          }}>
             {(alunos || []).map((aluno, id, index) => (
-              <li className="nav-item" role="presentation" key={index}>
-                <button className={`barrinha nav-link ${id === 0 ? 'active' : ''}`}
+              <li className="nav-item" role="presentation" key={aluno.id_aluno}>
+                <button className={`barrinha nav-link ${abaAtiva === aluno.id_aluno ? 'active' : ''}`}
                   id={`tab-${aluno.id_aluno}`}
                   data-bs-toggle="tab"
                   data-bs-target={`#content-${aluno.id_aluno}`}
                   type="button"
                   role="tab"
                   aria-controls={`content-${aluno.id_aluno}`}
-                  aria-selected={id === 0 ? 'true' : 'false'}
+                  aria-selected={abaAtiva === aluno.id_aluno ? 'true' : 'false'}
+                  onClick={() => setAbaAtiva(aluno.id_aluno)}
                 >
                   <img src={aluno.img || '/default-profile.png'} alt="" className='fotodeperfil' />
                   <p className='nomeAluno'>{aluno.nome_aluno}</p>
@@ -62,7 +71,7 @@ export default function Viagens() {
             {(alunos || []).map((aluno, id, index) => (
               <div
                 key={id}
-                className={`tab-pane fade ${id === 0 ? 'show active' : ''}`}
+                className={`tab-pane fade ${abaAtiva === aluno.id_aluno ? 'show active' : ''}`}
                 id={`content-${aluno.id_aluno}`}
                 role="tabpanel"
                 aria-labelledby={`tab-${aluno.id_aluno}`}
