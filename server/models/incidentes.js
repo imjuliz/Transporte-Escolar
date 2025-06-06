@@ -1,8 +1,9 @@
 import { create2 } from "../config/database.js";
 
-const adicionarIncidente = async (dados)=>{
+const adicionarIncidente = async (remetente)=>{
 try{
-    return await create2('incidentes', dados)
+req.body = [remetente = remetente]
+    return await create2('incidentes', remetente)
 }
 catch(err){
 console.error('Erro ao adicionar incidente', err);

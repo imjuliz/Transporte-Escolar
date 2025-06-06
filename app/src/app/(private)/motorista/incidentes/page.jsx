@@ -7,6 +7,7 @@ import '../../../globals.css';
 import './incidentes2.css'
 
 export default function incidentes() {
+
     const incidentes = [
         {
             id: 1,
@@ -44,9 +45,6 @@ imagem: '/img/bolinhasVermelha.svg'
             bgSelected: 'bg-amber-600',
             imagem: '/img/bolinhasAmarela.svg'
         }
-
-
-
     ];
 
     const [selecionado, setSelecionado] = useState('falta'); //guarda a opção que está selecionada
@@ -54,7 +52,28 @@ imagem: '/img/bolinhasVermelha.svg'
     const handleChange = (valor) => {
         setSelecionado(valor); //atualiza a seleção
     }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
+        const formData = {};
+         try {
+            const response = await fetch('http://localhost:3001/enviarIncidente', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: /*JSON.stringify(formData)*/{
+                    remetente: req.session.usuario.email,
+                    tipo: selecionado,
+                    mensagem:form.mensagem
+                },
+                credentials: 'include'
+            });
+            const data = await response.json();
+            setResposta(JSON.stringify(data, null, 2));
+
+        } catch (error) {
+            console.error('Erro:', error);
+        }
+    };
     //colocar aqui as lógicas de motorista enviar a mensagem, pode ser direto pro aluno ou para todos os alunos do ônibus da viagem
 
     return (
@@ -62,7 +81,7 @@ imagem: '/img/bolinhasVermelha.svg'
             <section className='informacoes'>
         <div className='page-indicador'>
           <h1>Registrar Incidentes</h1>
-          <hr />
+          <hr/>
                 </div>
 
                 <div className="p-4 space-y-4">
@@ -73,23 +92,21 @@ imagem: '/img/bolinhasVermelha.svg'
                                 className={`card-msg cursor-pointer text-white border ${incidente.backgroundColor} rounded-[2vw] transition-all text-left w-300px ${selecionado === incidente.valor
                                     ? `selecionado ${incidente.bgSelected} text-white border-blue-700` //card selecionado - se (selecionado === valor da msg) for verdadeiro, aplica esse estilo
                                     : `nao-selecionado  text-gray-800 hover:border-blue-400`//card não selecionado - se for falso, aplica esse estilo
-                                    }`}
-                            >
+                                    }`}>
                                 <input
                                     type="radio"
                                     name="motivo"
                                     value={incidente.valor}
                                     checked={selecionado === incidente.valor} //quando muda, atualiza o estado
                                     onChange={() => handleChange(incidente.valor)}
-                                    className="hidden"
-                                />
+                                    className="hidden"/>
                                 <h3>{incidente.label}</h3>
                                 <p>{incidente.descricao}</p>
                                 <img src={incidente.imagem} className='bolinhas'></img>
                             </label>
                         ))}
                     </div>
-
+<form>
                     <div className='pt-4 flex flex-column'>
 
                         <p className="mt-4">
@@ -107,19 +124,13 @@ imagem: '/img/bolinhasVermelha.svg'
                             <option value="aluno3">Aluno 3</option>
                             <option value="aluno4">Aluno 4</option>
                         </select>
-
                         <label for="checkbox ">
                             <input type="checkbox" id="checkbox" className='todos' name="meuCheckbox"></input>
                             Todos
                         </label>
-
-                        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded mb-5 mt-4 hover:bg-blue-700 transition duration-300 ease">Enviar Mensagem</button>
-
+                        <button type="submit" onSubmit={handleSubmit} className="bg-blue-600 text-white px-4 py-2 rounded mb-5 mt-4 hover:bg-blue-700 transition duration-300 ease">Enviar Mensagem</button>
                     </div>
-
+                    </form>
                 </div>
-
             </section>
-        </>
-    )
-}
+        </>)}

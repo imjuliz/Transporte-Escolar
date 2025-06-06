@@ -17,23 +17,14 @@ const router = express.Router();
 router.post("/login", loginController);
 
 // rotas privadas
-
 router.get('/administrador', autorizarAcesso('administrador'));
-
 router.get('/responsavel', autorizarAcesso('responsavel'));
-
 router.get('/aluno', autorizarAcesso('aluno'));
-
 router.get('/motorista', autorizarAcesso('Motorista'));
-router.get('/verVeiculo',verVeiculoController, autorizarAcesso('Motorista'));
-router.get('/verEscolas', verDadosEscolaController, autorizarAcesso('motorista'));
 
-router.post('/incidente',adicionarIncidenteController);
-// ver informaçoes na pagina "meu perfil"
+// informaçoes na pagina "meu perfil"
 router.get('/perfil', obterPerfilUsuario);
-router.get('/perfil', obterPerfilUsuario, autorizarAcesso('motorista', 'aluno', 'responsavel'));
-
-router.patch('/editarPerfilMotorista', editarPerfilMotoristaController, autorizarAcesso('motorista'));
+router.get('/perfil', obterPerfilUsuario, autorizarAcesso( 'aluno', 'responsavel'));
 router.patch('/editarPerfil', editarPerfilController);
 
 // router.post('/editarPerfil/foto', upload.single('foto'), editarFotoPerfilController);
@@ -41,8 +32,6 @@ router.patch('/editarPerfil', editarPerfilController);
 router.get('/viagens', obterInformacoesviagensController)
 
 router.get('/verAlunos', verAlunosController)
-
-
 
 // ver informaçoes das rotas
 router.get('/viagem/:tipo/:id', obterViagemPorUsuario);
@@ -54,6 +43,7 @@ router.post('/cadastro/motorista', cadastrarMotorista);
 router.post('/cadastro/administrador', cadastrarAdministrador);
 router.delete('/deletarUsuario', deletarPerfilController);
 
+//ESCOLAS
 router.get('/escolas', buscarEscolas)
 router.get('/ponto-por-escola', buscarPontoPorEscola);
 
@@ -73,5 +63,10 @@ router.get('/qtd-motoristas', contarMotoristasController)
 // responsavel
 router.get('/filhos', obterInformacoesFilhosController)
 
+//MOTORISTA -------------------------------------------------------------------------------------
+router.get('/verVeiculo',verVeiculoController, autorizarAcesso('Motorista'));
+router.get('/verEscolas', verDadosEscolaController, autorizarAcesso('motorista'));
+router.patch('/editarPerfilMotorista', editarPerfilMotoristaController, autorizarAcesso('motorista'));
+router.post('/enviarIncidente',adicionarIncidenteController);
 
 export default router;

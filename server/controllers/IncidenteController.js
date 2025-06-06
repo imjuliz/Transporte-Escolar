@@ -2,6 +2,8 @@ import { adicionarIncidente } from "../models/incidentes.js";
 
 const adicionarIncidenteController = async (req,res)=>{
 try{
+    const remetente = req.session.usuario.email;
+    
 await adicionarIncidente(req.body);
 res.status(201).json({mensagem: 'Incidente adicionado com sucesso!!!'})
 }catch(err){
