@@ -138,6 +138,5 @@ const editarFotoPerfilController = async (req, res) => {
   }
 };
 
-
 export { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController, editarPerfilMotoristaController };
 

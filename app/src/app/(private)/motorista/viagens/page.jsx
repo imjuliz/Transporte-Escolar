@@ -5,10 +5,10 @@ import { useRef, useEffect, useState } from "react";
 
 export default function Viagens() {
   // buusca dados do back
-  const [alunos, setAlunos] = useState([]);
+  const [motoristas, setMotoristas] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/filhos', {
+    fetch('http://localhost:3001/viagens', {
       credentials: 'include'
     })
       .then((res) => {
@@ -16,11 +16,11 @@ export default function Viagens() {
         return res.json();
       })
       .then((data) => {
-        setAlunos(data.infoFilhos || []);
+        setMotoristas(data.infoveiculos || []);
       })
       .catch((error) => {
-        console.error('Erro ao carregar alunos:', error);
-        setAlunos([]);
+        console.error('Erro ao carregar viagens do motorista:', error);
+        setMotoristas([]);
       });
   }, []);
 
@@ -30,7 +30,6 @@ export default function Viagens() {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
   
-
   return (
     <>
       <section className='navegacao'>
@@ -40,34 +39,34 @@ export default function Viagens() {
         </div>
         <div className='chrome'>
           <ul className="nav nav-tabs" id="myTab" role="tablist">
-            {(alunos || []).map((aluno, id, index) => (
+            {(motoristas || []).map((motorista, id, index) => (
               <li className="nav-item" role="presentation" key={index}>
                 <button className={`barrinha nav-link ${id === 0 ? 'active' : ''}`}
-                  id={`tab-${aluno.id_aluno}`}
+                  id={`tab-${motorista.id_veiculo}`}
                   data-bs-toggle="tab"
-                  data-bs-target={`#content-${aluno.id_aluno}`}
+                  data-bs-target={`#content-${motorista.id_veiculo}`}
                   type="button"
                   role="tab"
-                  aria-controls={`content-${aluno.id_aluno}`}
+                  aria-controls={`content-${motorista.id_veiculo}`}
                   aria-selected={id === 0 ? 'true' : 'false'}
                 >
-                  <img src={aluno.img || '/default-profile.png'} alt="" className='fotodeperfil' />
-                  <p className='nomeAluno'>{aluno.nome_aluno}</p>
+                  <img src={motorista.img || '/default-profile.png'} alt="" className='fotodeperfil' />
+                  <p className='nomeAluno'>{motorista.nome_aluno}</p>
                 </button>
               </li>
             ))}
           </ul>
           {/**Conteudo das tabs */}
           <div className="conteudo tab-content" id="myTabContent">
-            {(alunos || []).map((aluno, id, index) => (
+            {(motoristas || []).map((motorista, id, index) => (
               <div
                 key={id}
                 className={`tab-pane fade ${id === 0 ? 'show active' : ''}`}
-                id={`content-${aluno.id_aluno}`}
+                id={`content-${motorista.id_veiculo}`}
                 role="tabpanel"
-                aria-labelledby={`tab-${aluno.id_aluno}`}
+                aria-labelledby={`tab-${motorista.id_veiculo}`}
               >
-                {(aluno.viagens || []).map((viagem, i) => {
+                {(motorista.viagens || []).map((viagem, i) => {
                   const agora = new Date();
                   const [dia, mes, ano] = viagem.data.split('/');
                   const dataBase = new Date(`${ano}-${mes}-${dia}T00:00:00`);
@@ -81,7 +80,7 @@ export default function Viagens() {
                   }
 
                   const horaEmbarque = criarHorarioCompleto(viagem.horaEmbarque, dataBase);
-                  const horaSaida = criarHorarioCompleto(viagem.horaSaída, dataBase);
+                  const horaSaida = criarHorarioCompleto(viagem.horaSaida, dataBase);
 
                   const corCirculo = (agora >= horaEmbarque && agora <= horaSaida) ? '#00B383' : '#ADAEB1';
                   return (
@@ -95,7 +94,7 @@ export default function Viagens() {
                           <circle cx="1.5" cy="1.5" r="1.5" fill="#8F9BB3" />
                         </svg>
 
-                        <p className='m-0 text-[#8F9BB3]'>{viagem.horaEmbarque} - {viagem.horaSaída}</p>
+                        <p className='m-0 text-[#8F9BB3]'>{viagem.horaEmbarque} - {viagem.horaSaida}</p>
                       </div>
                       <div className='titulo-status flex gap-4 items-center justify-between'>
                         <h3>{primeiraLetraMaiuscula(viagem.tipo)}</h3>

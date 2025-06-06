@@ -34,7 +34,7 @@
 
 // export { registrarUsuarioController, registrarVeiculosController }
 
-import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdEscolas} from '../models/Admin.js';
+import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdMotoristas, qtdEscolas} from '../models/Admin.js';
 
 // cadastro dos usuarios
 export async function cadastrarAlunoComResponsavel(req, res) {
@@ -234,6 +234,17 @@ const contarUsuariosController = async (req, res) => {
   }
 };
 
+const contarMotoristasController = async (req, res) => {
+  try {
+    const totais = await qtdMotoristas();
+    const total_geral = totais.total_motoristas;
+      res.status(200).json({total_motoristas: total_geral});
+  } catch (error) {
+    console.error('Erro ao contar motoristas:', error);
+    res.status(500).json({ mensagem: 'Erro ao contar motoristas' });
+  }
+};
+
 // ver qtnd total de escolas
 const contarEscolasController = async (req, res) => {
   try {
@@ -268,4 +279,4 @@ async function quantidadeViagensEmAndamentoController(req, res) {
   }
 }
 
-export {verTodosController, verResponsaveisController, verMotoristasController, verAdminsController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController};
+export {verTodosController, verResponsaveisController, verMotoristasController, verAdminsController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarMotoristasController, contarEscolasController};
