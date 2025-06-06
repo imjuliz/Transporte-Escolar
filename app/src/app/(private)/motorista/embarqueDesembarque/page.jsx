@@ -6,27 +6,49 @@ import { useRef, useEffect, useState } from "react";
 
 export default function embarque() {
 
-    const escolas = [
-        { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola X', endereco: 'R. Santo Andre, B. Nova Gerty', qtd: '65' },
-        { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola Y', endereco: 'R.Boa Vista, B. Nova Gerty', qtd: '12' },
-        { img: '/img/motorista/embarque/teste.jfif', escola: 'Escola Z', endereco: 'R. Não Sei, B. Vou Pensar', qtd: '34' },
-    ]
+    const [escolas, setEscolas] = useState([]);
+    const [resposta, setResposta] = useState('');
+
+    useEffect(() => {
+        async function listarEscolas() {
+            const listarEscolas = await verEscolas();
+            setEscolas(listarEscolas);
+        } listarEscolas()
+    }, [])
+
+
+
+    async function verEscolas() {
+        try {
+            const response = await fetch('http://localhost:3001/verEscolas',
+                {credentials: "include" });
+
+            const data = await response.json();
+            setResposta(JSON.stringify(data, null, 2));
+
+            if (Array.isArray(data)) {
+                setEscolas(data)
+            }
+            return data;
+        } catch (err) {
+            console.error('Erro ao listar escolas', err);
+            return null;
+        }}
     return (
-        <>
-                <section className='secao1 '>
-                    <h1 className='title1 '>Embarques e desembarques</h1>
-                    <p className='linha'></p>
-                    <div className='@container'>
-                        <div className="escolas">
-                            {escolas.map(({ escolas1, escola, endereco, qtd, img }) => (
-                                <div className="cartao-escola lg:w-48" key={escolas1}>
-                                    <img src={img} alt="Imagem da escola" className="imagem-escola 2xl:h-45 md:w-45 md:h-40 sm:w-40 sm:h-38" />
+        <><section className='secao1 '>
+            <h1 className='title1 '>Embarques e desembarques</h1>
+            <p className='linha'></p>
+            <div className='@container'>
+                <div className="escolas">
+                    {escolas.map((escola) => (
+                                <div className="cartao-escola lg:w-48" key={escola.id}>
+                                    <img src='./' alt="Imagem da escola" className="imagem-escola 2xl:h-45 md:w-45 md:h-40 sm:w-40 sm:h-38" />
                                     <div className="info-escola">
-                                        <h1 className="nome-escola">{escola}</h1>
-                                        <h2 className="endereco-escola">{endereco}</h2>
+                                        <h1 className="nome-escola">{escola.nome}</h1>
+                                        <h2 className="endereco-escola">{escola.endereco}</h2>
                                     </div>
                                     <div className="acoes-escola">
-                                        <p className="qtd-alunos">{qtd} alunos</p>
+                                        {/* <p className="qtd-alunos">{escola.qtd} alunos</p> */}
                                         <a href='./embarqueDesembarque/alunos'><button className="botao-ver">
                                             Ver todos os alunos
                                             <img src="/img/motorista/embarque/Vector 108 (1).svg" alt="Ícone seta" />
@@ -35,8 +57,8 @@ export default function embarque() {
                                     </div>
                                 </div>
                             ))}
-                        </div>     </div>
-                </section>
+                </div></div>
+        </section>
         </>
     )
 }

@@ -1,8 +1,8 @@
 import express from "express";
 import { autorizarAcesso } from "../middlewares/authMiddleware.js";
 import { loginController } from "../controllers/LoginController.js";
-import { verAlunosController } from "../controllers/VerAlunosController.js";
-import { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController} from '../controllers/PerfilController.js';
+import { verAlunosController, verDadosEscolaController } from "../controllers/VerAlunosController.js";
+import { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController,editarPerfilMotoristaController} from '../controllers/PerfilController.js';
 // import { getViagemUsuario } from '../controllers/ViagensController.js';
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
 import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController} from '../controllers/AdminController.js';
@@ -26,13 +26,16 @@ router.get('/aluno', autorizarAcesso('aluno'));
 
 router.get('/motorista', autorizarAcesso('Motorista'));
 router.get('/verVeiculo',verVeiculoController, autorizarAcesso('Motorista'));
+router.get('/verEscolas', verDadosEscolaController, autorizarAcesso('motorista'));
 
 router.post('/incidente',adicionarIncidenteController);
 // ver informaçoes na pagina "meu perfil"
 router.get('/perfil', obterPerfilUsuario);
 router.get('/perfil', obterPerfilUsuario, autorizarAcesso('motorista', 'aluno', 'responsavel'));
+
+router.patch('/editarPerfilMotorista', editarPerfilMotoristaController, autorizarAcesso('motorista'));
 router.patch('/editarPerfil', editarPerfilController);
-router.post('/editarPerfil/foto', upload.single('foto'), editarFotoPerfilController);
+// router.post('/editarPerfil/foto', upload.single('foto'), editarFotoPerfilController);
 //
 router.get('/viagens', obterInformacoesviagensController)
 

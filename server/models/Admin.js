@@ -1,5 +1,7 @@
 import { create, readAll, read, readQuery, deleteRecord } from '../config/database.js';
-// registrar novos usuarios
+
+
+// ----------------------------------registrar novos usuarios----------------------------------
 export const criarAluno = async (dados) => {
   try {
     return await create('alunos', dados);
@@ -73,8 +75,9 @@ export async function buscarPontoDeEmbarquePorEscola(escolaId) {
 }
 
 // deleta o perfil do USUARIO
-export const deletarPerfil = async (tabela, cpf) => {
-  const usuario = await read(tabela, `cpf = '${cpf}'`);
+export const deletarPerfil = async (tipo, id) => {
+
+  const usuario = await read(tabela, `id = '${id}'`);
   if (!usuario) return null;
 
   const resultado = await deleteRecord(tabela, `cpf = '${cpf}'`);
