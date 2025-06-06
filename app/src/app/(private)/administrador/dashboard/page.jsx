@@ -66,12 +66,30 @@ export default function dashboard() {
         qtdEscolas();
     }, []);
 
+    // qntd de motoristas cadastrados no sistema
+    const [qtdMotoristas, setQtdMotoristas] = useState(null);
+
+    useEffect(() => {
+        async function qtdMotoristas() {
+            try {
+                const res = await fetch('http://localhost:3001/qtd-motoristas', {
+                    credentials: 'include'
+                });
+                const data = await res.json();
+                setQtdMotoristas(data.total_motoristas);
+            } catch (error) {
+                console.error('Erro ao buscar total de motoristas:', error);
+            }
+        }
+        qtdMotoristas();
+    }, []);
+
 
     const infos = [
         {
             img: '/img/icon-motorista2.png',
             nome: 'Motoristas ativos',
-            informacao: qtdUsuarios !== null ? qtdUsuarios : 'Carregando...'
+            informacao: qtdMotoristas !== null ? qtdMotoristas : 'Carregando...'
         },
         {
             img: '/img/bus-solid.svg' ,

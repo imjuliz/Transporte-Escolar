@@ -50,7 +50,4 @@ const obterInformacoesFilhosController = async (req, res) => {
     }
 };
 
-// editar perfil
-
-
 export { obterInformacoesFilhosController }
