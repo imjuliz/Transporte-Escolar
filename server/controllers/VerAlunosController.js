@@ -1,4 +1,4 @@
-import { verAlunos } from "../models/alunos.js";
+import { verAlunos, verDadosEscola } from "../models/alunos.js";
 const verAlunosController = async (req, res) => {
     try {
         const listaDeAlunos = await verAlunos();
@@ -8,4 +8,15 @@ const verAlunosController = async (req, res) => {
         res.status(500).json({ mensagem: 'não foi possivel listar os alunos!!!' })
     }
 }
-export { verAlunosController } 
+
+const verDadosEscolaController = async(req,res)=>{
+
+    try{
+       const escolas = await verDadosEscola();
+       res.json(escolas)
+    }catch(err){
+console.error('Erro ao listar todas as escols', error);
+res.status(500).json({mensagem: "erro ao listar escolas!!!"})
+    }
+}
+export { verAlunosController, verDadosEscolaController } 

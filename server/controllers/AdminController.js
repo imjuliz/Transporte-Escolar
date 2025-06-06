@@ -138,18 +138,15 @@ export const buscarPontoPorEscola = async (req, res) => {
   }
 };
 
-// deleta perfil do usuario - revisar
-const tabelasPermitidas = ['alunos', 'responsaveis', 'motoristas', 'adm'];
+// --------------------- deleta perfil do usuario - revisar
+
 
 const deletarPerfilController = async (req, res) => {
-  const { tabela, cpf } = req.body;
 
-  if (!tabelasPermitidas.includes(tabela)) {
-    return res.status(400).json({ erro: 'Tipo de usuário inválido.' });
-  }
-
+const {email, tipo} = req.body
   try {
-    const resultado = await deletarPerfil(tabela, cpf);
+ 
+    const resultado = await deletarPerfil(tipo,email);
 
     if (resultado === null) {
       return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
