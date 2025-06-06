@@ -7,7 +7,8 @@ CREATE TABLE adm (
     cpf VARCHAR(11) NOT NULL unique,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL
+    senha VARCHAR(255) NOT NULL,
+    fotoPerfil varchar(255)
 );
 
 CREATE TABLE motoristas (
@@ -18,7 +19,8 @@ CREATE TABLE motoristas (
     telefone VARCHAR(20) NOT NULL,
     vencimento_habilitacao DATE NOT NULL,
     email VARCHAR(100) NOT NULL,
-    senha varchar(100) not null
+    senha varchar(100) not null,
+    fotoPerfil varchar(255)
 );
 
 CREATE TABLE responsaveis (
@@ -27,7 +29,8 @@ CREATE TABLE responsaveis (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL,
-    telefone VARCHAR(20)
+    telefone VARCHAR(20),
+    fotoPerfil varchar(255)
 );
 
 CREATE TABLE pontos_embarque (
@@ -81,6 +84,7 @@ CREATE TABLE alunos (
     emailPessoal VARCHAR(100) NOT NULL,
     dataNascimento date NOT NULL,
     senha VARCHAR(255) NOT NULL,
+    fotoPerfil varchar(255),
     escola_id INT NOT NULL,
     ponto_embarque_id INT NOT NULL,
     FOREIGN KEY (escola_id) REFERENCES escolas(id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -404,7 +408,7 @@ from viagens
 inner join escolas on viagens.ponto_inicial_tipo = 'escola' 
 WHERE viagens.veiculo_id = 1;
 
-
+select * from responsaveis;
 
 select id 
 from veiculos

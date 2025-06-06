@@ -99,21 +99,27 @@ const editarPerfilController = async (req, res) => {
   }
 };
 
+// upload da foto de perfil
+const editarFotoPerfilController = async (req, res) => {
+  try {
+    const id = req.session.usuario.id;
+    const tipo = req.session.usuario.tipo;
 
-//upload foto
-const uploadFotoPerfil = async (req, res) => {
-    try {
-        const { tipo, id } = req.session.usuario;
-        // criar a pasta fotoPerfil dentro de /public/img
-        const filePath = ` /img/fotosfotoPerfil/${req.file.filename}`;
-
-        await editarPerfil(tipo, id, { fotoPerfil: filePath });
-        res.status(200).json({ mensagem: 'Foto enviada com sucesso!', url: filePath });
-    } catch (err) {
-        console.error('Erro no upload da imagem:', err);
-        res.status(500).json({ mensagem: 'Erro ao fazer upload da imagem.' });
+    if (!req.file) {
+      return res.status(400).json({ mensagem: 'Nenhuma foto enviada.' });
     }
+
+    const caminhoFoto = '/uploads/' + req.file.filename;
+
+    await editarPerfil(tipo, id, { foto: caminhoFoto });
+
+    res.status(200).json({ mensagem: 'Foto atualizada com sucesso!', foto: caminhoFoto });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensagem: 'Erro ao atualizar foto' });
+  }
 };
 
-export { obterPerfilUsuario, editarPerfilController, uploadFotoPerfil };
+
+export { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController };
 
