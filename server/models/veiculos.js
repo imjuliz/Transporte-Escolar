@@ -1,8 +1,8 @@
 import { read, readQuery} from "../config/database.js";
 
-const verVeiculo = async(veiculoId)=>{
+const verVeiculo = async(motoristaId)=>{
     try{
-        const where = `motorista_id = ${veiculoId} AND id > 4`;
+        const where = `motorista_id = ${motoristaId} AND id > 4`;
         return await read('veiculos', where)
     }
     catch(err){

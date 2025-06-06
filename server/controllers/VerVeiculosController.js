@@ -1,11 +1,10 @@
 import { verVeiculo, verViagensVeiculos } from "../models/veiculos.js";
 
 const verVeiculoController = async (req, res) => {
-    const veiculoId = req.session.usuario?.id;
+    const motoristaId = req.session.usuario?.id;
 
     try {
-        const rows = await verVeiculo(veiculoId);
-
+        const rows = await verVeiculo(motoristaId);
         res.status(200).json(rows)
     } catch (err) {
         console.error('Erro ao pegar informações do veiculo!!!', err)

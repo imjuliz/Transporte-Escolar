@@ -409,7 +409,6 @@ inner join escolas on viagens.ponto_inicial_tipo = 'escola'
 WHERE viagens.veiculo_id = 1;
 
 select * from responsaveis;
-
 select id 
 from veiculos
 where motorista_id = ? ;
@@ -417,7 +416,23 @@ select * from tipo_inicial_escola;
 select * from motoristas;
 select *  from veiculos;
 select * from viagens;
+select * from  alunos;
+select * from escolas;
 SELECT * FROM responsaveis_alunos WHERE responsavel_id = 1;
 select * from sessions;
-
 SELECT id, ponto_inicial_tipo, ponto_inicial_id FROM viagens;
+
+select escolas.id, escolas.nome
+from escolas
+inner join alunos on escolas.id  = alunos.escola_id
+where escolas.id = 1 ;
+
+alter table veiculos
+add modelo VARCHAR(50), add marca VARCHAR(50), add anoFabricacao INT;
+
+-- 06/ 06 
+insert into veiculos (placa, capacidade, motorista_id, modelo, marca, anoFabricacao)
+values ( "MNO-5432", 40, 1, " LO 916 R/ LO 916", "Mercedes-Benz", 2019),
+("PQR-8765", 40, 2, " LO 916 R/ LO 916", "Mercedes-Benz", 2020),
+("STU-6846", 40, 3, " LO 916 R/ LO 916", "Mercedes-Benz", 2019),
+("VWX-7356", 40, 4, " LO 916 R/ LO 916", "Mercedes-Benz", 2019)

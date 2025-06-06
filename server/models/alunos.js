@@ -1,13 +1,26 @@
-import { readAll2 } from "../config/database.js";
+import {readQuery, readAll} from "../config/database.js";
 
-const verAlunos = async()=>{
-    try{
-        const where =  " escola_id=1 " ;
-        return await readAll2('alunos ', where , 'nome, escola_id, email, ponto_embarque_id' )
-    }catch(err){
+const verAlunos = async () => {
+    try {
+        return await readQuery(`
+            select escolas.id, escolas.nome
+from escolas
+inner join alunos on escolas.id  = alunos.escola_id
+where escolas.id = ? ; `)
+    } catch (err) {
         console.error('Erro ao listar os alunos!!!')
         throw err;
-    }};
+    }
+};
 
-    
-export {verAlunos}
+
+const verDadosEscola = async ()=>{
+try{
+return await readAll('escolas')
+}catch(err){
+console.error('erro ao ver escolas!!!', error);
+throw error
+}
+}
+
+export { verAlunos, verDadosEscola }

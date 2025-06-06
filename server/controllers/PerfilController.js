@@ -1,4 +1,4 @@
-import { obterDadosDoUsuario, editarPerfil } from '../models/Perfil.js';
+import { obterDadosDoUsuario, editarPerfil, editarPerfilMotorista } from '../models/Perfil.js';
 import session from "express-session";
 
 // obter dados do perfil do usuario
@@ -38,16 +38,13 @@ const obterPerfilUsuario = async (req, res) => {
 //     if (!id || !isNaN(id)) {
 //       return res.status(400).json({ erro: 'Parâmetro "id" é obrigatório e deve ser um numero.' });
 //     }
-
 //     try {
 //       const escolas = await buscarEscolasPorNome(id);
 //       res.json(escolas);
 //     } catch (erro) {
 //       console.error(erro);
 //       res.status(500).json({ erro: 'Erro ao buscar escolas.' });
-//     }
-//   };
-
+//     } };
 // editar informaçoes do perfil
 // const editarPerfilController = async (req, res) => {
 //     console.log("editarPerfilController: ", req.session)
@@ -57,24 +54,19 @@ const obterPerfilUsuario = async (req, res) => {
 //         // let fotoPerfil = null;
 
 //         // if (req.file) {
-//         //     fotoPerfil = req.file.path.replace(__dirname.replace('\\controllers', ''), '');
-//         // }
-
+//         //     fotoPerfil = req.file.path.replace(__dirname.replace('\\controllers', ''), '');}
 //         //armazena no arquivo json as info
 //         const atualizacoes = {
 //             telefone: telefone,
 //             email: email
 //             // foto: fotoPerfil
 //         };
-
 //         await editarPerfil(tipo, id, atualizacoes);
-
 //         res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!!!', email });
 //     } catch (err) {
 //         console.error('Erro ao atualizar perfil!!!', err);
 //         res.status(500).json({ mensagem: 'Erro ao atualizar perfil!!!' });
-//     }
-// };
+//     }};
 const editarPerfilController = async (req, res) => {
   try {
     const id = req.session.usuario.id;
@@ -92,6 +84,32 @@ const editarPerfilController = async (req, res) => {
     }
 
     await editarPerfil(tipo, id, atualizacoes);
+    res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensagem: 'Erro ao atualizar perfil' });
+  }
+};
+
+//editar pefil motorista
+const editarPerfilMotoristaController = async (req, res) => {
+  try {
+    const id = req.session.usuario.id;
+    const tipo = req.session.usuario.tipo;
+
+    const { email, telefone, vencimento_habilitacao } = req.body;
+    
+
+    const atualizacoes = {};
+    if (email !== undefined && email !== "") atualizacoes.email = email;
+    if (telefone !== undefined && telefone !== "") atualizacoes.telefone = telefone;
+    if(vencimento_habilitacao !== undefined && vencimento_habilitacao !="") atualizacoes.vencimento_habilitacao = vencimento_habilitacao
+
+    if (Object.keys(atualizacoes).length === 0) {
+      return res.status(400).json({ mensagem: 'Nenhum dado para atualizar.' });
+    }
+
+    await editarPerfilMotorista(tipo, id, atualizacoes);
     res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!' });
   } catch (err) {
     console.error(err);
@@ -120,4 +138,5 @@ const editarFotoPerfilController = async (req, res) => {
   }
 };
 
-export { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController };
+export { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController, editarPerfilMotoristaController };
+

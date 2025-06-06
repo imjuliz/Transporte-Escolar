@@ -23,7 +23,19 @@ const obterDadosDoUsuario = async (tipo, id) => {
   }
 
 };
+//editar perfil do motorista
+const editarPerfilMotorista = async (tipo, id, dadosAtualizados) => {
+  try {
+    const tabela = tabelas[tipo];
+    if (!tabela) throw new Error('Tipo de usuário inválido');
 
+    const where = `id = ${id}`;
+    return await update(tabela, dadosAtualizados, where);
+  } catch (err) {
+    console.error('Erro ao atualizar informações do perfil!!!', err);
+    throw err;
+  }
+};
 // editar perfil - responsaveis, alunos e adms
 const editarPerfil = async (tipo, id, dadosAtualizados) => {
   try {
@@ -38,4 +50,4 @@ const editarPerfil = async (tipo, id, dadosAtualizados) => {
   }
 };
 
-export { obterDadosDoUsuario, editarPerfil };
+export { obterDadosDoUsuario, editarPerfil, editarPerfilMotorista };
