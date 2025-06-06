@@ -24,7 +24,7 @@ const obterDadosDoUsuario = async (tipo, id) => {
 
 };
 
-// editar perfil
+// editar perfil - responsaveis, alunos e adms
 const editarPerfil = async (tipo, id, dadosAtualizados) => {
   try {
     const tabela = tabelas[tipo];

@@ -20,14 +20,16 @@ const obterPerfilUsuario = async (req, res) => {
             return res.status(404).json({ erro: 'Usuário não encontrado.' });
         }
 
-        res.status(200).json(dados);
+        // Adiciona o tipo ao objeto retornado
+        const resposta = { ...dados, tipo };
+
+        res.status(200).json(resposta);
 
     } catch (erro) {
         console.error('Erro ao obter dados do perfil:', erro);
         res.status(500).json({ erro: 'Erro ao obter dados do perfil.' });
     }
 };
-
 
 // busca a escola pelo id
 // export const buscarEscolas = async (req, res) => {
@@ -47,31 +49,54 @@ const obterPerfilUsuario = async (req, res) => {
 //   };
 
 // editar informaçoes do perfil
+// const editarPerfilController = async (req, res) => {
+//     console.log("editarPerfilController: ", req.session)
+//     try {
+//         const { telefone, telefonePrinc, email, emailPessoal} = req.body;
+//         const { tipo, id } = req.session.usuario;
+//         // let fotoPerfil = null;
+
+//         // if (req.file) {
+//         //     fotoPerfil = req.file.path.replace(__dirname.replace('\\controllers', ''), '');
+//         // }
+
+//         //armazena no arquivo json as info
+//         const atualizacoes = {
+//             telefone: telefone,
+//             email: email
+//             // foto: fotoPerfil
+//         };
+
+//         await editarPerfil(tipo, id, atualizacoes);
+
+//         res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!!!', email });
+//     } catch (err) {
+//         console.error('Erro ao atualizar perfil!!!', err);
+//         res.status(500).json({ mensagem: 'Erro ao atualizar perfil!!!' });
+//     }
+// };
 const editarPerfilController = async (req, res) => {
-    console.log("editarPerfilController: ", req.session)
-    try {
-        const { telefone, telefonePrinc, email, emailPessoal} = req.body;
-        const { tipo, id } = req.session.usuario;
-        // let fotoPerfil = null;
+  try {
+    const id = req.session.usuario.id;
+    const tipo = req.session.usuario.tipo;
 
-        if (req.file) {
-            fotoPerfil = req.file.path.replace(__dirname.replace('\\controllers', ''), '');
-        }
+    const { email, telefone } = req.body;
+    
 
-        //armazena no arquivo json as info
-        const atualizacoes = {
-            telefone: telefone,
-            email: email
-            // foto: fotoPerfil
-        };
+    const atualizacoes = {};
+    if (email !== undefined && email !== "") atualizacoes.email = email;
+    if (telefone !== undefined && telefone !== "") atualizacoes.telefone = telefone;
 
-        await editarPerfil(tipo, id, atualizacoes);
-
-        res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!!!', email });
-    } catch (err) {
-        console.error('Erro ao atualizar perfil!!!', err);
-        res.status(500).json({ mensagem: 'Erro ao atualizar perfil!!!' });
+    if (Object.keys(atualizacoes).length === 0) {
+      return res.status(400).json({ mensagem: 'Nenhum dado para atualizar.' });
     }
+
+    await editarPerfil(tipo, id, atualizacoes);
+    res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensagem: 'Erro ao atualizar perfil' });
+  }
 };
 
 

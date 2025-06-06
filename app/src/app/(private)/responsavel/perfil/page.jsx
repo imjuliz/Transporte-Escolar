@@ -4,30 +4,53 @@ import Image from 'next/image';
 import React, { useRef, useEffect, useState } from 'react';
 
 export default function MeuPerfil() {
-    const cpfRef = useRef(null);
-    const telefoneRef= useRef(null);
+    // p colocar o tipo de usuario c acento
+    const tiposFormatados = {
+        administrador: "Administrador",
+        aluno: "Aluno",
+        motorista: "Motorista",
+        responsavel: "Responsável",
+    };
+
     const emailInputRef = useRef(null);
 
     const [usuario, setUsuario] = useState(null);
     const [erro, setErro] = useState("");
     const [resposta, setResposta] = useState("");
 
+    // formatação de cpf
+    function formatarCPF(cpf) {
+        if (!cpf) return " - ";
+        return cpf
+            .replace(/\D/g, "")
+            .replace(/^(\d{3})(\d)/, "$1.$2")
+            .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+            .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+    }
+
+    // mascara de telefone
+    function formatarTelefone(telefone) {
+        if (!telefone) return " - ";
+        telefone = telefone.replace(/\D/g, "").slice(0, 11);
+        telefone = telefone.replace(/^(\d{2})(\d)/, "($1)$2");
+        telefone = telefone.replace(/(\d{5})(\d)/, "$1-$2");
+        return telefone;
+    }
+
+    // mascara de telefone (p qnd o usuario digitar em editar perfil)
+    // mascara de telefone
+    const tellRef = useRef(null);
     useEffect(() => {
-        const cpfInput = cpfRef.current;
-        if (!cpfInput) return;
-
-        const handleInput = (e) => {
-            let value = e.target.value;
-            value = value.replace(/\D/g, '');
-            if (value.length > 3) value = value.replace(/^(\d{3})(\d)/, '$1.$2');
-            if (value.length > 6) value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
-            if (value.length > 9) value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{2})/, '$1.$2.$3-$4');
-            e.target.value = value;
-        };
-
-        cpfInput.addEventListener('input', handleInput);
-        return () => cpfInput.removeEventListener('input', handleInput);
-    }, []);
+        if (tellRef.current) {
+            tellRef.current.addEventListener("input", (e) => {
+                let value = e.target.value.replace(/\D/g, ""); // remove caracteres nao numericos
+                value = value.slice(0, 11); // limite de 11 digitos
+                value = value.replace(/^(\d\d)(\d)/g, "($1)$2"); // regex no padrão de telefone brasileiro
+                value = value.replace(/(\d{5})(\d)/, "$1-$2");
+                e.target.value = value;
+            });
+        }
+    });
 
     useEffect(() => {
         fetch("http://localhost:3001/perfil", {
@@ -47,10 +70,27 @@ export default function MeuPerfil() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = {
-            telefone: telefoneRef.current?.value,
-            email: emailInputRef.current?.value
-        };
+
+        // p enviar p banco de dados
+        const telefoneSemMascara = tellRef.current?.value?.replace(/\D/g, "") || null;
+        const email = emailInputRef.current?.value || null;
+
+        const formData = {};
+        if (telefoneSemMascara) formData.telefone = telefoneSemMascara;
+        if (email) formData.email = email;
+
+
+        // remove campos indefinidos (caso algum escape o || null)
+        Object.keys(formData).forEach(key => {
+            if (formData[key] === undefined) delete formData[key];
+        });
+
+        // evita requisição se nada for enviado
+        if (Object.keys(formData).length === 0) {
+            console.log("Nenhum campo foi preenchido.");
+            return;
+        }
+
         try {
             const response = await fetch('http://localhost:3001/editarPerfil', {
                 method: 'PATCH',
@@ -61,8 +101,14 @@ export default function MeuPerfil() {
 
             const data = await response.json();
             setResposta(JSON.stringify(data, null, 2));
-            if (response.ok) console.log('Perfil atualizado com sucesso!');
-            else console.error('Erro ao atualizar perfil');
+
+            if (response.ok) {
+                console.log('Perfil atualizado com sucesso!');
+                // atualiza apenas os campos modificados
+                setUsuario((prev) => ({ ...prev, ...formData }));
+            } else {
+                console.error('Erro ao atualizar perfil');
+            }
         } catch (error) {
             console.error('Erro:', error);
         }
@@ -104,7 +150,7 @@ export default function MeuPerfil() {
     if (erro) return <p className="text-red-600 p-4">{erro}</p>;
     if (!usuario) return <div className="text-center"><div role="status">Carregando...</div></div>;
 
-    const nomeSobrenome = pegarPrimeiroEUltimoNome(usuario.nomeCompleto);
+    const nomeSobrenome = pegarPrimeiroEUltimoNome(usuario.nome);
 
     return (
         <section>
@@ -116,24 +162,22 @@ export default function MeuPerfil() {
                 <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="" />
                 <div className="font-medium">
                     <h3>{nomeSobrenome.primeiroNome} {nomeSobrenome.ultimoNome}</h3>
-                    <p className="text-sm text-gray-500">{usuario.tipo || "Tipo de usuário"}</p>
+                    <p className="text-sm text-gray-500">{tiposFormatados[usuario.tipo] || "Tipo de usuário"}</p>
                 </div>
             </div>
             <div className='sec'>
                 <div className='sec-indicador'><h4>Dados Pessoais</h4><hr /></div>
-                <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
+                <div className='sec-container flex flex-row gap-3'>
                     <div className='sec-campos'><h6>Nome completo:</h6><p>{usuario.nome}</p></div>
-                    <div className='sec-campos'><h6>CPF:</h6><p>{usuario.cpf}</p></div>
-                    <div className='sec-campos'><h6>CNH:</h6><p>{usuario.cnh}</p></div>
-                    <div className='sec-campos'><h6>Vencimento da habilitação:</h6><p>{usuario.vencimento_habilitacao}</p></div>
+                    <div className='sec-campos'><h6>CPF:</h6><p>{formatarCPF(usuario.cpf)}</p></div>
                 </div>
             </div>
             <div className='sec'>
                 <div className='sec-indicador'><h4>Contatos</h4><hr /></div>
-                <div className='sec-container flex flex-col gap-8'>
+                <div className='sec-container flex flex-row flex-wrap justify-between gap-8'>
                     <div className='sec-campos'><h6>Email pessoal:</h6><p>{usuario.email}</p></div>
                     <div className='sec-campos flex gap-10'>
-                        <div className='sec-campos2'><h6>Telefone:</h6><p>{usuario.telefone}</p></div>
+                        <div className='sec-campos2'><h6>Telefone:</h6><p>{formatarTelefone(usuario.telefone)}</p></div>
                         <div className='sec-campos2'><h6>Tipo de telefone:</h6><p>{usuario.tipoTelefone || "Recado ou principal"}</p></div>
                     </div>
                 </div>
@@ -150,12 +194,12 @@ export default function MeuPerfil() {
                                 <div className="grid gap-6 mb-6 md:grid-cols-2">
                                     <div>
                                         <label htmlFor="telefone">telefone</label>
-                                        <input type="text" id="telefone" ref={telefoneRef} maxLength="11" className="input" placeholder="(00)00000-0000" required />
+                                        <input type="text" id="telefone" ref={tellRef} className="input" placeholder="(00)00000-0000" />
                                     </div>
                                 </div>
                                 <div className="mb-6">
                                     <label htmlFor="email">E-mail</label>
-                                    <input type="email" id="email" ref={emailInputRef} className="input" placeholder="seu@email.com" required />
+                                    <input type="email" id="email" ref={emailInputRef} className="input" placeholder="seu@email.com" />
                                 </div>
                                 <button type="submit" className="btn-salvar">Salvar</button>
                                 <div><strong>Resposta do servidor:</strong><pre>{resposta}</pre></div>
