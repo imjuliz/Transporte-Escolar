@@ -367,16 +367,7 @@ export default function embarques() {
                     <a href='/administrador/cadastrar'><button className="bg-blue-600 text-white px-4 py-2 rounded mb-5 hover:bg-blue-700 transition duration-300 ease">Cadastrar Usuário</button></a>
                 </div>
 
-                
             </section>
-
-
-
-
-
-
-
-
         </>
     )
 }

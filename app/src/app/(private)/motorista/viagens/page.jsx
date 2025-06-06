@@ -1,5 +1,4 @@
 "use client";
-import './viagens.css'
 import './teste.css'
 import { useRef, useEffect, useState } from "react";
 

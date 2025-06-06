@@ -6,6 +6,9 @@ import React from 'react';
 
 import { motion } from 'framer-motion';
 
+//componentes do dashboard
+import { StatCard } from './components/StatCard.jsx';
+
 //importação do bglh do dashboard
 //import './assets/vendor/apexcharts/dist/apexcharts.css';
 
@@ -92,7 +95,7 @@ export default function dashboard() {
             informacao: qtdMotoristas !== null ? qtdMotoristas : 'Carregando...'
         },
         {
-            img: '/img/bus-solid.svg' ,
+            img: '/img/bus-solid.svg',
             nome: 'Viagens em andamento',
             informacao: qtdViagens !== null ? qtdViagens : 'Carregando...'
         },
@@ -117,8 +120,8 @@ export default function dashboard() {
                 </div>
 
 
-                <section className='flex flex-row justify-between  '>
-                    {infos.map((info, index) => (
+                {/*<section className='flex flex-row justify-between  '>
+                    
                         <div key={index} className='box-infos flex p-4 w-70 h-35 flez-row rounded-xl bg-[#fff] items-center gap-4'>
 
                             <div className='icone'>
@@ -130,10 +133,14 @@ export default function dashboard() {
                                 <p className='info-nome'>{info.nome}</p>
                             </div>
                         </div>
-                    ))}
-                </section>
+                   
+                </section>*/}
+                {infos.map((infos, index) => (
+                    <div key={index} className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4-mb-8">
+                        <StatCard name={infos.nome} img={infos.img} value={infos.informacao}></StatCard>
+                    </div>
+                ))}
 
-               
             </section>
         </>
     )

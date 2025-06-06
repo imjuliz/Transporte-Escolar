@@ -34,7 +34,7 @@ router.get('/viagens', obterInformacoesviagensController)
 router.get('/verAlunos', verAlunosController)
 
 // ver informaçoes das rotas
-router.get('/viagem/:tipo/:id', obterViagemPorUsuario);
+router.get('/viagem-mapa', obterViagemPorUsuario);
 
 // ADM ------------------------------------------------------------------------------------------
 // cadastro de usuarios
