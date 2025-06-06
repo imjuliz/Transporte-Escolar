@@ -5,7 +5,7 @@ import { verAlunosController } from "../controllers/VerAlunosController.js";
 import { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController} from '../controllers/PerfilController.js';
 // import { getViagemUsuario } from '../controllers/ViagensController.js';
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
-import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController} from '../controllers/AdminController.js';
+import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
 import { obterInformacoesFilhosController } from '../controllers/ResponsavelController.js'
 import { verVeiculoController, obterInformacoesviagensController } from "../controllers/VerVeiculosController.js";
@@ -32,7 +32,7 @@ router.post('/incidente',adicionarIncidenteController);
 router.get('/perfil', obterPerfilUsuario);
 router.get('/perfil', obterPerfilUsuario, autorizarAcesso('motorista', 'aluno', 'responsavel'));
 router.patch('/editarPerfil', editarPerfilController);
-router.post('/editarPerfil/foto', upload.single('foto'), editarFotoPerfilController);
+// router.post('/editarPerfil/foto', upload.single('foto'), editarFotoPerfilController);
 //
 router.get('/viagens', obterInformacoesviagensController)
 
@@ -54,15 +54,17 @@ router.get('/escolas', buscarEscolas)
 router.get('/ponto-por-escola', buscarPontoPorEscola);
 
 //ver registros - adm
+//listagem
 router.get('/cadastros-alunos', verTodosController);
 router.get('/cadastros-responsaveis', verResponsaveisController );
 router.get('/cadastros-motoristas', verMotoristasController);
 router.get('/cadastros-admins', verAdminsController);
 router.get('/em-andamento', viagensEmAndamentoController)
-
+// contagem
 router.get('/em-andamento/quantidade', quantidadeViagensEmAndamentoController);
 router.get('/qtd-usuarios', contarUsuariosController)
 router.get('/qtd-escolas', contarEscolasController)
+router.get('/qtd-motoristas', contarMotoristasController)
 
 // responsavel
 router.get('/filhos', obterInformacoesFilhosController)

@@ -144,6 +144,15 @@ async function qtdUsuarios() {
   return resultado[0]; // retorna um objeto com os totais
 }
 
+async function qtdMotoristas() {
+  const sql = `
+    SELECT
+      (SELECT COUNT(*) FROM motoristas) AS total_motoristas
+  `;
+  const resultado = await readQuery(sql);
+  return resultado[0]; // retorna um objeto com os totais
+}
+
 // ver qntd de escolas no total
 async function qtdEscolas() {
   const sql = `
@@ -176,4 +185,4 @@ const buscarQuantidadeViagensEmAndamento = async () => {
   return resultado[0].total; // retorna apenas o número
 };
 
-export { buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdEscolas };
+export { buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas };
