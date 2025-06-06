@@ -32,7 +32,7 @@ router.post('/incidente',adicionarIncidenteController);
 router.get('/perfil', obterPerfilUsuario);
 router.get('/perfil', obterPerfilUsuario, autorizarAcesso('motorista', 'aluno', 'responsavel'));
 router.patch('/editarPerfil', editarPerfilController);
-router.post('/editarPerfil/foto', upload.single('foto'), editarFotoPerfilController);
+//router.post('/editarPerfil/foto', upload.single('foto'), editarFotoPerfilController);
 //
 router.get('/viagens', obterInformacoesviagensController)
 
