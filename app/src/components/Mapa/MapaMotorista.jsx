@@ -1,81 +1,77 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Polyline, Popup } from './Leaflet.jsx';
+// components/Mapa/MapaMotorista.jsx
+"use client";
+import { MapContainer, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
+import { useEffect, useRef, useState } from 'react';
+import L from 'leaflet';
 
-export default function MapaMotorista({ motoristaId }) {
-    const [viagem, setViagem] = useState(null);
-    const [erro, setErro] = useState(null);
+const MapaViagemMotorista = ({ dados }) => {
+  if (!dados || !dados.origem || !dados.destino) {
+    return <p>Carregando dados do mapa...</p>;
+  }
 
-    console.log("Renderizando MapaMotorista - Viagem Atual:", viagem);
+  const { origem, destino } = dados;
+  const origemLatLng = [origem.lat, origem.lng];
+  const destinoLatLng = [destino.lat, destino.lng];
 
-    useEffect(() => {
-        async function carregarViagemAtual() {
-            try {
-                const response = await fetch(`http://localhost:3001/viagem/motorista/${motoristaId}`,{
-                    credentials: "include"
-                });
-                const data = await response.json();
+  const origemIcon = new L.Icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+  });
 
-                console.log("Resposta da API no front-end:", data); 
+  const destinoIcon = new L.Icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/167/167707.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+  });
 
-                if (data.erro) {
-                    console.error("Erro ao buscar viagem do motorista:", data.erro);
-                    setErro(data.erro);
-                } else {
-                    setViagem(data.dados);
-                }
-            } catch (error) {
-                console.error("Erro ao conectar com o servidor:", error);
-                setErro("Erro ao conectar com o servidor.");
-            }
-        }
+  const onibusIcon = new L.Icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/61/61231.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+  });
 
-        if (motoristaId) {
-            carregarViagemAtual();
+  const [posicaoOnibus, setPosicaoOnibus] = useState(origemLatLng);
+  const stepRef = useRef(0);
 
-            const interval = setInterval(() => {
-                carregarViagemAtual();
-            }, 30000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      stepRef.current += 0.02;
+      if (stepRef.current > 1) {
+        clearInterval(interval);
+        return;
+      }
 
-            return () => clearInterval(interval);
-        }
-    }, [motoristaId]);
+      const lat = origem.lat + (destino.lat - origem.lat) * stepRef.current;
+      const lng = origem.lng + (destino.lng - origem.lng) * stepRef.current;
+      setPosicaoOnibus([lat, lng]);
+    }, 7000);
 
-    if (erro) {
-        return <div style={{ color: "red" }}>{erro}</div>;
-    }
+    return () => clearInterval(interval);
+  }, [origem, destino]);
 
-    if (!viagem) {
-        return <div>Carregando viagem atual...</div>;
-    }
+  return (
+    <MapContainer center={origemLatLng} zoom={15} style={{ height: '100%', width: '100%' }}>
+      <TileLayer
+        attribution="&copy; OpenStreetMap contributors"
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
 
-    return (
-        <div className="mapa-container">
-            <MapContainer center={[viagem.pontoInicial.lat, viagem.pontoInicial.lng]} zoom={14} className="leaflet-container">
-                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <Marker position={origemLatLng} icon={origemIcon}>
+        <Popup>Ponto de partida</Popup>
+      </Marker>
 
-                <Polyline
-                    positions={[
-                        [viagem.pontoInicial.lat, viagem.pontoInicial.lng],
-                        [viagem.pontoFinal.lat, viagem.pontoFinal.lng]
-                    ]}
-                    color={viagem.status === 'em_andamento' ? 'blue' : 'gray'}
-                />
+      <Marker position={destinoLatLng} icon={destinoIcon}>
+        <Popup>Destino</Popup>
+      </Marker>
 
-                <Marker position={[viagem.pontoInicial.lat, viagem.pontoInicial.lng]}>
-                    <Popup>
-                        <h3>Ponto Inicial</h3>
-                        <p>Saída às {viagem.hora_saida}</p>
-                    </Popup>
-                </Marker>
+      <Polyline positions={[origemLatLng, destinoLatLng]} color="blue" />
 
-                <Marker position={[viagem.pontoFinal.lat, viagem.pontoFinal.lng]}>
-                    <Popup>
-                        <h3>Ponto Final</h3>
-                        <p>Chegada prevista às {viagem.hora_chegada_prevista}</p>
-                    </Popup>
-                </Marker>
-            </MapContainer>
-        </div>
-    );
-}
+      <Marker position={posicaoOnibus} icon={onibusIcon}>
+        <Popup>Ônibus em movimento</Popup>
+      </Marker>
+    </MapContainer>
+  );
+};
+
+export default MapaViagemMotorista;

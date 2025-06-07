@@ -1,49 +1,83 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Popup, Marker, Polyline } from './Leaflet.jsx';
+"use client"
+import { MapContainer, TileLayer, Marker, Polyline, Popup, useMap } from 'react-leaflet';
+import { useEffect, useRef, useState } from 'react';
+import L from 'leaflet';
 
-export default function MapaAluno({ ponto, escola }) {
-    const [posicaoAtual, setPosicaoAtual] = useState(null);
 
-    useEffect(() => {
-        if (!ponto || !escola) return;
+const MapaViagemAluno = ({ dados }) => {
+  // Verifica se os dados necessários estão disponíveis
+  if (!dados || !dados.origem || !dados.destino) {
+    return <p>Carregando dados do mapa...</p>;
+  }
 
-        const steps = 100;
-        let current = 0;
-        const interval = setInterval(() => {
-            current++;
-            const lat = ponto.lat + (escola.lat - ponto.lat) * (current / steps);
-            const lng = ponto.lng + (escola.lng - ponto.lng) * (current / steps);
-            setPosicaoAtual({ lat, lng });
+  const { origem, destino } = dados;
 
-            if (current >= steps) clearInterval(interval);
-        }, 3000);
+  const origemLatLng = [origem.lat, origem.lng];
+  const destinoLatLng = [destino.lat, destino.lng];
 
-        return () => clearInterval(interval);
-    }, [ponto, escola]);
+  const origemIcon = new L.Icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+  });
 
-    if (!ponto || !escola || !ponto.lat || !ponto.lng || !escola.lat || !escola.lng) {
-        return <div>Carregando mapa...</div>;
-    }
-    return (
-        <div style={{ height: '100vh', width: '100%' }}>
-            <MapContainer center={ponto} zoom={16} className="leaflet-container hs-leaflet h-full w-full z-10">
-                <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
-                <Marker position={ponto}>
-                    <Popup>
-                        <h3>Ponto de Embarque</h3>
-                        <p>Local onde o aluno embarca.</p>
-                    </Popup>
-                </Marker>
-                <Marker position={escola}>
-                    <Popup>
-                        <h3>Escola</h3>
-                        <p>Destino final da viagem do aluno.</p>
-                    </Popup>
-                </Marker>
-                {posicaoAtual && <Marker position={posicaoAtual} />}
-                <Polyline positions={[ponto, escola]} />
-            </MapContainer>
-        </div>
-    );
-}
+  const destinoIcon = new L.Icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/167/167707.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+  });
+
+  const [posicaoOnibus, setPosicaoOnibus] = useState(origemLatLng);
+  const stepRef = useRef(0);
+
+  // Simulação da animação
+  useEffect(() => {
+    const interval = setInterval(() => {
+      stepRef.current += 0.02;
+      if (stepRef.current > 1) {
+        clearInterval(interval);
+        return;
+      }
+
+      const lat = origem.lat + (destino.lat - origem.lat) * stepRef.current;
+      const lng = origem.lng + (destino.lng - origem.lng) * stepRef.current;
+      setPosicaoOnibus([lat, lng]);
+    }, 7000);
+
+    return () => clearInterval(interval);
+  }, [origem, destino]);
+
+  const onibusIcon = new L.Icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/61/61231.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+  });
+
+  return (
+    <MapContainer center={origemLatLng} zoom={15} style={{ height: '100%', width: '100%' }}>
+      <TileLayer
+        attribution="&copy; OpenStreetMap contributors"
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+
+      {/* Origem */}
+      <Marker position={origemLatLng} icon={origemIcon}>
+        <Popup>Origem</Popup>
+      </Marker>
+
+      {/* Destino */}
+      <Marker position={destinoLatLng} icon={destinoIcon}>
+        <Popup>Destino</Popup>
+      </Marker>
+
+      {/* Linha entre os pontos */}
+      <Polyline positions={[origemLatLng, destinoLatLng]} color="blue" />
+       {/* Ônibus em movimento */}
+      <Marker position={posicaoOnibus} icon={onibusIcon}>
+        <Popup>Ônibus escolar</Popup>
+      </Marker>
+    </MapContainer>
+  );
+};
+
+export default MapaViagemAluno;
