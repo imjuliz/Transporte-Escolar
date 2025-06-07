@@ -1,52 +1,74 @@
-// 'use client';
-// import { useEffect, useState } from 'react';
-// import MapaAluno from './MapaAluno.jsx';
-// import MapaMotorista from './MapaMotorista.jsx';
-// import MapaResponsavel from './MapaResponsavel.jsx';
+'use client';
 
-// export default function Mapa({ usuarioId, tipoUsuario }) {
-//     const [dados, setDados] = useState(null);
-//     const [erro, setErro] = useState(null);
+import { useEffect, useState } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-routing-machine';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
-//     const tipoUsuarioFormatado = tipoUsuario?.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() ?? "";
+const ViagemAtivaMap = () => {
+  const [rotas, setRotas] = useState([]);
+  const [erroMensagem, setErroMensagem] = useState('');
 
-//     useEffect(() => {
-//         if (!usuarioId || !tipoUsuarioFormatado) {
-//             setErro("Erro: tipoUsuario ou usuarioId estão indefinidos.");
-//             return;
-//         }
+  useEffect(() => {
+    fetch('http://localhost:3001/viagem-mapa', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.erro) {
+          setErroMensagem(data.erro);
+        } else if (Array.isArray(data.rotas)) {
+          setRotas(data.rotas);
+        } else {
+          setErroMensagem('Dados de rota inválidos');
+        }
+      })
+      .catch(() => {
+        setErroMensagem('Erro ao carregar dados do servidor');
+      });
+  }, []);
 
-//         async function carregarDados() {
-//             try {
-//                 const response = await fetch(`http://localhost:3001/viagem/${tipoUsuarioFormatado}/${usuarioId}`, { credentials: 'include' });
-//                 const data = await response.json();
+  useEffect(() => {
+    if (!Array.isArray(rotas) || rotas.length === 0) return;
 
-//                 if (data.erro) {
-//                     setErro(data.erro);
-//                 } else {
-//                     setDados(data.dados);
-//                 }
-//             } catch (error) {
-//                 console.error("Erro ao carregar viagem:", error);
-//                 setErro("Erro ao buscar dados da viagem.");
-//             }
-//         }
-//         carregarDados();
-//     }, [usuarioId, tipoUsuarioFormatado]);
+    const mapaDiv = document.getElementById('hs-custom-pin-leaflet');
+    if (!mapaDiv) return;
 
-//     if (erro) {
-//         return <p style={{ color: 'red' }}>{erro}</p>;
-//     }
+    // Evita recriar múltiplos mapas
+    if (mapaDiv._leaflet_id) return;
 
-//     if (!dados) {
-//         return <p>Carregando informações da viagem...</p>;
-//     }
-//     return (
-//         <>
-//             {tipoUsuarioFormatado === 'aluno' && dados?.ponto && dados?.escola && (<MapaAluno ponto={dados.ponto} escola={dados.escola} />)}
-//             {tipoUsuarioFormatado === 'motorista' && <MapaMotorista motoristaId={usuarioId} />}
-//             {tipoUsuarioFormatado === 'responsavel' && <MapaResponsavel viagens={dados} />}
-//         </>
-//     );
-// }
+    const mapa = L.map('hs-custom-pin-leaflet').setView([-20.9, -48.5], 13);
 
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(mapa);
+
+    rotas.forEach(({ origem, destino }) => {
+      L.marker(origem).addTo(mapa).bindPopup('Origem').openPopup();
+      L.marker(destino).addTo(mapa).bindPopup('Destino');
+
+      L.Routing.control({
+        waypoints: [L.latLng(...origem), L.latLng(...destino)],
+        routeWhileDragging: false,
+        draggableWaypoints: false,
+        addWaypoints: false,
+        createMarker: () => null, // não duplicar marcadores
+      }).addTo(mapa);
+    });
+
+    // Remove mapa ao desmontar
+    return () => {
+      mapa.remove();
+    };
+  }, [rotas]);
+
+  return (
+    <div className="w-full h-full relative">
+      {erroMensagem && <div className="absolute top-0 left-0 p-2 text-red-600">{erroMensagem}</div>}
+      <div id="hs-custom-pin-leaflet" className="h-100 hs-leaflet z-10" style={{ height: '100%' }}></div>
+    </div>
+  );
+};
+
+export default ViagemAtivaMap;

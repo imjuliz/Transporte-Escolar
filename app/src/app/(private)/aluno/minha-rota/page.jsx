@@ -44,45 +44,16 @@ import '../styles/viagens.css';
 //     );
 // }
 
-export default function MinhaRotaAluno() {
-    const [usuario, setUsuario] = useState(null);
-    const [carregando, setCarregando] = useState(true);
+import ViagemAtivaMap from '../../../../components/Mapa/Mapa.jsx';
 
-    useEffect(() => {
-        const buscarUsuarioDaSessao = async () => {
-            try {
-                const response = await fetch("http://localhost:3001/viagem-mapa", {
-                    credentials: "include"
-                });
 
-                if (response.ok) {
-                    const usuarioData = await response.json();
-                    console.log("Dados do usuário da sessão:", usuarioData);
-                    setUsuario(usuarioData);
-                } else {
-                    console.error("Usuário não autenticado.");
-                }
-            } catch (error) {
-                console.error("Erro ao buscar usuário da sessão:", error);
-            } finally {
-                setCarregando(false);
-            }
-        };
 
-        buscarUsuarioDaSessao();
-    }, []);
+export default function RotaAluno() {
+  return (
+     <section className="relative w-screen m-8">
+        <div id="hs-custom-pin-leaflet" className="h-screen w-full z-10"></div>
 
-    if (carregando) {
-        return <p>Carregando informações do usuário...</p>;
-    }
-
-    if (!usuario) {
-        return <p>Usuário não autenticado.</p>;
-    }
-
-    return (
-        <section className="relative w-screen m-8">
-            <Mapa usuarioId={usuario.id} tipoUsuario={usuario.tipo} className="h-full" />
-        </section>
-    );
+      <ViagemAtivaMap />
+    </section>
+  );
 }

@@ -69,4 +69,17 @@ router.get('/verEscolas', verDadosEscolaController, autorizarAcesso('motorista')
 router.patch('/editarPerfilMotorista', editarPerfilMotoristaController, autorizarAcesso('motorista'));
 router.post('/enviarIncidente',adicionarIncidenteController);
 
+// logout
+router.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'Erro ao fazer logout' });
+    }
+    res.clearCookie('connect.sid'); // limpa o cookie da sessão no cliente
+    return res.status(200).json({ message: 'Logout efetuado com sucesso' });
+  });
+});
+
+
 export default router;

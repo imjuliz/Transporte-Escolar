@@ -1,35 +1,102 @@
 import { read, readAll } from '../config/database.js';
 
+// async function obterDadosDaViagemDoAluno(alunoId) {
+//     // passa id do aluno p/ numero inteiro
+//     const alunoIdInt = parseInt(alunoId, 10);
+//     if (isNaN(alunoIdInt)) {
+//         console.error('ID de aluno inválido:', alunoId);
+//         return null;
+//     }
+
+//     // busca aluno
+//     const aluno = await read('alunos', `id = ${alunoIdInt}`);
+
+//     // se n achar o aluno ou faltar ponto de embarque
+//     if (!aluno || !aluno.ponto_embarque_id) {
+//         console.error('Aluno não encontrado ou sem ponto de embarque');
+//         return null;
+//     }
+
+//     // busca informacoes da viagem correspondente ao id do aluno, traz as viagens c/ status 'agendada' ou 'em_andamento' e q comecaram/n terminaram ou q estao p/ comecar
+//     const viagens = await readAll(`alunos_viagens JOIN viagens ON alunos_viagens.viagem_id = viagens.id`, `alunos_viagens.aluno_id = ${alunoIdInt} AND viagens.status IN ('agendada','em_andamento') AND CONCAT(viagens.data_viagem, ' ', viagens.hora_saida) <= NOW() AND CONCAT(viagens.data_viagem, ' ', viagens.hora_chegada_prevista) >= NOW()`);
+
+//     // se nenhuma viagem ativa for encontrada retorna null
+//     if (!viagens || viagens.length === 0) {
+//         console.error('Nenhuma viagem ativa encontrada para o aluno');
+//         return null;
+//     }
+
+//     // pega a primeira viagem encontrada
+//     const viagem = viagens[0];
+
+//     // passa id do ponto p/ numero inteiro
+//     const pontoId = parseInt(aluno.ponto_embarque_id, 10);
+
+//     // determina se a escola é ponto final ou inicial e pega o seu id
+//     let escolaId = null;
+//     if (viagem.ponto_final_tipo === 'escola') {
+//         escolaId = parseInt(viagem.ponto_final_id, 10);
+//     } else if (viagem.ponto_inicial_tipo === 'escola') {
+//         escolaId = parseInt(viagem.ponto_inicial_id, 10);
+//     }
+
+//     // se o id da escola n for valido retorna null
+//     if (!escolaId || isNaN(escolaId)) {
+//         console.error('ID da escola inválido ou não encontrado');
+//         return null;
+//     }
+
+//     // busca ponto de embarque e escola pelo id
+//     const ponto = await read('pontos_embarque', `id = ${pontoId}`);
+//     const escola = await read('escolas', `id = ${escolaId}`);
+
+//     // se ponto ou escola n forem encontrados retorna null
+//     if (!ponto || !escola) {
+//         console.error('Ponto de embarque ou escola não encontrados');
+//         return null;
+//     }
+
+//     // retorna um objeto c/ viagem e as coordenadas do ponto de embarque e da escola, converte lat e long p/ formato numerico
+//     return {
+//         viagemId: viagem.id,
+//         ponto: { lat: parseFloat(ponto.latitude), lng: parseFloat(ponto.longitude) },
+//         escola: { lat: parseFloat(escola.latitude), lng: parseFloat(escola.longitude) }
+//     };
+// }
 async function obterDadosDaViagemDoAluno(alunoId) {
-    // passa id do aluno p/ numero inteiro
+    console.log('Iniciando busca para alunoId:', alunoId);
+
     const alunoIdInt = parseInt(alunoId, 10);
     if (isNaN(alunoIdInt)) {
         console.error('ID de aluno inválido:', alunoId);
         return null;
     }
 
-    // busca aluno
     const aluno = await read('alunos', `id = ${alunoIdInt}`);
+    console.log('Aluno encontrado:', aluno);
 
-    // se n achar o aluno ou faltar ponto de embarque
     if (!aluno || !aluno.ponto_embarque_id) {
         console.error('Aluno não encontrado ou sem ponto de embarque');
         return null;
     }
 
-    // busca informacoes da viagem correspondente ao id do aluno, traz as viagens c/ status 'agendada' ou 'em_andamento' e q comecaram/n terminaram ou q estao p/ comecar
-    const viagens = await readAll(`alunos_viagens JOIN viagens ON alunos_viagens.viagem_id = viagens.id`, `alunos_viagens.aluno_id = ${alunoIdInt} AND viagens.status IN ('agendada','em_andamento') AND CONCAT(viagens.data_viagem, ' ', viagens.hora_saida) <= NOW() AND CONCAT(viagens.data_viagem, ' ', viagens.hora_chegada_prevista) >= NOW()`);
+    const tabela = `alunos_viagens JOIN viagens ON alunos_viagens.viagem_id = viagens.id`;
+const condicao = `alunos_viagens.aluno_id = ${alunoIdInt} AND viagens.status IN ('agendada','em_andamento')`;
 
-    // se nenhuma viagem ativa for encontrada retorna null
+console.log('Tabela:', tabela);
+console.log('Condição:', condicao);
+
+const viagens = await readAll(tabela, condicao);
+console.log('Viagens encontradas para aluno:', viagens);
+
     if (!viagens || viagens.length === 0) {
         console.error('Nenhuma viagem ativa encontrada para o aluno');
         return null;
     }
 
-    // pega a primeira viagem encontrada
     const viagem = viagens[0];
+    console.log('Viagem escolhida:', viagem);
 
-    // passa id do ponto p/ numero inteiro
     const pontoId = parseInt(aluno.ponto_embarque_id, 10);
 
     // determina se a escola é ponto final ou inicial e pega o seu id
@@ -40,13 +107,7 @@ async function obterDadosDaViagemDoAluno(alunoId) {
         escolaId = parseInt(viagem.ponto_inicial_id, 10);
     }
 
-    // se o id da escola n for valido retorna null
-    if (!escolaId || isNaN(escolaId)) {
-        console.error('ID da escola inválido ou não encontrado');
-        return null;
-    }
-
-    // busca ponto de embarque e escola pelo id
+//busca ponto de embarque e escola pelo id
     const ponto = await read('pontos_embarque', `id = ${pontoId}`);
     const escola = await read('escolas', `id = ${escolaId}`);
 
@@ -56,13 +117,14 @@ async function obterDadosDaViagemDoAluno(alunoId) {
         return null;
     }
 
-     // retorna um objeto c/ viagem e as coordenadas do ponto de embarque e da escola, converte lat e long p/ formato numerico
+    // retorna um objeto c/ viagem e as coordenadas do ponto de embarque e da escola, converte lat e long p/ formato numerico
     return {
         viagemId: viagem.id,
         ponto: { lat: parseFloat(ponto.latitude), lng: parseFloat(ponto.longitude) },
         escola: { lat: parseFloat(escola.latitude), lng: parseFloat(escola.longitude) }
     };
 }
+
 
 async function obterDadosDaViagemDoMotorista(motoristaId) {
     const motoristaIdInt = parseInt(motoristaId, 10);
@@ -76,14 +138,25 @@ async function obterDadosDaViagemDoMotorista(motoristaId) {
     }
 
     // a viagem deve estar agendada ou em andamento, associada ao motorista logado ou ao veiculo que ele dirige e dentro do horario de inicio e fim da viagem
-    const viagem = await read(
-        'viagens',
-        `(motorista_id = ${motoristaIdInt} OR veiculo_id = ${veiculo.id}) 
-         AND status IN ('agendada', 'em_andamento') 
-         AND CONCAT(data_viagem, ' ', hora_saida) >= NOW()
-         ORDER BY data_viagem ASC, hora_saida ASC 
-         LIMIT 1`
-    );
+    // const viagem = await read(
+    //     'viagens',
+    //     `(motorista_id = ${motoristaIdInt} OR veiculo_id = ${veiculo.id}) 
+    //      AND status IN ('agendada', 'em_andamento') 
+    //      AND CONCAT(data_viagem, ' ', hora_saida) >= NOW()
+    //      ORDER BY data_viagem ASC, hora_saida ASC 
+    //      LIMIT 1`
+    // );
+    const viagens = await readQuery(`
+  SELECT * FROM viagens 
+  WHERE (motorista_id = ? OR veiculo_id = ?) 
+    AND status IN ('agendada', 'em_andamento') 
+    AND CONCAT(data_viagem, ' ', hora_saida) <= NOW()
+    AND CONCAT(data_viagem, ' ', hora_chegada_prevista) >= NOW()
+  ORDER BY data_viagem ASC, hora_saida ASC 
+  LIMIT 1
+`, [motoristaIdInt, veiculo.id]);
+
+    const viagem = viagens[0];
 
     if (!viagem) {
         console.error('Nenhuma viagem encontrada para o motorista ou veículo');
@@ -117,7 +190,7 @@ async function obterDadosDaViagemDoMotorista(motoristaId) {
 async function obterDadosDasViagensDoResponsavel(responsavelId) {
     // passa id p/ inteiro
     const responsavelIdInt = parseInt(responsavelId, 10);
-    if (isNaN(responsavelIdInt)){
+    if (isNaN(responsavelIdInt)) {
         console.error('ID de responsável inválido:', responsavelId);
     }
 
@@ -132,7 +205,7 @@ async function obterDadosDasViagensDoResponsavel(responsavelId) {
 
     // p/ cd aluno vinculado, usamos join entre 'alunos_viagens' e 'viagens' para pegar so viagens ativas e no horario associadas a ele
     for (const vinculacao of alunosVinculados) {
-        const viagensAluno = await readAll(`alunos_viagens JOIN viagens ON alunos_viagens.viagem_id = viagens.id`, `alunos_viagens.aluno_id = ${vinculacao.aluno_id} AND viagens.status IN ('agendada', 'em_andamento') AND CONCAT(viagens.data_viagem, ' ', viagens.hora_saida) <= NOW() AND CONCAT(viagens.data_viagem, ' ', viagens.hora_chegada_prevista) >= NOW()` );
+        const viagensAluno = await readAll(`alunos_viagens JOIN viagens ON alunos_viagens.viagem_id = viagens.id`, `alunos_viagens.aluno_id = ${vinculacao.aluno_id} AND viagens.status IN ('agendada', 'em_andamento') AND CONCAT(viagens.data_viagem, ' ', viagens.hora_saida) <= NOW() AND CONCAT(viagens.data_viagem, ' ', viagens.hora_chegada_prevista) >= NOW()`);
 
         for (const viagem of viagensAluno) {
             let pontoInicial = null, pontoFinal = null;
@@ -167,7 +240,7 @@ async function obterDadosDasViagensDoResponsavel(responsavelId) {
 }
 
 async function buscarViagensDoAluno(alunoId) {
-  const query = `
+    const query = `
     SELECT 
       viagens.data_viagem,
       viagens.hora_saida,
@@ -211,9 +284,9 @@ async function buscarViagensDoAluno(alunoId) {
       AND viagens.data_viagem >= CURDATE()
     ORDER BY viagens.data_viagem, viagens.hora_saida;
   `;
-  
-  const viagens = await readQuery(query, [alunoId]);
-  return viagens;
+
+    const viagens = await readQuery(query, [alunoId]);
+    return viagens;
 }
 
 export { obterDadosDaViagemDoAluno, obterDadosDaViagemDoMotorista, obterDadosDasViagensDoResponsavel, buscarViagensDoAluno };
