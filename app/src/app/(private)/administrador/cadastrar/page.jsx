@@ -10,8 +10,6 @@ export default function RegistroPage() {
 
   const cpfInputRef = useRef(null);
   const [tipo, setTipo] = useState('');
-  const [form, setForm] = useState({});
-  const formRef = useRef();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,24 +21,10 @@ export default function RegistroPage() {
     }));
   };
 
+  const formRef = useRef(null);
+  const [form, setForm] = useState({});
 
-  useEffect(() => {
-    const cpfInput = cpfInputRef.current;
-    if (!cpfInput) return;
-
-    const handleInput = (e) => {
-      let value = e.target.value;
-      value = value.replace(/\D/g, '');
-      if (value.length > 3) value = value.replace(/^(\d{3})(\d)/, '$1.$2');
-      if (value.length > 6) value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
-      if (value.length > 9) value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{2})/, '$1.$2.$3-$4');
-      e.target.value = value;
-    };
-
-    cpfInput.addEventListener('input', handleInput);
-    return () => cpfInput.removeEventListener('input', handleInput);
-  }, []);
-
+  // escolha de usuario
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!tipo) return alert('Selecione um tipo de usuário.');
@@ -72,8 +56,7 @@ export default function RegistroPage() {
               nome: form.nome_responsavel,
               email: form.email_responsavel,
               telefone: form.telefone_responsavel,
-              senha: form.senha_responsavel,
-              grau_parentesco: form.grau_parentesco,
+              senha: form.senha_responsavel
             },
           };
           break;
@@ -132,21 +115,6 @@ export default function RegistroPage() {
     }
   };
 
-  // formatação de cpf
- /* const cpfRef = useRef(null); // referência para o input de CPF para que seja possivel fazer a validação/formatação depois da renderização
-  useEffect(() => {
-    if (cpfRef.current) {
-      cpfRef.current.addEventListener("input", (e) => {
-        let value = e.target.value.replace(/\D/g, ""); // remove caracteres nao numericos
-        value = value.slice(0, 11); // limite de 11 digitos
-        value = value.replace(/^(\d{3})(\d)/, "$1.$2"); // adiciona o primeiro ponto
-        value = value.replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3"); // adiciona o segundo ponto
-        value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4"); // adiciona o traço
-        e.target.value = value;
-      });
-    }
-  });*/
-
   // ao digitar nomes, ele nao permite caracteres numericos
   const textRef = useRef(null);
   useEffect(() => {
@@ -157,60 +125,68 @@ export default function RegistroPage() {
       })
     }
   })
+  const formatCpf = (value) => {
+    const digits = value.replace(/\D/g, '').slice(0, 11);
+    return digits
+      .replace(/^(\d{3})(\d)/, '$1.$2')
+      .replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
+      .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+  };
 
-  // mascara de telefone
-  const tellRef = useRef(null);
-  useEffect(() => {
-    if (tellRef.current) {
-      tellRef.current.addEventListener("input", (e) => {
-        let value = e.target.value.replace(/\D/g, ""); // remove caracteres nao numericos
-        value = value.slice(0, 11); // limite de 11 digitos
-        value = value.replace(/^(\d\d)(\d)/g, "($1)$2"); // regex no padrão de telefone brasileiro
-        value = value.replace(/(\d{5})(\d)/, "$1-$2");
-        e.target.value = value;
-      });
-    }
-  });
+  const formatPhone = (value) => {
+    const digits = value.replace(/\D/g, '').slice(0, 11);
+    return digits
+      .replace(/^(\d{2})(\d)/, '($1)$2')
+      .replace(/(\d{5})(\d)/, '$1-$2');
+  };
 
-  // mascara de data
-  const dataRef = useRef(null);
-  useEffect(() => {
-    if (dataRef.current) {
-      dataRef.current.addEventListener("input", (e) => {
-        let value = e.target.value.replace(/\D/g, ""); // remove caracteres nao numericos
-        value = value.slice(0, 8); // limite de 8 digitos
-        value = value.replace(/(\d{2})(\d)/, "$1/$2");
-        e.target.value = value;
-      });
-    }
-  });
+  const formatDate = (value) => {
+    const digits = value.replace(/\D/g, '').slice(0, 8);
+    return digits
+      .replace(/(\d{2})(\d)/, '$1/$2')
+      .replace(/(\d{2})\/(\d{2})(\d)/, '$1/$2/$3');
+  };
 
-  // cnh
-  const cnhRef = useRef(null);
-  useEffect(() => {
-    if (cnhRef.current) {
-      cnhRef.current.addEventListener("input", (e) => {
-        let value = e.target.value.replace(/\D/g, ""); // remove caracteres nao numericos
-        value = value.slice(0, 9); // limite de 9 digitos
-        e.target.value = value;
-      });
-    }
-  });
+  const formatCNH = (value) => {
+    return value.replace(/\D/g, '').slice(0, 9);
+  };
+
+
 
   const renderCamposEspecificos = () => {
     switch (tipo) {
       case 'aluno':
         return (
           <>
-            <div className="relative z-0 w-full mb-5 group">
-              <input name="cpf" onChange={handleChange} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-b-2 border-gray-300 appearance-none peer" placeholder="CPF " required maxLength={11}  />{/*ref={cpfRef}*/}
+            <div className="relative z-0 w-full group">
+              <input name="cpf" placeholder="CPF" required value={formatCpf(form.cpf || '')} onChange={(e) =>
+                handleChange({
+                  target: {
+                    name: 'cpf',
+                    value: e.target.value.replace(/\D/g, '')
+                  }
+                })
+              } />
+
               <label htmlFor="cpf" className="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]"></label>
             </div>
-            <input name="email" pattern="^[a-zA-Z0-9._%+-]+@al\.gov\.br$" placeholder="Email institucional" onChange={handleChange} required />
-            <input name="nome" placeholder="Nome completo" onChange={handleChange} required />{/*ref={textRef}*/}
-            <input name="telefonePrinc" placeholder="Telefone" onChange={handleChange} required  maxLength={11}/>{/*ref={tellRef}*/}
-            <input name="dataNascimento" placeholder="Data de nascimento" onChange={handleChange} required />{/*ref={dataRef}*/}
-
+            <input name="email" pattern="^[a-zA-Z0-9._%+-]+@al\.gov\.br$" placeholder="Email institucional" onChange={handleChange} required autoComplete="off" />
+            <input name="nome" placeholder="Nome completo" onChange={handleChange} required ref={textRef} />
+            <input name="telefonePrinc" placeholder="Telefone" required value={formatPhone(form.telefonePrinc || '')} onChange={(e) => handleChange({
+              target: {
+                name: 'telefonePrinc',
+                value: e.target.value.replace(/\D/g, '')
+              }
+            })
+            } />
+            <input name="dataNascimento" placeholder="Data de nascimento" required value={formatDate(form.dataNascimento || '')} onChange={(e) =>
+              handleChange({
+                target: {
+                  name: 'dataNascimento',
+                  value: e.target.value.replace(/\D/g, '')
+                }
+              })
+            } />
             {/* Autocomplete da escola */}
             <div className="relative z-0 w-full mb-5 group">
               <input
@@ -223,20 +199,19 @@ export default function RegistroPage() {
                   await buscarEscolas(nome);
                   setForm((prev) => ({ ...prev, escola_id: null }));
                 }}
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-b-2 border-gray-300 appearance-none peer"
-                placeholder=""
+                placeholder="Nome da escola"
                 autoComplete="off"
                 required
               />
-              <label
+              {/* <label
                 htmlFor="escola_nome"
                 className="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-6 transition-all"
               >
                 Nome da escola
-              </label>
+              </label> */}
 
               {escolas.length > 0 && (
-                <ul className="absolute z-20 w-full mt-2 bg-white border border-gray-300 max-h-40 overflow-y-auto rounded shadow">
+                <ul className="absolute z-20 w-full mt-2order border-gray-300 overflow-y-auto rounded shadow">
                   {escolas.map((escola) => (
                     <li
                       key={escola.id}
@@ -276,61 +251,52 @@ export default function RegistroPage() {
                 defaultValue={pontoNome}
                 disabled
                 className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-gray-100 border-b-2 border-gray-300 appearance-none cursor-not-allowed peer"
-                placeholder=" "
+                placeholder="Ponto de ônibus"
               />
-              <label
+              {/* <label
                 htmlFor="ponto_embarque_nome"
                 className="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-6 transition-all"
               >
                 Ponto de embarque
-              </label>
+              </label> */}
             </div>
             {/* ainda é preciso revisar os campos abaixo */}
             <input name="viagem_id" placeholder="ID da viagem" onChange={handleChange} required />
             <input name="veiculo_id" placeholder="ID do veículo" onChange={handleChange} required />
-            <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required />
+            <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required autoComplete="off" />
             {/* Campos do Responsável */}
             <h2 className="text-lg font-semibold mt-6">Responsável</h2>
-            <input name="cpf_responsavel" placeholder="CPF do responsável" onChange={handleChange} required />{/*ref={cpfRef} - tirei a máscara para testar*/} 
+            <input name="cpf_responsavel" placeholder="CPF" required value={formatCpf(form.cpf_responsavel || '')} onChange={(e) => handleChange({ target: { name: 'cpf_responsavel', value: e.target.value.replace(/\D/g, '') } })} />
             <input name="nome_responsavel" placeholder="Nome do responsável" onChange={handleChange} required />{/*ref={textRef}*/}
-            <input type='email' name="email_responsavel" placeholder="Email do responsável" onChange={handleChange} required />
-            <input name="telefone_responsavel" placeholder="Telefone do responsável" onChange={handleChange} required ref={tellRef} />
-            <input name="senha_responsavel" placeholder="Senha do responsável" type="password" onChange={handleChange} required />
-            <input name="grau_parentesco" placeholder="Grau de parentesco" onChange={handleChange} required />
+            <input type='email' name="email_responsavel" placeholder="Email do responsável" onChange={handleChange} required autoComplete="off" />
+            <input name="telefone_responsavel" placeholder="Telefone do responsável" required value={formatPhone(form.telefone || '')} onChange={(e) => handleChange({ target: { name: 'telefone', value: e.target.value.replace(/\D/g, '') } }) } />
+            {/*
+            ainda vou revisar essa parte
+            {!responsavelExiste && (
+              <input name="senha_responsavel" type="password" placeholder="Senha do responsável" onChange={handleChange} required />
+            )} */}
           </>
         );
 
       case 'motorista':
         return (
           <>
-            <input name="cpf" placeholder="CPF" onChange={handleChange} required maxLength={11} />{/*ref={cpfRef}*/}
-            <input name="nome" placeholder="Nome completo" onChange={handleChange} required/>{/*ref={textRef}*/}
-            <input name="cnh" placeholder="CNH" onChange={handleChange} required />{/*ref={cnhRef}*/}
-            <input name="telefone" placeholder="Telefone" onChange={handleChange} required maxLength={11} />{/*ref={tellRef}*/}
-            <input name="vencimento_habilitacao" placeholder="Vencimento da habilitação" onChange={handleChange} required />{/*ref={dataRef}*/}
-            <input type='email' name="email" placeholder="Email" onChange={handleChange} required />
-            <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required />
+            <input name="cpf" placeholder="CPF" required value={formatCpf(form.cpf || '')} onChange={(e) => handleChange({ target: { name: 'cpf', value: e.target.value.replace(/\D/g, '') } })} />
+            <input name="nome" placeholder="Nome completo" onChange={handleChange} required />{/*ref={textRef}*/}
+            <input name="cnh" placeholder="CNH" required value={formatCNH(form.cnh || '')} onChange={(e) => handleChange({ target: { name: 'cnh', value: e.target.value } })} />
+            <input name="telefone" placeholder="Telefone" required value={formatPhone(form.telefone || '')} onChange={(e) => handleChange({ target: { name: 'telefone', value: e.target.value.replace(/\D/g, '') } })} />
+            <input name="validade_cnh" placeholder="Validade da CNH" required value={formatDate(form.validade_cnh || '')} onChange={(e) => handleChange({ target: { name: 'validade_cnh', value: e.target.value.replace(/\D/g, '') } })} />
+            <input type='email' name="email" placeholder="Email" required autoComplete="off" />
+            <input name="senha" placeholder="Senha" type="password" required autoComplete="off" />
           </>
         );
-
-      case 'responsavel':
-        return (
-          <>
-            <input name="cpf" placeholder="CPF" onChange={handleChange} required maxLength={11}/>{/*ref={cpfRef}*/}
-            <input name="nome" placeholder="Nome completo" onChange={handleChange} required />{/*ref={tellRef}*/}
-            <input type='email' name="email" placeholder="Email" onChange={handleChange} required />
-            <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required />
-            <input name="cpf_filhos" placeholder="CPF dos filhos (separado por vírgulas)" onChange={handleChange} required />
-          </>
-        );
-
       case 'administrador':
         return (
           <>
-            <input name="cpf" placeholder="CPF" onChange={handleChange} required maxLength={11} />{/*ref={cpfRef}*/}
+            <input name="cpf" placeholder="CPF" required value={formatCpf(form.cpf || '')} onChange={(e) => handleChange({ target: { name: 'cpf', value: e.target.value.replace(/\D/g, '') } })} />
             <input name="nome" placeholder="Nome completo" onChange={handleChange} required />{/*ref={textRef}*/}
-            <input name="email" placeholder="Email" onChange={handleChange} required />
-            <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required />
+            <input name="email" placeholder="Email" onChange={handleChange} required autoComplete="off" />
+            <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required autoComplete="off" />
           </>
         );
 
@@ -350,9 +316,8 @@ export default function RegistroPage() {
 
         <select onChange={(e) => setTipo(e.target.value)} value={tipo} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 mb-5">
           <option value="">Selecionar tipo</option>
-          <option value="aluno">Aluno</option>
+          <option value="aluno">Aluno e responsável</option>
           <option value="motorista">Motorista</option>
-          <option value="responsavel">Responsável</option>
           <option value="administrador">Administrador</option>
         </select>
 

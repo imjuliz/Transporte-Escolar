@@ -1,6 +1,5 @@
 import { create, readAll, read, readQuery, deleteRecord } from '../config/database.js';
 
-
 // ----------------------------------registrar novos usuarios----------------------------------
 export const criarAluno = async (dados) => {
   try {
@@ -39,20 +38,25 @@ export const criarAdministrador = async (dados) => {
 };
 
 // verifica se o responsavel ja existe
-export async function verificarResponsavelExistente({ cpf, email, telefone }) {
+export const verificarResponsavelExistente = async ({ cpf, email, telefone }) => {
   const where = `cpf = ? OR email = ? OR telefone = ?`;
   const values = [cpf, email, telefone];
-  const responsaveis = await readAll('responsaveis', where, values);
-  return responsaveis;
-}
+  try {
+    return await readAll('responsaveis', where, values);
+  } catch (err) {
+    throw err;
+  }
+};
 
-// associa responsavel ao aluno
-export const associarResponsavelAluno = async (responsavelId, alunoId, grau) => {
-  return await create('responsaveis_alunos', {
-    responsavel_id: responsavelId,
-    aluno_id: alunoId,
-    grau_parentesco: grau
-  });
+export const associarResponsavelAluno = async (responsavelId, alunoId) => {
+  try {
+    return await create('responsaveis_alunos', {
+      responsavel_id: responsavelId,
+      aluno_id: alunoId
+    });
+  } catch (err) {
+    throw err;
+  }
 };
 
 // busca o nome da escola

@@ -36,18 +36,17 @@
 
 import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario} from '../models/Admin.js';
 
-// cadastro dos usuarios
-export async function cadastrarAlunoComResponsavel(req, res) {
+// ------------------------------------------------------------ cadastro dos usuarios
+export const cadastrarAlunoComResponsavel = async (req, res) => {
   try {
     const { aluno, responsavel } = req.body;
 
-    // Verifica se o responsavel ja existe pelo CPF, email ou telefone
     const existentes = await verificarResponsavelExistente(responsavel);
 
     let responsavel_id;
 
     if (existentes.length > 0) {
-      // procura um registro que bata exatamente com todas as informações
+      // procura registro com todos os dados batendo
       const r = existentes.find(r =>
         r.cpf === responsavel.cpf &&
         r.nome === responsavel.nome &&
@@ -55,32 +54,24 @@ export async function cadastrarAlunoComResponsavel(req, res) {
         r.telefone === responsavel.telefone
       );
 
-      // se algum registro existe porem nao bate com os outros dados, rejeita
       if (!r) {
         return res.status(400).json({ erro: 'Informações inválidas do responsável.' });
       }
-
-      // todos os dados batem — reutiliza
       responsavel_id = r.id;
-
     } else {
-      // se nenhum dado bate, cria novo responsável
       responsavel_id = await criarResponsavel(responsavel);
     }
 
-    // cria aluno
     const aluno_id = await criarAluno(aluno);
 
-    // associa aluno ao responsavel
     await associarResponsavelAluno(responsavel_id, aluno_id);
 
-    res.status(201).json({ mensagem: 'Aluno e responsável registrados com sucesso.' });
-
-  } catch (erro) {
-    console.error(erro);
-    res.status(500).json({ erro: 'Erro ao registrar aluno e responsável.' });
+    return res.status(201).json({ mensagem: 'Aluno e responsável registrados com sucesso.' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ erro: 'Erro ao registrar aluno e responsável.' });
   }
-}
+};
 
 export const cadastrarMotorista = async (req, res) => {
   try {

@@ -37,7 +37,7 @@ export default function AdmLayout({ children }) {
 
     const links = [
         { href: '/administrador/dashboard', name: 'dashboard', page: 'Dashboard geral' },
-        { href: '/dashboard/cadastrar', name: 'cadastrar', page: 'Cadastrar',
+        { href: '/administrador/cadastrar', name: 'cadastrar', page: 'Cadastrar',
                     // links3 : [
                     //     { href: '/login', name: 'motoristas', page: 'Motoristas' },
                     //     { href: '/login', name: 'veiculos', page: 'Veículos' },
