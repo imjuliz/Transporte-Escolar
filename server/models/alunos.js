@@ -1,4 +1,4 @@
-import {readQuery, readAll} from "../config/database.js";
+import { readQuery, readAll } from "../config/database.js";
 
 const verAlunos = async () => {
     try {
@@ -14,13 +14,13 @@ where escolas.id = ? ; `)
 };
 
 
-const verDadosEscola = async ()=>{
-try{
-return await readAll('escolas')
-}catch(err){
-console.error('erro ao ver escolas!!!', error);
-throw error
-}
+const verDadosEscola = async () => {
+    try {
+        return await readAll('escolas')
+    } catch (error) {
+        console.error('erro ao ver escolas!!!', error);
+        throw error
+    }
 }
 
 export { verAlunos, verDadosEscola }

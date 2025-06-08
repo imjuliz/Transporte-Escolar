@@ -8,13 +8,15 @@ import { motion } from 'framer-motion';
 
 //componentes do dashboard
 import { StatCard } from './components/StatCard.jsx';
+import { ViagensGrafico } from './components/ViagensGrafico.jsx';
+import { TipoUsuarioChart} from './components/GraficoPizza.jsx';
 
 //importação do bglh do dashboard
 //import './assets/vendor/apexcharts/dist/apexcharts.css';
 
 export default function dashboard() {
 
-
+    //----------------------------------------cards
     // qntd de viagens em andamento
     const [qtdViagens, setQtdViagens] = useState(null);
     useEffect(() => {
@@ -111,16 +113,19 @@ export default function dashboard() {
         }
     ];
 
+
+
+
     return (
         <>
-            <section className='informacoes'>
-                <div className='page-indicador'>
-                    <h1>Dashboard</h1>
 
-                </div>
+            <div className='page-indicador'>
+                <h1>Dashboard</h1>
+
+            </div>
 
 
-                {/*<section className='flex flex-row justify-between  '>
+            {/*<section className='flex flex-row justify-between  '>
                     
                         <div key={index} className='box-infos flex p-4 w-70 h-35 flez-row rounded-xl bg-[#fff] items-center gap-4'>
 
@@ -135,13 +140,25 @@ export default function dashboard() {
                         </div>
                    
                 </section>*/}
-                {infos.map((infos, index) => (
-                    <div key={index} className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4-mb-8">
-                        <StatCard name={infos.nome} img={infos.img} value={infos.informacao}></StatCard>
-                    </div>
-                ))}
+            <div className=' overflow-auto relative z-10'>
+                <main className='w-full mx-auto py-4 px-4 lg:px-8 '>
+                    <motion.div className="statcards grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4 mb-8"
+                        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+                        {infos.map((infos, index) => (
 
-            </section>
+                            <StatCard key={index} name={infos.nome} img={infos.img} value={infos.informacao}></StatCard>
+
+                        ))} </motion.div>
+
+                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mt-5'>
+                        {/**Para o gráfico funcionar, é preciso adicionar datas diferentes na tabela das viagens */}
+                        <ViagensGrafico></ViagensGrafico>
+                        <TipoUsuarioChart></TipoUsuarioChart>
+
+                    </div>
+
+                </main>
+            </div>
         </>
     )
 }

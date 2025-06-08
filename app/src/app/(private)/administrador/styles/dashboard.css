@@ -6,9 +6,9 @@ body {
     background-color: #F5F5F5 !important;
 }
 
-main {
+/*main {
     align-content: start;
-}
+}*/
 
 section {
     margin-top: 10vh;
@@ -52,28 +52,42 @@ h3{
 
 .icone{
     background-color: antiquewhite;
-    width: 60px;
+    /*width: 60px;
     height: 60px;
     justify-items: center;
   position:relative;
-  border-radius: 50%;
+  border-radius: 50%;*/
 }
-.img-icone{
+/*.img-icone{
     width: 30px !important;
     position: absolute;
     top:25%;
     left:25%
     
-}
+}*/
 
-.informacao{
+/*.informacao{
     font-size: 25px;
     font-family: 'Plus Jakarta Sans Bold';
-}
+}*/
 
 .box-infos{
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
+.numero{
+    font-size: xx-large;
+    font-family: 'Plus Jakarta Sans Bold';
+}
 
+/*Gráfico de viagens*/
+.grafico{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px
+}
+
+.titulo-grafico{
+    font-family: 'Plus Jakarta Sans Semibold';
+    font-size: 1.2rem;
+
+}
 

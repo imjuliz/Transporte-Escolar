@@ -188,4 +188,31 @@ const buscarQuantidadeViagensEmAndamento = async () => {
   return resultado[0].total; // retorna apenas o número
 };
 
-export { buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas };
+//-----------------------------
+//para contar viagens por dia - gráfico do dashboard
+const qtdViagensPorDia = async () => {
+  const sql = `
+  SELECT data_viagem AS data, COUNT(*) AS total_viagens
+FROM viagens
+GROUP BY data_viagem
+ORDER BY data_viagem;
+  `;
+
+  return await readQuery(sql);
+}
+
+//para contar os tipos de usuário
+const qtdTipoUsuario = async ()=>{
+  const sql = `
+  SELECT 'Alunos' AS name, COUNT(*) AS value FROM alunos
+UNION ALL
+SELECT 'Motoristas' AS name, COUNT(*) AS value FROM motoristas
+UNION ALL
+SELECT 'Responsáveis' AS name, COUNT(*) AS value FROM responsaveis
+UNION ALL
+SELECT 'Administradores' AS name, COUNT(*) AS value FROM adm;
+`;
+return await readQuery(sql);
+}
+
+export { buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario };
