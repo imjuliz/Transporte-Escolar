@@ -86,7 +86,7 @@ export default function Login() {
       } else if (tipoUsuario === "motorista") {
         router.replace("/motorista/minha-rota");
       } else if (tipoUsuario === "responsavel") {
-        router.replace("/responsavel/filhos");
+        router.replace("/responsavel/rotas");
       } else {
         router.replace("/login");
       }
@@ -158,7 +158,7 @@ export default function Login() {
                 )}</button>
               </div>
               <button type="submit" className='btn-entrar'>Entrar</button>
-              <div className={statusAtual}><span>{loginStatus}</span></div>
+              <div className={statusAtual} style={{ marginTop: "3vh"}}><span className='text-red-500' >{loginStatus}</span></div>
             </form>
             <button style={{ marginTop: "1rem", color: "#FFC01D" }} onClick={() => setUsuarioAtivo("")}>Voltar</button>
           </div>
