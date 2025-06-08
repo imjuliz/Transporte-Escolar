@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import 'flowbite';
+@import "preline/variants.css";
+
 
 /* fontes */
 @font-face {

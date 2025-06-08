@@ -2,9 +2,10 @@
 import "./styles/layout.css";
 import { useEffect, useState } from "react";
 import Image from 'next/image'
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function RootLayout({ children }) {
+    const router = useRouter();
     const pathname = usePathname();
     const isMapa = pathname.includes('minha-rota');
     const [sidebarActive, setSidebarActive] = useState(false);
@@ -71,12 +72,28 @@ export default function RootLayout({ children }) {
         { href: '/ajuda', name: 'ajuda', page: 'Ajuda' },
     ];
 
-    //logout
-    const logout = () => {
-        localStorage.removeItem("usuario"); // remove os dados do usuário
-        window.location.href = "/login"; // redireciona p pag de login
-    };
+    // logout
+    const handleLogout = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
 
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.message);
+        router.push('/login'); // redireciona p pag de login
+      } else {
+        console.error(data.message);
+        alert('Erro ao fazer logout');
+      }
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('Erro ao fazer logout');
+    }
+  };
     return (
         <>
             <header>
@@ -113,7 +130,7 @@ export default function RootLayout({ children }) {
                     </ul>
                     <div className="profileContent">
                         <div className="profile">
-                            <button type='submit' className="btn-sair group flex flex-row gap-3 items-center" onClick={logout}>
+                            <button type='submit' className="btn-sair group flex flex-row gap-3 items-center" onClick={handleLogout}>
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11 1H13C14.1046 1 15 1.89543 15 3L15 13C15 14.1046 14.1046 15 13 15H11M1 8H11M11 8L9 10M11 8L9 6" stroke="#757575" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-[#FF0000] transition-colors duration-200" />
                                 </svg>

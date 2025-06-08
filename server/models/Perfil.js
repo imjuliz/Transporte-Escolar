@@ -5,7 +5,7 @@ const tabelas = {
   aluno: 'alunos',
   responsavel: 'responsaveis',
   motorista: 'motoristas',
-  adm: 'adm',
+  administrador: 'adm',
 };
 
 const obterDadosDoUsuario = async (tipo, id) => {

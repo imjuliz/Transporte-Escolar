@@ -32,5 +32,16 @@ p{
     
 }
 
+.btn-add{
+    padding: 1vh 2vw;
+    background-color: #013FF6;
+    color: #fff;
+    border-radius: 40px;
+    font-family: "Plus Jakarta Sans Medium";
+}
 
+.btn-edit{
+    color: #596780;
+    font-family: "Plus Jakarta Sans Medium";
+}
 

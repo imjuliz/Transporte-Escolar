@@ -54,8 +54,7 @@ export default function PrivateLayout({ children }) {
   }
 
   if (!usuarioLogado) {
-    // Se não está logado (mas isso normalmente redireciona)
-    return null; // Ou algo que faça sentido
+    return null;
   }
 
   return (
