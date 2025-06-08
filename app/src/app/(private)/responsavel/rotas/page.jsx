@@ -78,6 +78,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 import MapaViagemResponsavel from "../../../../components/Mapa/MapaResponsavel.jsx";
 import '../styles/rotas.css'
 
@@ -159,47 +160,60 @@ export default function RotaResponsavel() {
     : null;
 
   return (
-    <section className="relative w-screen">
-  {infoFilhos.length > 1 && (
-    <nav className="flex gap-x-1 --prevent-on-load-init" role="tablist">
-      <div className="mb-4 inline-flex gap-x-1">
-        {infoFilhos.map((filho) => {
-          const key = filho.id_aluno ?? filho.alunoId ?? filho.nome_aluno;
-          return (
-            <button
-              key={key}
-              type="button"
-              onClick={() => setFilhoSelecionado(filho.id_aluno ?? filho.alunoId)}
-              className={`
-                py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm rounded-full 
-                text-gray-500 hover:text-gray-800
-                focus:outline-hidden focus:text-gray-800
-                dark:text-neutral-500 dark:hover:text-neutral-200 dark:focus:text-neutral-200
-                disabled:opacity-50 disabled:pointer-events-none
-                ${filhoSelecionado === (filho.id_aluno ?? filho.alunoId)
-                  ? "hs-tab-active:bg-gray-100 hs-tab-active:hover:bg-gray-100 hs-tab-active:focus:bg-gray-100 hs-tab-active:text-gray-800 dark:hs-tab-active:bg-neutral-700 dark:hs-tab-active:focus:bg-neutral-700 dark:hs-tab-active:hover:bg-neutral-700 dark:hs-tab-active:text-neutral-200 active"
-                  : ""}
-              `}
-              role="tab"
-              aria-selected={filhoSelecionado === (filho.id_aluno ?? filho.alunoId)}
-              data-hs-tab={filho.nome_aluno || filho.nome || "tab"}
-            >
-              {filho.nome_aluno}
-            </button>
-          );
-        })}
-      </div>
-    </nav>
-  )}
+    <section className="relative h-screen w-screen">
+      {infoFilhos.length > 1 && (
+        <nav className="flex gap-x-1 --prevent-on-load-init mt-4 mb-4" role="tablist">
+          {infoFilhos.map((filho) => {
+            const key = filho.id_aluno ?? filho.alunoId ?? filho.nome_aluno;
+            const isSelected = filhoSelecionado === (filho.id_aluno ?? filho.alunoId);
+            return (
+              <div
+                key={key}
+                onClick={() => setFilhoSelecionado(filho.id_aluno ?? filho.alunoId)}
+                className={`
+              py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm rounded-full
+              text-gray-500 hover:text-gray-800
+              focus:outline-hidden focus:text-gray-800
+              dark:text-neutral-500
+              disabled:opacity-50 disabled:pointer-events-none
+              ${isSelected ?
+                    "rounded-full bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-neutral-200"
+                    : ""}
+            `}
+                role="tab"
+                aria-selected={isSelected}
+                data-hs-tab={filho.nome_aluno || filho.nome || "tab"}
+              >
+                {filho.nome_aluno}
+              </div>
+            );
+          })}
+        </nav>
+      )}
 
-  {dadosMapa ? (
-    <div style={{ height: "100%", width: "100%" }}>
-      <MapaViagemResponsavel dados={dadosMapa} />
-    </div>
-  ) : (
-    <p>Nenhuma viagem ativa para este filho no momento.</p>
-  )}
-</section>
+      {dadosMapa ? (
+        <div style={{ height: "100%", width: "100%" }}>
+          <MapaViagemResponsavel dados={dadosMapa} />
+        </div>
+      ) : (
+        <div className='flex flex-col gap-10 items-center justify-center'>
+          <Image
+            src="/img/semViagensAndamento.svg"
+            width={600}
+            height={400}
+            alt="Menino e menina esparando ônibus"
+            className='404-img'
+          />
+          <p>Não há nenhuma viagem em andamento.</p>
+          <button className="btn-viagens" href='/responsavel/viagens'>
+            <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="seta" >
+              <path d="M17 7H1M1 7L7 1M1 7L7 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <p className='text-[#fff] no-underline m-0'>Ver viagens</p>
+          </button>
+        </div>
+      )}
+    </section>
 
   );
 }
