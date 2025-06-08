@@ -39,10 +39,11 @@ export const criarAdministrador = async (dados) => {
 
 // verifica se o responsavel ja existe
 export const verificarResponsavelExistente = async ({ cpf, email, telefone }) => {
-  const where = `cpf = ? OR email = ? OR telefone = ?`;
+  const consulta = 'SELECT * FROM responsaveis WHERE cpf = ? OR email = ? OR telefone = ?';
   const values = [cpf, email, telefone];
+  console.log('Valores para consulta:', values);
   try {
-    return await readAll('responsaveis', where, values);
+    return await readQuery(consulta, values);
   } catch (err) {
     throw err;
   }
@@ -58,6 +59,21 @@ export const associarResponsavelAluno = async (responsavelId, alunoId) => {
     throw err;
   }
 };
+
+// busca o id da viagem pela escola e ponto
+export const buscarViagemPorEscolaEPonto = async (escola_id, ponto_embarque_id) => {
+  const query = `
+    SELECT id FROM viagens 
+    WHERE escola_id = ? AND ponto_embarque_id = ? 
+    LIMIT 1
+  `;
+  const results = await readQuery(query, [escola_id, ponto_embarque_id]);
+  if (results.length === 0) {
+    throw new Error('Viagem não encontrada para escola e ponto informados');
+  }
+  return results[0].id;
+};
+
 
 // busca o nome da escola
 export const buscarEscolasPorNome = async (nome) => {

@@ -41,19 +41,16 @@ export const cadastrarAlunoComResponsavel = async (req, res) => {
   try {
     const { aluno, responsavel } = req.body;
 
+    // 1. Verifica ou cria responsável
     const existentes = await verificarResponsavelExistente(responsavel);
-
     let responsavel_id;
-
     if (existentes.length > 0) {
-      // procura registro com todos os dados batendo
       const r = existentes.find(r =>
         r.cpf === responsavel.cpf &&
         r.nome === responsavel.nome &&
         r.email === responsavel.email &&
         r.telefone === responsavel.telefone
       );
-
       if (!r) {
         return res.status(400).json({ erro: 'Informações inválidas do responsável.' });
       }
@@ -62,14 +59,38 @@ export const cadastrarAlunoComResponsavel = async (req, res) => {
       responsavel_id = await criarResponsavel(responsavel);
     }
 
-    const aluno_id = await criarAluno(aluno);
+    // 2. Busca o viagem_id a partir da escola_id e ponto_embarque_id do aluno
+    const viagem_id = await buscarViagemPorEscolaEPonto(aluno.escola_id, aluno.ponto_embarque_id);
 
+    // 3. Remove viagem_id do objeto aluno para evitar erro na query de insert
+    const { viagem_id: _, ...dadosAluno } = aluno;
+
+    // 4. Cria aluno
+    const aluno_id = await criarAluno(dadosAluno);
+
+    // 5. Associa responsável e aluno
     await associarResponsavelAluno(responsavel_id, aluno_id);
+
+    // 6. Associa aluno e viagem
+    await associarAlunoViagem(aluno_id, viagem_id);
 
     return res.status(201).json({ mensagem: 'Aluno e responsável registrados com sucesso.' });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ erro: 'Erro ao registrar aluno e responsável.' });
+    return res.status(500).json({ erro: error.message || 'Erro ao registrar aluno e responsável.' });
+  }
+};
+
+export const buscarViagemPorEscolaEPontoController = async (req, res) => {
+  const { escola_id, ponto_embarque_id } = req.query;
+  if (!escola_id || !ponto_embarque_id) {
+    return res.status(400).json({ erro: 'Parâmetros escola_id e ponto_embarque_id são obrigatórios' });
+  }
+  try {
+    const viagemId = await buscarViagemPorEscolaEPonto(escola_id, ponto_embarque_id);
+    return res.json({ id: viagemId });
+  } catch (error) {
+    return res.status(404).json({ erro: error.message });
   }
 };
 

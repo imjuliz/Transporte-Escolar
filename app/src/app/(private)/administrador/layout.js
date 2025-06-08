@@ -104,27 +104,21 @@ useEffect(() => {
     // const primeiroNome = pegarPrimeiroNome(usuario.nome);
 
         // logout
-        const handleLogout = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/logout', {
-        method: 'POST',
-        credentials: 'include', // IMPORTANTE: inclui cookies na requisição
-      });
 
+const handleLogout = async () => {
+  try {
+    const response = await fetch('http://localhost:3001/logout', { method: 'POST', credentials: 'include' });
+
+    if (response.ok) {
+      router.push('/login'); // Redireciona para o login após logout
+    } else {
       const data = await response.json();
-
-      if (response.ok) {
-        alert(data.message); // opcional
-        router.push('/login'); // redireciona para a página de login
-      } else {
-        console.error(data.message);
-        alert('Erro ao fazer logout');
-      }
-    } catch (error) {
-      console.error('Erro:', error);
-      alert('Erro ao fazer logout');
+      console.error('Erro ao fazer logout:', data.message);
     }
-  };
+  } catch (error) {
+    console.error('Erro na requisição de logout:', error);
+  }
+};
 
     return (
         <>
@@ -174,7 +168,7 @@ useEffect(() => {
                         </ul>
                         <div className="profileContent">
                             <div className="profile">
-                                <button type='submit' className="btn-sair group flex flex-row gap-3 items-center" onClick={handleLogout}>
+                                <button className="btn-sair group flex flex-row gap-3 items-center" onClick={handleLogout}>
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11 1H13C14.1046 1 15 1.89543 15 3L15 13C15 14.1046 14.1046 15 13 15H11M1 8H11M11 8L9 10M11 8L9 6" stroke="#757575" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-[#FF0000] transition-colors duration-200" />
                                     </svg>
