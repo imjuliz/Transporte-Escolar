@@ -5,69 +5,58 @@ import { useRouter, usePathname } from "next/navigation";
 
 export default function PrivateLayout({ children }) {
   const router = useRouter();
-  const pathname = usePathname();
-  const [usuario, setUsuario] = useState(null);
+  const [usuarioLogado, setUsuarioLogado] = useState(null); // null = ainda não sabe, true = logado, false = não logado
   const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
-    const validarSessao = async () => {
+    async function checarSessao() {
       try {
-        const res = await fetch("http://localhost:3001/validar-sessao", {
-          credentials: "include", // ESSENCIAL para cookies de sessão
+        const res = await fetch('http://localhost:3001/validar-sessao', {
+          credentials: 'include'
         });
-
-        if (!res.ok) {
-          router.replace("/login");
-          return;
+        if (res.ok) {
+          const data = await res.json();
+          setUsuarioLogado(true); // usuário está logado
+        } else {
+          setUsuarioLogado(false); // não está logado
+          router.push('/login'); // redireciona para login
         }
-
-        const data = await res.json();
-        const tipoNaRota = pathname.split("/")[1];
-
-        const tipoNormalizado = (str) =>
-          str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-        if (tipoNormalizado(data.usuario.tipo) !== tipoNormalizado(tipoNaRota)) {
-          router.replace("/login");
-          return;
-        }
-
-        setUsuario(data.usuario);
       } catch (error) {
-        console.error("Erro ao validar sessão:", error);
-        router.replace("/login");
+        console.error('Erro ao validar sessão:', error);
+        setUsuarioLogado(false);
+        router.push('/login'); // redireciona para login também em caso de erro
       } finally {
-        setTimeout(() => setCarregando(false), 200);
+        setCarregando(false); // termina o carregamento em qualquer caso
       }
-    };
+    }
+    checarSessao();
+  }, [router]);
 
-    validarSessao();
-  }, [pathname]);
 
-  if (carregando || !usuario) {
+  if (carregando) {
     return (
       <div className="text-center" style={{ height: '100vh', width: '100%' }}>
-          <div role="status" className="text-center justify-items-center content-center" style={{ height: '100%', width: '100%' }}>
-              <svg 
-                  aria-hidden="true" 
-                  className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" 
-                  viewBox="0 0 100 101" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-              >
-                  <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                  <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-              </svg>
-              <span className="sr-only">Carregando...</span>
-          </div>
+        <div role="status" className="text-center justify-items-center content-center" style={{ height: '100%', width: '100%' }}>
+          <svg
+            aria-hidden="true"
+            className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            viewBox="0 0 100 101"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+          </svg>
+          <span className="sr-only">Carregando...</span>
+        </div>
       </div>
-  );
+    );
   }
 
-  const logout = () => {
-    localStorage.removeItem("usuario");
-    window.location.href = "/login";
-  };
+  if (!usuarioLogado) {
+    // Se não está logado (mas isso normalmente redireciona)
+    return null; // Ou algo que faça sentido
+  }
 
   return (
     <>

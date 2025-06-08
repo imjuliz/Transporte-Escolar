@@ -52,8 +52,11 @@ app.get('/debug/sessao', (req, res) => {
 });
 
 app.get('/validar-sessao', (req, res) => {
-  if (req.session?.usuario) {
-    res.status(200).json({ usuario: req.session.usuario });
+  const usuario = req.session.usuario;
+  console.log('Usuário na sessão (app.js):', usuario);
+
+  if (usuario) {
+    res.json(usuario);
   } else {
     res.status(401).json({ erro: 'Usuário não autenticado' });
   }

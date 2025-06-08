@@ -19,7 +19,7 @@ import '../styles/viagens.css';
 //             try {
 //                 const usuarioObj = JSON.parse(usuarioSalvo);
 //                 console.log("Dados recuperados do localStorage:", usuarioObj);
-                
+
 //                 if (usuarioObj.id) {
 //                     setUsuario(usuarioObj);
 //                 } else {
@@ -44,16 +44,71 @@ import '../styles/viagens.css';
 //     );
 // }
 
-import ViagemAtivaMap from '../../../../components/Mapa/Mapa.jsx';
-
-
+import MapaViagemAluno from '../../../../components/Mapa/MapaAluno.jsx';
+import { useRouter, usePathname } from "next/navigation";
 
 export default function RotaAluno() {
-  return (
-     <section className="relative w-screen m-8">
-        <div id="hs-custom-pin-leaflet" className="h-screen w-full z-10"></div>
+  const router = useRouter();
 
-      <ViagemAtivaMap />
+  const [dadosViagem, setDadosViagem] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // valida se o usuario esta logado
+  const [usuarioLogado, setUsuarioLogado] = useState(null); // null = ainda não sabe, true = logado, false = não logado
+  const [carregando, setCarregando] = useState(true);
+
+  useEffect(() => {
+    async function checarSessao() {
+      try {
+        const res = await fetch('http://localhost:3001/validar-sessao', {
+          credentials: 'include'
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setUsuarioLogado(true); // usuário está logado
+        } else {
+          setUsuarioLogado(false); // não está logado
+          router.push('/login'); // redireciona para login
+        }
+      } catch (error) {
+        console.error('Erro ao validar sessão:', error);
+        setUsuarioLogado(false);
+        router.push('/login'); // redireciona para login também em caso de erro
+      } finally {
+        setCarregando(false); // termina o carregamento em qualquer caso
+      }
+    }
+    checarSessao();
+  }, [router]);
+
+  // informacoes p ser renderizado no mapa
+  useEffect(() => {
+    fetch('http://localhost:3001/viagem-mapa', {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('Erro ao buscar dados');
+        return res.json();
+      })
+      .then(data => {
+        setDadosViagem(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <p>Carregando dados da viagem...</p>;
+  if (error) return <p>Erro: {error}</p>;
+  if (!dadosViagem || !dadosViagem.dados) return <p>Dados da viagem não encontrados.</p>;
+
+  return (
+    <section className="relative w-screen m-8">
+      <MapaViagemAluno dados={dadosViagem.dados} />
     </section>
   );
 }

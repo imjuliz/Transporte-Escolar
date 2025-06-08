@@ -25,13 +25,19 @@ export async function loginController(req, res) {
       id: usuario.id,
       tipo: tipo.toLowerCase()
     };
+
+    req.session.save((err) => {
+      if (err) {
+        console.error('Erro ao salvar sessão:', err);
+        return res.status(500).json({ erro: 'Erro ao salvar sessão' });
+      }
+
+      // Retorna sucesso e dados para o frontend
+      res.json({ id: usuario.id, mensagem: 'Login realizado com sucesso', tipo: req.session.usuario.tipo });
+
+    });
     console.log("Sessão criada com ID:", req.sessionID);
-
-
     console.log("Usuário autenticado:", req.session.usuario);
-
-    res.json({ id: usuario.id, mensagem: 'Login realizado com sucesso', tipo: req.session.usuario.tipo });
-
   } catch (erro) {
     console.error("Erro no login:", erro.stack || erro);
     res.status(500).json({ erro: 'Erro no servidor ao realizar login' });

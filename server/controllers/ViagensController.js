@@ -38,7 +38,7 @@ import { obterDadosDaViagemDoAluno, obterDadosDaViagemDoMotorista, obterDadosDas
 async function obterViagemPorUsuario(req, res) {
   try {
     const usuario = req.session.usuario;
-    console.log('Usuário na sessão:', usuario); // Verificar usuário
+    console.log('Usuário na sessão (viagens):', usuario);
 
     if (!usuario || !usuario.id || !usuario.tipo) {
       console.error('Usuário não autenticado ou dados faltando');
@@ -54,8 +54,28 @@ async function obterViagemPorUsuario(req, res) {
       if (!dadosAluno) {
         return res.status(404).json({ erro: 'Nenhuma viagem ativa para o aluno' });
       }
-      return res.json({ tipo, dados: dadosAluno });
 
+      const { viagemId, sentido, ponto, escola } = dadosAluno;
+
+      let origem, destino;
+      if (sentido === 'ida') {
+        origem = ponto;
+        destino = escola;
+      } else if (sentido === 'volta') {
+        origem = escola;
+        destino = ponto;
+      } else {
+        return res.status(400).json({ erro: 'Sentido da viagem inválido' });
+      }
+
+      return res.json({
+        tipo,
+        dados: {
+          viagemId,
+          origem,
+          destino
+        }
+      });
     } else if (tipo === 'motorista') {
       const dadosMotorista = await obterDadosDaViagemDoMotorista(id);
       console.log('Dados do motorista:', dadosMotorista);
@@ -83,11 +103,9 @@ async function obterViagemPorUsuario(req, res) {
   }
 }
 
-
-
 async function listarViagensDoAluno(req, res) {
   try {
-    const alunoId = req.params.alunoId;
+    const alunoId = req.session.usuario;
     if (!alunoId) {
       return res.status(400).json({ error: 'ID do aluno é obrigatório.' });
     }

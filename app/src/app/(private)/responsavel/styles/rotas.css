@@ -4,10 +4,6 @@ section{
     height: 100%;
 }
 
-.circle{
-    margin: 0 1.7vw;
-}
-
-.circle-t{
-    margin: 0 1vw 0 0;
+main{
+    padding: 0 !important;
 }
