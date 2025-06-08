@@ -1,0 +1,1 @@
+import { historicoAlunoViagens } from '../models/Aluno.js'

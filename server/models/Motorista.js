@@ -1,19 +1,44 @@
-import { read, readQuery} from "../config/database.js";
+import { read, readQuery, readAll } from "../config/database.js";
 
-const verVeiculo = async(motoristaId)=>{
-    try{
-        const where = `motorista_id = ${motoristaId} AND id > 4`;
-        return await read('veiculos', where)
-    }
-    catch(err){
-        console.error('Erro ao buscar veiculos!!!',err);
-        throw err;
-    }
-}
+const verAlunos = async () => {
+  try {
+    return await readQuery(`
+            select escolas.id, escolas.nome
+from escolas
+inner join alunos on escolas.id  = alunos.escola_id
+where escolas.id = ? ; `)
+  } catch (err) {
+    console.error('Erro ao listar os alunos!!!')
+    throw err;
+  }
+};
 
+// revisar - o motorista so pode ver as escolas as quais ele é responsavel por fazer viagem
+const verDadosEscola = async () => {
+  try {
+    return await readAll('escolas')
+  } catch (error) {
+    console.error('erro ao ver escolas!!!', error);
+    throw error
+  }
+};
+
+// procura veiculos c base no id do motorista
+const verVeiculo = async (motoristaId) => {
+  if (!motoristaId) throw new Error('motoristaId não fornecido');
+  try {
+    const where = `motorista_id = ${motoristaId}`;
+    return await read('veiculos', where);
+  } catch (err) {
+    console.error('Erro ao buscar veiculos!!!', err);
+    throw err;
+  }
+};
+
+// ve as viagens q o veiculo faz
 const verViagensVeiculos = async (motoristaId) => {
   // selecionamos as colunas que apresentam os ids das viagens, id dos veiculos, nome da escola associada a viagem, endereco da escola e ponto de embarque, tipo de viagem (ida ou volta), hora de saida e chegada e a data da viagem, formatando ela p padrao do brasil. em seguida, cria uma coluna q calcula se a viagem esta em andamento, concluida ou agendada. dps comecamos pela tabela viagens e liagmos ela a tabela de motoristas, pegando so as viagens onde o motorista corresponde ao motorista id, dps faz a juncao de viagens ao veiculo, viagens a escola e viagens a ponto de embarque. por fim q gnt filtra as viagens do motorista logado, pega só as viagens do dia de hoje e rdena os resultados da hr mais cedo p a mais tarde
-    const consulta = `
+  const consulta = `
       SELECT 
         v.id AS id_viagem,
         ve.id AS id_veiculo,
@@ -38,7 +63,7 @@ const verViagensVeiculos = async (motoristaId) => {
         AND DATE(v.data_viagem) = CURDATE()
       ORDER BY v.hora_saida;`
     ;
-    return readQuery(consulta, [motoristaId]);
-  };
+  return readQuery(consulta, [motoristaId]);
+};
 
-export{verVeiculo, verViagensVeiculos}
+export { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos }
