@@ -1,5 +1,5 @@
 "use client";
-import './incidentes.css'
+
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 import Image from 'next/image'
@@ -124,7 +124,7 @@ imagem: '/img/bolinhasVermelha.svg'
                             <option value="aluno3">Aluno 3</option>
                             <option value="aluno4">Aluno 4</option>
                         </select>
-                        <label for="checkbox ">
+                        <label htmlFor="checkbox ">
                             <input type="checkbox" id="checkbox" className='todos' name="meuCheckbox"></input>
                             Todos
                         </label>
