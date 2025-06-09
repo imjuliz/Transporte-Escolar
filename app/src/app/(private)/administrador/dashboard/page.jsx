@@ -11,6 +11,7 @@ import { StatCard } from './components/StatCard.jsx';
 import { ViagensGrafico } from './components/ViagensGrafico.jsx';
 import { TipoUsuarioChart} from './components/GraficoPizza.jsx';
 import { VeiculosTable } from './components/TabelaVeiculos.jsx'
+import { IncidentesChart } from './components/GraficoBarras.jsx';
 //importação do bglh do dashboard
 //import './assets/vendor/apexcharts/dist/apexcharts.css';
 
@@ -161,8 +162,8 @@ export default function dashboard() {
   <div className="lg:col-span-2">
     <VeiculosTable />
   </div>
-  <div className="lg:col-span-1 bg-gray-300 ">
-    {/* Conteúdo da segunda coluna */}
+  <div className="lg:col-span-1 ">
+    <IncidentesChart></IncidentesChart>
   </div>
 </div>
 
