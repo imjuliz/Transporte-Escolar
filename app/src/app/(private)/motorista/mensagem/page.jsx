@@ -1,9 +1,8 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
 import "../../../globals.css";
-import "../styles/mensagens.css";
+import '../mensagem/mensagens.css'
 
 export default function EnviarMensagemResponsavel() {
   const mensagens = [
@@ -168,8 +167,7 @@ useEffect(() => {
                 className="py-3 mt-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 mb-5"
                 value={alunoSelecionado}
                 onChange={(e) => setAlunoSelecionado(e.target.value)}
-                required
-              >
+                required >
                 <option value="">Selecionar aluno</option>
                 {filhos.length > 0
                   ? filhos.map((filho) => (
@@ -177,17 +175,12 @@ useEffect(() => {
                       {filho.nome_aluno} - {filho.nome_escola}
                     </option>
                   ))
-                  : (
-                    <>
-                      <option disabled>Carregando...</option>
-                    </>
-                  )}
+                  : (<><option disabled>Carregando...</option></> )}
               </select>
               <button
                 type="submit"
                 className="bg-blue-600 text-white px-4 py-2 rounded mb-5 hover:bg-blue-700 transition duration-300 ease"
-                disabled={loading}
-              >
+                disabled={loading} >
                 {loading ? "Enviando..." : "Enviar Mensagem"}
               </button>
             </div>

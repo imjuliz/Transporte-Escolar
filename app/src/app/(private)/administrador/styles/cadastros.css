@@ -8,13 +8,12 @@ main{
 
 section{
     margin-top: 10vh;
-    
+    margin-bottom: 10vh !important;    
 }
 
 
 .page-indicador{
     width: fit-content;
-    margin-bottom: 8vh;
 }
 
 .page-indicador h1{
@@ -38,6 +37,11 @@ p{
     color: #fff;
     border-radius: 40px;
     font-family: "Plus Jakarta Sans Medium";
+}
+
+.btn-add a{
+    color: #fff !important;
+    text-decoration: none;
 }
 
 .btn-edit{

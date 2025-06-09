@@ -9,7 +9,7 @@ import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrado
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
 import { obterInformacoesFilhosController, enviarResponsavelMensagem } from '../controllers/ResponsavelController.js'
 import { verAlunosController, verVeiculoController, obterInformacoesviagensController, verDadosEscolaController, mensagensParaMotorista, enviarMotoristaMensagemController, obterInformacoesAlunosController} from "../controllers/MotoristaController.js";
-
+import { upload } from '../middlewares/uploadMiddleware.js'; 
 import multer from 'multer';
 const router = express.Router();
 
@@ -27,7 +27,7 @@ router.get('/perfil', obterPerfilUsuario);
 router.get('/perfil', obterPerfilUsuario, autorizarAcesso( 'aluno', 'responsavel'));
 router.patch('/editarPerfil', editarPerfilController);
 
-// router.post('/editarPerfil/foto', upload.single('foto'), editarFotoPerfilController);
+router.post('/editarPerfil/foto', upload.single('foto'), editarFotoPerfilController);
 //
 router.get('/viagens', obterInformacoesviagensController)
 
@@ -80,8 +80,9 @@ router.get('/listarVeiculos', listarVeiculosController);
 router.get('/contar-incidentes', contarIncidentesController);
 // ver mensagens recebidas (motorista logado)
 router.get('/notificacoes', mensagensParaMotorista);
+
 //ver os alunos do onibus
-router.get('/alunosMensagem', obterInformacoesAlunosController)
+router.get('/alunosMensagem', obterInformacoesAlunosController);
 
 //enviar mensagens 
 router.post('/mensagem', enviarMotoristaMensagemController, autorizarAcesso('motorista'));

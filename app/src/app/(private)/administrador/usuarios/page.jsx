@@ -433,7 +433,7 @@ export default function embarques() {
                 </div>
 
                 <div className='flex flex-wrap gap-6'>
-                    <button className='btn-add' href='/administrador/cadastrar'>Cadastrar usuário</button>
+                    <button className='btn-add no-underline text-[#fff]'><a href='./cadastrar' className='no-underline text-[#fff]'>Cadastrar usuário</a></button>
                     <button className='btn-edit'>Deletar usuário</button>
                 </div>
 
