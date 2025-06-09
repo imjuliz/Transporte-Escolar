@@ -131,7 +131,7 @@ CREATE TABLE mensagens_motoristas (
   aluno_id INT,
   responsavel_id INT,
   motorista_id INT,
-  tipo ENUM('congestionamento', 'mudanca_rota', 'emergencia', 'problema_veiculo'),
+  tipo ENUM('congestionamento', 'rota', 'emergencia', 'veiculo'),
   conteudo TEXT,
   data_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
   lida BOOLEAN DEFAULT FALSE,
@@ -424,6 +424,7 @@ where id< 20;
 /*
 JOIN viagens ON alunos_viagens.viagem_id = viagens.id
 WHERE alunos_viagens.aluno_id = 1 AND viagens.data_viagem = CURDATE();*/
+
 
 select ponto_inicial_id , ponto_inicial_tipo, veiculo_id
 from viagens
