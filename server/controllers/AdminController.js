@@ -34,7 +34,7 @@
 
 // export { registrarUsuarioController, registrarVeiculosController }
 
-import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes} from '../models/Admin.js';
+import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes, RegistarVeiculos} from '../models/Admin.js';
 
 // ------------------------------------------------------------ cadastro dos usuarios
 export const cadastrarAlunoComResponsavel = async (req, res) => {
@@ -111,6 +111,17 @@ export const cadastrarAdministrador = async (req, res) => {
     res.status(500).json({ erro: err.message });
   }
 };
+
+//registrar veículos
+export const registrarVeiculosController = async (req, res) =>{
+  try{
+    await RegistarVeiculos(req.body);
+    res.status(201).json({mensagem: 'Veículo Registrado com sucesso! '});
+  }
+  catch(err) {
+    res.status(500).json({erro: err.mesage});
+  }
+}
 
 // busca a escola pelo nome
 export const buscarEscolas = async (req, res) => {

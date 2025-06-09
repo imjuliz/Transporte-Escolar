@@ -37,6 +37,16 @@ export const criarAdministrador = async (dados) => {
   }
 };
 
+//registrar veiculos
+export const RegistarVeiculos = async (dados) =>{
+  try{
+    return await create ('veiculos', dados);
+  } catch(err) {
+    console.error('Erro ao registrar veículo: ', err);
+    throw err
+  }
+}
+
 // verifica se o responsavel ja existe
 export const verificarResponsavelExistente = async ({ cpf, email, telefone }) => {
   const consulta = 'SELECT * FROM responsaveis WHERE cpf = ? OR email = ? OR telefone = ?';
@@ -103,6 +113,7 @@ export const deletarPerfil = async (tipo, id) => {
   const resultado = await deleteRecord(tabela, `cpf = '${cpf}'`);
   return resultado;
 }
+
 
 
 //---------------------------------
