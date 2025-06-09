@@ -1,4 +1,4 @@
-import { verFilhos, criarResponsavelMensagem } from '../models/Responsavel.js';
+import { verFilhos, criarResponsavelMensagem, mensagensPorResponsavel } from '../models/Responsavel.js';
 
 const obterInformacoesFilhosController = async (req, res) => {
     try {
@@ -74,4 +74,26 @@ const enviarResponsavelMensagem = async (req, res) => {
   }
 };
 
-export { obterInformacoesFilhosController, enviarResponsavelMensagem }
+// responsavel visualiza mensagens relacionadas aos alunos da viagem
+const mensagensParaResponsavel = async (req, res) => {
+  try {
+    const responsavelId = req.session.usuario?.id;
+    console.log('responsavelId:', responsavelId);
+    if (!responsavelId) {
+      return res.status(401).json({ erro: 'responsavel não autenticado' });
+    }
+
+   const mensagens = await mensagensPorResponsavel(responsavelId);
+
+    if (!Array.isArray(mensagens)) {
+      return res.json([]);
+    }
+
+    res.json(mensagens);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ erro: 'Erro ao buscar mensagens' });
+  }
+};
+
+export { obterInformacoesFilhosController, enviarResponsavelMensagem, mensagensParaResponsavel }

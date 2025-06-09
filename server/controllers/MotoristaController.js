@@ -1,4 +1,4 @@
-import { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos, mensagensPorMotorista, criarMotoristaMensagem, verAlunosPorVeiculo } from "../models/Motorista.js";
+import { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos, mensagensPorMotorista, criarMotoristaMensagem, escolasEAlunosPorMotorista } from "../models/Motorista.js";
 
 // ve os alunos que pegam o onibus
 const verAlunosController = async (req, res) => {
@@ -74,47 +74,54 @@ const obterInformacoesviagensController = async (req, res) => {
 };
 
 const obterInformacoesAlunosController = async (req, res) => {
+  // try {
+  //     const motoristaId = req.session.usuario?.id;
+
+  //     try {
+  //         const rows = await escolasEAlunosPorMotorista(motoristaId);
+  //         console.log('rows:', rows);
+          
+  //         const infoAlunos = [];//p agrupar os dados p/ aluno
+          
+  //         const escolasMap = {};// evita repetir alunos, agrupando as viagens de cada um
+
+  //         // esse for percorre todas as linhas q vieram do banco (cada linha é uma viagem de um filho)
+  //         for (const row of rows) {
+  //             // se o aluno ainda NAO tiver nenhuma entrada, cria um objeto com os dados do aluno e uma lista vazia pras viagens dele
+  //             if (!escolasMap[row.escola_id]) {
+  //               escolasMap[row.escola_id] = {
+  //                   escola_id: row.escola_id,
+  //                   escola_nome: row.escola_nome,
+  //                 };
+  //                 infoAlunos.push(escolasMap[row.escola_id]);// add esse novo aluno criado no array infoFilhos
+  //             }
+
+  //             escolasMap[row.id_escola].viagens.push({
+  //               aluno_id: row.aluno_id,
+  //               aluno_nome: row.aluno_nome
+  //             });}
+
+  //         res.json({ infoAlunos });
+
+  //     } catch (error) {
+  //         console.error('Erro ao buscar informações dos alunos:', error);
+  //         res.status(500).json({ message: 'Erro ao buscar informaçoes dos alunos' });
+  //     }} catch (error) {
+  //     console.error('Erro geral no controller:', error);
+  //     res.status(500).json({ message: 'Erro geral no controller' });
   try {
-      const motoristaId = req.session.usuario?.id;
+    const motoristaId = req.session.usuario?.id;
 
-      try {
-          const rows = await verAlunosPorVeiculo(motoristaId);
-          console.log('rows:', rows);
+    const dados = await escolasEAlunosPorMotorista(motoristaId);
 
-          
-          const infoFilhos = [];//p agrupar os dados p/ aluno
-          
-          const alunosMap = {};// evita repetir alunos, agrupando as viagens de cada um
+    res.json({ escolas: dados });
+  } catch (error) {
+    console.error("Erro ao buscar escolas e alunos do motorista:", error);
+    res.status(500).json({ message: "Erro interno ao buscar dados" });
+  }
+};
 
-          // esse for percorre todas as linhas q vieram do banco (cada linha é uma viagem de um filho)
-          for (const row of rows) {
-              // se o aluno ainda NAO tiver nenhuma entrada, cria um objeto com os dados do aluno e uma lista vazia pras viagens dele
-              if (!alunosMap[row.id_aluno]) {
-                  alunosMap[row.id_aluno] = {
-                      id_aluno: row.id_aluno,
-                      nome_aluno: row.nome_aluno,
-                  };
-                  infoFilhos.push(alunosMap[row.id_aluno]);// add esse novo aluno criado no array infoFilhos
-              }
-
-              alunosMap[row.id_aluno].viagens.push({
-                  tipo: row.tipo_viagem,
-                  horaEmbarque: row.hora_saida,
-                  horaSaída: row.hora_chegada_prevista,
-                  data: row.data,
-                  status: row.status_viagem
-              });}
-
-          res.json({ infoFilhos });
-
-      } catch (error) {
-          console.error('Erro ao buscar informações dos alunos:', error);
-          res.status(500).json({ message: 'Erro ao buscar informaçoes dos alunos' });
-      }} catch (error) {
-      console.error('Erro geral no controller:', error);
-      res.status(500).json({ message: 'Erro geral no controller' });
-  }};
-
+  
 // motorista visualiza mensagens relacionadas aos alunos da viagem
 const mensagensParaMotorista = async (req, res) => {
   try {
@@ -147,7 +154,7 @@ const enviarMotoristaMensagemController = async (req, res) => {
     }
 
     await criarMotoristaMensagem({
-      motorista_Id: motoristaId,
+      motorista_id: motoristaId,
       aluno_id,
       tipo: motivo,
       conteudo: mensagem

@@ -5,6 +5,7 @@ import { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController,
 // import { getViagemUsuario } from '../controllers/ViagensController.js';
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
 import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, registrarVeiculosController} from '../controllers/AdminController.js';
+import { cadastrarAlunoComResponsavel, criarPontoEmbarqueController, criarEscolaController, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, deletarPerfilController} from '../controllers/AdminController.js';
 //import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, buscarViagemPorEscolaEPontoController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
 import { obterInformacoesFilhosController, enviarResponsavelMensagem } from '../controllers/ResponsavelController.js'
@@ -41,6 +42,13 @@ router.get('/viagem-mapa', obterViagemPorUsuario);
 router.post('/cadastro/aluno-com-responsavel', cadastrarAlunoComResponsavel);
 router.post('/cadastro/motorista', cadastrarMotorista);
 router.post('/cadastro/administrador', cadastrarAdministrador);
+
+//cadastro de escolas ---- funcionando 
+router.post ('/cadastro/cadastroEscolas', criarEscolaController);
+//cadastro ponto de embarque ---- funcionando 
+router.post ('/cadastro/cadastroPontos', criarPontoEmbarqueController);
+
+//deletar usuarios - FUNCIONANDO
 router.delete('/deletarUsuario', deletarPerfilController);
 router.post('/registrar-veiculo', registrarVeiculosController);
 
@@ -86,7 +94,7 @@ router.get('/notificacoes', mensagensParaMotorista);
 router.get('/alunosMensagem', obterInformacoesAlunosController);
 
 //enviar mensagens 
-router.post('/mensagem', enviarMotoristaMensagemController, autorizarAcesso('motorista'));
+router.post('/motoristaEnviarMensagem', enviarMotoristaMensagemController, autorizarAcesso('motorista'));
 
 // logout
 router.post('/logout', (req, res) => {
