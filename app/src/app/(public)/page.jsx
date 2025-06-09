@@ -3,12 +3,13 @@ import '../../styles/page.css';
 import '../../styles/Footer.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
+import Image from 'next/image';
 
 export default function Home() {
     // titulo da guia
     useEffect(() => {
         document.title = 'EduTrip - Página Inicial';
-      }, []);
+    }, []);
 
     /* nav bar */
     const links = [
@@ -130,14 +131,14 @@ export default function Home() {
     const conteudos = [
         {
             name: "Página inicial",
-            link: "../#",
+            link: "/",
         },
         {
             name: "Trabalhe Conosco",
             link: "./trabalheConosco"
         },
         {
-            name: "link 3",
+            name: "Termos de uso e privacidade",
             link: "../"
         }
     ]
@@ -274,9 +275,13 @@ export default function Home() {
             </section>
             <footer className=''>
                 <div className="container">
-                    <div className='cont-footer'>
-                        <h1 className='logo'>Logo</h1>
-                        <div className="cont-1 flex flex-row md:flex-col md:gap-4 justify-between">
+                    <div className='cont-footer '>
+                        <div className='cont-logo flex flex-row gap-6'>
+                            <img src="/img/logo.png" alt="Logo do site" className='logo-img'/>
+                            <h1 className='logo'>EduTrip</h1>
+                        </div>
+
+                        <div className="cont-1 flex-wrap flex flex-row md:flex-col md:gap-4 justify-between">
                             <div className="f-col">
                                 <h1>Outros conteúdos relevantes</h1>
                                 {conteudos.map((cont, index) => (
@@ -307,7 +312,6 @@ export default function Home() {
                         </div>
                         <div className='cont-2'>
                             <p>© 2025. Feito por Julia Alves, Lorena Oshiro e Maria Brito.</p>
-                            <p>Baixe o APP</p>
                         </div>
                     </div>
                 </div>

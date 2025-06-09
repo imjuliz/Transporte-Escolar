@@ -1,8 +1,8 @@
 "use client";
-import './login.css'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import './login.css'
 
 export default function Login() {
   // titulo da guia

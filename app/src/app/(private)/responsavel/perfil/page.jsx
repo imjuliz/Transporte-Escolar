@@ -389,7 +389,7 @@ export default function MeuPerfil() {
 
             <div className='user flex items-center gap-3 border-b border-[#D0D0D0]'>
                 <img className="w-10 h-10 rounded-full" src={preview} alt="Foto de perfil" />
-                <input type="file" accept="image/*" onChange={handleFileChange} />
+                <input type="file" accept="image/*" name='foto' onChange={handleFileChange} />
                 <button onClick={enviarFoto}>Enviar foto</button>
                 <div className="font-medium">
                     <h3>{nomeSobrenome.primeiroNome} {nomeSobrenome.ultimoNome}</h3>
