@@ -8,7 +8,7 @@ import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrado
 //import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, buscarViagemPorEscolaEPontoController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
 import { obterInformacoesFilhosController, enviarResponsavelMensagem } from '../controllers/ResponsavelController.js'
-import { verAlunosController, verVeiculoController, obterInformacoesviagensController, verDadosEscolaController, mensagensParaMotorista} from "../controllers/MotoristaController.js";
+import { verAlunosController, verVeiculoController, obterInformacoesviagensController, verDadosEscolaController, mensagensParaMotorista, enviarMotoristaMensagemController, obterInformacoesAlunosController} from "../controllers/MotoristaController.js";
 
 import multer from 'multer';
 const router = express.Router();
@@ -64,7 +64,7 @@ router.get('/viagens-por-dia', viagensPorDiaController); //viagens por dia
 router.get('/qtd-tipo', usuariosPorTipoController ) //usuarios por tipo
 
 
-// responsavel
+// responsavel -------------------------------------------------------------------------------------
 router.get('/filhos', obterInformacoesFilhosController)
 // enviar mensagem (responsavel logado)
 router.post('/mensagens', enviarResponsavelMensagem);
@@ -80,6 +80,11 @@ router.get('/listarVeiculos', listarVeiculosController);
 router.get('/contar-incidentes', contarIncidentesController);
 // ver mensagens recebidas (motorista logado)
 router.get('/notificacoes', mensagensParaMotorista);
+//ver os alunos do onibus
+router.get('/alunosMensagem', obterInformacoesAlunosController)
+
+//enviar mensagens 
+router.post('/mensagem', enviarMotoristaMensagemController, autorizarAcesso('motorista'));
 
 // logout
 router.post('/logout', (req, res) => {

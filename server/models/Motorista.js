@@ -1,4 +1,4 @@
-import { read, readQuery, readAll } from "../config/database.js";
+import { read, readQuery, readAll, create } from "../config/database.js";
 
 const verAlunos = async () => {
   try {
@@ -29,6 +29,17 @@ const verVeiculo = async (motoristaId) => {
   try {
     const where = `motorista_id = ${motoristaId}`;
     return await read('veiculos', where);
+  } catch (err) {
+    console.error('Erro ao buscar veiculos!!!', err);
+    throw err;
+  }};
+//ver os alunos com base no id do motorista
+const verAlunosPorVeiculo = async (motoristaId) => {
+  if (!motoristaId) throw new Error('motoristaId não fornecido');
+  try {
+    // const where = `motorista_id = ${motoristaId}`;
+    const row = `SELECT nome from alunos, viagens where viagens.motorista_id = ${motoristaId} and viagens.veiculo_id = ${motoristaId};`
+    return await readQuery(row);
   } catch (err) {
     console.error('Erro ao buscar veiculos!!!', err);
     throw err;
@@ -82,5 +93,13 @@ const mensagensPorMotorista = async (motoristaId) => {
   console.log("Resultados mensagensPorMotorista:", resultados);
   return resultados;
 };
+const criarMotoristaMensagem = async (dados) => {
+  return await create('mensagens_motoristas', {
+    motorista_id: dados.motorista_id,
+    aluno_id: dados.aluno_id,
+    tipo: dados.tipo,
+    conteudo: dados.conteudo
+  });
+};
 
-export { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos, mensagensPorMotorista }
+export { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos, mensagensPorMotorista, criarMotoristaMensagem, verAlunosPorVeiculo }
