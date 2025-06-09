@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, Polyline, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
-import Mapa from '../../../../components/Mapa/Mapa.jsx';
 import '../styles/viagens.css';
 
 // export default function MinhaRotaAluno() {
