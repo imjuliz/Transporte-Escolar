@@ -1,4 +1,4 @@
-import { readQuery } from "../config/database.js";
+import { create, readQuery } from "../config/database.js";
 
 const verFilhos = async (responsavelId) => {
   // nessa query buscamos id, nome e idade do aluno, nome da escola que ele esta vinculado, o endereco do ponto de embarque da viagem q o aluno ta vinculado. busca se é ida ou volta, hora de saida e chegada, nome do motorista q conduz a viagem e no final retorna só os alunos vinculados ao id do responsavel q foi passado como parametro
@@ -36,4 +36,13 @@ ORDER BY v.hora_saida;
   return readQuery(consulta, [responsavelId]);
 };
 
-export { verFilhos };
+const criarResponsavelMensagem = async (dados) => {
+  return await create('mensagens_responsaveis', {
+    responsavel_id: dados.responsavel_id,
+    aluno_id: dados.aluno_id,
+    tipo: dados.tipo,
+    conteudo: dados.conteudo
+  });
+};
+
+export { verFilhos, criarResponsavelMensagem };

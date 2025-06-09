@@ -6,8 +6,8 @@ import { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController,
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
 import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, buscarViagemPorEscolaEPontoController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
-import { obterInformacoesFilhosController } from '../controllers/ResponsavelController.js'
-import { verAlunosController, verVeiculoController, obterInformacoesviagensController, verDadosEscolaController} from "../controllers/MotoristaController.js";
+import { obterInformacoesFilhosController, enviarResponsavelMensagem } from '../controllers/ResponsavelController.js'
+import { verAlunosController, verVeiculoController, obterInformacoesviagensController, verDadosEscolaController, mensagensParaMotorista} from "../controllers/MotoristaController.js";
 
 import multer from 'multer';
 const router = express.Router();
@@ -65,12 +65,16 @@ router.get('/qtd-tipo', usuariosPorTipoController ) //usuarios por tipo
 
 // responsavel
 router.get('/filhos', obterInformacoesFilhosController)
+// enviar mensagem (responsavel logado)
+router.post('/mensagens', enviarResponsavelMensagem);
 
 //MOTORISTA -------------------------------------------------------------------------------------
 router.get('/verVeiculo',verVeiculoController, autorizarAcesso('Motorista'));
 router.get('/verEscolas', verDadosEscolaController, autorizarAcesso('motorista'));
 router.patch('/editarPerfilMotorista', editarPerfilMotoristaController, autorizarAcesso('motorista'));
 router.post('/enviarIncidente',adicionarIncidenteController);
+// ver mensagens recebidas (motorista logado)
+router.get('/notificacoes', mensagensParaMotorista);
 
 // logout
 router.post('/logout', (req, res) => {

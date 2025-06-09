@@ -66,4 +66,21 @@ const verViagensVeiculos = async (motoristaId) => {
   return readQuery(consulta, [motoristaId]);
 };
 
-export { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos }
+// recebe mensagens 
+const mensagensPorMotorista = async (motoristaId) => {
+  const sql = `
+    SELECT m.*, a.nome AS aluno_nome, r.nome AS responsavel_nome
+  FROM mensagens_responsaveis m
+  JOIN alunos a ON m.aluno_id = a.id
+  JOIN responsaveis r ON m.responsavel_id = r.id
+  JOIN alunos_viagens av ON av.aluno_id = a.id
+  JOIN viagens v ON v.id = av.viagem_id
+  WHERE v.motorista_id = ?
+  ORDER BY m.data_envio DESC
+  `;
+  const resultados = await readQuery(sql, [motoristaId]);
+  console.log("Resultados mensagensPorMotorista:", resultados);
+  return resultados;
+};
+
+export { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos, mensagensPorMotorista }

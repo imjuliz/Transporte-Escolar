@@ -101,6 +101,7 @@ CREATE TABLE alunos (
     FOREIGN KEY (ponto_embarque_id) REFERENCES pontos_embarque(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+/*
 CREATE TABLE incidentes (
 id INT AUTO_INCREMENT PRIMARY KEY,
 remetente VARCHAR(100),
@@ -108,6 +109,21 @@ tipo VARCHAR (50),
 mensagem text,
 dataDaMensagem date,
 hora time
+);
+*/
+
+CREATE TABLE mensagens_responsaveis (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  aluno_id INT,
+  responsavel_id INT,
+  motorista_id INT,
+  tipo ENUM('falta', 'local', 'condicao', 'obj'),
+  conteudo TEXT,
+  data_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
+  lida BOOLEAN DEFAULT FALSE,
+  FOREIGN KEY (aluno_id) REFERENCES alunos(id),
+  FOREIGN KEY (responsavel_id) REFERENCES responsaveis(id),
+  FOREIGN KEY (motorista_id) REFERENCES motoristas(id)
 );
 
 # tabelas de associações
@@ -160,7 +176,6 @@ BEGIN
 END$$
 
 DELIMITER ;
-
 
 INSERT INTO motoristas (cpf, nome, cnh, telefone, vencimento_habilitacao, email, senha) VALUES
 ('55555555555', 'Ana Souza', '1234567890', '11999999999', '2026-05-15', 'ana@gmail.com', 'ana@motorista'),
@@ -366,7 +381,17 @@ INSERT INTO alunos_viagens (aluno_id, viagem_id) VALUES
 (11, 61);
 */
 
-select * from alunos_viagens;
+SELECT m.*, a.nome AS aluno_nome, r.nome AS responsavel_nome
+FROM mensagens_responsaveis m
+JOIN alunos a ON m.aluno_id = a.id
+JOIN responsaveis r ON m.responsavel_id = r.id
+JOIN alunos_viagens av ON av.aluno_id = a.id
+JOIN viagens v ON v.id = av.viagem_id
+WHERE v.motorista_id = 1
+ORDER BY m.data_envio DESC;
 
+select * from  mensagens_responsaveis;
+/*
 insert into incidentes (remetente, tipo, mensagem, dataDaMensagem, hora)
 value('maria@gmail.com', "transito", "muito transito", curdate(), curtime());
+*/

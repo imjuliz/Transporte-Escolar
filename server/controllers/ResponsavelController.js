@@ -1,4 +1,4 @@
-import { verFilhos } from '../models/Responsavel.js';
+import { verFilhos, criarResponsavelMensagem } from '../models/Responsavel.js';
 
 const obterInformacoesFilhosController = async (req, res) => {
     try {
@@ -50,4 +50,28 @@ const obterInformacoesFilhosController = async (req, res) => {
     }
 };
 
-export { obterInformacoesFilhosController }
+// responsavel envia mensagem
+const enviarResponsavelMensagem = async (req, res) => {
+  try {
+    const responsavelId = req.session.usuario?.id;
+    const { aluno_id, mensagem, motivo } = req.body;
+
+    if (!responsavelId) {
+      return res.status(401).json({ erro: 'Responsável não autenticado' });
+    }
+
+    await criarResponsavelMensagem({
+      responsavel_id: responsavelId,
+      aluno_id,
+      tipo: motivo,
+      conteudo: mensagem
+    });
+
+    res.status(201).json({ mensagem: 'Mensagem enviada com sucesso!' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ erro: 'Erro ao enviar mensagem' });
+  }
+};
+
+export { obterInformacoesFilhosController, enviarResponsavelMensagem }

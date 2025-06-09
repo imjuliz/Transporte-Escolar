@@ -1,4 +1,4 @@
-import { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos } from "../models/Motorista.js";
+import { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos, mensagensPorMotorista } from "../models/Motorista.js";
 
 // ve os alunos que pegam o onibus
 const verAlunosController = async (req, res) => {
@@ -73,4 +73,26 @@ const obterInformacoesviagensController = async (req, res) => {
     }
 };
 
-export { verAlunosController, verDadosEscolaController, verVeiculoController, obterInformacoesviagensController } 
+// motorista visualiza mensagens relacionadas aos alunos da viagem
+const mensagensParaMotorista = async (req, res) => {
+  try {
+    const motoristaId = req.session.usuario?.id;
+    console.log('motoristaId:', motoristaId);
+    if (!motoristaId) {
+      return res.status(401).json({ erro: 'Motorista não autenticado' });
+    }
+
+   const mensagens = await mensagensPorMotorista(motoristaId);
+
+    if (!Array.isArray(mensagens)) {
+      return res.json([]);
+    }
+
+    res.json(mensagens);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ erro: 'Erro ao buscar mensagens' });
+  }
+};
+
+export { verAlunosController, verDadosEscolaController, verVeiculoController, obterInformacoesviagensController, mensagensParaMotorista } 
