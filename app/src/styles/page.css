@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+.logo-img{
+  width: 60px;
+  height: 39px;
+}
+
 header {
   margin-top: 5vh;
   position: absolute;
@@ -45,7 +50,6 @@ header ul {
   position: relative;
 }
 
-/* Efeito underline amarelo ao passar o mouse */
 .link-item a::before {
   content: '';
   position: absolute;
@@ -62,7 +66,6 @@ header ul {
   width: 80%;
 }
 
-/* Highlight amarelo que se move */
 .highlight {
   position: absolute;
   top: 50%;
@@ -82,7 +85,6 @@ header ul {
   background: #2D2F39;
 }
 
-/* banner */
 .banner {
   height: 100vh;
   width: 100%;
@@ -123,7 +125,6 @@ margin-left: -30vw;
 }
 
 
-/* seção 3 */
 .secão3 {
   width: 75%;
   height: 100vh;
@@ -177,7 +178,6 @@ margin-left: -30vw;
   width: 50%;
 }
 
-/* seção 4 */
 .secão4 {
   width: 75%;
   height: 100vh;
@@ -238,7 +238,6 @@ h3 {
   border-radius: 10px;
 }
 
-/* seção 5 */
 
 .secão5 {
   background-color: #161A23;
@@ -312,10 +311,8 @@ h3 {
 }
 
 
-/* responsividade */
 @media screen and (max-width: 1536px){
 
-  /*Banner*/
   .banner-textos{
     margin-top: 15vh;
   }
@@ -324,7 +321,6 @@ h3 {
     margin-right: 40%;
     }
     
-/* seção 5 */
 
 .secão5 {
   background-color: #161A23;
@@ -346,7 +342,6 @@ h3 {
   width: 40vw;
 }
 
-/* seção 4 */
 .secão4{
   height: 70vh;
 }
@@ -427,7 +422,6 @@ h3 {
     height: 10vw;
   }
 
-  /* seção 5 */
   .secão5 {
     height: 90vw;
     padding-top: -5%;

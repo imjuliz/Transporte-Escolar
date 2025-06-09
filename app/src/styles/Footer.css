@@ -28,9 +28,14 @@ footer div p {
 }
 footer .logo{
     color: #ffffff;
-    padding-bottom: 3vh;
+    margin: 0;
     font-size: 25px;
+}
+
+footer .cont-logo{
     border-bottom: 1px solid #c1c7cd9a;
+    padding-bottom: 1vh;
+    margin-bottom: 3vh;
 }
 
 .cont-1{
@@ -172,7 +177,24 @@ footer .container {
     }
     .cont-redes{
         width: 80% !important;
-}}
+}
+    .cont-logo{
+        justify-content: center;
+    }
+
+    .f-col{
+        text-align: center;
+    }
+
+    .col, .f-col div{
+        display: flex;
+        justify-content: center;
+    }
+
+    .col-redes{
+        justify-content: center;
+    }
+}
 
 @media screen and (max-width: 680px){
     .cont-footer{
