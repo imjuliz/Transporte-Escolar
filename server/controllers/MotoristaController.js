@@ -81,10 +81,10 @@ const obterInformacoesAlunosController = async (req, res) => {
           const rows = await verAlunosPorVeiculo(motoristaId);
           console.log('rows:', rows);
 
-          //p agrupar os dados p/ aluno
-          const infoFilhos = [];
-          // evita repetir alunos, agrupando as viagens de cada um
-          const alunosMap = {};
+          
+          const infoFilhos = [];//p agrupar os dados p/ aluno
+          
+          const alunosMap = {};// evita repetir alunos, agrupando as viagens de cada um
 
           // esse for percorre todas as linhas q vieram do banco (cada linha é uma viagem de um filho)
           for (const row of rows) {
@@ -93,10 +93,6 @@ const obterInformacoesAlunosController = async (req, res) => {
                   alunosMap[row.id_aluno] = {
                       id_aluno: row.id_aluno,
                       nome_aluno: row.nome_aluno,
-                      idade: row.idade,
-                      nome_escola: row.nome_escola,
-                      endereco_embarque: row.endereco_embarque,
-                      viagens: []
                   };
                   infoFilhos.push(alunosMap[row.id_aluno]);// add esse novo aluno criado no array infoFilhos
               }
