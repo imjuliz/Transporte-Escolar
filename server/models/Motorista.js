@@ -35,21 +35,23 @@ const verVeiculo = async (motoristaId) => {
   }
 };
 //ver os alunos com base no id do motorista
-const verAlunosPorVeiculo = async (motoristaId) => {
-  if (!motoristaId) throw new Error('motoristaId não fornecido');
-  try {
-    // const where = `motorista_id = ${motoristaId}`;
-    const row = `SELECT DISTINCT alunos.nome as nome_aluno
-     FROM alunos_viagens 
-     INNER JOIN alunos ON alunos_viagens.aluno_id = alunos.id 
-     INNER JOIN viagens ON alunos_viagens.viagem_id = viagens.id
-     WHERE viagens.motorista_id = ${motoristaId};`
-    return await readQuery(row, [motoristaId]);
-  } catch (err) {
-    console.error('Erro ao buscar veiculos!!!', err);
-    throw err;
-  }
-};
+// const verAlunosPorVeiculo = async (motoristaId) => {
+//   if (!motoristaId) throw new Error('motoristaId não fornecido');
+//   try {
+//     // const where = `motorista_id = ${motoristaId}`;
+//     const row = `SELECT DISTINCT alunos.nome as nome_aluno
+//      FROM alunos_viagens 
+//      INNER JOIN alunos ON alunos_viagens.aluno_id = alunos.id 
+//      INNER JOIN viagens ON alunos_viagens.viagem_id = viagens.id
+//      WHERE viagens.motorista_id = ${motoristaId};`
+//     return await readQuery(row, [motoristaId]);
+//   } catch (err) {
+//     console.error('Erro ao buscar veiculos!!!', err);
+//     throw err;
+//   }
+// };
+
+
 
 // ve as viagens q o veiculo faz
 const verViagensVeiculos = async (motoristaId) => {
@@ -98,6 +100,62 @@ const mensagensPorMotorista = async (motoristaId) => {
   console.log("Resultados mensagensPorMotorista:", resultados);
   return resultados;
 };
+
+async function escolasEAlunosPorMotorista(motoristaId) {
+  const query = `
+SELECT DISTINCT
+  e.id AS escola_id,
+  e.nome AS escola_nome,
+  e.endereco AS escola_endereco,
+  a.id AS aluno_id,
+  a.nome AS aluno_nome,
+  a.email AS aluno_email,
+  r.id AS responsavel_id,
+  r.nome AS responsavel_nome,
+  r.email AS responsavel_email
+FROM viagens v
+JOIN alunos_viagens av ON av.viagem_id = v.id
+JOIN alunos a ON a.id = av.aluno_id
+JOIN escolas e ON e.id = a.escola_id
+JOIN responsaveis_alunos ra ON ra.aluno_id = a.id
+JOIN responsaveis r ON r.id = ra.responsavel_id
+WHERE v.motorista_id = ?
+
+`;
+  const rows = await readQuery(query, [motoristaId]);
+
+  const escolasMap = {};
+  const resultado = [];
+
+  for (const row of rows) {
+    if (!escolasMap[row.escola_id]) {
+      escolasMap[row.escola_id] = {
+        escola_id: row.escola_id,
+        escola_nome: row.escola_nome,
+        escola_endereco: row.escola_endereco,
+        alunos: []
+      };
+      resultado.push(escolasMap[row.escola_id]);
+    }
+
+    // Verifica se o aluno já foi adicionado
+    if (!escolasMap[row.escola_id].alunos.some(a => a.aluno_id === row.aluno_id)) {
+      escolasMap[row.escola_id].alunos.push({
+        aluno_id: row.aluno_id,
+        aluno_nome: row.aluno_nome,
+        aluno_email: row.aluno_email,
+        responsavel: row.responsavel_id ? {
+          responsavel_id: row.responsavel_id,
+          responsavel_nome: row.responsavel_nome,
+          responsavel_email: row.responsavel_email
+        } : null
+      });
+    }
+  }
+
+  return resultado;
+}
+
 const criarMotoristaMensagem = async (dados) => {
   return await create('mensagens_motoristas', {
     motorista_id: dados.motorista_id,
@@ -107,4 +165,4 @@ const criarMotoristaMensagem = async (dados) => {
   });
 };
 
-export { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos, mensagensPorMotorista, criarMotoristaMensagem, verAlunosPorVeiculo }
+export { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos, mensagensPorMotorista, criarMotoristaMensagem, escolasEAlunosPorMotorista }

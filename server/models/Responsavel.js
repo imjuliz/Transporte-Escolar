@@ -36,6 +36,7 @@ ORDER BY v.hora_saida;
   return readQuery(consulta, [responsavelId]);
 };
 
+// cria a mensagem
 const criarResponsavelMensagem = async (dados) => {
   return await create('mensagens_responsaveis', {
     responsavel_id: dados.responsavel_id,
@@ -45,4 +46,21 @@ const criarResponsavelMensagem = async (dados) => {
   });
 };
 
-export { verFilhos, criarResponsavelMensagem };
+// recebe mensagens 
+const mensagensPorResponsavel = async (responsavelId) => {
+  const sql = `
+    SELECT m.*, a.nome AS aluno_nome, r.nome AS responsavel_nome
+  FROM mensagens_responsaveis m
+  JOIN alunos a ON m.aluno_id = a.id
+  JOIN responsaveis r ON m.responsavel_id = r.id
+  JOIN alunos_viagens av ON av.aluno_id = a.id
+  JOIN viagens v ON v.id = av.viagem_id
+  WHERE v.motorista_id = ?
+  ORDER BY m.data_envio DESC
+  `;
+  const resultados = await readQuery(sql, [responsavelId]);
+  console.log("Resultados mensagensPorResponsavel:", resultados);
+  return resultados;
+};
+
+export { verFilhos, criarResponsavelMensagem, mensagensPorResponsavel };

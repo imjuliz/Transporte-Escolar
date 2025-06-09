@@ -85,7 +85,7 @@ router.get('/notificacoes', mensagensParaMotorista);
 router.get('/alunosMensagem', obterInformacoesAlunosController);
 
 //enviar mensagens 
-router.post('/mensagem', enviarMotoristaMensagemController, autorizarAcesso('motorista'));
+router.post('/motoristaEnviarMensagem', enviarMotoristaMensagemController, autorizarAcesso('motorista'));
 
 // logout
 router.post('/logout', (req, res) => {

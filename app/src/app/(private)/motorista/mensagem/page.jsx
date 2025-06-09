@@ -42,14 +42,14 @@ export default function EnviarMensagemResponsavel() {
 
   // Estados
   const [selecionado, setSelecionado] = useState("falta");
-  const [filhos, setFilhos] = useState([]);
+  const [alunos, setAlunos] = useState([]);
   const [alunoSelecionado, setAlunoSelecionado] = useState("");
   const [textoMensagem, setTextoMensagem] = useState("");
   const [loading, setLoading] = useState(false);
 
   // Buscar filhos no carregamento do componente
 useEffect(() => {
-  const fetchFilhos = async () => {
+  const fetchAlunos = async () => {
     try {
       const res = await fetch("http://localhost:3001/alunosMensagem", {
         credentials: "include",
@@ -57,14 +57,14 @@ useEffect(() => {
 
       if (!res.ok) throw new Error("Erro ao buscar alunos");
       const data = await res.json();
-      setFilhos(data.infoFilhos);
+      setAlunos(data.infoFilhos);
     } catch (error) {
       console.error(error);
       alert("Erro ao carregar lista de alunos.");
     }
   };
 
-  fetchFilhos();
+  fetchAlunos();
 }, []);
 
 
@@ -169,10 +169,10 @@ useEffect(() => {
                 onChange={(e) => setAlunoSelecionado(e.target.value)}
                 required >
                 <option value="">Selecionar aluno</option>
-                {filhos.length > 0
-                  ? filhos.map((filho) => (
-                    <option key={filho.id_aluno} value={filho.id_aluno}>
-                      {filho.nome_aluno} - {filho.nome_escola}
+                {alunos.length > 0
+                  ? alunos.map((aluno) => (
+                    <option key={aluno.aluno_id} value={aluno.aluno_id}>
+                      Nome: {aluno.aluno_nome} - Responsavel{aluno.responsavel_nome}
                     </option>
                   ))
                   : (<><option disabled>Carregando...</option></> )}
