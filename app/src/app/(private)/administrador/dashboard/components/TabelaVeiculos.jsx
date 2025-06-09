@@ -73,7 +73,7 @@ export const VeiculosTable = () => {
                 </table>
             </div>
             <div className="botao-cadastro">
-                <a><button className="botao">Registrar Veículos</button></a>
+                <a href="/administrador/registrar-veiculo"><button className="botao">Registrar Veículos</button></a>
             </div>
         </motion.div>
     );
