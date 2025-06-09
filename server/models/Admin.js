@@ -222,7 +222,7 @@ ORDER BY data_viagem;
 }
 
 //para contar os tipos de usuário
-const qtdTipoUsuario = async ()=>{
+const qtdTipoUsuario = async () => {
   const sql = `
   SELECT 'Alunos' AS name, COUNT(*) AS value FROM alunos
 UNION ALL
@@ -232,18 +232,28 @@ SELECT 'Responsáveis' AS name, COUNT(*) AS value FROM responsaveis
 UNION ALL
 SELECT 'Administradores' AS name, COUNT(*) AS value FROM adm;
 `;
-return await readQuery(sql);
+  return await readQuery(sql);
 }
 
 //para listar os veiculos
-const listarVeiculos = async () =>{
-  try{
-  return await readAll ('veiculos');
-}
-catch(error){
-  console.error('Erro ao listar veículos: ', error);
+const listarVeiculos = async () => {
+  try {
+    return await readAll('veiculos');
+  }
+  catch (error) {
+    console.error('Erro ao listar veículos: ', error);
     throw error;
-}
+  }
 }
 
-export { buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario, listarVeiculos };
+//para contar os incidentes por tipo - gráfico de barras
+const contarIncidentes = async () => {
+  const sql = `
+  SELECT tipo, COUNT(*) AS quantidade
+FROM incidentes
+GROUP BY tipo;
+  `;
+  return await readQuery(sql)
+}
+
+export { buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes };

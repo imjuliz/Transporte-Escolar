@@ -445,7 +445,7 @@ values ( "MNO-5432", 40, 1, " LO 916 R/ LO 916", "Mercedes-Benz", 2019),
 ("PQR-8765", 40, 2, " LO 916 R/ LO 916", "Mercedes-Benz", 2020),
 ("STU-6846", 40, 3, " LO 916 R/ LO 916", "Mercedes-Benz", 2019),
 ("VWX-7356", 40, 4, " LO 916 R/ LO 916", "Mercedes-Benz", 2019);
-
+*/
 -- para função de contar viagens
 SELECT data_viagem AS data, COUNT(*) AS total_viagens
 FROM viagens
@@ -549,4 +549,3 @@ UNION ALL
 SELECT 'Responsáveis' AS tipo, COUNT(*) AS quantidade FROM responsaveis
 UNION ALL
 SELECT 'Administradores' AS tipo, COUNT(*) AS quantidade FROM adm;
-*/

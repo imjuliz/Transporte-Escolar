@@ -34,7 +34,7 @@
 
 // export { registrarUsuarioController, registrarVeiculosController }
 
-import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario, listarVeiculos} from '../models/Admin.js';
+import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes} from '../models/Admin.js';
 
 // ------------------------------------------------------------ cadastro dos usuarios
 export const cadastrarAlunoComResponsavel = async (req, res) => {
@@ -327,4 +327,16 @@ async function listarVeiculosController(req,res){
   }
 }
 
-export {verTodosController, verResponsaveisController, verMotoristasController, verAdminsController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarMotoristasController, contarEscolasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController};
+//contar incidentes
+async function contarIncidentesController(req,res){
+  try{
+    const incidentes = await contarIncidentes();
+    return res.status(200).json({incidentes});
+  }
+  catch(error){
+    console.error('Erro ao contar incidentes por tipo: ', error);
+    return res.status(500).json({erro: 'Erro ao contar incidentes por tipo'});
+  }
+}
+
+export {verTodosController, verResponsaveisController, verMotoristasController, verAdminsController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarMotoristasController, contarEscolasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, contarIncidentesController};
