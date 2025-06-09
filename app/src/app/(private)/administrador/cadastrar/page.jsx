@@ -39,7 +39,6 @@ export default function RegistroPage() {
           url = 'http://localhost:3001/cadastro/aluno-com-responsavel';
           corpo = {
             aluno: {
-              // cpf: form.cpf,
               cpf: cpfInputRef.current?.value.replace(/[.-]/g, ''),
               nome: form.nome,
               email: form.email,
@@ -48,7 +47,6 @@ export default function RegistroPage() {
               escola_id: form.escola_id,
               ponto_embarque_id: form.ponto_embarque_id,
               viagem_id: form.viagem_id,
-              veiculo_id: form.veiculo_id,
               senha: form.senha,
             },
             responsavel: {
@@ -60,18 +58,28 @@ export default function RegistroPage() {
             },
           };
           break;
-
         case 'motorista':
           url = 'http://localhost:3001/cadastro/motorista';
-          corpo = form;
-
+          corpo = {
+            cpf: form.cpf,
+            nome: form.nome,
+            cnh: form.cnh,
+            vencimento_habilitacao: form.vencimento_habilitacao,
+            telefone: form.telefone,
+            email: form.email,
+            senha: form.senha
+          };
           break;
-
         case 'administrador':
           url = 'http://localhost:3001/cadastro/administrador';
-          corpo = form;
+          corpo = {
+            cpf: form.cpf,
+            nome: form.nome,
+            email: form.email,
+            telefone: form.telefone,
+            senha: form.senha
+          };
           break;
-
         default:
           return alert('Tipo de cadastro não suportado.');
       }
@@ -98,10 +106,36 @@ export default function RegistroPage() {
     }
   };
 
+  // Após setar escola_id e ponto_embarque_id, busca o viagem_id
+useEffect(() => {
+  async function fetchViagem() {
+    if (form.escola_id && form.ponto_embarque_id) {
+      try {
+        const res = await fetch(
+          `http://localhost:3001/viagem-por-escola-ponto?escola_id=${form.escola_id}&ponto_embarque_id=${form.ponto_embarque_id}`,
+          { credentials: 'include' }
+        );
+        const data = await res.json();
+        if (res.ok && data.id) {
+          setForm(prev => ({ ...prev, viagem_id: data.id }));
+        } else {
+          setForm(prev => ({ ...prev, viagem_id: null }));
+          console.warn('Viagem não encontrada');
+        }
+      } catch (err) {
+        console.error('Erro ao buscar viagem:', err);
+        setForm(prev => ({ ...prev, viagem_id: null }));
+      }
+    }
+  }
+  fetchViagem();
+}, [form.escola_id, form.ponto_embarque_id]);
+
+// busca as escola com base no que o usuario escrever
   const [nomeEscola, setNomeEscola] = useState('');
   const [escolas, setEscolas] = useState([]);
   const [pontoNome, setPontoNome] = useState('');
-
+  
   const buscarEscolas = async (nome) => {
     if (!nome || nome.length < 2) return setEscolas([]);
     try {
@@ -125,6 +159,8 @@ export default function RegistroPage() {
       })
     }
   })
+
+  // formatacao de cpf para o front
   const formatCpf = (value) => {
     const digits = value.replace(/\D/g, '').slice(0, 11);
     return digits
@@ -133,6 +169,7 @@ export default function RegistroPage() {
       .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
   };
 
+  //formatacao de telefone p o front
   const formatPhone = (value) => {
     const digits = value.replace(/\D/g, '').slice(0, 11);
     return digits
@@ -140,18 +177,22 @@ export default function RegistroPage() {
       .replace(/(\d{5})(\d)/, '$1-$2');
   };
 
-  const formatDate = (value) => {
-    const digits = value.replace(/\D/g, '').slice(0, 8);
-    return digits
-      .replace(/(\d{2})(\d)/, '$1/$2')
-      .replace(/(\d{2})\/(\d{2})(\d)/, '$1/$2/$3');
-  };
-
+  // formatacao de cnh p o front
   const formatCNH = (value) => {
     return value.replace(/\D/g, '').slice(0, 9);
   };
 
+  // validade min da CNH pode ser hoje, a validade max pode ser a partir de hoje + 5 anos
+  function calcularMinData() {
+    const hoje = new Date();
+    return hoje.toISOString().split('T')[0]; // formata para yyyy-mm-dd
+  }
 
+  function calcularMaxData() {
+    const hoje = new Date();
+    hoje.setFullYear(hoje.getFullYear() + 5); // adiciona 5 anos
+    return hoje.toISOString().split('T')[0];
+  }
 
   const renderCamposEspecificos = () => {
     switch (tipo) {
@@ -179,14 +220,12 @@ export default function RegistroPage() {
               }
             })
             } />
-            <input name="dataNascimento" placeholder="Data de nascimento" required value={formatDate(form.dataNascimento || '')} onChange={(e) =>
-              handleChange({
-                target: {
-                  name: 'dataNascimento',
-                  value: e.target.value.replace(/\D/g, '')
-                }
-              })
-            } />
+            <input type="date"
+              name="dataNascimento"
+              placeholder="Data de nascimento"
+              required
+              value={form.dataNascimento || ''}
+              onChange={handleChange} />
             {/* Autocomplete da escola */}
             <div className="relative z-0 w-full mb-5 group">
               <input
@@ -223,9 +262,8 @@ export default function RegistroPage() {
 
                         try {
                           const res = await fetch(`http://localhost:3001/ponto-por-escola?escolaId=${escola.id}`, {
-                            credentials: 'include'
+                            credentials: 'include',
                           });
-
                           const ponto = await res.json();
                           if (res.ok) {
                             handleChange({ target: { name: 'ponto_embarque_id', value: ponto.id } });
@@ -261,15 +299,46 @@ export default function RegistroPage() {
               </label> */}
             </div>
             {/* ainda é preciso revisar os campos abaixo */}
-            <input name="viagem_id" placeholder="ID da viagem" onChange={handleChange} required />
-            <input name="veiculo_id" placeholder="ID do veículo" onChange={handleChange} required />
             <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required autoComplete="off" />
             {/* Campos do Responsável */}
             <h2 className="text-lg font-semibold mt-6">Responsável</h2>
-            <input name="cpf_responsavel" placeholder="CPF" required value={formatCpf(form.cpf_responsavel || '')} onChange={(e) => handleChange({ target: { name: 'cpf_responsavel', value: e.target.value.replace(/\D/g, '') } })} />
-            <input name="nome_responsavel" placeholder="Nome do responsável" onChange={handleChange} required />{/*ref={textRef}*/}
-            <input type='email' name="email_responsavel" placeholder="Email do responsável" onChange={handleChange} required autoComplete="off" />
-            <input name="telefone_responsavel" placeholder="Telefone do responsável" required value={formatPhone(form.telefone || '')} onChange={(e) => handleChange({ target: { name: 'telefone', value: e.target.value.replace(/\D/g, '') } }) } />
+            <input
+              name="cpf_responsavel"
+              placeholder="CPF"
+              required
+              value={formatCpf(form.cpf_responsavel || '')}
+              onChange={(e) =>
+                handleChange({ target: { name: 'cpf_responsavel', value: e.target.value.replace(/\D/g, '') } })
+              }
+            />
+
+            <input
+              name="nome_responsavel"
+              placeholder="Nome do responsável"
+              value={form.nome_responsavel || ''}
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              type="email"
+              name="email_responsavel"
+              placeholder="Email do responsável"
+              value={form.email_responsavel || ''}
+              onChange={handleChange}
+              required
+              autoComplete="off"
+            />
+
+            <input
+              name="telefone_responsavel"
+              placeholder="Telefone do responsável"
+              required
+              value={formatPhone(form.telefone_responsavel || '')}
+              onChange={(e) =>
+                handleChange({ target: { name: 'telefone_responsavel', value: e.target.value.replace(/\D/g, '') } })
+              }
+            />
             {/*
             ainda vou revisar essa parte
             {!responsavelExiste && (
@@ -285,17 +354,27 @@ export default function RegistroPage() {
             <input name="nome" placeholder="Nome completo" onChange={handleChange} required />{/*ref={textRef}*/}
             <input name="cnh" placeholder="CNH" required value={formatCNH(form.cnh || '')} onChange={(e) => handleChange({ target: { name: 'cnh', value: e.target.value } })} />
             <input name="telefone" placeholder="Telefone" required value={formatPhone(form.telefone || '')} onChange={(e) => handleChange({ target: { name: 'telefone', value: e.target.value.replace(/\D/g, '') } })} />
-            <input name="validade_cnh" placeholder="Validade da CNH" required value={formatDate(form.validade_cnh || '')} onChange={(e) => handleChange({ target: { name: 'validade_cnh', value: e.target.value.replace(/\D/g, '') } })} />
-            <input type='email' name="email" placeholder="Email" required autoComplete="off" />
-            <input name="senha" placeholder="Senha" type="password" required autoComplete="off" />
+            <input
+              name="vencimento_habilitacao"
+              placeholder="Validade da CNH"
+              required
+              type="date"
+              value={form.vencimento_habilitacao || ''}
+              onChange={handleChange}
+              min={calcularMinData()}
+              max={calcularMaxData()}
+            />
+            <input type='email' name="email" placeholder="Email" required autoComplete="off" value={form.email || ''} onChange={handleChange} />
+            <input type="password" name="senha" placeholder="Senha" required autoComplete="off" value={form.senha || ''} onChange={handleChange} />
           </>
         );
       case 'administrador':
         return (
           <>
             <input name="cpf" placeholder="CPF" required value={formatCpf(form.cpf || '')} onChange={(e) => handleChange({ target: { name: 'cpf', value: e.target.value.replace(/\D/g, '') } })} />
-            <input name="nome" placeholder="Nome completo" onChange={handleChange} required />{/*ref={textRef}*/}
+            <input name="nome" placeholder="Nome completo" onChange={handleChange} required />
             <input name="email" placeholder="Email" onChange={handleChange} required autoComplete="off" />
+            <input name="telefone" placeholder="Telefone" required value={formatPhone(form.telefone || '')} onChange={(e) => handleChange({ target: { name: 'telefone', value: e.target.value.replace(/\D/g, '') } })} />
             <input name="senha" placeholder="Senha" type="password" onChange={handleChange} required autoComplete="off" />
           </>
         );
@@ -332,4 +411,3 @@ export default function RegistroPage() {
 
   );
 }
-

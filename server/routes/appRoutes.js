@@ -1,14 +1,14 @@
 import express from "express";
 import { autorizarAcesso } from "../middlewares/authMiddleware.js";
 import { loginController } from "../controllers/LoginController.js";
-import { verAlunosController, verDadosEscolaController } from "../controllers/VerAlunosController.js";
 import { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController,editarPerfilMotoristaController} from '../controllers/PerfilController.js';
 // import { getViagemUsuario } from '../controllers/ViagensController.js';
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
-import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController} from '../controllers/AdminController.js';
+import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController} from '../controllers/AdminController.js';
+//import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, buscarViagemPorEscolaEPontoController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
-import { obterInformacoesFilhosController } from '../controllers/ResponsavelController.js'
-import { verVeiculoController, obterInformacoesviagensController } from "../controllers/VerVeiculosController.js";
+import { obterInformacoesFilhosController, enviarResponsavelMensagem } from '../controllers/ResponsavelController.js'
+import { verAlunosController, verVeiculoController, obterInformacoesviagensController, verDadosEscolaController, mensagensParaMotorista} from "../controllers/MotoristaController.js";
 
 import multer from 'multer';
 const router = express.Router();
@@ -43,9 +43,10 @@ router.post('/cadastro/motorista', cadastrarMotorista);
 router.post('/cadastro/administrador', cadastrarAdministrador);
 router.delete('/deletarUsuario', deletarPerfilController);
 
-//ESCOLAS
+//ESCOLAS, pontos e viagens
 router.get('/escolas', buscarEscolas)
 router.get('/ponto-por-escola', buscarPontoPorEscola);
+router.get('/viagem-por-escola-ponto', buscarViagemPorEscolaEPontoController);
 
 //ver registros - adm
 //listagem
@@ -65,6 +66,8 @@ router.get('/qtd-tipo', usuariosPorTipoController ) //usuarios por tipo
 
 // responsavel
 router.get('/filhos', obterInformacoesFilhosController)
+// enviar mensagem (responsavel logado)
+router.post('/mensagens', enviarResponsavelMensagem);
 
 //MOTORISTA -------------------------------------------------------------------------------------
 router.get('/verVeiculo',verVeiculoController, autorizarAcesso('Motorista'));
@@ -73,6 +76,8 @@ router.patch('/editarPerfilMotorista', editarPerfilMotoristaController, autoriza
 router.post('/enviarIncidente',adicionarIncidenteController);
 //para ver os veiculos (dashboard)
 router.get('/listarVeiculos', listarVeiculosController);
+// ver mensagens recebidas (motorista logado)
+router.get('/notificacoes', mensagensParaMotorista);
 
 // logout
 router.post('/logout', (req, res) => {

@@ -31,23 +31,6 @@ async function readAll(table, where = null) {
         connection.release();
     }
 }
-//fução utilizada para o Alunos.js(models)
-async function readAll2(table, where, select) {
-    const connection = await getConnection();
-    try{
-        let sql = `SELECT ${select} FROM ${table}`;
-        if(where){
-           sql += `WHERE ${where}`
-        }
-        const [rows] = await connection.execute(sql);
-        return rows;
-    }catch(err){
-        console.error('Erro ao ler registros!!!', err);
-        throw err;
-    }finally{
-        connection.release()
-    };
-};
 
 //Função para ler um registro específico
 async function read(table, where) {
@@ -165,4 +148,4 @@ async function deleteRecord(table, where) {
     }
 }
 
-export { create,create2, readAll, readAll2, read, readQuery, update, deleteRecord }
+export { create,create2, readAll, read, readQuery, update, deleteRecord }

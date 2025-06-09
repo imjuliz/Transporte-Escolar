@@ -36,6 +36,7 @@ import { obterDadosDaViagemDoAluno, obterDadosDaViagemDoMotorista, obterDadosDas
 // }
 
 async function obterViagemPorUsuario(req, res) {
+
   try {
     const usuario = req.session.usuario;
     console.log('Usuário na sessão (viagens):', usuario);
@@ -85,13 +86,12 @@ async function obterViagemPorUsuario(req, res) {
       return res.json({ tipo, dados: dadosMotorista });
 
     } else if (tipo === 'responsavel') {
-      const dadosResponsavel = await obterDadosDasViagensDoResponsavel(id);
-      console.log('Dados do responsável:', dadosResponsavel);
-      if (!dadosResponsavel || dadosResponsavel.length === 0) {
+      const viagens = await obterDadosDasViagensDoResponsavel(id);
+      console.log('Viagens encontradas para responsável:', viagens);
+      if (!viagens || viagens.length === 0) {
         return res.status(404).json({ erro: 'Nenhuma viagem ativa para os alunos vinculados' });
       }
-      return res.json({ tipo, dados: dadosResponsavel });
-
+      return res.json({ infoFilhos: viagens });
     } else {
       console.error('Tipo de usuário desconhecido:', tipo);
       return res.status(400).json({ erro: 'Tipo de usuário desconhecido' });
