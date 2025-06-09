@@ -91,3 +91,21 @@ h3{
 
 }
 
+/*tabela de veiculos*/
+.botao{
+    background-color: #013FF6;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    margin-top: 30px;
+    transition: all 0.3s ease
+}
+
+.botao:hover{
+background-color: #022dae
+}
+
+.tabela{
+    font-family: 'Plus Jakarta Sans Medium';
+}
+

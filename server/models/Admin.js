@@ -219,4 +219,15 @@ SELECT 'Administradores' AS name, COUNT(*) AS value FROM adm;
 return await readQuery(sql);
 }
 
-export { buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario };
+//para listar os veiculos
+const listarVeiculos = async () =>{
+  try{
+  return await readAll ('veiculos');
+}
+catch(error){
+  console.error('Erro ao listar veículos: ', error);
+    throw error;
+}
+}
+
+export { buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario, listarVeiculos };

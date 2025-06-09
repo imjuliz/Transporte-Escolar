@@ -5,7 +5,7 @@ import { verAlunosController, verDadosEscolaController } from "../controllers/Ve
 import { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController,editarPerfilMotoristaController} from '../controllers/PerfilController.js';
 // import { getViagemUsuario } from '../controllers/ViagensController.js';
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
-import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController} from '../controllers/AdminController.js';
+import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
 import { obterInformacoesFilhosController } from '../controllers/ResponsavelController.js'
 import { verVeiculoController, obterInformacoesviagensController } from "../controllers/VerVeiculosController.js";
@@ -71,6 +71,8 @@ router.get('/verVeiculo',verVeiculoController, autorizarAcesso('Motorista'));
 router.get('/verEscolas', verDadosEscolaController, autorizarAcesso('motorista'));
 router.patch('/editarPerfilMotorista', editarPerfilMotoristaController, autorizarAcesso('motorista'));
 router.post('/enviarIncidente',adicionarIncidenteController);
+//para ver os veiculos (dashboard)
+router.get('/listarVeiculos', listarVeiculosController);
 
 // logout
 router.post('/logout', (req, res) => {

@@ -34,7 +34,7 @@
 
 // export { registrarUsuarioController, registrarVeiculosController }
 
-import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario} from '../models/Admin.js';
+import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario, listarVeiculos} from '../models/Admin.js';
 
 // ------------------------------------------------------------ cadastro dos usuarios
 export const cadastrarAlunoComResponsavel = async (req, res) => {
@@ -294,4 +294,16 @@ async function usuariosPorTipoController(req,res){
   }
 }
 
-export {verTodosController, verResponsaveisController, verMotoristasController, verAdminsController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarMotoristasController, contarEscolasController, viagensPorDiaController, usuariosPorTipoController};
+//listar veículos
+async function listarVeiculosController(req,res){
+  try{
+    const veiculos = await listarVeiculos();
+    return res.status(200).json({veiculos})
+  }
+  catch(error){
+    console.error('Erro ao listar veículos: ', error);
+    return res.status(500).json({erro: 'Erro ao listar veículos'});
+  }
+}
+
+export {verTodosController, verResponsaveisController, verMotoristasController, verAdminsController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarMotoristasController, contarEscolasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController};
