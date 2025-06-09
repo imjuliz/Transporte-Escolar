@@ -126,6 +126,20 @@ CREATE TABLE mensagens_responsaveis (
   FOREIGN KEY (motorista_id) REFERENCES motoristas(id)
 );
 
+CREATE TABLE mensagens_motoristas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  aluno_id INT,
+  responsavel_id INT,
+  motorista_id INT,
+  tipo ENUM('congestionamento', 'mudanca_rota', 'emergencia', 'problema_veiculo'),
+  conteudo TEXT,
+  data_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
+  lida BOOLEAN DEFAULT FALSE,
+  FOREIGN KEY (aluno_id) REFERENCES alunos(id),
+  FOREIGN KEY (responsavel_id) REFERENCES responsaveis(id),
+  FOREIGN KEY (motorista_id) REFERENCES motoristas(id)
+);
+
 # tabelas de associações
 -- associação entre alunos e seus responsaveis
 CREATE TABLE responsaveis_alunos (
@@ -410,7 +424,6 @@ where id< 20;
 /*
 JOIN viagens ON alunos_viagens.viagem_id = viagens.id
 WHERE alunos_viagens.aluno_id = 1 AND viagens.data_viagem = CURDATE();*/
-
 
 select ponto_inicial_id , ponto_inicial_tipo, veiculo_id
 from viagens
