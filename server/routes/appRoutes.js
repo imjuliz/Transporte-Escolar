@@ -80,8 +80,9 @@ router.get('/listarVeiculos', listarVeiculosController);
 router.get('/contar-incidentes', contarIncidentesController);
 // ver mensagens recebidas (motorista logado)
 router.get('/notificacoes', mensagensParaMotorista);
+
 //ver os alunos do onibus
-router.get('/alunosMensagem', obterInformacoesAlunosController)
+router.get('/alunosMensagem', obterInformacoesAlunosController);
 
 //enviar mensagens 
 router.post('/mensagem', enviarMotoristaMensagemController, autorizarAcesso('motorista'));

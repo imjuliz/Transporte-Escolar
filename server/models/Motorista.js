@@ -32,14 +32,19 @@ const verVeiculo = async (motoristaId) => {
   } catch (err) {
     console.error('Erro ao buscar veiculos!!!', err);
     throw err;
-  }};
+  }
+};
 //ver os alunos com base no id do motorista
 const verAlunosPorVeiculo = async (motoristaId) => {
   if (!motoristaId) throw new Error('motoristaId não fornecido');
   try {
     // const where = `motorista_id = ${motoristaId}`;
-    const row = `SELECT nome from alunos, viagens where viagens.motorista_id = ${motoristaId} and viagens.veiculo_id = ${motoristaId};`
-    return await readQuery(row);
+    const row = `SELECT DISTINCT alunos.nome as nome_aluno
+     FROM alunos_viagens 
+     INNER JOIN alunos ON alunos_viagens.aluno_id = alunos.id 
+     INNER JOIN viagens ON alunos_viagens.viagem_id = viagens.id
+     WHERE viagens.motorista_id = ${motoristaId};`
+    return await readQuery(row, [motoristaId]);
   } catch (err) {
     console.error('Erro ao buscar veiculos!!!', err);
     throw err;
