@@ -119,10 +119,6 @@ export default function MeuPerfil() {
             if (response.ok) {
                 console.log('Perfil atualizado com sucesso!');
                 setUsuario((prev) => ({ ...prev, ...formData }));
-                // setEditando(false);              // fecha o modo de edição
-                // setEmailEditando(false);        // bloqueia o campo de email
-                // setTelefoneEditando(false);     // bloqueia o campo de telefone
-                // setVencimentoEditando(false); //bloqueia o campo de vencimento
             }
             else {
                 console.error('Erro ao atualizar perfil');

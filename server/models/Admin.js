@@ -57,10 +57,27 @@ export const associarResponsavelAluno = async (responsavelId, alunoId) => {
     });
   } catch (err) {
     throw err;
-  }
-};
+  }};
+  // ----------------------------------registrar escolas----------------------------------
+  const criarEscola = async (dados) => {
+    try {
+      return await create('escolas', dados);
+    } catch (err) {
+      console.error('Erro ao cadastrar escola', err);
+      throw err;
+    }
+  };
+ // ----------------------------------registrar pontos de embarque----------------------------------
+  const criarPontosEmbarque = async (dados) => {
+    try {
+      return await create('pontos_embarque', dados);
+    } catch (err) {
+      console.error('Erro ao registrar ponto de embarque', err);
+      throw err;
+    }
+  };
 
-// busca o id da viagem pela escola e ponto
+// busca o id da viagem pela escola e ponto-------------------------------------------------------------------
 export const buscarViagemPorEscolaEPonto = async (escola_id, ponto_embarque_id) => {
   const query = `
     SELECT id FROM viagens 
@@ -75,7 +92,7 @@ export const buscarViagemPorEscolaEPonto = async (escola_id, ponto_embarque_id) 
 };
 
 
-// busca o nome da escola
+// busca o nome da escola--------------------------------------------------------------------------------------
 export const buscarEscolasPorNome = async (nome) => {
   const where = `nome LIKE "%${nome}%" LIMIT 10`;
   return await readAll('escolas', where);
@@ -91,21 +108,8 @@ export async function buscarPontoDeEmbarquePorEscola(escolaId) {
     WHERE epe.escola_id = ?
     `,
     [escolaId]
-  );
-}
+  );}
 
-// deleta o perfil do USUARIO
-export const deletarPerfil = async (tipo, id) => {
-
-  const usuario = await read(tabela, `id = '${id}'`);
-  if (!usuario) return null;
-
-  const resultado = await deleteRecord(tabela, `cpf = '${cpf}'`);
-  return resultado;
-}
-
-
-//---------------------------------
 
 //funcoes de ver todos os registros
 
@@ -254,6 +258,13 @@ FROM incidentes
 GROUP BY tipo;
   `;
   return await readQuery(sql)
+};
+
+// deleta o perfil do USUARIO
+const deletarPerfil = async (tipo, email) => {
+
+  const resultado = await deleteRecord(tipo, `email = '${email}' `);
+  return resultado;
 }
 
-export { buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes };
+export { deletarPerfil, criarPontosEmbarque, criarEscola, buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes };
