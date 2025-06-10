@@ -6,9 +6,9 @@ import { VerAdmins, VerMotoristas, VerResponsaveis, VerTodos } from '../../../..
 import '../styles/cadastros.css'
 
 export default function embarques() {
-    useEffect(() => {
-        import('preline/dist/preline') // << usar o bundle compilado
-    }, [])
+    //useEffect(() => {
+    //    import('preline/dist/preline') // << usar o bundle compilado
+   // }, [])
 
     const [alunos, setAlunos] = useState([]);
     const [resposta, setResposta] = useState("");
