@@ -63,9 +63,9 @@ input{
         margin-right: 8%;
         }
         .mensagens{
-            display: grid;
-            grid: auto-flow;
-            width: 50%;
+            display: flex;flex-direction: row;
+            /* grid-auto-rows: auto; */
+            width: 80%;
         }
     .card-msg h3{
         font-size: 20px;
