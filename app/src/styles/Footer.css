@@ -38,12 +38,17 @@ footer .cont-logo{
     margin-bottom: 3vh;
 }
 
+.logo-img{
+  width: 60px;
+  height: 39px;
+}
+
 .cont-1{
     height: fit-content;
 }
 
 .cont-1 p:hover {
-    opacity: 1; /* Exemplo de mudança de opacidade */
+    opacity: 1;
 }
 
 .cont-redes {
@@ -193,6 +198,12 @@ footer .container {
 
     .col-redes{
         justify-content: center;
+    }
+
+    .container-redes{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 

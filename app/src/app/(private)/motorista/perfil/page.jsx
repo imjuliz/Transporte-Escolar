@@ -77,6 +77,16 @@ export default function MeuPerfil() {
                 e.target.value = value;   // Atualiza o valor do input
             })}}, []);
 
+     // formatação de cpf ao pegar o cpf do back
+    const formatarCPF = (cpf) => {
+        if (!cpf) return " - ";
+        return cpf
+            .replace(/\D/g, "")
+            .replace(/^(\d{3})(\d)/, "$1.$2")
+            .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+            .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+    };
+
     // formatação de telefone ao pegar o telefone do back
     const formatarTelefone = (telefone) => {
         if (!telefone) return " - ";
@@ -127,21 +137,6 @@ export default function MeuPerfil() {
             console.error('Erro:', error);
         }
     };
-    if (erro) return <p className="text-red-600 p-4">{erro}</p>;
-
-    if (!usuario) {
-        return (
-            <div className="text-center">
-                <div role="status">
-                    <svg aria-hidden="true" className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="..." fill="currentColor" />
-                        <path d="..." fill="currentFill" />
-                    </svg>
-                    <span className="sr-only">Carregando...</span>
-                </div>
-            </div>
-        );
-    };
 
     const openModal = () => document.getElementById("modal").style.display = "block";
     const closeModal = () => document.getElementById("modal").style.display = "none";
@@ -172,7 +167,7 @@ export default function MeuPerfil() {
     if (erro) return <p className="text-red-600 p-4">{erro}</p>;
     if (!usuario) return <div className="text-center"><div role="status">Carregando...</div></div>;
 
-    const nomeSobrenome = pegarPrimeiroEUltimoNome(usuario.nomeCompleto);
+    const nomeSobrenome = pegarPrimeiroEUltimoNome(usuario.nome);
 
     return (
         <section>
@@ -191,7 +186,7 @@ export default function MeuPerfil() {
                 <div className='sec-indicador'><h4>Dados Pessoais</h4><hr /></div>
                 <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
                     <div className='sec-campos'><h6>Nome completo:</h6><p>{usuario.nome}</p></div>
-                    <div className='sec-campos'><h6>CPF:</h6><p>{usuario.cpf}</p></div>
+                    <div className='sec-campos'><h6>CPF:</h6><p>{formatarCPF(usuario.cpf)}</p></div>
                     <div className='sec-campos'><h6>CNH:</h6><p>{usuario.cnh}</p></div>
                     <div className='sec-campos'><h6>Vencimento da habilitação:</h6><p>{usuario.vencimento_habilitacao}</p></div>
                 </div>
@@ -201,7 +196,7 @@ export default function MeuPerfil() {
                 <div className='sec-container flex flex-col gap-8'>
                     <div className='sec-campos'><h6>Email pessoal:</h6><p>{usuario.email}</p></div>
                     <div className='sec-campos flex gap-10'>
-                        <div className='sec-campos2'><h6>Telefone:</h6><p>{usuario.telefone}</p></div>
+                        <div className='sec-campos2'><h6>Telefone:</h6><p>{formatarTelefone(usuario.telefone)}</p></div>
                         <div className='sec-campos2'><h6>Tipo de telefone:</h6><p>{usuario.tipoTelefone || "Recado ou principal"}</p></div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos, mensagensPorMotorista, criarMotoristaMensagem, escolasEAlunosPorMotorista } from "../models/Motorista.js";
+import { verAlunos, verDadosEscola, verVeiculo, buscarResponsavelPorAluno, verViagensVeiculos, mensagensPorMotorista, criarMotoristaMensagem, escolasEAlunosPorMotorista } from "../models/Motorista.js";
 
 // ve os alunos que pegam o onibus
 const verAlunosController = async (req, res) => {
@@ -72,55 +72,6 @@ const obterInformacoesviagensController = async (req, res) => {
         res.status(500).json({ message: 'Erro ao buscar informações do veículo' });
     }
 };
-
-const obterInformacoesAlunosController = async (req, res) => {
-  // try {
-  //     const motoristaId = req.session.usuario?.id;
-
-  //     try {
-  //         const rows = await escolasEAlunosPorMotorista(motoristaId);
-  //         console.log('rows:', rows);
-          
-  //         const infoAlunos = [];//p agrupar os dados p/ aluno
-          
-  //         const escolasMap = {};// evita repetir alunos, agrupando as viagens de cada um
-
-  //         // esse for percorre todas as linhas q vieram do banco (cada linha é uma viagem de um filho)
-  //         for (const row of rows) {
-  //             // se o aluno ainda NAO tiver nenhuma entrada, cria um objeto com os dados do aluno e uma lista vazia pras viagens dele
-  //             if (!escolasMap[row.escola_id]) {
-  //               escolasMap[row.escola_id] = {
-  //                   escola_id: row.escola_id,
-  //                   escola_nome: row.escola_nome,
-  //                 };
-  //                 infoAlunos.push(escolasMap[row.escola_id]);// add esse novo aluno criado no array infoFilhos
-  //             }
-
-  //             escolasMap[row.id_escola].viagens.push({
-  //               aluno_id: row.aluno_id,
-  //               aluno_nome: row.aluno_nome
-  //             });}
-
-  //         res.json({ infoAlunos });
-
-  //     } catch (error) {
-  //         console.error('Erro ao buscar informações dos alunos:', error);
-  //         res.status(500).json({ message: 'Erro ao buscar informaçoes dos alunos' });
-  //     }} catch (error) {
-  //     console.error('Erro geral no controller:', error);
-  //     res.status(500).json({ message: 'Erro geral no controller' });
-  try {
-    const motoristaId = req.session.usuario?.id;
-
-    const dados = await escolasEAlunosPorMotorista(motoristaId);
-
-    res.json({ escolas: dados });
-  } catch (error) {
-    console.error("Erro ao buscar escolas e alunos do motorista:", error);
-    res.status(500).json({ message: "Erro interno ao buscar dados" });
-  }
-};
-
   
 // motorista visualiza mensagens relacionadas aos alunos da viagem
 const mensagensParaMotorista = async (req, res) => {
@@ -144,18 +95,39 @@ const mensagensParaMotorista = async (req, res) => {
   }
 };
 
+const obterInformacoesAlunosController = async (req, res) => {
+  try {
+    const motoristaId = req.session.usuario?.id;
+
+    const dados = await escolasEAlunosPorMotorista(motoristaId);
+
+    res.json({ escolas: dados });
+  } catch (error) {
+    console.error("Erro ao buscar escolas e alunos do motorista:", error);
+    res.status(500).json({ message: "Erro interno ao buscar dados" });
+  }
+};
+
 const enviarMotoristaMensagemController = async (req, res) => {
   try {
     const motoristaId = req.session.usuario?.id;
     const { aluno_id, mensagem, motivo } = req.body;
 
     if (!motoristaId) {
-      return res.status(401).json({ erro: 'Responsável não autenticado' });
+      return res.status(401).json({ erro: 'Motorista não autenticado' });
+    }
+
+    // Busca o responsável associado ao aluno
+    const responsavelId = await buscarResponsavelPorAluno(aluno_id);
+
+    if (!responsavelId) {
+      return res.status(404).json({ erro: 'Responsável não encontrado para o aluno' });
     }
 
     await criarMotoristaMensagem({
       motorista_id: motoristaId,
       aluno_id,
+      responsavel_id: responsavelId,
       tipo: motivo,
       conteudo: mensagem
     });
@@ -166,5 +138,6 @@ const enviarMotoristaMensagemController = async (req, res) => {
     res.status(500).json({ erro: 'Erro ao enviar mensagem' });
   }
 };
+
 
 export { verAlunosController, verDadosEscolaController, verVeiculoController, obterInformacoesviagensController, mensagensParaMotorista, enviarMotoristaMensagemController, obterInformacoesAlunosController} 

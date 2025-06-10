@@ -32,41 +32,20 @@ const obterPerfilUsuario = async (req, res) => {
 };
 
 // busca a escola pelo id
-// export const buscarEscolas = async (req, res) => {
-//     const { id } = req.query;
+export const buscarEscolas = async (req, res) => {
+    const { id } = req.query;
 
-//     if (!id || !isNaN(id)) {
-//       return res.status(400).json({ erro: 'Parâmetro "id" é obrigatório e deve ser um numero.' });
-//     }
-//     try {
-//       const escolas = await buscarEscolasPorNome(id);
-//       res.json(escolas);
-//     } catch (erro) {
-//       console.error(erro);
-//       res.status(500).json({ erro: 'Erro ao buscar escolas.' });
-//     } };
-// editar informaçoes do perfil
-// const editarPerfilController = async (req, res) => {
-//     console.log("editarPerfilController: ", req.session)
-//     try {
-//         const { telefone, telefonePrinc, email, emailPessoal} = req.body;
-//         const { tipo, id } = req.session.usuario;
-//         // let fotoPerfil = null;
+    if (!id || !isNaN(id)) {
+      return res.status(400).json({ erro: 'Parâmetro "id" é obrigatório e deve ser um numero.' });
+    }
+    try {
+      const escolas = await buscarEscolasPorNome(id);
+      res.json(escolas);
+    } catch (erro) {
+      console.error(erro);
+      res.status(500).json({ erro: 'Erro ao buscar escolas.' });
+} };
 
-//         // if (req.file) {
-//         //     fotoPerfil = req.file.path.replace(__dirname.replace('\\controllers', ''), '');}
-//         //armazena no arquivo json as info
-//         const atualizacoes = {
-//             telefone: telefone,
-//             email: email
-//             // foto: fotoPerfil
-//         };
-//         await editarPerfil(tipo, id, atualizacoes);
-//         res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!!!', email });
-//     } catch (err) {
-//         console.error('Erro ao atualizar perfil!!!', err);
-//         res.status(500).json({ mensagem: 'Erro ao atualizar perfil!!!' });
-//     }};
 const editarPerfilController = async (req, res) => {
   try {
     const id = req.session.usuario.id;

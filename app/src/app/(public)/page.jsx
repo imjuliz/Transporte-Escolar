@@ -146,8 +146,8 @@ export default function Home() {
     // contatos
     const ctts = [
         {
-            end: "suporte@quintaldopet.com.br",
-            link: "mailto:suporte@quintaldopet.com.br"
+            end: "suporte@edutrip.com.br",
+            link: "mailto:suporte@edutrip.com.br"
         },
         {
             end: "(11) 23456-7890",
@@ -298,7 +298,7 @@ export default function Home() {
                                     </div>
                                 ))}
                             </div>
-                            <div className="f-col col-redes">
+                            <div className="f-col container-redes col-redes">
                                 <h1>Siga-nos</h1>
                                 <div className='cont-redes flex flex-row gap-4'>
                                     {msociais.map((social, index) => (

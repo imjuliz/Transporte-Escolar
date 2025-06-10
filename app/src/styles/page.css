@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
-.logo-img{
-  width: 60px;
-  height: 39px;
-}
+
 
 header {
   margin-top: 5vh;

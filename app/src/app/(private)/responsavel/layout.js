@@ -39,19 +39,6 @@ export default function RootLayout({ children }) {
             </svg>
 
         ),
-        ajuda: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clipPath="url(#clip0_8_309)">
-                <path d="M8.33337 7.50001C8.33337 7.01087 8.51582 6.69804 8.75533 6.49481C9.01297 6.27621 9.38618 6.14584 9.79171 6.14584C10.1972 6.14584 10.5704 6.27621 10.8281 6.49481C11.0676 6.69804 11.25 7.01087 11.25 7.50001C11.25 7.86432 11.1642 8.06657 11.0645 8.21615C10.9481 8.39066 10.7951 8.52827 10.5362 8.76099L10.4842 8.80768C10.2179 9.04738 9.86751 9.37142 9.60035 9.84342C9.32502 10.3298 9.16671 10.9176 9.16671 11.6667C9.16671 12.1269 9.5398 12.5 10 12.5C10.4603 12.5 10.8334 12.1269 10.8334 11.6667C10.8334 11.1658 10.9355 10.8681 11.0508 10.6644C11.1742 10.4463 11.3447 10.2756 11.5992 10.0465C11.6221 10.0259 11.6462 10.0044 11.6714 9.98191C11.8991 9.77892 12.2111 9.50088 12.4512 9.14065C12.7421 8.70429 12.9167 8.17737 12.9167 7.50001C12.9167 6.53082 12.5262 5.7499 11.9064 5.22396C11.3046 4.71339 10.532 4.47918 9.79171 4.47918C9.05141 4.47918 8.27878 4.71339 7.67704 5.22396C7.05718 5.7499 6.66671 6.53082 6.66671 7.50001C6.66671 7.96025 7.0398 8.33334 7.50004 8.33334C7.96028 8.33334 8.33337 7.96025 8.33337 7.50001Z" fill="currentColor" />
-                <path d="M10.625 15.5598C10.9346 15.2192 10.9095 14.6922 10.569 14.3826C10.2284 14.073 9.70137 14.0981 9.39177 14.4386L9.38344 14.4478C9.07384 14.7883 9.09892 15.3153 9.43946 15.6249C9.78 15.9345 10.307 15.9095 10.6166 15.5689L10.625 15.5598Z" fill="currentColor" />
-                <path fillRule="evenodd" clipRule="evenodd" d="M10 0.833344C4.9373 0.833344 0.833374 4.93727 0.833374 10C0.833374 15.0627 4.9373 19.1667 10 19.1667C15.0628 19.1667 19.1667 15.0627 19.1667 10C19.1667 4.93727 15.0628 0.833344 10 0.833344ZM2.50004 10C2.50004 5.85775 5.85778 2.50001 10 2.50001C14.1423 2.50001 17.5 5.85775 17.5 10C17.5 14.1423 14.1423 17.5 10 17.5C5.85778 17.5 2.50004 14.1423 2.50004 10Z" fill="currentColor" />
-            </g>
-            <defs>
-                <clipPath id="clip0_8_309">
-                    <rect width="20" height="20" fill="white" />
-                </clipPath>
-            </defs>
-        </svg>
-        ),
         filhos: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" clipRule="evenodd" d="M10 2.5C8.89497 2.5 7.83516 2.93899 7.05376 3.72039C6.27236 4.50179 5.83337 5.5616 5.83337 6.66667C5.83337 7.77174 6.27236 8.83154 7.05376 9.61294C7.10873 9.66791 7.16507 9.72119 7.22272 9.77273C6.50895 10.0998 5.85185 10.5534 5.286 11.1193C4.03575 12.3695 3.33337 14.0652 3.33337 15.8333V16.6667C3.33337 17.1269 3.70647 17.5 4.16671 17.5C4.62694 17.5 5.00004 17.1269 5.00004 16.6667V15.8333C5.00004 14.5073 5.52682 13.2355 6.46451 12.2978C7.40219 11.3601 8.67396 10.8333 10 10.8333C11.3261 10.8333 12.5979 11.3601 13.5356 12.2978C14.4733 13.2355 15 14.5073 15 15.8333V16.6667C15 17.1269 15.3731 17.5 15.8334 17.5C16.2936 17.5 16.6667 17.1269 16.6667 16.6667V15.8333C16.6667 14.0652 15.9643 12.3695 14.7141 11.1193C14.1482 10.5534 13.4911 10.0998 12.7774 9.77273C12.835 9.72119 12.8914 9.66791 12.9463 9.61294C13.7277 8.83154 14.1667 7.77174 14.1667 6.66667C14.1667 5.5616 13.7277 4.50179 12.9463 3.72039C12.1649 2.93899 11.1051 2.5 10 2.5ZM8.23227 4.8989C8.70111 4.43006 9.337 4.16667 10 4.16667C10.6631 4.16667 11.299 4.43006 11.7678 4.8989C12.2366 5.36774 12.5 6.00363 12.5 6.66667C12.5 7.32971 12.2366 7.96559 11.7678 8.43443C11.299 8.90327 10.6631 9.16667 10 9.16667C9.337 9.16667 8.70111 8.90327 8.23227 8.43443C7.76343 7.96559 7.50004 7.32971 7.50004 6.66667C7.50004 6.00363 7.76343 5.36774 8.23227 4.8989Z" fill="currentColor" />
         </svg>
@@ -68,7 +55,7 @@ export default function RootLayout({ children }) {
         ),
         motorista: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16.9696 19.5047C16.7257 17.5293 15.0414 16 13 16H11C8.95858 16 7.27433 17.5293 7.03036 19.5047M16.9696 19.5047C19.3986 17.893 21 15.1335 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 15.1335 4.60137 17.893 7.03036 19.5047M16.9696 19.5047C15.5456 20.4496 13.8371 21 12 21C10.1629 21 8.45441 20.4496 7.03036 19.5047M15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10Z" stroke="white" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>),
+        </svg>),
         perfil: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16.9696 19.5047C16.7257 17.5293 15.0414 16 13 16H11C8.95858 16 7.27433 17.5293 7.03036 19.5047M16.9696 19.5047C19.3986 17.893 21 15.1335 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 15.1335 4.60137 17.893 7.03036 19.5047M16.9696 19.5047C15.5456 20.4496 13.8371 21 12 21C10.1629 21 8.45441 20.4496 7.03036 19.5047M15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10Z" stroke="white" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -76,15 +63,40 @@ export default function RootLayout({ children }) {
     };
 
     const links = [
-        { href: '/responsavel/rotas', name: 'rotas', page: 'Rotas' },
+        { href: '/responsavel/rotas', name: 'rotas', page: 'Painel de Navegação' },
         { href: '/responsavel/viagens', name: 'viagens', page: 'Viagens' },
         { href: '/responsavel/filhos', name: 'filhos', page: 'Filhos' },
         { href: '/responsavel/mensagem', name: 'mensagens', page: 'Enviar mensagem' },
         { href: '/responsavel/notificacoes', name: 'notificacoes', page: 'Notificações' },
         { href: '/responsavel/motorista', name: 'motorista', page: 'Motorista' },
-        { href: '/responsavel/perfil', name: 'perfil', page: 'perfil' },
-        { href: '/ajuda', name: 'ajuda', page: 'Ajuda' },
+        { href: '/responsavel/perfil', name: 'perfil', page: 'Meu Perfil' }
     ];
+    // buscar informações do perfil
+    useEffect(() => {
+        fetch("http://localhost:3001/perfil", {
+            method: "GET",
+            credentials: "include",
+        })
+            .then(async (res) => {
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.mensagem);
+                setUsuario(data);
+            })
+            .catch((err) => {
+                console.error("Erro ao buscar dados do usuário:", err.message);
+                setErro("Erro ao carregar perfil.");
+            });
+    }, []);
+
+    const [usuario, setUsuario] = useState(null);
+
+    // pega primeiro e ultimo nome do usuario
+    const pegarPrimeiroEUltimoNome = (nome) => {
+        if (!nome) return { primeiroNome: "", ultimoNome: "" };
+        const nomes = nome.trim().split(" ");
+        return { primeiroNome: nomes[0], ultimoNome: nomes[nomes.length - 1] };
+    };
+    const nomeSobrenome = usuario?.nome ? pegarPrimeiroEUltimoNome(usuario.nome) : { primeiroNome: '', ultimoNome: '' };
 
     // logout
     const handleLogout = async () => {
@@ -120,9 +132,9 @@ export default function RootLayout({ children }) {
                             alt="Foto de perfil"
                             className='fotoPerfil'
                         />
-                        <div className="logo flex flex-col">
+                        <div className="logo flex flex-col justify-end">
                             <p className="logoName">Responsável</p>
-                            <h4 className='nomepessoa'>nome</h4>
+                            <h4 className='nomepessoa'>Olá, {nomeSobrenome.primeiroNome}</h4>
                         </div>
                         <i className='botaoMenu bx bx-menu' id="btn" onClick={toggleSidebar}><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="0.5" y="0.5" width="27" height="27" rx="7.5" fill="#161A23" />

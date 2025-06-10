@@ -1,20 +1,15 @@
-// /middleware/uploadMiddleware.js
 import multer from 'multer';
 import path from 'path';
-import fs from 'fs';
-
-const uploadDir = 'public/uploads';
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadDir);
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads/');
   },
-  filename: function (req, file, cb) {
-    const ext = path.extname(file.originalname);
-    cb(null, `user-${req.session.usuario.id}-${Date.now()}${ext}`);
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + path.extname(file.originalname);
+    cb(null, 'user-' + uniqueSuffix);
   }
 });
-
 const upload = multer({ storage });
 
-export {upload};
+export { upload };

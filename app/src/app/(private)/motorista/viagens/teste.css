@@ -1,26 +1,34 @@
 /* bolinha piscando quando a viagem estiver ativa*/
 .blink {
     animation: piscar 1s infinite;
-  }
-  
-  @keyframes piscar {
-    0% { opacity: 1; }
-    50% { opacity: 0.2; }
-    100% { opacity: 1; }
-  }
-  
+}
 
-.chrome{
-    background-color: white;
+@keyframes piscar {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.chrome {
+    /* background-color: white; */
     height: fit-content;
-    border-radius: 30px;
+    /* border-radius: 30px; */
 }
 
-.conteudo{
-    padding: 50px 30px;
+.conteudo {
+    padding: 30px 30px;
 }
 
-.container-viagem{
+.container-viagem {
     width: 100%;
     height: fit-content;
     padding: 1.3rem 2.3rem;
@@ -30,97 +38,104 @@
     border-radius: 2vw !important
 }
 
-hr{
+hr {
     width: 250px;
 }
 
-main{
+main {
     align-content: start;
     height: max-content !important;
 
 }
 
-section{
+section {
     margin-top: 10vh;
     width: 100%;
 }
 
-.titulo{
+.titulo {
     align-items: flex-start;
 }
 
-.fotodeperfil{
+.fotodeperfil {
     width: 50px;
-height: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.nomealuno{
+.nomealuno {
     margin-bottom: 0px;
 }
 
-ul{
+ul {
     list-style: circle;
 }
 
-/*.aluno-active{
-    background-color:white;
-    padding: 1vh 3vh;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    
-}*/
+ul li{
+    font-family: 'Plus Jakarta Sans Medium';
+}
 
-.aluno{
+.conteudo {
+    background-color: #fff !important;
+    border-radius: 20px;
+}
+
+.conteudo .tab-content p {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans Medium';
+}
+
+.aluno {
     background-color: rgb(233, 233, 233);
     padding: 1vh 3vh;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    
 }
 
-.nomeAluno{
+.nomeAluno {
     margin: 0;
     font-family: 'Plus Jakarta Sans Medium';
     font-size: 1rem;
     color: black
 }
+
 /********************************************************************/
 
-body{
+body {
     background-color: #F5F5F5 !important;
 }
 
-main{
+main {
     align-content: start;
     overflow: hidden;
 }
 
-section{
+section {
     margin-top: 10vh;
 }
 
-.page-indicador{
+.page-indicador {
     width: fit-content;
     margin-bottom: 8vh;
 }
 
-.page-indicador h1{
+.page-indicador h1 {
     font-family: 'Plus Jakarta Sans Bold';
 }
 
-.days, section{
+.days,
+section {
     width: 100%;
 }
 
-.days h2{
+.days h2 {
     font-family: 'Plus Jakarta Sans Semibold';
     margin-bottom: 3vh;
     font-size: 1.5rem;
 }
 
-.container-viagem{
+.container-viagem {
     width: 100%;
     padding: 1.3rem 2.3rem;
     box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
@@ -128,21 +143,21 @@ section{
     transition: box-shadow .3s;
 }
 
-.container-viagem p{
+.container-viagem p {
     font-family: 'Plus Jakarta Sans Medium';
     font-size: 1rem;
 }
 
-.container-viagem h3{
+.container-viagem h3 {
     font-family: 'Plus Jakarta Sans Semibold';
     font-size: 1.2rem;
 }
 
-.container-viagem:hover{
-    box-shadow: 0 0 11px rgba(0,0,0,0.06);
+.container-viagem:hover {
+    box-shadow: 0 0 11px rgba(0, 0, 0, 0.06);
 }
 
-.status{
+.status {
     width: fit-content;
     padding: 0.4rem 2rem;
     font-family: 'Plus Jakarta Sans Medium';
@@ -150,63 +165,74 @@ section{
     text-align: center;
 }
 
-.titulo-status{
+.titulo-status {
     width: 100%
 }
-.titulo-status h3{
+
+.titulo-status h3 {
     margin: 0;
 }
-.circle{
+
+.circle {
     margin: 0 1.7vw;
 }
 
-.circle-t{
+.circle-t {
     margin: 0 1vw 0 0;
 }
 
-.barrinha{
+.barrinha {
     gap: 15px
 }
+
 @media screen and (max-width: 1536px) {
-    .container-viagem h3{
+    .container-viagem h3 {
         font-size: 1.5rem;
     }
-    .titulo-status{
+
+    .titulo-status {
         justify-content: space-between;
     }
-  }
+}
+
 @media screen and (max-width: 1280px) {
-    .container-viagem h3{
+    .container-viagem h3 {
         font-size: 1.3rem;
     }
-    .titulo-status{
+
+    .titulo-status {
         justify-content: space-between;
     }
-  }
+}
+
 @media screen and (max-width: 1024px) {
-    .container-viagem h3{
+    .container-viagem h3 {
         font-size: 1rem;
     }
-    .titulo-status{
+
+    .titulo-status {
         justify-content: space-between;
     }
-  }
+}
+
 @media screen and (max-width: 768px) {
-    .container-viagem h3{
+    .container-viagem h3 {
         font-size: 1rem;
     }
-  }
+}
+
 @media screen and (max-width: 640px) {
-    .container-viagem h3{
+    .container-viagem h3 {
         font-size: 1rem;
     }
-    .titulo-status{
+
+    .titulo-status {
         justify-content: space-between;
     }
-  }
+}
 
 @media screen and (max-width: 600px) {
-    .titulo-status{
+    .titulo-status {
         flex-direction: column;
     }
 }

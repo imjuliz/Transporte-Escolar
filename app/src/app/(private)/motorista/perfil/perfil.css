@@ -4,9 +4,10 @@
       cursor: pointer;
     }
   };
-  
-  /* Defaults hover styles on all devices */
-  @custom-variant hover (&:hover);
+
+ section{
+    width:100%;
+ } 
 section h1{
     font-family: "Plus Jakarta Sans SemiBold";
     font-size: 2rem;

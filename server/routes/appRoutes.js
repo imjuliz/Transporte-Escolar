@@ -2,16 +2,16 @@ import express from "express";
 import { autorizarAcesso } from "../middlewares/authMiddleware.js";
 import { loginController } from "../controllers/LoginController.js";
 import { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController,editarPerfilMotoristaController} from '../controllers/PerfilController.js';
-// import { getViagemUsuario } from '../controllers/ViagensController.js';
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
 //import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, } from '../controllers/AdminController.js';
-import { cadastrarAlunoComResponsavel, criarPontoEmbarqueController, criarEscolaController, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, deletarPerfilController, registrarVeiculosController, verEscolasController, verPontosController} from '../controllers/AdminController.js';
+//import { cadastrarAlunoComResponsavel, criarPontoEmbarqueController, criarEscolaController, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, deletarPerfilController, registrarVeiculosController, } from '../controllers/AdminController.js';
 //import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, buscarViagemPorEscolaEPontoController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
-import { obterInformacoesFilhosController, enviarResponsavelMensagem } from '../controllers/ResponsavelController.js'
+//import { obterInformacoesFilhosController, enviarResponsavelMensagem } from '../controllers/ResponsavelController.js'
+import { cadastrarAlunoComResponsavel, criarPontoEmbarqueController, criarEscolaController, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, deletarPerfilController, registrarVeiculosController, verEscolasController, verPontosController} from '../controllers/AdminController.js';;
+import { obterInformacoesFilhosController, enviarResponsavelMensagem, mensagensParaResponsavel } from '../controllers/ResponsavelController.js'
 import { verAlunosController, verVeiculoController, obterInformacoesviagensController, verDadosEscolaController, mensagensParaMotorista, enviarMotoristaMensagemController, obterInformacoesAlunosController} from "../controllers/MotoristaController.js";
-import { upload } from '../middlewares/uploadMiddleware.js'; 
-import multer from 'multer';
+import { upload } from '../middlewares/uploadMiddleware.js';
 const router = express.Router();
 
 // Rotas públicas
@@ -85,25 +85,26 @@ router.get('/qtd-tipo', usuariosPorTipoController ) //usuarios por tipo
 // responsavel -------------------------------------------------------------------------------------
 router.get('/filhos', obterInformacoesFilhosController)
 // enviar mensagem (responsavel logado)
-router.post('/mensagens', enviarResponsavelMensagem);
+router.post('/mensagensMotorista', enviarResponsavelMensagem);
+router.get('/notificacoesResponsavel', mensagensParaResponsavel);
 
 //MOTORISTA -------------------------------------------------------------------------------------
 router.get('/verVeiculo',verVeiculoController, autorizarAcesso('Motorista'));
 router.get('/verEscolas', verDadosEscolaController, autorizarAcesso('motorista'));
 router.patch('/editarPerfilMotorista', editarPerfilMotoristaController, autorizarAcesso('motorista'));
-router.post('/enviarIncidente',adicionarIncidenteController);
 //para ver os veiculos (dashboard)
 router.get('/listarVeiculos', listarVeiculosController);
 //contar incidentes (dashboard)
 router.get('/contar-incidentes', contarIncidentesController);
 // ver mensagens recebidas (motorista logado)
-router.get('/notificacoes', mensagensParaMotorista);
+router.post('/motoristaEnviarMensagem', enviarMotoristaMensagemController, autorizarAcesso('motorista'));
+router.get('/notificacoesMotorista', mensagensParaMotorista);
 
 //ver os alunos do onibus
 router.get('/alunosMensagem', obterInformacoesAlunosController);
 
 //enviar mensagens 
-router.post('/motoristaEnviarMensagem', enviarMotoristaMensagemController, autorizarAcesso('motorista'));
+
 
 // logout
 router.post('/logout', (req, res) => {

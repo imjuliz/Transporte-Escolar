@@ -123,8 +123,8 @@ export async function buscarPontoDeEmbarquePorEscola(escolaId) {
 // deleta o perfil do USUARIO
 /*export const deletarPerfil = async (tipo, id) => {
 
-  const usuario = await read(tabela, `id = '${id}'`);
-  if (!usuario) return null;
+//   const usuario = await read(tabela, `id = '${id}'`);
+//   if (!usuario) return null;
 
   const resultado = await deleteRecord(tabela, `cpf = '${cpf}'`);
   return resultado;
