@@ -129,6 +129,10 @@ margin-left: -30vw;
   align-content: center;
 }
 
+.secão5 .banner2{
+  width: 30vw;
+}
+
 .secao3-corpo {
   width: 100%;
 }
@@ -139,10 +143,12 @@ margin-left: -30vw;
   margin-bottom: 4vh;
 }
 
-.row-left {
+.row-left, .row-right {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  width: 25%;
 }
 
 .row-left img,
@@ -150,29 +156,14 @@ margin-left: -30vw;
   height: 20vh;
 }
 
-.row-right {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.row-right p {
-  font-family: "Plus Jakarta Sans Regular";
-  font-size: 1.2rem;
-  text-align: start;
-  height: fit-content;
-  margin: 0;
-  width: 50%;
-}
-
+.row-right p, 
 .row-left p {
   font-family: "Plus Jakarta Sans Regular";
   font-size: 1.2rem;
-  text-align: end;
+  text-align: justify;
   height: fit-content;
   margin: 0;
-  width: 50%;
+  width: 100%;
 }
 
 .secão4 {
@@ -269,8 +260,9 @@ h3 {
 
 .cards5 {
   text-align: center;
-  width: 80%;
+  width: 75%;
   margin-top: 8vh;
+  align-items: center;
 }
 
 .texto5, .texto5{

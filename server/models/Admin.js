@@ -38,10 +38,10 @@ export const criarAdministrador = async (dados) => {
 };
 
 //registrar veiculos
-export const RegistarVeiculos = async (dados) =>{
-  try{
-    return await create ('veiculos', dados);
-  } catch(err) {
+export const RegistarVeiculos = async (dados) => {
+  try {
+    return await create('veiculos', dados);
+  } catch (err) {
     console.error('Erro ao registrar veículo: ', err);
     throw err
   }
@@ -67,32 +67,48 @@ export const associarResponsavelAluno = async (responsavelId, alunoId) => {
     });
   } catch (err) {
     throw err;
-  }};
-  // ----------------------------------registrar escolas----------------------------------
-  const criarEscola = async (dados) => {
-    try {
-      return await create('escolas', dados);
-    } catch (err) {
-      console.error('Erro ao cadastrar escola', err);
-      throw err;
-    }
-  };
- // ----------------------------------registrar pontos de embarque----------------------------------
-  const criarPontosEmbarque = async (dados) => {
-    try {
-      return await create('pontos_embarque', dados);
-    } catch (err) {
-      console.error('Erro ao registrar ponto de embarque', err);
-      throw err;
-    }
-  };
+  }
+};
+
+export const associarAlunoViagem = async (viagemId, alunoId) => {
+  try {
+    return await create('alunos_viagens', {
+      viagem_id: viagemId,
+      aluno_id: alunoId
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
+// ----------------------------------registrar escolas----------------------------------
+const criarEscola = async (dados) => {
+  try {
+    return await create('escolas', dados);
+  } catch (err) {
+    console.error('Erro ao cadastrar escola', err);
+    throw err;
+  }
+};
+// ----------------------------------registrar pontos de embarque----------------------------------
+const criarPontosEmbarque = async (dados) => {
+  try {
+    return await create('pontos_embarque', dados);
+  } catch (err) {
+    console.error('Erro ao registrar ponto de embarque', err);
+    throw err;
+  }
+};
 
 // busca o id da viagem pela escola e ponto-------------------------------------------------------------------
 export const buscarViagemPorEscolaEPonto = async (escola_id, ponto_embarque_id) => {
   const query = `
     SELECT id FROM viagens 
-    WHERE escola_id = ? AND ponto_embarque_id = ? 
-    LIMIT 1
+WHERE ponto_inicial_tipo = 'ponto_embarque' 
+  AND ponto_inicial_id = ? 
+  AND ponto_final_tipo = 'escola' 
+  AND ponto_final_id = ?
+LIMIT 1
   `;
   const results = await readQuery(query, [escola_id, ponto_embarque_id]);
   if (results.length === 0) {
@@ -100,6 +116,8 @@ export const buscarViagemPorEscolaEPonto = async (escola_id, ponto_embarque_id) 
   }
   return results[0].id;
 };
+
+// associa o aluno a viagem -------------------------------------------------------------------
 
 
 // busca o nome da escola--------------------------------------------------------------------------------------
@@ -118,7 +136,8 @@ export async function buscarPontoDeEmbarquePorEscola(escolaId) {
     WHERE epe.escola_id = ?
     `,
     [escolaId]
-  );}
+  );
+}
 
 // deleta o perfil do USUARIO
 /*export const deletarPerfil = async (tipo, id) => {
@@ -236,22 +255,22 @@ const buscarQuantidadeViagensEmAndamento = async () => {
 };
 
 // ver escolas registradas
-const verEscolas = async () =>{
-  try{
+const verEscolas = async () => {
+  try {
     return await readAll('escolas')
   }
-  catch(error){
+  catch (error) {
     console.error('Ocorreu um erro ao listar as escolas registradas: ', err);
     throw error;
   }
 }
 
 //ver pontos de embarque 
-const verPontos = async () =>{
-  try{
+const verPontos = async () => {
+  try {
     return await readAll('pontos_embarque');
   }
-  catch(error){
+  catch (error) {
     console.error('Ocorreu um erro ao listar os pontos de embarque: ', error);
   }
 }
@@ -316,4 +335,4 @@ const deletarPerfil = async (tipo, email) => {
   return resultado
 }*/
 
-export { deletarPerfil, criarPontosEmbarque, criarEscola, buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes, verEscolas, verPontos};
+export { deletarPerfil, criarPontosEmbarque, criarEscola, buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes, verEscolas, verPontos };

@@ -122,6 +122,14 @@ header ul {
     width: 50%;
 }
 
+.trabalhe-text h2{
+  font-family: "Plus Jakarta Sans Bold";
+}
+
+.trabalhe-text p{
+  font-family: "Plus Jakarta Sans Medium";
+}
+
 /* O que buscamos */
 .sec2{
     width: 75%;
@@ -161,7 +169,6 @@ header ul {
 .req-cont{
     display: flex;
     align-items: center;
-    width: 40%;
 }
 
 .req-cont img{
@@ -172,6 +179,12 @@ header ul {
     margin: 0;
     height: fit-content;
     font-family: "Plus Jakarta Sans Regular";
+}
+
+.cont-busca{
+  width: 80%;
+  display: flex;
+  flex-direction: row;
 }
 
 /* candidatar-se */
@@ -281,6 +294,11 @@ margin-top: 2%;
   }
   }
   
+  @media screen and (max-width: 1450px){
+    .cont-busca{
+      width: 100%;
+    }
+  }
   
   @media screen and (max-width: 1280px) {
     .secão5{
@@ -322,8 +340,74 @@ margin-top: 2%;
     width: 5vw;
   }
 
-  form{
+  .candidate form{
     width: 100%;
+  }
+
+  .cont-busca {
+    display: flex;
+    flex-direction: column-reverse !important;
+  }
+
+  .cont-busca img{
+    height: 40vh;
+  }
+
+  .req-text p{
+    margin-bottom: 5vh;
+  }
+
+  .req-cont img{
+    height: 5vh;
+  }
+
+  .req-cont p{
+    text-align: center;
+  }
+
+  .req-cont img{
+    margin: 0;
+  }
+
+  .requisitos{
+    gap: 50px 7px !important;
+  }
+
+  .req-cont{
+    width: 20%;
+  }
+
+  .requisitos{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-around
+  }
+
+  .trabalhe{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .req-cont{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .row-left{
+    flex-direction: column;
+  }
+
+  .trabalhe-text{
+    width: 100%;
+  }
+
+  .trabalhe-text p, .row-right h2{
+    text-align: justify;
+  }
+
+  .trabalhe{
+    gap: 20px;
   }
   
   }

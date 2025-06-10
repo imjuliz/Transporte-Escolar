@@ -103,7 +103,7 @@ export default function Home() {
         {
             img1: './img/sessao4/bolinha3.svg',
             img2: './img/sessao4/card4_3.svg',
-            text: 'Tenha total acesso a todas as funcionalidades do seu tipo de perfil'
+            text: 'Tenha total controle na palma da mão'
         }
     ];
 
@@ -228,7 +228,7 @@ export default function Home() {
             <section className='secão3'>
                 <div className='secao3-corpo'>
                     <h2>Sobre nós</h2>
-                    <div className="grid grid-flow-col grid-rows-3 gap-4">
+                    <div className="flex flex-row justify-between gap-4">
                         {sobreItens.map((sobre, index) => (
                             <div key={index} className={sobre.classNamee}>
                                 <img src={sobre.img} />

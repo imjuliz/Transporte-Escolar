@@ -126,10 +126,10 @@ export default function RootLayout({ children }) {
                 <div className={`sidebar ${sidebarActive ? 'active' : ''}`}>
                     <div className="logoContent flex flex-nowrap gap-4 items-center">
                         <Image
-                            src="/img/fotoPerfil.png"
+                            src="/img/logo.png"
                             width={100}
                             height={100}
-                            alt="Foto de perfil"
+                            alt="logo"
                             className='fotoPerfil'
                         />
                         <div className="logo flex flex-col justify-end">

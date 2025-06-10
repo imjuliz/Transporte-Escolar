@@ -89,7 +89,7 @@ CREATE TABLE alunos (
     email varchar(100) not null unique,
     nome varchar(100) not null,
     telefonePrinc VARCHAR(9) NOT NULL unique,
-    emailPessoal VARCHAR(100) NOT NULL unique,
+    emailPessoal VARCHAR(100) unique,
     dataNascimento date NOT NULL,
     senha VARCHAR(255) NOT NULL,
     fotoPerfil varchar(255),
@@ -100,6 +100,8 @@ CREATE TABLE alunos (
     FOREIGN KEY (escola_id) REFERENCES escolas(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (ponto_embarque_id) REFERENCES pontos_embarque(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+select * from alunos;
 
 /*
 CREATE TABLE incidentes (
@@ -358,108 +360,6 @@ INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
 (7, 8),
 (8, 9);
 
-/*
-INSERT INTO alunos_viagens (aluno_id, viagem_id) VALUES
--- Roberto Alves (escola_id: 6, ponto_embarque_id: 1)
-(1, 11), -- viagem de ida -> 13:00 ate 15:00
-(1, 15), -- viagem de volta -> 15:15 ate 17:30
--- Beatriz Sousa (escola_id: 5, ponto_embarque_id: 2)
-(2, 4),  -- viagem de ida -> 13:00
-(2, 8),  -- viagem de volta -> 17:30
--- Marcos Correia (escola_id: 1, ponto_embarque_id: 3)
-(3, 12), -- viagem de ida -> 13:00
-(3, 16), -- viagem de volta -> 17:30
--- Ana Julia (escola_id: 1, ponto_embarque_id: 4)
-(4, 12), -- viagem de ida -> 13:00
-(4, 16), -- viagem de volta -> 17:30
--- Carlos Eduardo (escola_id: 2, ponto_embarque_id: 5)
-(5, 13), -- viagem de ida -> 13:00
-(5, 17), -- viagem de volta -> 17:30
--- Beatriz Santos (escola_id: 4, ponto_embarque_id: 6)
-(6, 14), -- viagem de ida -> 13:00
-(6, 18), -- viagem de volta -> 17:30
--- Lucas Mendes (escola_id: 6, ponto_embarque_id: 7)
-(7, 12), -- viagem de ida -> 13:00
-(7, 16), -- viagem de volta -> 17:30
--- Fernanda Almeida (escola_id: 6, ponto_embarque_id: 8)
-(8, 12), -- viagem de ida -> 13:00
-(8, 16), -- viagem de volta -> 17:30
--- Gustavo Ribeiro (escola_id: 8, ponto_embarque_id: 1)
-(9, 13), -- viagem de ida -> 13:00
-(9, 17), -- viagem de volta -> 17:30
--- Mariana Souza (escola_id: 5, ponto_embarque_id: 2)
-(10, 4), -- viagem de ida -> 13:00
-(10, 8),
--- teste
-(11, 57),
-(11, 61);
-*/
-
-SELECT m.*, a.nome AS aluno_nome, r.nome AS responsavel_nome
-FROM mensagens_responsaveis m
-JOIN alunos a ON m.aluno_id = a.id
-JOIN responsaveis r ON m.responsavel_id = r.id
-JOIN alunos_viagens av ON av.aluno_id = a.id
-JOIN viagens v ON v.id = av.viagem_id
-WHERE v.motorista_id = 1
-ORDER BY m.data_envio DESC;
-
-select * from  mensagens_responsaveis;
-/*
-insert into incidentes (remetente, tipo, mensagem, dataDaMensagem, hora)
-value('maria@gmail.com', "transito", "muito transito", curdate(), curtime());
-select * from incidentes; 
-
-select * from motoristas;
-
-select count(*)from alunos_viagem;
-
-update alunos
-set turno = 'manhã'
-where id<20;
-
-update alunos
-set status = 'ativo'
-where id< 20;
-/*
-JOIN viagens ON alunos_viagens.viagem_id = viagens.id
-WHERE alunos_viagens.aluno_id = 1 AND viagens.data_viagem = CURDATE();*/
-
-
-select ponto_inicial_id , ponto_inicial_tipo, veiculo_id
-from viagens
-inner join escolas on viagens.ponto_inicial_tipo = 'escola' 
-WHERE viagens.veiculo_id = 1;
-
-select * from responsaveis;
-select id 
-from veiculos
-where motorista_id = ? ;
-select * from tipo_inicial_escola;
-select * from motoristas;
-select *  from veiculos;
-select * from viagens;
-select * from  alunos;
-select * from escolas;
-SELECT * FROM responsaveis_alunos WHERE responsavel_id = 1;
-select * from sessions;
-SELECT id, ponto_inicial_tipo, ponto_inicial_id FROM viagens;
-
-select escolas.id, escolas.nome
-from escolas
-inner join alunos on escolas.id  = alunos.escola_id
-where escolas.id = 1 ;
-
-alter table veiculos
-add modelo VARCHAR(50), add marca VARCHAR(50), add anoFabricacao INT;
-
--- 06/ 06 
-insert into veiculos (placa, capacidade, motorista_id, modelo, marca, anoFabricacao)
-values ( "MNO-5432", 40, 1, " LO 916 R/ LO 916", "Mercedes-Benz", 2019),
-("PQR-8765", 40, 2, " LO 916 R/ LO 916", "Mercedes-Benz", 2020),
-("STU-6846", 40, 3, " LO 916 R/ LO 916", "Mercedes-Benz", 2019),
-("VWX-7356", 40, 4, " LO 916 R/ LO 916", "Mercedes-Benz", 2019);
-*/
 -- para função de contar viagens
 SELECT data_viagem AS data, COUNT(*) AS total_viagens
 FROM viagens
