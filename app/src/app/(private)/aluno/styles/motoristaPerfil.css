@@ -65,6 +65,16 @@ section h1{
     font-family: "Plus Jakarta Sans SemiBold";
     margin: 0;
 }
+.sec-campos{
+    width: 60%;
+}
+.sec-campos2{
+    width: 40%;
+    margin-right: -30%;
+}
+.sec-container{
+    width: 70%;
+}
 
 .btn-add{
     padding: 1vh 2vw;
@@ -124,52 +134,64 @@ section h1{
 }
 
 @media screen and (max-width: 640px) {
-.perfil{
-    padding-left: 10vw;
-}
    
+    .sec-campos2 h6{
+        width: 140%;
+        white-space: pre-line;
+      }
+      .sec-campos2{
+        margin-right: 0%;
+        margin-left: -20%;
+       
+   }
+    .sec-container.gap-8{
+        gap: 7rem;
+
+       }
 }
 @media screen and (max-width: 768px) {
-    .perfil{
-        padding: 15vw;
+    .sec-container{
+        width:100%;
+       
     }
-    .sec{
-        width: 90%;
-    }
+    .sec-campos{
+        margin-right: 20%;
+   }
+   .sec-campos2{
+    white-space: nowrap;
+   
+   }
+   .sec-campos2 p{
+     width: 120%;
+   }
+   .gap-8{
+    gap: 10rem;
+   }
        
     }
     @media screen and (max-width: 1024px) {
-        .perfil{
-            padding: 15vw;
+        .sec-container{
+            width:80%;
+           
         }
-
-           .sec-campos2{
-            width: 100%;
-            white-space: nowrap;
-            margin-left: -60%;
-           }
+        .sec-campos2{
+            margin-right: 10%;
+       }
         }
         @media screen and (max-width: 1280px) {
-            .perfil{
-                padding: 15vw;
-            }
-    
-               .sec-campos2{
-                width: 100%;
-                white-space: nowrap;
-                margin-left: -100%;
-                margin-right: 25%;
-               }
+            .sec-container{
+                width:60%;
+               
+            }.sec-campos2{
+                margin-right: 10%;
+           }
             }
             @media screen and (max-width: 1536px) {
-                .perfil{
-                    padding: 15vw;
+                .sec-container{
+                    width: 80%;
+                   
                 }
-        
-                   .sec-campos2{
-                    width: 100%;
-                    white-space: nowrap;
-                    margin-left: -142%;
-                    margin-right: 70%;
-                   }
+                .sec-campos2{
+                     margin-left: -30%;
+                }
                 }

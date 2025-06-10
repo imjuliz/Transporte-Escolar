@@ -226,7 +226,7 @@ export default function MeuPerfil() {
                         </div>
 
                         {/* Telefone */}
-                        <div className='sec-campos flex gap-10'>
+                        <div className='sec-campos flex gap-10 '>
                             <div className='sec-campos2'>
                                 <h6>Telefone:</h6>
                                 {editando ? (

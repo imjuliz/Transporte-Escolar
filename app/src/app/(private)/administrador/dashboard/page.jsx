@@ -69,8 +69,7 @@ export default function dashboard() {
                 setQtdEscolas(data.total_escolas);
             } catch (error) {
                 console.error('Erro ao buscar total de escolas:', error);
-            }
-        }
+            }}
         qtdEscolas();
     }, []);
 
@@ -87,47 +86,35 @@ export default function dashboard() {
                 setQtdMotoristas(data.total_motoristas);
             } catch (error) {
                 console.error('Erro ao buscar total de motoristas:', error);
-            }
-        }
+            } }
         qtdMotoristas();
     }, []);
-
 
     const infos = [
         {
             img: '/img/icon-motorista2.png',
             nome: 'Motoristas ativos',
             informacao: qtdMotoristas !== null ? qtdMotoristas : 'Carregando...'
-        },
-        {
+        },{
             img: '/img/bus-solid.svg',
             nome: 'Viagens em andamento',
             informacao: qtdViagens !== null ? qtdViagens : 'Carregando...'
-        },
-        {
+        },{
             img: '/img/users-solid.svg',
             nome: 'Novos usuários',
             informacao: qtdUsuarios !== null ? qtdUsuarios : 'Carregando...'
-        },
-        {
+        },{
             img: '/img/school-solid.svg',
             nome: 'Escolas cadastradas',
             informacao: qtdEscolas !== null ? qtdEscolas : 'Carregando...'
-        }
-    ];
-
-
-
+        }];
 
     return (
         <>
 
             <div className='page-indicador'>
                 <h1>Dashboard</h1>
-
             </div>
-
-
             {/*<section className='flex flex-row justify-between  '>
                     
                         <div key={index} className='box-infos flex p-4 w-70 h-35 flez-row rounded-xl bg-[#fff] items-center gap-4'>
@@ -149,7 +136,7 @@ export default function dashboard() {
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
                         {infos.map((infos, index) => (
 
-                            <StatCard key={index} name={infos.nome} img={infos.img} value={infos.informacao}></StatCard>
+                            <StatCard className='statcard' key={index} name={infos.nome} img={infos.img} value={infos.informacao}></StatCard>
 
                         ))} </motion.div>
 

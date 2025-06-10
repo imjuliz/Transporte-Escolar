@@ -1,38 +1,38 @@
-body{
+body {
     background-color: #F5F5F5 !important;
 
 }
 
-main{
+main {
     align-content: start;
 }
 
-section{
+section {
     margin-top: 10vh;
-    margin-bottom: 10vh !important;    
+    margin-bottom: 10vh !important;
 }
 
 
-.page-indicador{
+.page-indicador {
     width: fit-content;
 }
 
-.page-indicador h1{
+.page-indicador h1 {
     font-family: 'Plus Jakarta Sans Bold';
 }
 
-hr{
-    width:100%
+hr {
+    width: 100%
 }
 
-p{
+p {
     font-family: 'Plus Jakarta Sans Medium';
     font-size: 1rem;
     margin: 0;
-    
+
 }
 
-.btn-add{
+.btn-add {
     padding: 1vh 2vw;
     background-color: #013FF6;
     color: #fff;
@@ -40,13 +40,335 @@ p{
     font-family: "Plus Jakarta Sans Medium";
 }
 
-.btn-add a{
+.btn-add a {
     color: #fff !important;
     text-decoration: none;
 }
 
-.btn-edit{
+.btn-edit {
     color: #596780;
     font-family: "Plus Jakarta Sans Medium";
 }
 
+@media screen and (max-width: 768px) {
+    .motoristas {
+        width: 116%;
+        margin-left: -16%;
+    }
+
+    .motoristas p {
+        font-size: 10px;
+    }
+
+    .motoristas .cadastros {
+        width: 108%;
+    }
+
+    .motoristas .nomee {
+        margin-left: -8%;
+        width: 5vw;
+        margin-right: 10%;
+        white-space: nowrap;
+    }
+
+    .motoristas .cpff {
+        width: 5vw;
+        margin-right: 10%;
+        margin-left: 2%;
+    }
+
+    .motoristas .telefone {
+        width: 5vw;
+        margin-right: 10%;
+        margin-left: 2%;
+    }
+
+    .motoristas .email {
+        word-wrap: break-word;
+        width: 16vw;
+        margin-right: 5%;
+        margin-left: 2%;
+    }
+
+    /*alunos*/
+    .alunos {
+        width: 116%;
+        margin-left: -16%;
+    }
+
+    .alunos p {
+        font-size: 10px;
+    }
+
+    .alunos .cadastros {
+        width: 108%;
+    }
+
+    .alunos .nomee {
+        margin-left: -8%;
+        width: 5vw;
+        margin-right: 10%;
+        white-space: nowrap;
+    }
+
+    .alunos .cpff {
+        width: 5vw;
+        margin-right: 10%;
+        margin-left: 2%;
+    }
+
+    .alunos .telefone {
+        width: 5vw;
+        margin-right: -5%;
+        margin-left: -8%;
+    }
+
+    .alunos .email {
+        word-wrap: break-word;
+        width: 17.8vw;
+        margin-right: -5%;
+        margin-left: 2%;
+    }
+
+    /*responsaveis*/
+    .responsaveis {
+        width: 116%;
+        margin-left: -16%;
+    }
+
+    .responsaveis p {
+        font-size: 10px;
+    }
+
+    .responsaveis .cadastros {
+        width: 108%;
+    }
+
+    .responsaveis .nomee {
+        margin-left: -8%;
+        width: 5vw;
+        margin-right: -3%;
+        white-space: nowrap;
+    }
+
+    .responsaveis .cpff {
+        width: 5vw;
+        margin-right: 0%;
+        margin-left: 2%;
+    }
+
+    .responsaveis .telefone {
+        width: 5vw;
+        margin-right: -10%;
+        margin-left: -8%;
+    }
+
+    .responsaveis .email {
+        word-wrap: break-word;
+        width: 20vw;
+        margin-right: -15%;
+        margin-left: 0%;
+    }
+
+    /*adm*/
+    .admins {
+        width: 116%;
+        margin-left: -16%;
+    }
+
+    .admins p {
+        font-size: 10px;
+    }
+
+    .admins .cadastros {
+        width: 108%;
+    }
+
+    .admins .nomee {
+        margin-left: -5%;
+        width: 5vw;
+        margin-right: -3%;
+        white-space: nowrap;
+    }
+
+    .admins .cpff {
+        width: 5vw;
+        margin-right: 0%;
+        margin-left: 0%;
+    }
+
+    .admins .telefone {
+        width: 5vw;
+        margin-right: -10%;
+        margin-left: -8%;
+    }
+
+    .admins .email {
+        word-wrap: break-word;
+        width: 20vw;
+        margin-right: 0%;
+        margin-left: 0%;
+    }
+}
+@media screen and (max-width: 640px) {
+    .motoristas {
+        width: 98%;
+        margin-left: -6%;
+    }
+
+    .motoristas p {
+        font-size: 10px;
+    }
+
+    .motoristas .cadastros {
+        width: 108%;
+    }
+
+    .motoristas .nomee {
+        margin-left: -8%;
+        width:15vw;
+        margin-right: 5%;
+        word-wrap: break-word;
+        white-space: pre-line;
+    }
+
+    .motoristas .cpff {
+        width: 5vw;
+        margin-right: 10%;
+        margin-left: -5%;
+    }
+
+    .motoristas .telefone {
+        width: 5vw;
+        margin-right: 10%;
+        margin-left: 2%;
+    }
+
+    .motoristas .email {
+        word-wrap: break-word;
+        width: 20vw;
+        margin-right: 0%;
+        margin-left: 2%;
+    }
+
+    /*alunos*/
+    .alunos {
+        width: 98%;
+        margin-left: -6%;
+    }
+
+    .alunos p {
+        font-size: 10px;
+    }
+
+    .alunos .cadastros {
+        width: 108%;
+    }
+
+    .alunos .nomee {
+        margin-left: -8%;
+        width: 18vw;
+        margin-right: -8%;
+        word-wrap: break-word;
+        white-space: pre-line;
+    }
+
+    .alunos .cpff {
+        width: 5vw;
+        margin-right: 15%;
+        margin-left: 4%;
+    }
+
+    .alunos .telefone {
+        width: 5vw;
+        margin-right: -3%;
+        margin-left: -8%;
+    }
+
+    .alunos .email {
+        word-wrap: break-word;
+        width: 20vw;
+        margin-right: -5%;
+        margin-left: 5%;
+    }
+
+    /*responsaveis*/
+    .responsaveis {
+        width: 98%;
+        margin-left: -6%;
+    }
+
+    .responsaveis p {
+        font-size: 10px;
+    }
+
+    .responsaveis .cadastros {
+        width: 108%;
+    }
+
+    .responsaveis .nomee {
+        margin-left: -8%;
+        width: 5vw;
+        margin-right: -3%;
+        white-space: nowrap;
+    }
+
+    .responsaveis .cpff {
+        width: 5vw;
+        margin-right: 0%;
+        margin-left: 2%;
+    }
+
+    .responsaveis .telefone {
+        width: 5vw;
+        margin-right: -10%;
+        margin-left: -8%;
+    }
+
+    .responsaveis .email {
+        word-wrap: break-word;
+        width: 20vw;
+        margin-right: -15%;
+        margin-left: 0%;
+    }
+
+    /*adm*/
+    .admins {
+        width: 98%;
+        margin-left: -6%;
+    }
+
+    .admins p {
+        font-size: 10px;
+    }
+
+    .admins .cadastros {
+        width: 108%;
+    }
+
+    .admins .nomee {
+        margin-left: -5%;
+        width: 5vw;
+        margin-right: -3%;
+        white-space: nowrap;
+    }
+
+    .admins .cpff {
+        width: 5vw;
+        margin-right: 5%;
+        margin-left: 0%;
+    }
+
+    .admins .telefone {
+        width: 5vw;
+        margin-right: -5%;
+        margin-left: -8%;
+    }
+
+    .admins .email {
+        word-wrap: break-word;
+        width: 20vw;
+        margin-right: 0%;
+        margin-left: 0%;
+    }
+}

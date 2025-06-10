@@ -1,5 +1,5 @@
 "use client";
-import '../styles/perfil.css';
+import '../styles/motoristaPerfil.css';
 import Image from 'next/image';
 import React, { useRef, useEffect, useState } from 'react';
 
@@ -8,6 +8,61 @@ export default function motoristas() {
     useEffect(() => {
         document.title = 'EduTrip - Motoristas';
     }, []);
+    const [motorista, setMotorista] = useState(null);
+    const [veiculo, setVeiculo] = useState(null);
+    const [erro, setErro] = useState("");
+
+
+    //ver veiculo
+    useEffect(() => {
+        fetch("http://localhost:3001/verVeiculo", {
+            method: "GET",
+            credentials: "include",
+        })
+            .then(async (res) => {
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.mensagem);
+                setVeiculo(data);
+            })
+            .catch((err) => {
+                console.error("Erro ao buscar dados do veiculo:", err.message);
+                setErro("Erro ao carregar informações do veiculo.");
+            });
+    }, []);
+    //ver motorista
+    useEffect(() => {
+        fetch("http://localhost:3001/verMotorista", {
+            method: "GET",
+            credentials: "include",
+        })
+            .then(async (res) => {
+                const data = await res.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    setMotorista(data[0]);
+                } else {
+                    setMotorista(data);
+                }
+            })
+            .catch((err) => {
+                console.error("Erro ao buscar dados do usuário:", err.message);
+                setErro("Erro ao carregar perfil.");
+            })}, []);
+
+            if (erro) return <p className="text-red-600 p-4">{erro}</p>;
+    
+            if (!motorista) {
+                return (
+                    <div className="text-center">
+                        <div role="status">
+                            <svg aria-hidden="true" className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="..." fill="currentColor" />
+                                <path d="..." fill="currentFill" />
+                            </svg>
+                            <span className="sr-only">Carregando...</span>
+                        </div>
+                    </div>
+                );
+            }
     return (
         <>
             {/* <main className='justify-items-center content-center'> */}
@@ -28,7 +83,7 @@ export default function motoristas() {
                         />
                         </div>
                         <div>
-                            <h3>Nome e ultimo nome do motorista</h3>
+                            <h3>{motorista.nome}</h3>
                         </div>
                     </div>
                     <hr />
@@ -42,15 +97,15 @@ export default function motoristas() {
                     <div className='sec-container flex flex-row gap-3 justify-between'>
                         <div className='sec-campos'>
                             <h6>Nome completo:</h6>
-                            <p>Nome completo.</p>
+                            <p>{motorista.nome}</p>
                         </div>
                         <div className='sec-campos'>
                             <h6>Email:</h6>
-                            <p>Email</p>
+                            <p>{motorista.email}</p>
                         </div>
                         <div className='sec-campos'>
                             <h6>Telefone:</h6>
-                            <p>Telefone pessoal 1</p>
+                            <p>{motorista.telefone}</p>
                         </div>
                     </div>
                 </div>
@@ -63,28 +118,22 @@ export default function motoristas() {
                     <div className='sec-container flex flex-row gap-8 justify-between'>
                         <div className='sec-campos'>
                             <h6>Modelo:</h6>
-                            <p>modelo tal</p>
+                            <p>{veiculo.modelo}</p>
                         </div>
                         <div className='sec-campos2'>
                             <h6>Placa:</h6>
-                            <p>N°</p>
+                            <p>{veiculo.placa}</p>
                         </div>
                         <div className='sec-campos2'>
                             <h6>Data de fabricação:</h6>
-                            <p>data</p>
+                            <p>{veiculo.anoFabricacao}</p>
                         </div>
                         <div className='sec-campos2'>
                             <h6>Capacidade de passageiros:</h6>
-                            <p>N°</p>
+                            <p>{veiculo.capacidade}</p>
                         </div>
                     </div>
-                    {/* <div className='sec-campos flex gap-50'>
-                            
-                            <div className='sec-campos2'>
-                                <h6>?:</h6>
-                                <p>aaa</p>
-                            </div>
-                        </div> */}
+                    
                 </div>
 
                 <div className='btn-perfil flex flex-wrap gap-6'>
