@@ -127,22 +127,6 @@ export default function dashboard() {
 
             </div>
 
-
-            {/*<section className='flex flex-row justify-between  '>
-                    
-                        <div key={index} className='box-infos flex p-4 w-70 h-35 flez-row rounded-xl bg-[#fff] items-center gap-4'>
-
-                            <div className='icone'>
-                                <img src={info.img} className='img-icone' />
-                            </div>
-
-                            <div className='flex flex-col'>
-                                <p className='informacao'>{info.informacao}</p>
-                                <p className='info-nome'>{info.nome}</p>
-                            </div>
-                        </div>
-                   
-                </section>*/}
             <div className=' overflow-auto relative z-10'>
                 <main className='w-full mx-auto py-4 px-4 lg:px-8 '>
                     <motion.div className="statcards grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4 mb-8"

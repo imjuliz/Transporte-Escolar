@@ -132,16 +132,16 @@ export default function MeuPerfil() {
     };
 
     const handleReset = () => {
-       //volta para os valores originais
-       if (tellRef.current) tellRef.current.value = formatarTelefone(usuario.telefone || "");
-       if (emailInputRef) emailInputRef.current.value =  usuario.email || "";
+        //volta para os valores originais
+        if (tellRef.current) tellRef.current.value = formatarTelefone(usuario.telefone || "");
+        if (emailInputRef) emailInputRef.current.value = usuario.email || "";
 
-       setTelefoneEditando(false);
-       setEmailEditando(false);
+        setTelefoneEditando(false);
+        setEmailEditando(false);
     };
 
-    const openModal = () => document.getElementById("modal").style.display = "block";
-    const closeModal = () => document.getElementById("modal").style.display = "none";
+    //const openModal = () => document.getElementById("modal").style.display = "block";
+    //const closeModal = () => document.getElementById("modal").style.display = "none";
 
     // 1. Enquanto carrega
     if (erro) {
@@ -202,7 +202,7 @@ export default function MeuPerfil() {
                     </div>
                 </div>
             </div>
-            {/**Editar informações */}
+            {/**Editar informações */} {/** */}
             <div className='flex flex-wrap gap-6'>
                 <button type="button" className="btn-add btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Editar perfil

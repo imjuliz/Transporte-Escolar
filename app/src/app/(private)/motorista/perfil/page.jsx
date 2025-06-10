@@ -1,18 +1,17 @@
 "use client";
 import './perfil.css';
 import Image from 'next/image';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useState } from "react";
 
 export default function MeuPerfil() {
 
     const tellRef = useRef(null);
-    const vencimentoRef = useRef(null);
     const emailInputRef = useRef(null);
     const [usuario, setUsuario] = useState(null);
     const [erro, setErro] = useState("");
     const [resposta, setResposta] = useState("");
     const [editando, setEditando] = useState(false);
-    const [vencimentoEditando, setVencimentoEditando]= useState(false);
     const [emailEditando, setEmailEditando] = useState(false);
     const [telefoneEditando, setTelefoneEditando] = useState(false);
     const [foto, setFoto] = useState(null);
@@ -23,7 +22,8 @@ export default function MeuPerfil() {
         setFoto(file);
         if (file) {
             setPreview(URL.createObjectURL(file));
-        }};
+        }
+    };
     const enviarFoto = async () => {
         if (!foto) return alert("Selecione uma foto");
 
@@ -38,7 +38,8 @@ export default function MeuPerfil() {
             alert("Foto atualizada!");
         } else {
             alert("Erro ao enviar foto");
-        }};
+        }
+    };
 
     //info perfil 
     useEffect(() => {
@@ -54,7 +55,8 @@ export default function MeuPerfil() {
             .catch((err) => {
                 console.error("Erro ao buscar dados do usuário:", err.message);
                 setErro("Erro ao carregar perfil.");
-            })}, []);
+            })
+    }, []);
 
     // mascara telefone - ao escrever no input
     useEffect(() => {
@@ -64,20 +66,11 @@ export default function MeuPerfil() {
                 value = value.replace(/^(\d\d)(\d)/g, "($1)$2");
                 value = value.replace(/(\d{5})(\d)/, "$1-$2");
                 e.target.value = value;
-            }) }}, []);
+            })
+        }
+    }, []);
 
-     // mascara vencimento - ao escrever no input
-     useEffect(() => {
-        if (vencimentoRef.current) {
-            vencimentoRef.current.addEventListener("input", (e) => {
-              
-                let value = e.target.value.replace(/\D/g, "").slice(0, 8);  //tira tudo o que não for npumero e deixa só 8 dígitos
-                value = value.replace(/^(\d{4})(\d)/, "$1-$2");  // Adiciona a primeira barra
-                value = value.replace(/(\d{4})-(\d{2})(\d)/, "$1-$2-$3");// Adiciona a segunda barra
-                e.target.value = value;   // Atualiza o valor do input
-            })}}, []);
-
-     // formatação de cpf ao pegar o cpf do back
+    // formatação de cpf ao pegar o cpf do back
     const formatarCPF = (cpf) => {
         if (!cpf) return " - ";
         return cpf
@@ -100,12 +93,10 @@ export default function MeuPerfil() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const telefoneSemMascara = tellRef.current?.value?.replace(/\D/g, "") || null;
-        const vencimento_habilitacao = vencimentoRef.current?.value || null;
         const email = emailInputRef.current?.value || null;
 
         const formData = {};
         if (telefoneSemMascara) formData.telefone = telefoneSemMascara;
-        if(vencimento_habilitacao) formData.vencimento_habilitacao = vencimento_habilitacao;
         if (email) formData.email = email;
 
         Object.keys(formData).forEach(key => {
@@ -116,7 +107,7 @@ export default function MeuPerfil() {
             console.log("Nenhum campo foi preenchido.");
             return;
         } try {
-            const response = await fetch('http://localhost:3001/editarPerfilMotorista', {
+            const response = await fetch('http://localhost:3001/editarPerfil', {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -136,10 +127,21 @@ export default function MeuPerfil() {
         } catch (error) {
             console.error('Erro:', error);
         }
+
+
     };
 
-    const openModal = () => document.getElementById("modal").style.display = "block";
-    const closeModal = () => document.getElementById("modal").style.display = "none";
+    const handleReset = () => {
+        //volta para os valores originais
+        if (tellRef.current) tellRef.current.value = formatarTelefone(usuario.telefone || "");
+        if (emailInputRef) emailInputRef.current.value = usuario.email || "";
+
+        setTelefoneEditando(false);
+        setEmailEditando(false);
+    };
+
+    //const openModal = () => document.getElementById("modal").style.display = "block";
+    //const closeModal = () => document.getElementById("modal").style.display = "none";
 
     // 1. Enquanto carrega
     if (erro) {
@@ -156,7 +158,8 @@ export default function MeuPerfil() {
                     <span className="sr-only">Carregando...</span>
                 </div>
             </div>
-        )}
+        )
+    }
 
     function pegarPrimeiroEUltimoNome(nome) {
         if (!nome) return { primeiroNome: "", ultimoNome: "" };
@@ -187,8 +190,6 @@ export default function MeuPerfil() {
                 <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
                     <div className='sec-campos'><h6>Nome completo:</h6><p>{usuario.nome}</p></div>
                     <div className='sec-campos'><h6>CPF:</h6><p>{formatarCPF(usuario.cpf)}</p></div>
-                    <div className='sec-campos'><h6>CNH:</h6><p>{usuario.cnh}</p></div>
-                    <div className='sec-campos'><h6>Vencimento da habilitação:</h6><p>{usuario.vencimento_habilitacao}</p></div>
                 </div>
             </div>
             <div className='sec'>
@@ -201,32 +202,32 @@ export default function MeuPerfil() {
                     </div>
                 </div>
             </div>
-            <div className='btn-perfil flex flex-wrap gap-6'>
-                <button onClick={openModal} className='btn-edit'>
-                <div className='btn-perfil flex flex-wrap gap-6 mt-4'>
-                                    {!editando ? (
-                                        <button type="button" onClick={() => setEditando(true)} className='btn-edit'>
-                                            Editar informações
-                                        </button>) : (<>
-                                           </>)}
-                                </div>
+            {/**Editar informações */} {/** */}
+            <div className='flex flex-wrap gap-6'>
+                <button type="button" className="btn-add btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Editar perfil
                 </button>
-                <div id="modal" className="modal">
-                    <div className="modal-content">
-                        <span className="fecharModal" onClick={closeModal}>&times;</span>
-                        <div className='conteudoModal'>
-                            <h3 className="text-lg font-semibold">Editar Informações</h3>
-                            <form onSubmit={handleSubmit}>
-                                <div className="grid gap-6 mb-6 md:grid-cols-2">
-                                    <div>
-                                        <label htmlFor="telefone">telefone</label>
-                                        {editando ? (
+
+                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h1 className="modal-title fs-5" id="staticBackdropLabel">Editar Perfil</h1>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div className="modal-body">
+                                <form onSubmit={handleSubmit}>
+                                    <div className="mb-3">
+                                        <div>
+                                            <label htmlFor="telefone" className='form-label'>Telefone:</label>
+
                                             <div className="flex items-center gap-2">
                                                 <input
                                                     type="text"
                                                     defaultValue={formatarTelefone(usuario.telefone)}
                                                     ref={tellRef}
-                                                    className="input"
+                                                    className="form-control"
                                                     readOnly={!telefoneEditando}
                                                     maxLength={14}
                                                 />
@@ -240,47 +241,19 @@ export default function MeuPerfil() {
                                                     </svg>
                                                 </button>
                                             </div>
-                                        ) : (
-                                            <p>{formatarTelefone(usuario.telefone)}</p>
-                                        )}
+
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="grid gap-6 mb-6 md:grid-cols-2">
-                                    <div>
-                                        <label htmlFor="vencimentto">Vencimento</label>
-                                        {editando ? (
-                                            <div className="flex items-center gap-2">
-                                                <input
-                                                    type="text"
-                                                    defaultValue={(usuario.vencimento_habilitacao)}
-                                                    ref={vencimentoRef}
-                                                    className="input"
-                                                    readOnly={!vencimentoEditando}
-                                                    placeholder='YYYY-MM-DD'
-                                                />
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setVencimentoEditando(true)}
-                                                    title="Editar vencimento"
-                                                    className="text-gray-500 hover:text-black"
-                                                ><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M14.3786 6.44975L4.96376 15.8648C4.68455 16.144 4.32895 16.3343 3.94177 16.4117L1.00003 17.0001L1.58838 14.0583C1.66582 13.6711 1.85612 13.3155 2.13532 13.0363L11.5502 3.62132M14.3786 6.44975L15.7929 5.03553C16.1834 4.64501 16.1834 4.01184 15.7929 3.62132L14.3786 2.20711C13.9881 1.81658 13.355 1.81658 12.9644 2.20711L11.5502 3.62132M14.3786 6.44975L11.5502 3.62132" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        ) : (
-                                            <p>{(usuario.vencimento_habilitacao)}</p>)}
-                                    </div>
-                                </div>
-                                <div className="mb-6">
-                                    <label htmlFor="email">E-mail</label>
-                                    {editando ? (
+
+                                    <div className="mb-3">
+                                        <label htmlFor="email" className='form-label'>E-mail</label>
+
                                         <div className="flex items-center gap-2">
                                             <input
                                                 type="email"
                                                 defaultValue={usuario.email}
                                                 ref={emailInputRef}
-                                                className="input"
+                                                className="form-control"
                                                 readOnly={!emailEditando}
                                             />
                                             <button
@@ -292,22 +265,28 @@ export default function MeuPerfil() {
                                                     <path d="M14.3786 6.44975L4.96376 15.8648C4.68455 16.144 4.32895 16.3343 3.94177 16.4117L1.00003 17.0001L1.58838 14.0583C1.66582 13.6711 1.85612 13.3155 2.13532 13.0363L11.5502 3.62132M14.3786 6.44975L15.7929 5.03553C16.1834 4.64501 16.1834 4.01184 15.7929 3.62132L14.3786 2.20711C13.9881 1.81658 13.355 1.81658 12.9644 2.20711L11.5502 3.62132M14.3786 6.44975L11.5502 3.62132" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg></button>
                                         </div>
-                                    ) : (
-                                        <p>{usuario.email}</p>
-                                    )}
-                                    <button type="submit" className='btn-edit'>Salvar alterações</button>
-                                            <button type="button" className='btn-cancel' onClick={() => {
-                                                setEditando(false);
-                                                setEmailEditando(false);
-                                                setTelefoneEditando(false);
-                                                setVencimentoEditando(false);
-                                            }}>Cancelar</button>
-                                </div>
-                                <div><strong>Resposta do servidor:</strong><pre>{resposta}</pre></div>
-                            </form>
+
+                                        <div className='items-center mt-3 flex justify-center gap-3'>
+                                            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300">Editar</button>
+                                            <button type='button' className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300' onClick={handleReset}>Cancelar</button>
+                                        </div>
+
+                                    </div>
+
+                                    <div><strong>Resposta do servidor:</strong><pre>{resposta}</pre></div>
+
+                                </form>
+
+
+
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    )}
+    )
+}
