@@ -121,14 +121,14 @@ export async function buscarPontoDeEmbarquePorEscola(escolaId) {
   );}
 
 // deleta o perfil do USUARIO
-export const deletarPerfil = async (tipo, id) => {
+/*export const deletarPerfil = async (tipo, id) => {
 
   const usuario = await read(tabela, `id = '${id}'`);
   if (!usuario) return null;
 
   const resultado = await deleteRecord(tabela, `cpf = '${cpf}'`);
   return resultado;
-}
+}*/
 
 
 
@@ -235,6 +235,26 @@ const buscarQuantidadeViagensEmAndamento = async () => {
   return resultado[0].total; // retorna apenas o número
 };
 
+// ver escolas registradas
+const verEscolas = async () =>{
+  try{
+    return await readAll('escolas')
+  }
+  catch(error){
+    console.error('Ocorreu um erro ao listar as escolas registradas: ', err);
+    throw error;
+  }
+}
+
+//ver pontos de embarque 
+const verPontos = async () =>{
+  try{
+    return await readAll('pontos_embarque');
+  }
+  catch(error){
+    console.error('Ocorreu um erro ao listar os pontos de embarque: ', error);
+  }
+}
 //-----------------------------
 //para contar viagens por dia - gráfico do dashboard
 const qtdViagensPorDia = async () => {
@@ -290,4 +310,10 @@ const deletarPerfil = async (tipo, email) => {
   return resultado;
 }
 
-export { deletarPerfil, criarPontosEmbarque, criarEscola, buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes };
+//excluir um veículo
+/*const excluirVeiculo = async (veiculos, id) =>{
+  const resultado = await deleteRecord (veiculos, `id = '${id}'`);
+  return resultado
+}*/
+
+export { deletarPerfil, criarPontosEmbarque, criarEscola, buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento, qtdMotoristas, qtdUsuarios, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes, verEscolas, verPontos};

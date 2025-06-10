@@ -15,9 +15,9 @@ export const IncidentesChart = () => {
     }, [])
 
     return (
-        <motion.div className="bg-white backdrop-blur-lg shadow-lg rounded-xl p-4 md:p-6 mx-2 md:mx-0"
+        <motion.div className="grafico bg-white rounded-xl p-4 md:p-6 mx-2 md:mx-0 mb-8"
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.5 }}>
-            <h2 className="text-base md:text-xl font-semibold text-gray-900 mb-4 text-cender md:text-left">
+            <h2 className="titulo-grafico  mb-4 text-gray-100 text-left">
                 Incidentes
             </h2>
 

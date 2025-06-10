@@ -462,33 +462,33 @@ export default function embarques() {
                     <button className='btn-add' href='/administrador/cadastrar'>Cadastrar usuário</button>
                     {/* <button className='btn-edit'>Deletar usuário</button> */}
 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Deletar usuário
                     </button>
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h1 className="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
+                                <div className="modal-body">
 
                                     <form onSubmit={handleSubmit}>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Email do usuário que deseja deletar:</label>
-                                            <input type="email" ref={emailRef} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                        <div className="mb-3">
+                                            <label htmlFor="exampleInputEmail1" className="form-label">Email do usuário que deseja deletar:</label>
+                                            <input type="email" ref={emailRef} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Tipo de usuário:</label>
-                                            <input type="tipo" ref={tipoRef} class="form-control" id="exampleInputPassword1" placeholder='ex. motoristas, alunos, responsaveis' />
+                                        <div className="mb-3">
+                                            <label htmlFor="exampleInputPassword1" className="form-label">Tipo de usuário:</label>
+                                            <input type="tipo" ref={tipoRef} className="form-control" id="exampleInputPassword1" placeholder='ex. motoristas, alunos, responsaveis' />
                                         </div>
-                                        <button type="submit" class="btn btn-primary">enviar</button>
+                                        <button type="submit" className="btn btn-primary">enviar</button>
                                     </form>
                                     <div><strong>Resposta do servidor:</strong><pre>{resposta2}</pre></div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>

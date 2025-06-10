@@ -1,13 +1,16 @@
-import { verificarResponsavelExistente,
-   criarAluno, criarResponsavel, criarMotorista, criarAdministrador, criarEscola, criarPontosEmbarque,
-   buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento,
-   VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, 
-   qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario,
-   listarVeiculos, contarIncidentes, deletarPerfil} from '../models/Admin.js';
+import {
+  verificarResponsavelExistente,
+  criarAluno, criarResponsavel, criarMotorista, criarAdministrador, criarEscola, criarPontosEmbarque,
+  buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, buscarViagensEmAndamento, buscarQuantidadeViagensEmAndamento,
+  VerTodos, VerResponsaveis, VerMotoristas, VerAdmins,
+  qtdUsuarios, qtdMotoristas, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario,
+  listarVeiculos, contarIncidentes, deletarPerfil, RegistarVeiculos, verEscolas,
+  verPontos
+} from '../models/Admin.js';
 
 // export { registrarUsuarioController, registrarVeiculosController }
 
-import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes, RegistarVeiculos} from '../models/Admin.js';
+// import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes, } from '../models/Admin.js';
 
 // ------------------------------------------------------------ cadastro dos usuarios
 // cadastro dos usuarios ------------------------------------------------------------ 
@@ -87,15 +90,17 @@ export const cadastrarAdministrador = async (req, res) => {
 };
 
 //registrar veículos
-export const registrarVeiculosController = async (req, res) =>{
-  try{
+export const registrarVeiculosController = async (req, res) => {
+  try {
     await RegistarVeiculos(req.body);
-    res.status(201).json({mensagem: 'Veículo Registrado com sucesso! '});
+    res.status(201).json({ mensagem: 'Veículo Registrado com sucesso! ' });
   }
-  catch(err) {
-    res.status(500).json({erro: err.mesage});
+  catch (err) {
+    res.status(500).json({ erro: err.mesage });
   }
 }
+
+
 //Cadastrar escola ---------------------------------------------------------------------------
 const criarEscolaController = async (req, res) => {
   try {
@@ -157,50 +162,50 @@ export const buscarPontoPorEscola = async (req, res) => {
 //funcoes de ver registros ----------------------------------------------------------------------------
 
 //ver todos os alunos
-const verTodosController = async (req, res) =>{
-  try{
+const verTodosController = async (req, res) => {
+  try {
     const alunos = await VerTodos();
     res.json(alunos);
   }
-  catch (error){
-    console.error ('Erro ao listar todos os alunos: ', error);
-    res.status(500).json({mensagem: 'Erro ao listar alunos'})
+  catch (error) {
+    console.error('Erro ao listar todos os alunos: ', error);
+    res.status(500).json({ mensagem: 'Erro ao listar alunos' })
   }
 };
 
 //ver todos os responsaveis
-const verResponsaveisController = async (req, res) =>{
-  try{
+const verResponsaveisController = async (req, res) => {
+  try {
     const responsaveis = await VerResponsaveis();
     res.json(responsaveis);
   }
-  catch (error){
-    console.error ('Erro ao listar todos os responsáveis: ', error);
-    res.status(500).json({mensagem: 'Erro ao listar responsáveis '})
+  catch (error) {
+    console.error('Erro ao listar todos os responsáveis: ', error);
+    res.status(500).json({ mensagem: 'Erro ao listar responsáveis ' })
   }
 };
 
 //ver todos os motoristas
-const verMotoristasController = async (req, res) =>{
-  try{
+const verMotoristasController = async (req, res) => {
+  try {
     const motoristas = await VerMotoristas();
     res.json(motoristas);
   }
-  catch(error){
+  catch (error) {
     console.error('Erro ao listar todos os motoristas: ', error);
-    res.status(500).json({mensagem: 'Erro ao listar motoristas'})
+    res.status(500).json({ mensagem: 'Erro ao listar motoristas' })
   }
 };
 
 // ver todos os adms
-const verAdminsController = async (req, res) =>{
-  try{
+const verAdminsController = async (req, res) => {
+  try {
     const admins = await VerAdmins();
-    res.json (admins);
+    res.json(admins);
   }
-  catch (error){
+  catch (error) {
     console.error('Erro ao listar todos os administradores: ', error);
-    res.status(500).json({mensagem: 'Erro ao listar administradores'})
+    res.status(500).json({ mensagem: 'Erro ao listar administradores' })
   }
 };
 
@@ -210,12 +215,12 @@ const verAdminsController = async (req, res) =>{
 const contarUsuariosController = async (req, res) => {
   try {
     const totais = await qtdUsuarios();
-    const total_geral = 
+    const total_geral =
       totais.total_alunos +
       totais.total_responsaveis +
       totais.total_motoristas +
       totais.total_administradores;
-      res.status(200).json(total_geral);
+    res.status(200).json(total_geral);
   } catch (error) {
     console.error('Erro ao contar usuários:', error);
     res.status(500).json({ mensagem: 'Erro ao contar usuários' });
@@ -226,7 +231,7 @@ const contarMotoristasController = async (req, res) => {
   try {
     const totais = await qtdMotoristas();
     const total_geral = totais.total_motoristas;
-      res.status(200).json({total_motoristas: total_geral});
+    res.status(200).json({ total_motoristas: total_geral });
   } catch (error) {
     console.error('Erro ao contar motoristas:', error);
     res.status(500).json({ mensagem: 'Erro ao contar motoristas' });
@@ -247,14 +252,14 @@ const contarEscolasController = async (req, res) => {
 
 // ver todas as viagens em andamento
 async function viagensEmAndamentoController(req, res) {
-    try {
-        const viagens = await buscarViagensEmAndamento();
+  try {
+    const viagens = await buscarViagensEmAndamento();
 
-        return res.status(200).json(viagens);
-    } catch (error) {
-        console.error('Erro ao buscar viagens em andamento:', error);
-        return res.status(500).json({ erro: 'Erro interno ao buscar viagens em andamento' });
-    }
+    return res.status(200).json(viagens);
+  } catch (error) {
+    console.error('Erro ao buscar viagens em andamento:', error);
+    return res.status(500).json({ erro: 'Erro interno ao buscar viagens em andamento' });
+  }
 }
 
 async function quantidadeViagensEmAndamentoController(req, res) {
@@ -268,95 +273,145 @@ async function quantidadeViagensEmAndamentoController(req, res) {
 }
 
 //ver quantidade de viagens por dia - gráfico line chart
-async function viagensPorDiaController(req,res){
-  try{
+async function viagensPorDiaController(req, res) {
+  try {
     const qtd_viagens = await qtdViagensPorDia();
-    return res.status(200).json({qtd_viagens})
+    return res.status(200).json({ qtd_viagens })
   }
-  catch(error){
+  catch (error) {
     console.error('Erro ao ver quantidade de viagens por dia: ', error);
-    return res.status(500).json({erro: 'Erro ao ver qtd de viagens por dia'});
+    return res.status(500).json({ erro: 'Erro ao ver qtd de viagens por dia' });
   }
 }
 
 //ver quantidade de usuarios por tipo - grafico de pizza
-async function usuariosPorTipoController(req,res){
-  try{
+async function usuariosPorTipoController(req, res) {
+  try {
     const qtd_tipo = await qtdTipoUsuario();
-    return res.status(200).json({qtd_tipo})
+    return res.status(200).json({ qtd_tipo })
   }
-  catch(error){
-    console.error('Erro ao ver quantidade de usuários por tipo: ' , error);
-    return res.status(500).json({erro: 'Erro ao ver quantidade de usuários por tipo'});
+  catch (error) {
+    console.error('Erro ao ver quantidade de usuários por tipo: ', error);
+    return res.status(500).json({ erro: 'Erro ao ver quantidade de usuários por tipo' });
   }
 }
 
 //listar veículos
-async function listarVeiculosController(req,res){
-  try{
+async function listarVeiculosController(req, res) {
+  try {
     const veiculos = await listarVeiculos();
-    return res.status(200).json({veiculos})
+    return res.status(200).json({ veiculos })
   }
-  catch(error){
+  catch (error) {
     console.error('Erro ao listar veículos: ', error);
-    return res.status(500).json({erro: 'Erro ao listar veículos'});
+    return res.status(500).json({ erro: 'Erro ao listar veículos' });
   }
 }
 
+
 //contar incidentes
-async function contarIncidentesController(req,res){
-  try{
+async function contarIncidentesController(req, res) {
+  try {
     const incidentes = await contarIncidentes();
-    return res.status(200).json({incidentes});
+    return res.status(200).json({ incidentes });
+  }
+  catch (error) {
+    console.error('Erro ao contar incidentes por tipo: ', error);
+    return res.status(500).json({ erro: 'Erro ao contar incidentes por tipo' });
+  }
+};
+
+//tabela de escolas
+async function verEscolasController (req,res){
+  try{
+    const escolas = await verEscolas();
+    return res.status(200).json({escolas})
   }
   catch(error){
-    console.error('Erro ao contar incidentes por tipo: ', error);
-    return res.status(500).json({erro: 'Erro ao contar incidentes por tipo'});
-  }};
+    console.error('Erro ao ver os registros das escolas: ', error);
+    return res.status(500).json({erro: 'Erro ao ver escolas cadastradas'});
+  }
+}
+
+//ver pontos de embarque - tabela dashboard
+async function verPontosController(req,res){
+  try{
+    const pontos = await verPontos();
+    return res.status(200).json({pontos});
+  }
+  catch(error){
+    console.error('Erro ao ver pontos de embarque: ', error);
+    return res.status(500).json({erro: 'Erro ao ver pontos de embarque'});
+  }
+}
 
 // --------------------- deleta perfil do usuario - FUNCIONANDO
 
 
 const deletarPerfilController = async (req, res) => {
 
-  const {tipo, email} = req.body
-    try {
-   
-      const resultado = await deletarPerfil(tipo,email);
-  
-      if (resultado === null) {
-        return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
-      }
-  
-      if (resultado === 0) {
-        return res.status(500).json({ mensagem: 'Erro ao excluir usuário.' });
-      }
-  
-      res.status(200).json({ mensagem: 'Usuário excluído com sucesso.' });
-    } catch (erro) {
-      console.error('Erro ao excluir usuário:', erro);
-      res.status(500).json({ erro: 'Erro interno do servidor.' });
-    } };
+  const { tipo, email } = req.body
+  try {
 
-    // const deletarVeiculoController = async (req, res) => {
+    const resultado = await deletarPerfil(tipo, email);
 
-    //   const {email, tipo} = req.body
-    //     try {
-       
-    //       const resultado = await deletarPerfil(tipo,email);
-      
-    //       if (resultado === null) {
-    //         return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
-    //       }
-      
-    //       if (resultado === 0) {
-    //         return res.status(500).json({ mensagem: 'Erro ao excluir usuário.' });
-    //       }
-      
-    //       res.status(200).json({ mensagem: 'Usuário excluído com sucesso.' });
-    //     } catch (erro) {
-    //       console.error('Erro ao excluir usuário:', erro);
-    //       res.status(500).json({ erro: 'Erro interno do servidor.' });
-    //     } };
+    if (resultado === null) {
+      return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
+    }
 
-export {verTodosController, criarPontoEmbarqueController, criarEscolaController, deletarPerfilController, verResponsaveisController, verMotoristasController, verAdminsController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarMotoristasController, contarEscolasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, contarIncidentesController};
+    if (resultado === 0) {
+      return res.status(500).json({ mensagem: 'Erro ao excluir usuário.' });
+    }
+
+    res.status(200).json({ mensagem: 'Usuário excluído com sucesso.' });
+  } catch (erro) {
+    console.error('Erro ao excluir usuário:', erro);
+    res.status(500).json({ erro: 'Erro interno do servidor.' });
+  }
+};
+
+//excluir veiculos
+/*export const excluirVeiculoController = async (req, res) => {
+  const {id} = req.params
+  try {
+    const resultado = await excluirVeiculo("veiculos", id);
+
+    if (resultado === null){
+      return res.status(404).json({mensagem: 'Veículo não encontrado'});
+    }
+    if (resultado === 0){
+      return res.status(500).json({mensagem: 'Erro ao excluir veículo'});
+    }
+    
+    res.status(200).json({mensagem: 'Veículo excluído com sucesso.'});
+  }
+  catch(error){
+    console.error(`Erro ao excluir veículo: `, error);
+    res.status(500).json({erro: 'Erro ao excluir veículo'});
+  }
+}*/
+
+// const deletarVeiculoController = async (req, res) => {
+
+//   const {email, tipo} = req.body
+//     try {
+
+//       const resultado = await deletarPerfil(tipo,email);
+
+//       if (resultado === null) {
+//         return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
+//       }
+
+//       if (resultado === 0) {
+//         return res.status(500).json({ mensagem: 'Erro ao excluir usuário.' });
+//       }
+
+//       res.status(200).json({ mensagem: 'Usuário excluído com sucesso.' });
+//     } catch (erro) {
+//       console.error('Erro ao excluir usuário:', erro);
+//       res.status(500).json({ erro: 'Erro interno do servidor.' });
+//     } };
+
+
+
+export { verTodosController, criarPontoEmbarqueController, criarEscolaController, deletarPerfilController, verResponsaveisController, verMotoristasController, verAdminsController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarMotoristasController, contarEscolasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, contarIncidentesController , verEscolasController, verPontosController};

@@ -4,8 +4,8 @@ import { loginController } from "../controllers/LoginController.js";
 import { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController,editarPerfilMotoristaController} from '../controllers/PerfilController.js';
 // import { getViagemUsuario } from '../controllers/ViagensController.js';
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
-import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, registrarVeiculosController} from '../controllers/AdminController.js';
-import { cadastrarAlunoComResponsavel, criarPontoEmbarqueController, criarEscolaController, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, deletarPerfilController} from '../controllers/AdminController.js';
+//import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, } from '../controllers/AdminController.js';
+import { cadastrarAlunoComResponsavel, criarPontoEmbarqueController, criarEscolaController, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, deletarPerfilController, registrarVeiculosController, verEscolasController, verPontosController} from '../controllers/AdminController.js';
 //import { cadastrarAlunoComResponsavel, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, deletarPerfilController , verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, buscarViagemPorEscolaEPontoController} from '../controllers/AdminController.js';
 import { adicionarIncidenteController } from "../controllers/IncidenteController.js";
 import { obterInformacoesFilhosController, enviarResponsavelMensagem } from '../controllers/ResponsavelController.js'
@@ -50,7 +50,12 @@ router.post ('/cadastro/cadastroPontos', criarPontoEmbarqueController);
 
 //deletar usuarios - FUNCIONANDO
 router.delete('/deletarUsuario', deletarPerfilController);
+
+//registrar veiculo
 router.post('/registrar-veiculo', registrarVeiculosController);
+
+//excluir veículos
+//router.delete('/excluir-veiculo/:id', excluirVeiculoController);
 
 //ESCOLAS, pontos e viagens
 router.get('/escolas', buscarEscolas)
@@ -63,7 +68,11 @@ router.get('/cadastros-alunos', verTodosController);
 router.get('/cadastros-responsaveis', verResponsaveisController );
 router.get('/cadastros-motoristas', verMotoristasController);
 router.get('/cadastros-admins', verAdminsController);
-router.get('/em-andamento', viagensEmAndamentoController)
+router.get('/em-andamento', viagensEmAndamentoController);
+//ver escolas
+router.get('/cadastros-escolas', verEscolasController);
+//ver pontos de embarque
+router.get('/pontosEmbarque', verPontosController);
 // contagem
 router.get('/em-andamento/quantidade', quantidadeViagensEmAndamentoController);
 router.get('/qtd-usuarios', contarUsuariosController)

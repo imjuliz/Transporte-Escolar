@@ -3,33 +3,33 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, Trash2 } from "lucide-react";
 
-export const VeiculosTable = () => {
-    const [veiculos, setVeiculos] = useState([]);
+export const PontosTable = () => {
+    const [pontos, setPontos] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3001/listarVeiculos")
+        fetch("http://localhost:3001/pontosEmbarque")
             .then((res) => {
                 if (!res.ok) throw new Error("Erro ao buscar dados da API");
                 return res.json();
             })
             .then((data) => {
-                setVeiculos(data.veiculos || data); // Fallback para diferentes formatos
+                setPontos(data.pontos || data); // Fallback para diferentes formatos
             })
             .catch((err) => {
-                console.error("Erro ao buscar veículos:", err);
+                console.error("Erro ao buscar pontos de embarque:", err);
             });
     }, []);
 
     return (
         <motion.div
-            className="grafico bg-white rounded-xl p-4 md:p-6 mx-2 md:mx-0 mb-8"
+            className="grafico bg-white  rounded-xl p-4 md:p-6 mx-2 md:mx-0 mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
         >
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 md:gap-6">
                 <h2 className="titulo-grafico  mb-4 text-gray-100 text-left">
-                    Veículos
+                    Pontos de Embarque
                 </h2>
 
 
@@ -39,7 +39,7 @@ export const VeiculosTable = () => {
                 <table className="tabela min-w-full border border-gray-300 rounded-xl">
                     <thead className="bg-gray-100">
                         <tr>
-                            {["ID", "Placa", "ID Motorista", "Modelo", "Marca"].map(
+                            {["ID","Nome", "Endereço", "Latitude", "Longitude"].map(
                                 (header) => (
                                     <th
                                         key={header}
@@ -53,19 +53,19 @@ export const VeiculosTable = () => {
                     </thead>
 
                     <tbody>
-                        {veiculos.map((veiculo) => (
+                        {pontos.map((ponto) => (
                             <motion.tr
-                                key={veiculo.id}
+                                key={ponto.id}
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.05, duration: 0.3 }}
                                 className="border-b border-gray-200 hover:bg-gray-50"
                             >
-                                <td className="px-4 py-2">{veiculo.id}</td>
-                                <td className="px-4 py-2">{veiculo.placa}</td>
-                                <td className="px-4 py-2">{veiculo.motorista_id}</td>
-                                <td className="px-4 py-2">{veiculo.modelo}</td>
-                                <td className="px-4 py-2">{veiculo.marca}</td>
+                                <td className="px-4 py-2">{ponto.id}</td>
+                                <td className="px-4 py-2">{ponto.nome}</td>
+                                <td className="px-4 py-2">{ponto.endereco}</td>
+                                <td className="px-4 py-2">{ponto.latitude}</td>
+                                <td className="px-4 py-2">{ponto.longitude}</td>
 
                             </motion.tr>
                         ))}
@@ -73,7 +73,7 @@ export const VeiculosTable = () => {
                 </table>
             </div>
             <div className="botao-cadastro flex gap-3">
-                <a href="/administrador/registrar-veiculo"><button className="botao bg-[#013FF6] hover:bg-[#022dae]">Registrar Veículos</button></a>
+                <a href="/administrador/registrar-pontos"><button className="botao bg-[#013FF6] hover:bg-[#022dae]">Registrar Ponto de Embarque</button></a>
                 
             </div>
         </motion.div>

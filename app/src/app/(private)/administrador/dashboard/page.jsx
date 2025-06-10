@@ -9,9 +9,11 @@ import { motion } from 'framer-motion';
 //componentes do dashboard
 import { StatCard } from './components/StatCard.jsx';
 import { ViagensGrafico } from './components/ViagensGrafico.jsx';
-import { TipoUsuarioChart} from './components/GraficoPizza.jsx';
+import { TipoUsuarioChart } from './components/GraficoPizza.jsx';
 import { VeiculosTable } from './components/TabelaVeiculos.jsx'
 import { IncidentesChart } from './components/GraficoBarras.jsx';
+import { EscolasTable } from './components/TabelaEscolas.jsx';
+import { PontosTable } from './components/TabelaPontos.jsx';
 //importação do bglh do dashboard
 //import './assets/vendor/apexcharts/dist/apexcharts.css';
 
@@ -159,13 +161,20 @@ export default function dashboard() {
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-5">
-  <div className="lg:col-span-2">
-    <VeiculosTable />
-  </div>
-  <div className="lg:col-span-1 ">
-    <IncidentesChart></IncidentesChart>
-  </div>
-</div>
+                        <div className="lg:col-span-2">
+                            <VeiculosTable />
+                        </div>
+                        <div className="lg:col-span-1 ">
+                            <IncidentesChart></IncidentesChart>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-8 mt-5">
+<EscolasTable></EscolasTable>
+                    </div>
+                    <div className="grid grid-cols-1 gap-8 mt-5">
+<PontosTable></PontosTable>
+                    </div>
 
                 </main>
             </div>
