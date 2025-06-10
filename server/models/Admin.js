@@ -316,7 +316,7 @@ const listarVeiculos = async () => {
 const contarIncidentes = async () => {
   const sql = `
   SELECT tipo, COUNT(*) AS quantidade
-FROM incidentes
+FROM mensagens_motoristas
 GROUP BY tipo;
   `;
   return await readQuery(sql)

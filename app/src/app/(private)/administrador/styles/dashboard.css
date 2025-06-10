@@ -21,7 +21,9 @@ section {
 
 .page-indicador h1 {
     font-family: 'Plus Jakarta Sans Bold';
-    font-size:2.5rem
+    font-size:2.5rem;
+    margin-top: 30px;
+    
 }
 
 p{
@@ -35,41 +37,10 @@ h3{
     font-size: 1.2rem;
 }
 
-/*.icone{
-    width: 70px;
-    height: 70px;
-    background-color:#ffbf1d3a;
-    align-items: center ;
-    justify-items: center;
-    border-radius: 50%;
-    padding: 15px
-}
-
-.img-icone{
-   align-items: center;
-   width: 35px
-}*/
-
 .icone{
     background-color: #013ef64f;
-    /*width: 60px;
-    height: 60px;
-    justify-items: center;
-  position:relative;
-  border-radius: 50%;*/
+   
 }
-/*.img-icone{
-    width: 30px !important;
-    position: absolute;
-    top:25%;
-    left:25%
-    
-}*/
-
-/*.informacao{
-    font-size: 25px;
-    font-family: 'Plus Jakarta Sans Bold';
-}*/
 
 .box-infos{
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -101,9 +72,37 @@ h3{
     transition: all 0.3s ease
 }
 
-
-
 .tabela{
     font-family: 'Plus Jakarta Sans Medium';
 }
+
+@media screen and (max-width: 1536px) {
+    .statcards{
+width: 100%;
+margin-left: 3%;
+    }
+  .box-infos{
+width: 80%;
+}
+.icone{
+    visibility: hidden;
+}
+}
+@media screen and (max-width: 1280px) {
+    .statcards{
+width: 100%;
+margin-left: 0%;
+    }
+  .box-infos{
+width: 100%;
+}
+.icone{
+    visibility: hidden;
+}
+p .titulo{
+    width: 150%;
+    margin-right: 0%;
+}
+}
+
 

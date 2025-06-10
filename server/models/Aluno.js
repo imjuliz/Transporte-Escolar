@@ -16,4 +16,19 @@ const historicoAlunoViagens = async (alunoId) => {
     }
 }
 
-export { historicoAlunoViagens };
+const verMotorista = async (alunoId) => {
+    try {
+        const query = `
+        select distinct nome, telefone, email 
+        FROM alunos_viagens
+        INNER JOIN viagens ON alunos_viagens.viagem_id = viagens.id
+        INNER JOIN motoristas ON viagens.motorista_id = motoristas.id
+        WHERE alunos_viagens.aluno_id = ?; `;
+        return await readQuery(query, [alunoId]);
+    }catch(err){
+        console.error('Não foi possível pegar as informações do motorista', err);
+        throw err;
+    }
+}
+
+export { historicoAlunoViagens, verMotorista };

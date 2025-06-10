@@ -131,7 +131,7 @@ export default function incidentes() {
                 </div>
                 <div className="p-4 space-y-4">
                     <form onSubmit={handleSubmit}>
-                        <div className="flex gap-4">{/*grid grid-cols-2 justify-center items-center gap-4*/}
+                        <div className=" mensagens flex gap-4">{/*grid grid-cols-2 justify-center items-center gap-4*/}
                             {mensagens.map((msg) => (
                                 <label
                                     key={msg.valor}

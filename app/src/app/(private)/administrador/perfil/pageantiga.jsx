@@ -1,18 +1,17 @@
 "use client";
 import './perfil.css';
 import Image from 'next/image';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useState } from "react";
 
 export default function MeuPerfil() {
 
     const tellRef = useRef(null);
-    const vencimentoRef = useRef(null);
     const emailInputRef = useRef(null);
     const [usuario, setUsuario] = useState(null);
     const [erro, setErro] = useState("");
     const [resposta, setResposta] = useState("");
     const [editando, setEditando] = useState(false);
-    const [vencimentoEditando, setVencimentoEditando]= useState(false);
     const [emailEditando, setEmailEditando] = useState(false);
     const [telefoneEditando, setTelefoneEditando] = useState(false);
     const [foto, setFoto] = useState(null);
@@ -66,17 +65,6 @@ export default function MeuPerfil() {
                 e.target.value = value;
             }) }}, []);
 
-     // mascara vencimento - ao escrever no input
-     useEffect(() => {
-        if (vencimentoRef.current) {
-            vencimentoRef.current.addEventListener("input", (e) => {
-              
-                let value = e.target.value.replace(/\D/g, "").slice(0, 8);  //tira tudo o que não for npumero e deixa só 8 dígitos
-                value = value.replace(/^(\d{4})(\d)/, "$1-$2");  // Adiciona a primeira barra
-                value = value.replace(/(\d{4})-(\d{2})(\d)/, "$1-$2-$3");// Adiciona a segunda barra
-                e.target.value = value;   // Atualiza o valor do input
-            })}}, []);
-
      // formatação de cpf ao pegar o cpf do back
     const formatarCPF = (cpf) => {
         if (!cpf) return " - ";
@@ -100,12 +88,10 @@ export default function MeuPerfil() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const telefoneSemMascara = tellRef.current?.value?.replace(/\D/g, "") || null;
-        const vencimento_habilitacao = vencimentoRef.current?.value || null;
         const email = emailInputRef.current?.value || null;
 
         const formData = {};
         if (telefoneSemMascara) formData.telefone = telefoneSemMascara;
-        if(vencimento_habilitacao) formData.vencimento_habilitacao = vencimento_habilitacao;
         if (email) formData.email = email;
 
         Object.keys(formData).forEach(key => {
@@ -116,7 +102,7 @@ export default function MeuPerfil() {
             console.log("Nenhum campo foi preenchido.");
             return;
         } try {
-            const response = await fetch('http://localhost:3001/editarPerfilMotorista', {
+            const response = await fetch('http://localhost:3001/editarPerfil', {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -170,7 +156,7 @@ export default function MeuPerfil() {
     const nomeSobrenome = pegarPrimeiroEUltimoNome(usuario.nome);
 
     return (
-        <section className='perfil'>
+        <section>
             <div className='page-indicador'>
                 <h1>Meu perfil</h1>
                 <hr />
@@ -187,8 +173,6 @@ export default function MeuPerfil() {
                 <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
                     <div className='sec-campos'><h6>Nome completo:</h6><p>{usuario.nome}</p></div>
                     <div className='sec-campos'><h6>CPF:</h6><p>{formatarCPF(usuario.cpf)}</p></div>
-                    <div className='sec-campos'><h6>CNH:</h6><p>{usuario.cnh}</p></div>
-                    <div className='sec-campos'><h6>Vencimento da habilitação:</h6><p>{usuario.vencimento_habilitacao}</p></div>
                 </div>
             </div>
             <div className='sec'>
@@ -201,6 +185,7 @@ export default function MeuPerfil() {
                     </div>
                 </div>
             </div>
+            {/**Editar informações */}
             <div className='btn-perfil flex flex-wrap gap-6'>
                 <button onClick={openModal} className='btn-edit'>
                 <div className='btn-perfil flex flex-wrap gap-6 mt-4'>
@@ -243,33 +228,6 @@ export default function MeuPerfil() {
                                         ) : (
                                             <p>{formatarTelefone(usuario.telefone)}</p>
                                         )}
-                                    </div>
-                                </div>
-                                <div className="grid gap-6 mb-6 md:grid-cols-2">
-                                    <div>
-                                        <label htmlFor="vencimentto">Vencimento</label>
-                                        {editando ? (
-                                            <div className="flex items-center gap-2">
-                                                <input
-                                                    type="text"
-                                                    defaultValue={(usuario.vencimento_habilitacao)}
-                                                    ref={vencimentoRef}
-                                                    className="input"
-                                                    readOnly={!vencimentoEditando}
-                                                    placeholder='YYYY-MM-DD'
-                                                />
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setVencimentoEditando(true)}
-                                                    title="Editar vencimento"
-                                                    className="text-gray-500 hover:text-black"
-                                                ><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M14.3786 6.44975L4.96376 15.8648C4.68455 16.144 4.32895 16.3343 3.94177 16.4117L1.00003 17.0001L1.58838 14.0583C1.66582 13.6711 1.85612 13.3155 2.13532 13.0363L11.5502 3.62132M14.3786 6.44975L15.7929 5.03553C16.1834 4.64501 16.1834 4.01184 15.7929 3.62132L14.3786 2.20711C13.9881 1.81658 13.355 1.81658 12.9644 2.20711L11.5502 3.62132M14.3786 6.44975L11.5502 3.62132" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        ) : (
-                                            <p>{(usuario.vencimento_habilitacao)}</p>)}
                                     </div>
                                 </div>
                                 <div className="mb-6">

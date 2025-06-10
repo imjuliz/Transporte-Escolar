@@ -7,6 +7,7 @@ import { cadastrarAlunoComResponsavel, criarPontoEmbarqueController, criarEscola
 import { obterInformacoesFilhosController, enviarResponsavelMensagem, mensagensParaResponsavel } from '../controllers/ResponsavelController.js'
 import { verAlunosController, verVeiculoController, obterInformacoesviagensController, verDadosEscolaController, mensagensParaMotorista, enviarMotoristaMensagemController, obterInformacoesAlunosController} from "../controllers/MotoristaController.js";
 import { upload } from '../middlewares/uploadMiddleware.js';
+import { verMotoristaController } from "../controllers/AlunoController.js";
 const router = express.Router();
 
 // Rotas públicas
@@ -20,7 +21,7 @@ router.get('/motorista', autorizarAcesso('Motorista'));
 
 // informaçoes na pagina "meu perfil"
 router.get('/perfil', obterPerfilUsuario);
-router.get('/perfil', obterPerfilUsuario, autorizarAcesso( 'aluno', 'responsavel'));
+router.get('/perfil', obterPerfilUsuario, autorizarAcesso( 'aluno', 'responsavel', 'administrador', 'Motorista'));
 router.patch('/editarPerfil', editarPerfilController);
 
 router.post('/editarPerfil/foto', upload.single('foto'), editarFotoPerfilController);
@@ -32,25 +33,27 @@ router.get('/verAlunos', verAlunosController)
 // ver informaçoes das rotas
 router.get('/viagem-mapa', obterViagemPorUsuario);
 
+
+// ALUNOS ------------------------------------------------------------------------------------------
+router.get('/verMotorista', verMotoristaController, autorizarAcesso('aluno'));//ver o motorista do onibus
+
+
 // ADM ------------------------------------------------------------------------------------------
 // cadastro de usuarios
-router.post('/cadastro/aluno-com-responsavel', cadastrarAlunoComResponsavel);
-router.post('/cadastro/motorista', cadastrarMotorista);
-router.post('/cadastro/administrador', cadastrarAdministrador);
+router.post('/cadastro/aluno-com-responsavel', cadastrarAlunoComResponsavel, autorizarAcesso('administrador'));
+router.post('/cadastro/motorista', cadastrarMotorista, autorizarAcesso('administrador'));
+router.post('/cadastro/administrador', cadastrarAdministrador, autorizarAcesso('administrador'));
 
 //cadastro de escolas ---- funcionando 
-router.post ('/cadastro/cadastroEscolas', criarEscolaController);
+router.post ('/cadastro/cadastroEscolas', criarEscolaController, autorizarAcesso('administrador'));
 //cadastro ponto de embarque ---- funcionando 
-router.post ('/cadastro/cadastroPontos', criarPontoEmbarqueController);
+router.post ('/cadastro/cadastroPontos', criarPontoEmbarqueController, autorizarAcesso('administrador'));
 
 //deletar usuarios - FUNCIONANDO
-router.delete('/deletarUsuario', deletarPerfilController);
+router.delete('/deletarUsuario', deletarPerfilController, autorizarAcesso('administrador'));
 
 //registrar veiculo
-router.post('/registrar-veiculo', registrarVeiculosController);
-
-//excluir veículos
-//router.delete('/excluir-veiculo/:id', excluirVeiculoController);
+router.post('/registrar-veiculo', registrarVeiculosController, autorizarAcesso('administrador'));
 
 //ESCOLAS, pontos e viagens
 router.get('/escolas', buscarEscolas)
@@ -59,11 +62,11 @@ router.get('/viagem-por-escola-ponto', buscarViagemPorEscolaEPontoController);
 
 //ver registros - adm
 //listagem
-router.get('/cadastros-alunos', verTodosController);
-router.get('/cadastros-responsaveis', verResponsaveisController );
-router.get('/cadastros-motoristas', verMotoristasController);
-router.get('/cadastros-admins', verAdminsController);
-router.get('/em-andamento', viagensEmAndamentoController);
+router.get('/cadastros-alunos', verTodosController, autorizarAcesso('administrador'));
+router.get('/cadastros-responsaveis', verResponsaveisController , autorizarAcesso('administrador'));
+router.get('/cadastros-motoristas', verMotoristasController, autorizarAcesso('administrador'));
+router.get('/cadastros-admins', verAdminsController, autorizarAcesso('administrador'));
+router.get('/em-andamento', viagensEmAndamentoController, autorizarAcesso('administrador'));
 //ver escolas
 router.get('/cadastros-escolas', verEscolasController);
 //ver pontos de embarque
@@ -78,28 +81,27 @@ router.get('/qtd-tipo', usuariosPorTipoController ) //usuarios por tipo
 
 
 // responsavel -------------------------------------------------------------------------------------
-router.get('/filhos', obterInformacoesFilhosController)
+router.get('/filhos', obterInformacoesFilhosController, autorizarAcesso('responsavel'))
 // enviar mensagem (responsavel logado)
-router.post('/mensagensMotorista', enviarResponsavelMensagem);
-router.get('/notificacoesResponsavel', mensagensParaResponsavel);
+router.post('/mensagensMotorista', enviarResponsavelMensagem, autorizarAcesso('responsavel'));
+router.get('/notificacoesResponsavel', mensagensParaResponsavel, autorizarAcesso('responsavel'));
 
 //MOTORISTA -------------------------------------------------------------------------------------
-router.get('/verVeiculo',verVeiculoController, autorizarAcesso('Motorista'));
-router.get('/verEscolas', verDadosEscolaController, autorizarAcesso('motorista'));
-router.patch('/editarPerfilMotorista', editarPerfilMotoristaController, autorizarAcesso('motorista'));
-//para ver os veiculos (dashboard)
-router.get('/listarVeiculos', listarVeiculosController);
-//contar incidentes (dashboard)
-router.get('/contar-incidentes', contarIncidentesController);
-// ver mensagens recebidas (motorista logado)
-router.post('/motoristaEnviarMensagem', enviarMotoristaMensagemController, autorizarAcesso('motorista'));
-router.get('/notificacoesMotorista', mensagensParaMotorista);
+router.get('/verVeiculo',verVeiculoController, autorizarAcesso('Motorista', 'aluno'));
+router.get('/verEscolas', verDadosEscolaController, autorizarAcesso('Motorista'));
+router.patch('/editarPerfilMotorista', editarPerfilMotoristaController, autorizarAcesso('Motorista'));
 
-//ver os alunos do onibus
-router.get('/alunosMensagem', obterInformacoesAlunosController);
+router.get('/listarVeiculos', listarVeiculosController,  autorizarAcesso('Motorista'));//para ver os veiculos (dashboard)
 
-//enviar mensagens 
+router.get('/contar-incidentes', contarIncidentesController,  autorizarAcesso('Motorista'));//contar incidentes (dashboard)
 
+router.get('/notificacoesMotorista', mensagensParaMotorista, autorizarAcesso('Motorista'));// ver mensagens recebidas (motorista logado)
+
+
+router.get('/alunosMensagem', obterInformacoesAlunosController, autorizarAcesso('Motorista'));//ver os alunos do onibus
+
+
+router.post('/motoristaEnviarMensagem', enviarMotoristaMensagemController, autorizarAcesso('Motorista'));//enviar mensagens 
 
 // logout
 router.post('/logout', (req, res) => {
