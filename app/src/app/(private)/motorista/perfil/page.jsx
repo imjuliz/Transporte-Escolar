@@ -173,7 +173,7 @@ export default function MeuPerfil() {
     const nomeSobrenome = pegarPrimeiroEUltimoNome(usuario.nome);
 
     return (
-        <section>
+        <section className='perfil'>
             <div className='page-indicador'>
                 <h1>Meu perfil</h1>
                 <hr />

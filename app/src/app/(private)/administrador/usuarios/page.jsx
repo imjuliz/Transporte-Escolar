@@ -178,9 +178,7 @@ export default function embarques() {
                                     <p>{nome}</p>
                                 </div>
                             ))}
-
                         </div>
-
                         <div className='cpff'>
                             <p className='text-black/50 '>CPF</p>
                             <hr></hr>
@@ -345,7 +343,6 @@ export default function embarques() {
                         </div>
                     </div>
                 </div>
-
                 {/**admins */}
                 <div className="admins bg-white p-5 rounded-[2vw] mb-5">
                     <h3>Administradores</h3>
@@ -356,9 +353,7 @@ export default function embarques() {
                             {admins.map(({ nome, id }) => (
                                 <div className='flex flex-column gap-3' key={id}>
                                     <p>{nome}</p>
-                                </div>
-                            ))}
-
+                                </div>))}
                         </div>
 
                         <div className='cpff'>
