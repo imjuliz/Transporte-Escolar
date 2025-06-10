@@ -101,19 +101,6 @@ CREATE TABLE alunos (
     FOREIGN KEY (ponto_embarque_id) REFERENCES pontos_embarque(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-select * from alunos;
-
-/*
-CREATE TABLE incidentes (
-id INT AUTO_INCREMENT PRIMARY KEY,
-remetente VARCHAR(100),
-tipo VARCHAR (50),
-mensagem text,
-dataDaMensagem date,
-hora time
-);
-*/
-
 CREATE TABLE mensagens_responsaveis (
   id INT AUTO_INCREMENT PRIMARY KEY,
   aluno_id INT,
@@ -177,7 +164,7 @@ CREATE TRIGGER associacao_alunos_viagens
 AFTER INSERT ON alunos
 FOR EACH ROW
 BEGIN
-  -- Inserir na associação alunos_viagens todas as viagens que batem com escola, ponto embarque e turno
+  -- insere na associação alunos_viagens todas as viagens que batem com escola, ponto embarque e turno
   INSERT INTO alunos_viagens (aluno_id, viagem_id)
   SELECT NEW.id, v.id
   FROM viagens v
@@ -454,6 +441,7 @@ INSERT INTO viagens (veiculo_id, motorista_id, data_viagem, hora_saida, hora_che
 (4, 4, '2025-06-02', '20:35:00', '21:30:00', 'escola', 5, 'ponto_embarque', 7, 'volta', 'agendada', 55),
 (4, 4, '2025-06-02', '21:35:00', '22:30:00', 'escola', 7, 'ponto_embarque', 8, 'volta', 'agendada', 55);
 
+/*
 select *from viagens;
 -- funcao de contar tipo de usuarios (gráfico de pizza)
 SELECT 'Alunos' AS tipo, COUNT(*) AS quantidade FROM alunos
@@ -463,3 +451,4 @@ UNION ALL
 SELECT 'Responsáveis' AS tipo, COUNT(*) AS quantidade FROM responsaveis
 UNION ALL
 SELECT 'Administradores' AS tipo, COUNT(*) AS quantidade FROM adm;
+*/

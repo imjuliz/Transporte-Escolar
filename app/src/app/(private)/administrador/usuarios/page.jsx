@@ -1,14 +1,12 @@
 "use client";
-//import './alunosEmbarque.css'
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 import { VerAdmins, VerMotoristas, VerResponsaveis, VerTodos } from '../../../../../../server/models/Admin.js';
 import '../styles/cadastros.css'
 
 export default function embarques() {
-    //useEffect(() => {
-    //    import('preline/dist/preline') // << usar o bundle compilado
-    // }, [])
+
+    const [tipo, setTipo] = useState("");
 
     const [alunos, setAlunos] = useState([]);
     const [resposta, setResposta] = useState("");
@@ -23,51 +21,164 @@ export default function embarques() {
     const [respostaAdmin, setRespostaAdmin] = useState("");
 
 
+    // useEffect(() => {
+    //     async function listarTodos() { //chama verTodos para buscar os dados da API e atualiza a lista de alunos com setAlunos
+    //         const listaTodos = await VerTodos();
+    //         setAlunos(listaTodos);
+    //     } listarTodos();
+
+    //     async function listarResponsaveis() {
+    //         const listaResponsaveis = await VerResponsaveis();
+    //         setResponsaveis(listaResponsaveis);
+    //     } listarResponsaveis();
+
+    //     async function listarMotoristas() {
+    //         const listaMotoristas = await VerMotoristas();
+    //         setMotoristas(listaMotoristas);
+    //     } listarMotoristas();
+
+    //     async function listarAdmins() {
+    //         const listaAdmins = await VerAdmins();
+    //         setAdmins(listaAdmins);
+    //     } listarAdmins();
+    // },
+    //     []);
+
+    async function listarTodos() {
+        try {
+            const response = await fetch('http://localhost:3001/cadastros-alunos', {
+                credentials: 'include'
+            });
+            const data = await response.json();
+            setResposta(JSON.stringify(data, null, 2));
+            if (Array.isArray(data)) {
+                setAlunos(data);
+            }
+            return data;
+        } catch (err) {
+            console.error('Erro ao listar alunos!!!', err);
+            return ['deu erro vei'];
+        }
+    }
+
+    async function listarResponsaveis() {
+        try {
+            const response = await fetch('http://localhost:3001/cadastros-responsaveis', {
+                credentials: 'include'
+            });
+            const data = await response.json();
+            setRespostaResponsavel(JSON.stringify(data, null, 2));
+            if (Array.isArray(data)) {
+                setResponsaveis(data);
+            }
+            return data;
+        } catch (err) {
+            console.error('Erro ao listar responsáveis!!', err);
+            return ['deu erro vei'];
+        }
+    }
+
+    async function listarMotoristas() {
+        try {
+            const response = await fetch('http://localhost:3001/cadastros-motoristas', {
+                credentials: 'include'
+            });
+            const data = await response.json();
+            setRespostaMotorista(JSON.stringify(data, null, 2));
+            if (Array.isArray(data)) {
+                setMotoristas(data);
+            }
+            return data;
+        } catch (err) {
+            console.error('Erro ao listar motoristas!!', err);
+            return ['deu erro vei'];
+        }
+    }
+
+    async function listarAdmins() {
+        try {
+            const response = await fetch('http://localhost:3001/cadastros-admins', {
+                credentials: 'include'
+            });
+            const data = await response.json();
+            setRespostaAdmin(JSON.stringify(data, null, 2));
+            if (Array.isArray(data)) {
+                setAdmins(data);
+            }
+            return data;
+        } catch (err) {
+            console.error('Erro ao listar admins! ', err);
+            return ['deu erro vei'];
+        }
+    }
+
     useEffect(() => {
-        async function listarTodos() { //chama verTodos para buscar os dados da API e atualiza a lista de alunos com setAlunos
-            const listaTodos = await VerTodos();
-            setAlunos(listaTodos);
-        } listarTodos();
-
-        async function listarResponsaveis() {
-            const listaResponsaveis = await VerResponsaveis();
-            setResponsaveis(listaResponsaveis);
-        } listarResponsaveis();
-
-        async function listarMotoristas() {
-            const listaMotoristas = await VerMotoristas();
-            setMotoristas(listaMotoristas);
-        } listarMotoristas();
-
-        async function listarAdmins() {
-            const listaAdmins = await VerAdmins();
-            setAdmins(listaAdmins);
-        } listarAdmins();
-    },
-        []);
+        listarTodos();
+        listarResponsaveis();
+        listarMotoristas();
+        listarAdmins();
+    }, []);
 
     // DELETAR USUARIO
     const tipoRef = useRef(null);//
     const emailRef = useRef(null);
     const [resposta2, setResposta2] = useState("");
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const tipo = tipoRef.current?.value || null;
+    //     const email2 = emailRef.current?.value || null;
+
+    //     const formData = {};
+    //     if (tipo) formData.tipo = tipo;
+    //     if (email2) formData.email = email2;
+
+    //     Object.keys(formData).forEach(key => {
+    //         if (formData[key] === undefined) delete formData[key];
+    //     });
+
+    //     if (Object.keys(formData).length === 0) {
+    //         console.log("Nenhum campo foi preenchido.");
+    //         return;
+    //     } try {
+    //         const response = await fetch('http://localhost:3001/deletarUsuario', {
+    //             method: 'DELETE',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify(formData),
+    //             credentials: 'include'
+    //         });
+
+    //         const data = await response.json();
+    //         setResposta2(JSON.stringify(data, null, 2));
+
+    //         if (response.ok) {
+    //             console.log('Perfil deletado com sucesso!');
+    //             setUsuario((prev) => ({ ...prev, ...formData }));
+    //         } else {
+    //             console.error('Erro ao deletar perfil');
+    //         }
+    //     } catch (error) {
+    //         console.error('Erro:', error);
+    //     }
+    // };
+
+    const [usuario, setUsuario] = useState({});
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const tipo = tipoRef.current?.value || null;
+        const tipoSelecionado = tipo;  // pega do estado atualizado pelo select
         const email2 = emailRef.current?.value || null;
 
         const formData = {};
-        if (tipo) formData.tipo = tipo;
+        if (tipoSelecionado) formData.tipo = tipoSelecionado;
         if (email2) formData.email = email2;
-
-        Object.keys(formData).forEach(key => {
-            if (formData[key] === undefined) delete formData[key];
-        });
 
         if (Object.keys(formData).length === 0) {
             console.log("Nenhum campo foi preenchido.");
             return;
-        } try {
+        }
+
+        try {
             const response = await fetch('http://localhost:3001/deletarUsuario', {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
@@ -80,7 +191,11 @@ export default function embarques() {
 
             if (response.ok) {
                 console.log('Perfil deletado com sucesso!');
-                setUsuario((prev) => ({ ...prev, ...formData }));
+                // atualiza a lista de alunos, motoristas, responsaveis e admins
+                await listarTodos();  
+                await listarResponsaveis();
+                await listarMotoristas();
+                await listarAdmins();
             } else {
                 console.error('Erro ao deletar perfil');
             }
@@ -88,7 +203,6 @@ export default function embarques() {
             console.error('Erro:', error);
         }
     };
-
 
 
     //fazer uma função só para mostrar todos os dados a partir de vários fetch
@@ -158,7 +272,7 @@ export default function embarques() {
 
     return (
         <>
-            <section className='pagina-cadastros'>
+            <section className='pagina-cadastros' style={{ marginBottom: '10vh' }}>
                 <div className='page-indicador'>
                     <h1>Usuários</h1>
                     <hr />
@@ -397,8 +511,8 @@ export default function embarques() {
                 </div>
 
                 <div className='flex flex-wrap gap-6 '>
-                    <button className='bg-blue-500 hover:bg-[#013FF6] text-white font-bold py-2 px-4 rounded no-underline mb-5 transition duration-300'><a href='./cadastrar' className='!no-underline text-white'>Cadastrar usuário</a></button>
-                    <button type="button" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-5 transition duration-300" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button className='btn-add'><a href='./cadastrar' className='!no-underline text-white'>Cadastrar usuário</a></button>
+                    <button type="button" className="btn-edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Deletar usuário
                     </button>
 
@@ -407,7 +521,7 @@ export default function embarques() {
                         <div className="modal-dialog">
                             <div className="modal-content">
                                 <div className="modal-header">
-                                    <h1 className="modal-title fs-5" id="staticBackdropLabel">Deletar usuário</h1>
+                                    <h1 className="modal-title fs-5 " id="staticBackdropLabel">Deletar usuário</h1>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body">
@@ -417,15 +531,20 @@ export default function embarques() {
                                             <input type="email" ref={emailRef} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                                         </div>
                                         <div className="mb-3">
-                                            <label htmlFor="exampleInputPassword1" className="form-label">Tipo de usuário:</label>
-                                            <input type="tipo" ref={tipoRef} className="form-control" id="exampleInputPassword1" placeholder='ex. motoristas, alunos, responsaveis' />
+                                            <label htmlFor="tipoUsuario" className="form-label">
+                                                Tipo de usuário:
+                                            </label>
+                                            <select id="tipoUsuario" onChange={(e) => setTipo(e.target.value)} value={tipo} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 mb-5" >
+                                                <option value="">Selecionar tipo</option>
+                                                <option value="aluno">Aluno</option>
+                                                <option value="responsavel">Responsável</option>
+                                                <option value="motorista">Motorista</option>
+                                                <option value="administrador">Administrador</option>
+                                            </select>
                                         </div>
-                                        <button type="submit" className="btn btn-primary">enviar</button>
+                                        <button type="submit" className="btn btn-primary px-4">Enviar</button>
                                     </form>
-                                    <div><strong>Resposta do servidor:</strong><pre>{resposta2}</pre></div>
-                                </div>
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    {/* <div><strong>Resposta do servidor:</strong><pre>{resposta2}</pre></div> */}
                                 </div>
                             </div>
                         </div>

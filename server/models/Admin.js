@@ -324,8 +324,18 @@ GROUP BY tipo;
 
 // deleta o perfil do USUARIO
 const deletarPerfil = async (tipo, email) => {
+const tabelas = {
+    aluno: "alunos",
+    motorista: "motoristas",
+    responsavel: "responsaveis",
+    administrador: "adm",
+  };
 
-  const resultado = await deleteRecord(tipo, `email = '${email}' `);
+  const tabela = tabelas[tipo?.toLowerCase()];
+  if (!tabela) {
+    throw new Error("Tipo de usuário inválido");
+  }
+  const resultado = await deleteRecord(tabela, `email = '${email}'`);
   return resultado;
 }
 
