@@ -5,56 +5,69 @@ import {
   VerTodos, VerResponsaveis, VerMotoristas, VerAdmins,
   qtdUsuarios, qtdMotoristas, qtdEscolas, qtdViagensPorDia, qtdTipoUsuario,
   listarVeiculos, contarIncidentes, deletarPerfil, RegistarVeiculos, verEscolas,
-  verPontos
+  verPontos, buscarViagemPorEscolaEPonto, associarResponsavelAluno, associarAlunoViagem
 } from '../models/Admin.js';
 
-// export { registrarUsuarioController, registrarVeiculosController }
-
-// import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes, } from '../models/Admin.js';
-
-// ------------------------------------------------------------ cadastro dos usuarios
 // cadastro dos usuarios ------------------------------------------------------------ 
+// controller responsável por cadastrar um aluno e seu responsável ao mesmo tempo
 export const cadastrarAlunoComResponsavel = async (req, res) => {
   try {
+    // Extrai os dados enviados no corpo da requisição
     const { aluno, responsavel } = req.body;
-
-    // 1. Verifica ou cria responsável
+    // verifica se já existe um responsável com o mesmo CPF, email ou telefone
     const existentes = await verificarResponsavelExistente(responsavel);
     let responsavel_id;
+
+    console.log('Responsável enviado:', responsavel);
+    console.log('Responsáveis encontrados:', existentes);
+
     if (existentes.length > 0) {
+      // Caso exista, verifica se os dados batem exatamente com os dados enviados
       const r = existentes.find(r =>
         r.cpf === responsavel.cpf &&
-        r.nome === responsavel.nome &&
-        r.email === responsavel.email &&
+        r.email.toLowerCase() === responsavel.email.toLowerCase() &&
         r.telefone === responsavel.telefone
       );
-      if (!r) {
-        return res.status(400).json({ erro: 'Informações inválidas do responsável.' });
+      console.log('Comparando com:', r);
+
+
+      if (r) {
+        // Se todos os dados forem iguais, usa o ID do responsável já existente
+        responsavel_id = r.id;
+      } else {
+        // Se algum dado não bater, retorna erro e não permite criar novo responsável
+        return res.status(400).json({
+          erro: 'Dados do responsável inválidos. Já existe um responsável com CPF, email ou telefone informado, mas outros dados não conferem.'
+        });
       }
-      responsavel_id = r.id;
     } else {
+      // Se não existir responsável com CPF/email/telefone, cria um novo e armazena o ID
       responsavel_id = await criarResponsavel(responsavel);
     }
 
-    // 2. Busca o viagem_id a partir da escola_id e ponto_embarque_id do aluno
+    // busca o ID da viagem com base na escola e ponto de embarque escolhidos pelo aluno
     const viagem_id = await buscarViagemPorEscolaEPonto(aluno.escola_id, aluno.ponto_embarque_id);
+    // cria o aluno no banco (removendo o campo viagem_id do objeto aluno, se existir)
+    const { viagem_id: _viagem_id, cpf, ...outrosDadosAluno } = aluno;
+    const dadosAluno = { cpf, ...outrosDadosAluno }; // ignora viagem_id se estiver no objeto
+    console.log("Dados do aluno a serem inseridos:", dadosAluno);
+    const aluno_id = await criarAluno(dadosAluno); // retorna o insertId diretamente
 
-    // 3. Remove viagem_id do objeto aluno para evitar erro na query de insert
-    const { viagem_id: _, ...dadosAluno } = aluno;
-
-    // 4. Cria aluno
-    const aluno_id = await criarAluno(dadosAluno);
-
-    // 5. Associa responsável e aluno
+    // cria o vínculo entre responsável e aluno (tabela associativa)
     await associarResponsavelAluno(responsavel_id, aluno_id);
 
-    // 6. Associa aluno e viagem
+    // cria o vínculo entre aluno e viagem (tabela associativa)
     await associarAlunoViagem(aluno_id, viagem_id);
 
+    // retorna sucesso para o frontend
     return res.status(201).json({ mensagem: 'Aluno e responsável registrados com sucesso.' });
+
   } catch (error) {
+    // Se qualquer etapa falhar, retorna erro genérico para o frontend
     console.error(error);
-    return res.status(500).json({ erro: error.message || 'Erro ao registrar aluno e responsável.' });
+    return res.status(500).json({
+      erro: error.message || 'Erro ao registrar aluno e responsável.'
+    });
   }
 };
 
@@ -322,26 +335,26 @@ async function contarIncidentesController(req, res) {
 };
 
 //tabela de escolas
-async function verEscolasController (req,res){
-  try{
+async function verEscolasController(req, res) {
+  try {
     const escolas = await verEscolas();
-    return res.status(200).json({escolas})
+    return res.status(200).json({ escolas })
   }
-  catch(error){
+  catch (error) {
     console.error('Erro ao ver os registros das escolas: ', error);
-    return res.status(500).json({erro: 'Erro ao ver escolas cadastradas'});
+    return res.status(500).json({ erro: 'Erro ao ver escolas cadastradas' });
   }
 }
 
 //ver pontos de embarque - tabela dashboard
-async function verPontosController(req,res){
-  try{
+async function verPontosController(req, res) {
+  try {
     const pontos = await verPontos();
-    return res.status(200).json({pontos});
+    return res.status(200).json({ pontos });
   }
-  catch(error){
+  catch (error) {
     console.error('Erro ao ver pontos de embarque: ', error);
-    return res.status(500).json({erro: 'Erro ao ver pontos de embarque'});
+    return res.status(500).json({ erro: 'Erro ao ver pontos de embarque' });
   }
 }
 
@@ -414,4 +427,4 @@ const deletarPerfilController = async (req, res) => {
 
 
 
-export { verTodosController, criarPontoEmbarqueController, criarEscolaController, deletarPerfilController, verResponsaveisController, verMotoristasController, verAdminsController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarMotoristasController, contarEscolasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, contarIncidentesController , verEscolasController, verPontosController};
+export { verTodosController, criarPontoEmbarqueController, criarEscolaController, deletarPerfilController, verResponsaveisController, verMotoristasController, verAdminsController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarMotoristasController, contarEscolasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, contarIncidentesController, verEscolasController, verPontosController };

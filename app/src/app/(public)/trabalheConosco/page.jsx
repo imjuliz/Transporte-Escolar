@@ -139,23 +139,23 @@ export default function TrabalheConosco() {
 
     const requisitos = [
         {
-            img: './img/reqCNH.svg',
+            img: './img/cnh.svg',
             req: 'CNH categoria D ou superior'
         },
         {
-            img: './img/reqCurso.svg',
+            img: './img/curso.svg',
             req: 'Curso de Transporte Escolar completo'
         },
         {
-            img: './img/reqExperiencia.svg',
+            img: './img/experiencia.svg',
             req: 'Experiência como motorista'
         },
         {
-            img: './img/reqIdade.svg',
+            img: './img/previsibilidade.svg',
             req: 'Idade acima de 25 anos'
         },
         {
-            img: './img/reqSeg.svg',
+            img: './img/compromisso.svg',
             req: 'Compromisso com segurança e pontualidade'
         }
     ];
@@ -290,7 +290,7 @@ export default function TrabalheConosco() {
 
             {/* trabalhe com a (?)*/}
             <section className='sec1'>
-                <div className="grid grid-flow-col grid-rows-3 gap-4">
+                <div className="trabalhe grid grid-flow-col grid-rows-3 gap-4">
                     {trabalheItens.map((trabalheItem, index) => (
                         <div key={index} className={trabalheItem.classNamee}>
                             <img src='' />
@@ -305,19 +305,23 @@ export default function TrabalheConosco() {
 
             {/* o que buscamos? */}
             <section className='reqs'>
-                <div className='sec2'>
+                <div className='sec2 flex flex-col justify-center items-center'>
                     <div className='req-text'>
                         <h2>O que buscamos?</h2>
                         <p>Na EduTrip, prezamos pela segurança, pontualidade e cuidado com nossos alunos. Buscamos motoristas comprometidos, experientes e capacitados para fazer parte da nossa equipe.</p>
                     </div>
-                    <div className="grid grid-flow-col grid-rows-5 gap-5">
+                    <div className='cont-busca flex justify-between'>
+                    <div className="requisitos grid grid-flow-col grid-rows-5">
                         {requisitos.map((req, index) => (
                             <div key={index} className='req-cont'>
-                                {/* <img src={req.img} /> */}
+                                <img src={req.img} />
                                 <p>{req.req}</p>
                             </div>
                         ))}
                     </div>
+                    <img src='./img/jornada.svg' />
+                    </div>
+                    
                 </div>
             </section>
 

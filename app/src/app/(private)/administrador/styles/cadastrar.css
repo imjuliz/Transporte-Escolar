@@ -4,7 +4,7 @@ hr {
 
 body {
     background-color: #F5F5F5 !important;
-     font-family: 'Plus Jakarta Sans Medium';
+    font-family: 'Plus Jakarta Sans Medium';
 }
 
 main {
@@ -13,7 +13,6 @@ main {
 
 section {
     margin-top: 10vh;
-  
 }
 
 .page-indicador {
@@ -25,18 +24,29 @@ section {
     font-family: 'Plus Jakarta Sans Bold';
 }
 
-input{
+input {
     padding: 15px;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.200);
-    /*border-radius: 15px;
-    background-color: white;
-    transition: all 0.3s ease;
-    box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;*/
+    background-color: transparent !important;
     outline: none;
+    width: 100%;
 }
 
 
-.data input{
+.data input {
     background-color: transparent !important;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.200);
+    --tw-ring-color: none !important;
+}
+
+.h2-resp{
+    margin-top: 8vh;
+}
+
+
+.autoc-escolas{
+    background-color: #fff;
+    width: fit-content;
 }
