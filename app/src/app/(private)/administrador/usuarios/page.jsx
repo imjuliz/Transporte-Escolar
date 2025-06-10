@@ -8,7 +8,7 @@ import '../styles/cadastros.css'
 export default function embarques() {
     //useEffect(() => {
     //    import('preline/dist/preline') // << usar o bundle compilado
-   // }, [])
+    // }, [])
 
     const [alunos, setAlunos] = useState([]);
     const [resposta, setResposta] = useState("");
@@ -47,7 +47,7 @@ export default function embarques() {
         []);
 
     // DELETAR USUARIO
-    const tipoRef = useRef(null);
+    const tipoRef = useRef(null);//
     const emailRef = useRef(null);
     const [resposta2, setResposta2] = useState("");
 
@@ -105,7 +105,8 @@ export default function embarques() {
         } catch (err) {
             console.error('Erro ao listar alunos!!!', err);
             return ['deu erro vei'];
-        } }
+        }
+    }
 
     async function VerResponsaveis() {
         try {
@@ -162,7 +163,7 @@ export default function embarques() {
                     <h1>Usuários</h1>
                     <hr />
                 </div>
-                
+
                 {/**NAO ESQUECER DE CRIAR UMA FUNÇÃO PARA DEIXAR ATIVO / INATIVO */}
 
                 {/**motoristas */}
@@ -400,11 +401,13 @@ export default function embarques() {
                     </div>
                 </div>
 
-                <div className='flex flex-wrap gap-6'>
-                <button className='btn-add no-underline text-[#fff]'><a href='./cadastrar' className='no-underline text-[#fff]'>Cadastrar usuário</a></button>
-                    <button type="button" className="btn-add btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <div className='flex flex-wrap gap-6 '>
+                    <button className='bg-blue-500 hover:bg-[#013FF6] text-white font-bold py-2 px-4 rounded no-underline mb-5 transition duration-300'><a href='./cadastrar' className='!no-underline text-white'>Cadastrar usuário</a></button>
+                    <button type="button" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-5 transition duration-300" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Deletar usuário
                     </button>
+
+                    {/*Deletar usuário */}
                     <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div className="modal-dialog">
                             <div className="modal-content">
@@ -435,4 +438,5 @@ export default function embarques() {
                 </div>
             </section>
         </>
-    )}
+    )
+}
