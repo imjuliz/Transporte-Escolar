@@ -477,10 +477,10 @@ body{
 }
 
 @media screen and (max-width: 680px) {
-  .sidebar {
-    background-color: #fff;
+  main{
+    width:100%;
+    padding: 0 5%
   }
-
   .sidebar.active .logoContent .logo .logoName {
     font-size: 1.3rem;
   }

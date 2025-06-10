@@ -227,7 +227,7 @@ useEffect(() => {
               value={form.dataNascimento || ''}
               onChange={handleChange} />
             {/* Autocomplete da escola */}
-            <div className="relative z-0 w-full mb-5 group">
+            <div className="data relative z-0 w-full mb-5 group">
               <input
                 type="text"
                 name="escola_nome"

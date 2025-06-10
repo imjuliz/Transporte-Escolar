@@ -1,6 +1,7 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import "./notificacoes.css";
+
+import React, { useEffect, useState } from "react";
+import "../../motorista/notificacoes/notificacoes.css"; // Certifique-se de que o CSS esteja criado corretamente
 
 export default function Notificacoes() {
     const [mensagens, setMensagens] = useState([]);
@@ -9,8 +10,8 @@ export default function Notificacoes() {
     useEffect(() => {
         const fetchMensagens = async () => {
             try {
-                const res = await fetch("http://localhost:3001/notificacoes", {
-                    credentials: "include"
+                const res = await fetch("http://localhost:3001/notificacoesResponsavel", {
+                    credentials: "include",
                 });
                 const dados = await res.json();
 
@@ -22,7 +23,6 @@ export default function Notificacoes() {
                 }
             } catch (error) {
                 console.error("Erro ao buscar mensagens:", error);
-                setMensagens([]);
             }
         };
 
@@ -61,7 +61,7 @@ export default function Notificacoes() {
                     >
                         <span className="textos text-start">
                             <h3>{msg.tipo || "Mensagem"}</h3>
-                            <p className="text-sm text-slate-500">De: {msg.responsavel_nome} - Aluno: {msg.aluno_nome}</p>
+                            <p className="text-sm text-slate-500">De: {msg.motorista_nome} - Aluno: {msg.aluno_nome}</p>
                         </span>
                         <div className="ver-mais items-center">
                             Ver Mais
@@ -89,6 +89,9 @@ export default function Notificacoes() {
                     <div className="conteudo-escondido pt-5 text-sm text-slate-500">
                         <p>{msg.conteudo || "Sem detalhes adicionais."}</p>
                     </div>
+                    <small className="data-envio text-gray-500">
+                        {new Date(msg.data_envio).toLocaleString("pt-BR")}
+                    </small>
                 </div>
             </div>
         );

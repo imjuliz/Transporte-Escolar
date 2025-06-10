@@ -156,13 +156,28 @@ WHERE v.motorista_id = ?
   return resultado;
 }
 
+const buscarResponsavelPorAluno = async (aluno_id) => {
+  const query = `
+    SELECT r.id AS responsavel_id
+    FROM responsaveis r
+    JOIN responsaveis_alunos ra ON ra.responsavel_id = r.id
+    WHERE ra.aluno_id = ?
+    LIMIT 1
+  `;
+  const [resultado] = await readQuery(query, [aluno_id]);
+  return resultado?.responsavel_id || null;
+};
+
+
 const criarMotoristaMensagem = async (dados) => {
   return await create('mensagens_motoristas', {
     motorista_id: dados.motorista_id,
     aluno_id: dados.aluno_id,
+    responsavel_id: dados.responsavel_id,
     tipo: dados.tipo,
     conteudo: dados.conteudo
   });
 };
 
-export { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos, mensagensPorMotorista, criarMotoristaMensagem, escolasEAlunosPorMotorista }
+
+export { verAlunos, verDadosEscola, verVeiculo, verViagensVeiculos, buscarResponsavelPorAluno, mensagensPorMotorista, criarMotoristaMensagem, escolasEAlunosPorMotorista }

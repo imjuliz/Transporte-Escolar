@@ -209,10 +209,6 @@ header ul {
     border-radius: 10px;
 }
 /* formulario */
-form{
-    width: 100%;
-}
-
 form input{
     padding: 0.6rem;
 }
@@ -324,6 +320,10 @@ margin-top: 2%;
   }
   .secão4 .bolinha{
     width: 5vw;
+  }
+
+  form{
+    width: 100%;
   }
   
   }

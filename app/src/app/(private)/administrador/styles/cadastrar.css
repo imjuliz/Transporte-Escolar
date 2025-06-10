@@ -37,6 +37,6 @@ input{
 }
 
 
-/*input:hover{
-    box-shadow: 0 0 11px rgba(0,0,0,0.06);
-}*/
+.data input{
+    background-color: transparent !important;
+}

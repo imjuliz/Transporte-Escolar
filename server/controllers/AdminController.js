@@ -5,10 +5,6 @@ import { verificarResponsavelExistente,
    qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario,
    listarVeiculos, contarIncidentes, deletarPerfil} from '../models/Admin.js';
 
-// export { registrarUsuarioController, registrarVeiculosController }
-
-import { verificarResponsavelExistente, criarAluno, criarResponsavel, criarMotorista, criarAdministrador, buscarEscolasPorNome, buscarPontoDeEmbarquePorEscola, deletarPerfil, VerTodos, VerResponsaveis, VerMotoristas, VerAdmins, buscarViagensEmAndamento , buscarQuantidadeViagensEmAndamento, qtdUsuarios, qtdMotoristas, qtdEscolas , qtdViagensPorDia, qtdTipoUsuario, listarVeiculos, contarIncidentes, RegistarVeiculos} from '../models/Admin.js';
-
 // ------------------------------------------------------------ cadastro dos usuarios
 // cadastro dos usuarios ------------------------------------------------------------ 
 export const cadastrarAlunoComResponsavel = async (req, res) => {

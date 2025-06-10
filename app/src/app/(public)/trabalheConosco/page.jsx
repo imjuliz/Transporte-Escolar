@@ -196,14 +196,14 @@ export default function TrabalheConosco() {
     const conteudos = [
         {
             name: "Página inicial",
-            link: "../#",
+            link: "/",
         },
         {
             name: "Trabalhe Conosco",
             link: "./trabalheConosco"
         },
         {
-            name: "link 3",
+            name: "Termos de uso e privacidade",
             link: "../"
         }
     ]
@@ -211,15 +211,14 @@ export default function TrabalheConosco() {
     // contatos
     const ctts = [
         {
-            end: "suporte@quintaldopet.com.br",
-            link: "mailto:suporte@quintaldopet.com.br"
+            end: "suporte@edutrip.com.br",
+            link: "mailto:suporte@edutrip.com.br"
         },
         {
             end: "(11) 23456-7890",
             link: "tellto:1123456-7890"
         }
     ]
-
     // redes sociais
     const msociais = [
         {
@@ -274,7 +273,7 @@ export default function TrabalheConosco() {
                 <div className='banner-container'>
                     <div className='banner-textos flex flex-column items-center gap-10'>
                         <h1>Trabalhe conosco</h1>
-                        <p>Faça parte da nossa equite de motoristas</p>
+                        <p>Junte-se à EduTrip e ajude a construir um transporte escolar mais seguro e eficiente.</p>
                     </div>
                     <div className='banner-imgs'>
                         {banners.map((banner, index) => (
@@ -331,42 +330,42 @@ export default function TrabalheConosco() {
                 </div>
                 <form className='flex flex-col gap-10'>
                     <div className="relative z-0">
-                        <input type="text" id="floating_standard" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-x-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " ref={textRef} />
-                        <label htmlFor="floating_standard" className="py-8 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Nome Completo</label>
+                        <input type="text" id="floating_standard" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-x-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " ref={textRef} />
+                        <label htmlFor="floating_standard" className="py-8 absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Nome Completo</label>
                     </div>
                     <div className="relative z-0">
-                        <input type="text" id="floating_standard" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-x-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                        <label htmlFor="floating_standard" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Endereço</label>
+                        <input type="text" id="floating_standard" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-x-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                        <label htmlFor="floating_standard" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Endereço</label>
                     </div>
 
                     <div className='flex flex-row justify-between'>
                         <div className="relative z-0">
-                            <input type="text" id="floating_standard" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent  border-t-0 border-x-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer campo-w" placeholder=" " />
-                            <label htmlFor="floating_standard" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto campo-w">Cidade</label>
+                            <input type="text" id="floating_standard" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent  border-t-0 border-x-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer campo-w" placeholder=" " />
+                            <label htmlFor="floating_standard" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto campo-w">Cidade</label>
                         </div>
                         <div className="relative z-0">
-                            <input type="text" id="floating_standard cep" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-x-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer campo-w" placeholder=" " ref={cepRef} maxLength="9" required />
-                            <label htmlFor="floating_standard" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto campo-w">CEP</label>
+                            <input type="text" id="floating_standard cep" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-x-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer campo-w" placeholder=" " ref={cepRef} maxLength="9" required />
+                            <label htmlFor="floating_standard" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto campo-w">CEP</label>
                         </div>
                     </div>
 
                     <div className="relative z-0">
-                        <input type="text" id="floating_standard" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-x-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " ref={tellRef} />
-                        <label htmlFor="floating_standard" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Telefone para Contato</label>
+                        <input type="text" id="floating_standard" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-x-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " ref={tellRef} />
+                        <label htmlFor="floating_standard" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Telefone para Contato</label>
                     </div>
                     <div className="relative z-0">
-                        <input type="email" id="floating_standard" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-x-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                        <label htmlFor="floating_standard" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Email</label>
+                        <input type="email" id="floating_standard" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-t-0 border-x-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                        <label htmlFor="floating_standard" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Email</label>
                     </div>
 
                     <div className="flex items-center justify-center w-full">
-                        <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
                             <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                <svg className="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                 </svg>
-                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Clique para carregar</span> ou arrastar e soltar</p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG ou GIF (MAX. 800x400px)</p>
+                                <p className="mb-2 text-sm text-gray-500"><span className="font-semibold">Clique para carregar</span> ou arrastar e soltar</p>
+                                <p className="text-xs text-gray-500">SVG, PNG, JPG ou GIF (MAX. 800x400px)</p>
                             </div>
                             <input id="dropzone-file" type="file" className="hidden" />
                         </label>
@@ -380,49 +379,52 @@ export default function TrabalheConosco() {
                 <div className='contatos'>
                 </div>
 
-                
+
             </section>
             {/* footer */}
             <footer className=''>
-                    <div className="container">
-                        <div className='cont-footer'>
-                            <h1 className='logo'>Logo</h1>
-                            <div className="cont-1 flex flex-row md:flex-col md:gap-4 justify-between">
-                                <div className="f-col">
-                                    <h1>Outros conteúdos relevantes</h1>
-                                    {conteudos.map((cont, index) => (
-                                        <div className='col' key={index}>
-                                            <a href={cont.link}><p>{cont.name}</p></a>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="f-col">
-                                    <h1>Contatos</h1>
-                                    {ctts.map((ctt, index) => (
-                                        <div key={index}>
-                                            <a href={ctt.link}><p>{ctt.end}</p></a>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="f-col col-redes">
-                                    <h1>Siga-nos</h1>
-                                    <div className='cont-redes flex flex-row gap-4'>
-                                        {msociais.map((social, index) => (
-                                            <div key={index}>
-                                                <a href={social.link}>{social.img}</a>
-                                            </div>
-                                        ))
-                                        }
+                <div className="container">
+                    <div className='cont-footer '>
+                        <div className='cont-logo flex flex-row gap-6'>
+                            <img src="/img/logo.png" alt="Logo do site" className='logo-img' />
+                            <h1 className='logo'>EduTrip</h1>
+                        </div>
+
+                        <div className="cont-1 flex-wrap flex flex-row md:flex-col md:gap-4 justify-between">
+                            <div className="f-col">
+                                <h1>Outros conteúdos relevantes</h1>
+                                {conteudos.map((cont, index) => (
+                                    <div className='col' key={index}>
+                                        <a href={cont.link}><p>{cont.name}</p></a>
                                     </div>
-                                </div>
+                                ))}
                             </div>
-                            <div className='cont-2'>
-                                <p>© 2025. Feito por Julia Alves, Lorena Oshiro e Maria Brito.</p>
-                                <p>Baixe o APP</p>
+                            <div className="f-col">
+                                <h1>Contatos</h1>
+                                {ctts.map((ctt, index) => (
+                                    <div key={index}>
+                                        <a href={ctt.link}><p>{ctt.end}</p></a>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="f-col container-redes col-redes">
+                                <h1>Siga-nos</h1>
+                                <div className='cont-redes flex flex-row gap-4'>
+                                    {msociais.map((social, index) => (
+                                        <div key={index}>
+                                            <a href={social.link}>{social.img}</a>
+                                        </div>
+                                    ))
+                                    }
+                                </div>
                             </div>
                         </div>
+                        <div className='cont-2'>
+                            <p>© 2025. Feito por Julia Alves, Lorena Oshiro e Maria Brito.</p>
+                        </div>
                     </div>
-                </footer>
+                </div>
+            </footer>
         </>
     );
 }

@@ -7,7 +7,6 @@ import { usePathname, useRouter } from 'next/navigation';
 export default function AlunoLayout({ children }) {
     const router = useRouter();
     const pathname = usePathname();
-    const isMapa = pathname.includes('minha-rota');
     // SIDEBAR
     const [sidebarActive, setSidebarActive] = useState(false);
 
@@ -136,7 +135,7 @@ export default function AlunoLayout({ children }) {
                     </div>
                 </div>
             </header>
-            <main className={`main-content justify-items-center ${sidebarActive ? 'collapsed' : ''} ${isMapa ? 'p-0' : 'px-[12%]'}`}>
+            <main className={`main-content justify-items-center`}>
                 {children}
             </main>
         </>

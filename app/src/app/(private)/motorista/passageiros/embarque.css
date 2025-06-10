@@ -1,0 +1,35 @@
+section{
+  width:100%;
+  margin: 10vh 0
+}
+
+.page-indicador {
+    width: fit-content;
+    margin-bottom: 8vh;
+}
+
+.page-indicador h1 {
+    font-family: 'Plus Jakarta Sans Bold';
+}
+
+.ver-mais{
+    background-color: #013FF6;
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    gap: 15px;
+    color: white;
+    font-family: 'Plus Jakarta Sans Semibold';
+}
+
+.cont-escolas{
+  width: 100%;
+}
+
+p{
+    font-family: 'Plus Jakarta Sans Medium';
+}
+
+.texto-card p, .texto-card h3{
+  margin:0;
+}

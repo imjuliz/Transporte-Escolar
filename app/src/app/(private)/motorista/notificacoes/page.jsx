@@ -9,7 +9,7 @@ export default function Notificacoes() {
     useEffect(() => {
         const fetchMensagens = async () => {
             try {
-                const res = await fetch("http://localhost:3001/notificacoes", {
+                const res = await fetch("http://localhost:3001/notificacoesMotorista", {
                     credentials: "include"
                 });
                 const dados = await res.json();
