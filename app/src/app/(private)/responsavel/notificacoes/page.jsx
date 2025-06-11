@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import "../../motorista/notificacoes/notificacoes.css"; // Certifique-se de que o CSS esteja criado corretamente
+import "../../motorista/notificacoes/notificacoes.css";
 
 export default function Notificacoes() {
     const [mensagens, setMensagens] = useState([]);
@@ -98,26 +98,29 @@ export default function Notificacoes() {
     };
 
     return (
-        <section className="navegacao">
-            <div className="page-indicador">
-                <h1>Notificações</h1>
-                <hr />
-            </div>
-
-            <div className="flex flex-column">
-                {mensagensHoje.length > 0 && (
-                    <div className="today days">
-                        <h2>Hoje</h2>
-                        {mensagensHoje.map(renderMensagem)}
-                    </div>
-                )}
-                {mensagensAntigas.length > 0 && (
-                    <div className="mounth days">
-                        <h2>Esse Mês</h2>
-                        {mensagensAntigas.map(renderMensagem)}
-                    </div>
-                )}
-            </div>
-        </section>
+        <div className="flex flex-column">
+            {/* caso nao haja notificacoes, mostra a mensgaem */}
+            {mensagensHoje.length === 0 && mensagensAntigas.length === 0 ? (
+                <div className="sem-notificacoes text-center text-slate-500 py-10">
+                    <p>Não há notificações no momento.</p>
+                </div>
+            ) : (
+                <>
+                {/* se houver, mostra as mensagem que foram enviadas */}
+                    {mensagensHoje.length > 0 && (
+                        <div className="today days">
+                            <h2>Hoje</h2>
+                            {mensagensHoje.map(renderMensagem)}
+                        </div>
+                    )}
+                    {mensagensAntigas.length > 0 && (
+                        <div className="mounth days">
+                            <h2>Esse Mês</h2>
+                            {mensagensAntigas.map(renderMensagem)}
+                        </div>
+                    )}
+                </>
+            )}
+        </div>
     );
 }

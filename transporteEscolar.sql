@@ -347,12 +347,13 @@ INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
 (7, 8),
 (8, 9);
 
+/*
 -- para função de contar viagens
 SELECT data_viagem AS data, COUNT(*) AS total_viagens
 FROM viagens
 GROUP BY data_viagem
 ORDER BY data_viagem;
-
+*/
 -- para funcionar no gráfico é necessário add datas diferentes
 INSERT INTO viagens (veiculo_id, motorista_id, data_viagem, hora_saida, hora_chegada_prevista, ponto_inicial_tipo, ponto_inicial_id, ponto_final_tipo, ponto_final_id, tipo_viagem, status, tempo_estimado_viagem) VALUES
 -- ONIBUS 1

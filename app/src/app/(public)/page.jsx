@@ -225,10 +225,10 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-            <section className='secão3'>
+            <section className='secao3'>
                 <div className='secao3-corpo'>
                     <h2>Sobre nós</h2>
-                    <div className="flex flex-row justify-between gap-4">
+                    <div className="sobre flex justify-between gap-4">
                         {sobreItens.map((sobre, index) => (
                             <div key={index} className={sobre.classNamee}>
                                 <img src={sobre.img} />
@@ -238,14 +238,14 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-            <section className='secão5 justify-items-center content-center'>
+            <section className='secao5 justify-items-center content-center'>
                 <h2 className='title5_2'>Por que usar EduTrip?</h2>
                 <h1 className='title5_1'>Simples, fácil e rápido</h1>
                 <h3 className='title5_3'>Nossa plataforma te ajuda a ter controle total e otimizar uma experiência organizada e confiável com o transporte escolar!</h3>
-                <div className='cards5 flex flex-row lg:flex-col justify-between'>
-                    <div className='container-cards flex flex-column gap-4'>
+                <div className='cards5 flex justify-between'>
+                    <div className='container-cards flex gap-4'>
                         {cards5.map((card, index) => (
-                            <div className="cards52 flex flex-row lg:flex-col gap-4" key={index}>
+                            <div className="cards52 flex gap-4" key={index}>
                                 <img src={card.img} className='card5' />
                                 <div className='texto5'>
                                     <p className='title5'>{card.title}</p>
@@ -257,14 +257,14 @@ export default function Home() {
                     <img src='/img/fotoInicio.svg' className='rounded banner2 xl:w-5/6' />
                 </div>
             </section>
-            <section className='secão4 justify-items-center content-center'>
+            <section className='secao4 justify-items-center content-center'>
                 <h2 className='title2'>Como funciona?</h2>
                 <h1 className='title'>Entenda em poucos passos</h1>
                 <h3 className='title3'>Em apenas algumas etapas fáceis, você está pronto para gerenciar suas viagens com nosso transporte escolar. Tudo em um só lugar.</h3>
                 <div className='cards4'>
                     {cards4.map((card4, index) => (
                         <div className="cards42" key={index}>
-                            <div className='cards42'>
+                            <div className='cards43 content-center justify-items-center'>
                                 <img src={card4.img2} className='card4' />
                                 <img src={card4.img1} className='bolinha' />
                                 <p className='text4'>{card4.text}</p>

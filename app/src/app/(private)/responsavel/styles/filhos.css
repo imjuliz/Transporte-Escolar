@@ -24,6 +24,14 @@ hr{
     width:auto
 }
 
+.texto-card{
+    text-align: left;
+}
+
+.align-right{
+    text-align: right;
+}
+
 .container-viagem{
     width: 100%;
     margin-bottom: 30px;
@@ -97,6 +105,10 @@ hr{
     width: 10px
 }
 
-@media screen and (max-width: 768px) {
-    
+@media screen and (max-width: 850px) {
+    .conteudo-card{
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
   }
