@@ -166,3 +166,5 @@ input[type="password"]::-webkit-password-toggle-button,
 input[type="password"]::-ms-reveal {
     display: none;
 }
+
+/* responsividade */

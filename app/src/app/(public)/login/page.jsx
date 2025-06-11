@@ -1,7 +1,6 @@
 "use client";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
-import axios from 'axios';
 import './login.css'
 
 export default function Login() {
@@ -120,9 +119,7 @@ export default function Login() {
   }
   return (
     <section className="login">
-      <div id="particles-container" className="imgLogin">
-        {/* <div id="particles-js"></div><div className="count-particles"> <span className="js-count-particles"></span></div> */}
-      </div>
+      <img src='/img/login-img.svg' className="imgLogin" />
       {!usuarioAtivo ? (
         <div className="login-btn">
           <div className="login-corpo">
@@ -137,7 +134,6 @@ export default function Login() {
                         <path d="M6 14L22 14M22 14L16 20M22 14L16 8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         <circle cx="14" cy="14" r="14" fill="white" fillOpacity="0.5" />
                       </svg>
-
                     </button>
                   </div>
                 </div>

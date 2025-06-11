@@ -8,22 +8,6 @@ export default function EnviarMensagemResponsavel() {
   const mensagens = [
     {
       id: 1,
-      valor: "falta",
-      label: "Aluno Irá Faltar",
-      descricao: "Cancele a viagem do aluno de forma simples",
-      backgroundColor: "bg-[#DB3056]",
-      bgSelected: "bg-rose-800",
-    },
-    {
-      id: 2,
-      valor: "local",
-      label: "Mudança de local",
-      descricao: "O embarque/desembarque do aluno será em outro endereço",
-      backgroundColor: "bg-[#76BF4C]",
-      bgSelected: "bg-lime-600",
-    },
-    {
-      id: 3,
       valor: "condicao",
       label: "Condições Especiais",
       descricao: "Envie uma observação sobre o aluno para obter cuidados especiais",
@@ -31,7 +15,7 @@ export default function EnviarMensagemResponsavel() {
       bgSelected: "bg-blue-700",
     },
     {
-      id: 4,
+      id: 2,
       valor: "obj",
       label: "Objeto esquecido",
       descricao: "O aluno esqueceu um objeto pessoal no ônibus",
@@ -126,7 +110,7 @@ useEffect(() => {
 
         <div className="p-4 space-y-4">
           <form onSubmit={handleSubmit}>
-            <div className="flex gap-4">{/*grid grid-cols-2 justify-center items-center gap-4*/}
+            <div className="box-motivos flex justify-between gap-4">{/*grid grid-cols-2 justify-center items-center gap-4*/}
               {mensagens.map((msg) => (
                 <label
                   key={msg.valor}

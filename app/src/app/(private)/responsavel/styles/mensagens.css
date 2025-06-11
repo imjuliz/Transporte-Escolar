@@ -48,10 +48,17 @@ input{
     padding: 15px;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.200);
-    /*border-radius: 15px;
-    background-color: white;
-    transition: all 0.3s ease;
-    box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;*/
     outline: none;
     width: 100%
+}
+
+@media screen and (max-width: 750px){
+    .box-motivos{
+        flex-direction: column;
+    }
+
+    .card-msg{
+        width: 100%;
+        height: fit-content;
+    }
 }

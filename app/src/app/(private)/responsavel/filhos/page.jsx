@@ -34,12 +34,11 @@ export default function filhos() {
 
   return (
     <section className='informacoes'>
-      <div className='div-section'>
       <div className='page-indicador'>
         <h1>Informações</h1>
         <hr />
       </div>
-      <div className="max-w-1000px justify-items-center mx-auto mt-10 md:w-10">
+      <div className="justify-items-center mt-10 ">
         {filhos.map((filho, index) => (
           <div key={index} className="container-viagem bg-[#fff] rounded-[2vw] border-b border-slate-200">
             <div className='flex '>
@@ -79,17 +78,6 @@ export default function filhos() {
                   <div className='info flex justify-between items-center'><p>Ponto de embarque:</p><p>{filho.endereco_embarque}</p></div><hr />
                   <div className='info flex justify-between items-center'><p>Rota:</p><p>Ida e volta</p></div><hr />
                 </div>
-
-                <div className='cards-horario'>
-                  <div className="card-hora bg-[#fffff] rounded-[1vw] ">
-                    <h3>Horário de Embarque</h3>
-                    <p>{filho.viagens[0]?.hora_saida}</p>
-                  </div>
-                  <div className="card-hora bg-[#fffff] rounded-[1vw] ">
-                    <h3>Horário de Desembarque</h3>
-                    <p>{filho.viagens[0]?.hora_chegada_prevista}</p>
-                  </div>
-                </div>
                 {/**Colocar aqui o mapa da rota de cada aluno - linkar na const */}
                 <h3>Motorista</h3>
                 <div className='info-motorista flex items-center gap-5 pt-3'>
@@ -104,7 +92,6 @@ export default function filhos() {
             </div>
           </div>
         ))}
-      </div>
       </div>
     </section>
   )

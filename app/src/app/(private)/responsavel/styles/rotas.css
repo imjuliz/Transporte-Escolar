@@ -5,7 +5,7 @@ section{
 }
 
 main{
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 .btn-viagens {
@@ -18,7 +18,7 @@ main{
   width: fit-content;
 }
 
-.btn-viagens a p {
+.btn-viagens a p, .text-viagens {
   font-family: 'Plus Jakarta Sans Medium';
   text-decoration: none !important;
   transition: 300ms;

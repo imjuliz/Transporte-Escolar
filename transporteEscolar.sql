@@ -101,14 +101,12 @@ CREATE TABLE alunos (
     FOREIGN KEY (ponto_embarque_id) REFERENCES pontos_embarque(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-select * from responsaveis_alunos ;
-
 CREATE TABLE mensagens_responsaveis (
   id INT AUTO_INCREMENT PRIMARY KEY,
   aluno_id INT,
   responsavel_id INT,
   motorista_id INT,
-  tipo ENUM('falta', 'local', 'condicao', 'obj'),
+  tipo ENUM('condicao', 'obj'),
   conteudo TEXT,
   data_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
   lida BOOLEAN DEFAULT FALSE,

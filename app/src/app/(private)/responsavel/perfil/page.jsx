@@ -130,20 +130,26 @@ export default function MeuPerfil() {
 
 
     };
+const [telefone, setTelefone] = useState("");
+    const [email, setEmail] = useState("");
 
+    // att telefone e email quando usuario estiver disponivel
+    useEffect(() => {
+        if (usuario) {
+            setTelefone(formatarTelefone(usuario.telefone || ""));
+            setEmail(usuario.email || "");
+        }
+    }, [usuario]);
+
+    //volta para os valores originais
     const handleReset = () => {
-        //volta para os valores originais
-        if (tellRef.current) tellRef.current.value = formatarTelefone(usuario.telefone || "");
-        if (emailInputRef) emailInputRef.current.value = usuario.email || "";
-
+        setTelefone(formatarTelefone(usuario?.telefone || ""));
+        setEmail(usuario?.email || "");
         setTelefoneEditando(false);
         setEmailEditando(false);
     };
 
-    //const openModal = () => document.getElementById("modal").style.display = "block";
-    //const closeModal = () => document.getElementById("modal").style.display = "none";
-
-    // 1. Enquanto carrega
+    // enquanto carrega
     if (erro) {
         return <p className="text-red-600 p-4">{erro}</p>;
     }
@@ -167,9 +173,6 @@ export default function MeuPerfil() {
         return { primeiroNome: nomes[0], ultimoNome: nomes[nomes.length - 1] };
     };
 
-    if (erro) return <p className="text-red-600 p-4">{erro}</p>;
-    if (!usuario) return <div className="text-center"><div role="status">Carregando...</div></div>;
-
     const nomeSobrenome = pegarPrimeiroEUltimoNome(usuario.nome);
 
     return (
@@ -187,14 +190,14 @@ export default function MeuPerfil() {
             </div>
             <div className='sec'>
                 <div className='sec-indicador'><h4>Dados Pessoais</h4><hr /></div>
-                <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
+                <div className='sec-container flex flex-wrap flex-row justify-between gap-3'>
                     <div className='sec-campos'><h6>Nome completo:</h6><p>{usuario.nome}</p></div>
                     <div className='sec-campos'><h6>CPF:</h6><p>{formatarCPF(usuario.cpf)}</p></div>
                 </div>
             </div>
             <div className='sec'>
                 <div className='sec-indicador'><h4>Contatos</h4><hr /></div>
-                <div className='sec-container flex flex-col gap-8'>
+                <div className='sec-container flex flex-wrap flex-row justify-between gap-3'>
                     <div className='sec-campos'><h6>Email pessoal:</h6><p>{usuario.email}</p></div>
                     <div className='sec-campos flex gap-10'>
                         <div className='sec-campos2'><h6>Telefone:</h6><p>{formatarTelefone(usuario.telefone)}</p></div>
@@ -202,9 +205,8 @@ export default function MeuPerfil() {
                     </div>
                 </div>
             </div>
-            {/**Editar informações */} {/** */}
             <div className='flex flex-wrap gap-6'>
-                <button type="button" className="btn-add btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button type="button" className="btn-add mt-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Editar perfil
                 </button>
 
@@ -225,12 +227,13 @@ export default function MeuPerfil() {
                                             <div className="flex items-center gap-2">
                                                 <input
                                                     type="text"
-                                                    defaultValue={formatarTelefone(usuario.telefone)}
-                                                    ref={tellRef}
-                                                    className="form-control"
+                                                    value={telefone}
+                                                    onChange={(e) => setTelefone(formatarTelefone(e.target.value))}
                                                     readOnly={!telefoneEditando}
-                                                    maxLength={14}
+                                                    className="form-control"
+                                                    maxLength={15}
                                                 />
+
                                                 <button
                                                     type="button"
                                                     onClick={() => setTelefoneEditando(true)}
@@ -246,7 +249,7 @@ export default function MeuPerfil() {
                                     </div>
 
                                     <div className="mb-3">
-                                        <label htmlFor="email" className='form-label'>E-mail</label>
+                                        <label htmlFor="email" className='form-label'>Email</label>
 
                                         <div className="flex items-center gap-2">
                                             <input
@@ -267,21 +270,21 @@ export default function MeuPerfil() {
                                         </div>
 
                                         <div className='items-center mt-3 flex justify-center gap-3'>
-                                            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300">Editar</button>
-                                            <button type='button' className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300' onClick={handleReset}>Cancelar</button>
+                                            <button type="submit" className="btn-add">Salvar alterações</button>
                                         </div>
-
                                     </div>
-
-                                    <div><strong>Resposta do servidor:</strong><pre>{resposta}</pre></div>
-
+                                    <div><p>
+                                        {(() => {
+                                            try {
+                                                if (!resposta) return null; // evita parse de string vazia
+                                                const parsed = JSON.parse(resposta);
+                                                return parsed.mensagem || 'Resposta recebida';
+                                            } catch (e) {
+                                                return resposta; // mostra como texto cru se nn for json
+                                            }
+                                        })()}
+                                    </p></div>
                                 </form>
-
-
-
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>

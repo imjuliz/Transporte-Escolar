@@ -63,7 +63,7 @@ export default function RotaResponsavel() {
       });
   }, []);
 
-  if (loading || carregando) return <p>Carregando dados da viagem...</p>;
+  if (loading || carregando) return <div className="w-screen h-screen justify-items-center content-center"><p>Carregando dados da viagem...</p></div>;
   if (error) return <p className="text-red-500">Erro: {error}</p>;
   if (!infoFilhos) return <p>Nenhum dado encontrado.</p>;
 
@@ -81,7 +81,7 @@ export default function RotaResponsavel() {
     : null;
 
   return (
-    <section className="relative h-screen w-screen">
+    <section className="relative h-screen w-screen justify-items-center content-center">
       {infoFilhos.length > 1 && (
         <nav className="flex gap-x-1 --prevent-on-load-init mt-4 mb-4" role="tablist">
           {infoFilhos.map((filho) => {
@@ -125,12 +125,14 @@ export default function RotaResponsavel() {
             alt="Menino e menina esparando ônibus"
             className='404-img'
           />
-          <p>Não há nenhuma viagem em andamento.</p>
-          <button className="btn-viagens" href='/responsavel/viagens'>
+          <p className="">Não há nenhuma viagem em andamento.</p>
+          <button className="btn-viagens">
+            <a href='./viagens'>
             <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="seta" >
               <path d="M17 7H1M1 7L7 1M1 7L7 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <p className='text-[#fff] no-underline m-0'>Ver viagens</p>
+            <p className='text-viagens text-[#fff] no-underline m-0'>Ver viagens</p>
+            </a>
           </button>
         </div>
       )}

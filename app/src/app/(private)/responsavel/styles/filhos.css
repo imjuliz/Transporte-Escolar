@@ -1,6 +1,5 @@
 body{
     background-color: #F5F5F5 !important;
-    
 }
 
 main{
@@ -26,7 +25,7 @@ hr{
 }
 
 .container-viagem{
-    width: 900px;
+    width: 100%;
     margin-bottom: 30px;
    justify-content: center; 
 }
@@ -99,18 +98,5 @@ hr{
 }
 
 @media screen and (max-width: 768px) {
-    .container-viagem{
-        width: 600px;
-       
-    }
-    .foto-aluno{
-        width: 200px;
-        height: 174px
-    }
-    .ver-mais{
-        width: 50%;
-        height: 70%;
-        margin-bottom: -20%;
-        margin-right: -5%;
-    }
+    
   }
