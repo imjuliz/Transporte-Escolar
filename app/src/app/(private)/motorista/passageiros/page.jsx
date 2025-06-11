@@ -42,11 +42,7 @@ export default function Escolas() {
           {escolas.map((escola, index) => (
             <div key={index} className="cont-escolas bg-[#fff] rounded-[2vw] border-b border-slate-200" >
               <div className="cont-escolas flex items-center">
-                <img
-                  className="foto-aluno object-cover rounded-l-[2vw]"
-                  src="/imgs/escola.png"
-                  alt="Foto da escola"
-                />
+                
                 <button
                   onClick={() => toggle(escola.escola_id)}
                   className="conteudo-card w-full flex justify-between items-center py-5 text-slate-800"
