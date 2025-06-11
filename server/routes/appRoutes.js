@@ -21,7 +21,7 @@ router.get('/motorista', autorizarAcesso('Motorista'));
 
 // informaçoes na pagina "meu perfil"
 router.get('/perfil', obterPerfilUsuario, autorizarAcesso( 'aluno', 'responsavel', 'administrador', 'Motorista'));
-router.patch('/editarPerfil', editarPerfilController);
+router.patch('/editarPerfil', editarPerfilController, autorizarAcesso( 'aluno', 'responsavel', 'administrador', 'Motorista'));
 
 router.post('/editarPerfil/foto', upload.single('foto'), editarFotoPerfilController);
 //

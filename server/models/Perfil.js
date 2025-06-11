@@ -36,9 +36,17 @@ const editarPerfilMotorista = async (tipo, id, dadosAtualizados) => {
     throw err;
   }
 };
+
 // editar perfil - responsaveis, alunos e adms
 const editarPerfil = async (tipo, id, dadosAtualizados) => {
   try {
+    const tabelas = {
+      aluno: 'alunos',
+      responsavel: 'responsaveis',
+      motorista: 'motoristas',
+      administrador: 'adm',
+    };
+
     const tabela = tabelas[tipo];
     if (!tabela) throw new Error('Tipo de usuário inválido');
 
