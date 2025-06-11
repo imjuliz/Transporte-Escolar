@@ -94,12 +94,14 @@ CREATE TABLE alunos (
     senha VARCHAR(255) NOT NULL,
     fotoPerfil varchar(255),
     status ENUM('ativo', 'inativo') DEFAULT 'ativo',
-    turno ENUM('manha', 'tarde', 'noite') not null,
+    turno ENUM('manha', 'tarde', 'noite', 'integral') not null,
     escola_id INT NOT NULL,
     ponto_embarque_id INT NOT NULL,
     FOREIGN KEY (escola_id) REFERENCES escolas(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (ponto_embarque_id) REFERENCES pontos_embarque(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+select * from responsaveis_alunos ;
 
 CREATE TABLE mensagens_responsaveis (
   id INT AUTO_INCREMENT PRIMARY KEY,

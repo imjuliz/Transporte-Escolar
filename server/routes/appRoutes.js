@@ -3,7 +3,7 @@ import { autorizarAcesso } from "../middlewares/authMiddleware.js";
 import { loginController } from "../controllers/LoginController.js";
 import { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController,editarPerfilMotoristaController} from '../controllers/PerfilController.js';
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
-import { cadastrarAlunoComResponsavel, criarPontoEmbarqueController, criarEscolaController, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, deletarPerfilController, registrarVeiculosController, verEscolasController, verPontosController} from '../controllers/AdminController.js';;
+import { cadastrarAlunoComResponsavel, criarPontoEmbarqueController, criarEscolaController, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, deletarPerfilController, registrarVeiculosController, verEscolasController, verPontosController, verificarResponsavel} from '../controllers/AdminController.js';;
 import { obterInformacoesFilhosController, enviarResponsavelMensagem, mensagensParaResponsavel } from '../controllers/ResponsavelController.js'
 import { verAlunosController, verVeiculoController, obterInformacoesviagensController, verDadosEscolaController, mensagensParaMotorista, enviarMotoristaMensagemController, obterInformacoesAlunosController} from "../controllers/MotoristaController.js";
 import { upload } from '../middlewares/uploadMiddleware.js';
@@ -20,7 +20,6 @@ router.get('/aluno', autorizarAcesso('aluno'));
 router.get('/motorista', autorizarAcesso('Motorista'));
 
 // informaçoes na pagina "meu perfil"
-router.get('/perfil', obterPerfilUsuario);
 router.get('/perfil', obterPerfilUsuario, autorizarAcesso( 'aluno', 'responsavel', 'administrador', 'Motorista'));
 router.patch('/editarPerfil', editarPerfilController);
 
@@ -78,10 +77,11 @@ router.get('/qtd-escolas', contarEscolasController)
 router.get('/qtd-motoristas', contarMotoristasController)
 router.get('/viagens-por-dia', viagensPorDiaController); //viagens por dia
 router.get('/qtd-tipo', usuariosPorTipoController ) //usuarios por tipo
-
+router.post('/verificar-responsavel', verificarResponsavel, autorizarAcesso('administrador'));
 
 // responsavel -------------------------------------------------------------------------------------
 router.get('/filhos', obterInformacoesFilhosController, autorizarAcesso('responsavel'))
+
 // enviar mensagem (responsavel logado)
 router.post('/mensagensMotorista', enviarResponsavelMensagem, autorizarAcesso('responsavel'));
 router.get('/notificacoesResponsavel', mensagensParaResponsavel, autorizarAcesso('responsavel'));

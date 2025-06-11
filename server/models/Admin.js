@@ -117,9 +117,6 @@ LIMIT 1
   return results[0].id;
 };
 
-// associa o aluno a viagem -------------------------------------------------------------------
-
-
 // busca o nome da escola--------------------------------------------------------------------------------------
 export const buscarEscolasPorNome = async (nome) => {
   const where = `nome LIKE "%${nome}%" LIMIT 10`;
@@ -139,22 +136,7 @@ export async function buscarPontoDeEmbarquePorEscola(escolaId) {
   );
 }
 
-// deleta o perfil do USUARIO
-/*export const deletarPerfil = async (tipo, id) => {
-
-//   const usuario = await read(tabela, `id = '${id}'`);
-//   if (!usuario) return null;
-
-  const resultado = await deleteRecord(tabela, `cpf = '${cpf}'`);
-  return resultado;
-}*/
-
-
-
-//---------------------------------
-
-//funcoes de ver todos os registros
-
+// ----------------------------------- funcoes de ver todos os registros
 //ver todos os alunos
 export const VerTodos = async () => {
   try {

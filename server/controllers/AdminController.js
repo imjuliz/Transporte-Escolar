@@ -12,62 +12,70 @@ import {
 // controller responsável por cadastrar um aluno e seu responsável ao mesmo tempo
 export const cadastrarAlunoComResponsavel = async (req, res) => {
   try {
-    // Extrai os dados enviados no corpo da requisição
     const { aluno, responsavel } = req.body;
-    // verifica se já existe um responsável com o mesmo CPF, email ou telefone
+    // verifica se ja existe um responsavel com o mesmo CPF, email ou telefone
     const existentes = await verificarResponsavelExistente(responsavel);
     let responsavel_id;
 
-    console.log('Responsável enviado:', responsavel);
-    console.log('Responsáveis encontrados:', existentes);
-
     if (existentes.length > 0) {
-      // Caso exista, verifica se os dados batem exatamente com os dados enviados
+      // caso exista, verifica se os dados batem exatamente com os dados enviados
       const r = existentes.find(r =>
         r.cpf === responsavel.cpf &&
         r.email.toLowerCase() === responsavel.email.toLowerCase() &&
-        r.telefone === responsavel.telefone
+        r.telefone === responsavel.telefone &&
+        r.nome.toLowerCase() === responsavel.nome.toLowerCase()
       );
-      console.log('Comparando com:', r);
-
 
       if (r) {
-        // Se todos os dados forem iguais, usa o ID do responsável já existente
+        // se todos os dados forem iguais, usa o id do responsavel ja existent
         responsavel_id = r.id;
       } else {
-        // Se algum dado não bater, retorna erro e não permite criar novo responsável
+        // se algum dado nn bater, retorna erro e nn permite criar novo responsavel
         return res.status(400).json({
-          erro: 'Dados do responsável inválidos. Já existe um responsável com CPF, email ou telefone informado, mas outros dados não conferem.'
+          erro: 'Dados do responsável inválidos. Tente novamente.'
         });
       }
     } else {
-      // Se não existir responsável com CPF/email/telefone, cria um novo e armazena o ID
+      // Se nn existir responsavel com CPF/email/telefone, cria um novo e armazena
       responsavel_id = await criarResponsavel(responsavel);
     }
 
-    // busca o ID da viagem com base na escola e ponto de embarque escolhidos pelo aluno
+    // busca o id da viagem com base na escola e ponto de embarque escolhidos pelo aluno
     const viagem_id = await buscarViagemPorEscolaEPonto(aluno.escola_id, aluno.ponto_embarque_id);
     // cria o aluno no banco (removendo o campo viagem_id do objeto aluno, se existir)
     const { viagem_id: _viagem_id, cpf, ...outrosDadosAluno } = aluno;
-    const dadosAluno = { cpf, ...outrosDadosAluno }; // ignora viagem_id se estiver no objeto
+    const dadosAluno = { cpf, ...outrosDadosAluno };
     console.log("Dados do aluno a serem inseridos:", dadosAluno);
     const aluno_id = await criarAluno(dadosAluno); // retorna o insertId diretamente
 
-    // cria o vínculo entre responsável e aluno (tabela associativa)
+    // cria vinculo entre responsavel e aluno
     await associarResponsavelAluno(responsavel_id, aluno_id);
 
-    // cria o vínculo entre aluno e viagem (tabela associativa)
+    // cria vinculo entre aluno e viagem
     await associarAlunoViagem(aluno_id, viagem_id);
 
-    // retorna sucesso para o frontend
     return res.status(201).json({ mensagem: 'Aluno e responsável registrados com sucesso.' });
 
   } catch (error) {
-    // Se qualquer etapa falhar, retorna erro genérico para o frontend
     console.error(error);
     return res.status(500).json({
       erro: error.message || 'Erro ao registrar aluno e responsável.'
     });
+  }
+};
+
+// controller so p verificar se o respons existe ou n
+export const verificarResponsavel = async (req, res) => {
+  try {
+    const { cpf, email, telefone } = req.body; 
+    const existentes = await verificarResponsavelExistente({ cpf, email, telefone });
+    if (existentes.length > 0) {
+      return res.json({ existe: true });
+    } else {
+      return res.json({ existe: false });
+    }
+  } catch (error) {
+    return res.status(500).json({ erro: 'Erro ao verificar responsável.' });
   }
 };
 
@@ -112,7 +120,6 @@ export const registrarVeiculosController = async (req, res) => {
     res.status(500).json({ erro: err.mesage });
   }
 }
-
 
 //Cadastrar escola ---------------------------------------------------------------------------
 const criarEscolaController = async (req, res) => {

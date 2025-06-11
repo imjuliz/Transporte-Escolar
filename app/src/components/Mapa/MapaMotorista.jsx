@@ -52,10 +52,10 @@ const MapaViagemMotorista = ({ dados }) => {
 
   return (
     <MapContainer center={origemLatLng} zoom={15} style={{ height: '100%', width: '100%' }}>
-      <TileLayer
-        attribution="&copy; OpenStreetMap contributors"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+<TileLayer
+  attribution='&copy; <a href="https://carto.com/">Carto</a>'
+  url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+/>
 
       <Marker position={origemLatLng} icon={origemIcon}>
         <Popup>Ponto de partida</Popup>

@@ -15,16 +15,10 @@ main {
   align-content: start;
 }
 
-.page-indicador, .sec-indicador{
-  width: min-content;
-  white-space: nowrap;
-}
-
 .main-content {
-  height: 100vh;
   width: calc(100% - 78px);
   transition: margin-left 0.3s ease, width 0.3s ease;
-  /* padding: 0 12%; */
+  padding: 0 12%;
 }
 
 .main-content.collapsed {
@@ -122,7 +116,6 @@ main {
   display: flex;
   height: fit-content;
   width: fit-content;
-  align-items: center;
   opacity: 0;
   pointer-events: none;
   transition: all 0.6s ease;
@@ -470,11 +463,6 @@ main {
   .sidebar {
     /*barra lateral*/
     height: 100%;
-}
-
-.sidebar.active {
-    /*widht da barra lateral*/
-    width: 190px;
 }
 
   .sidebar .logoContent .logo {

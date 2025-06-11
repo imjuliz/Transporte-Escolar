@@ -51,10 +51,7 @@ export default function RegistrarVeiculo() {
       console.error("Erro:", error);
       setResposta("Erro ao enviar os dados.");
     }
-
-
   };
-
 
   return (
     <>
@@ -68,21 +65,11 @@ export default function RegistrarVeiculo() {
 
 
         <form onSubmit={handleSubmit} className='flex flex-col gap-6 mt-6'>
-          {/*<label htmlFor="motorista_cpf">CPF do motorista:</label>*/}
           <input type="text" id="placa" name="placa" required placeholder="Placa do Veículo" />
-
-          {/*<label htmlFor="fabricacao">Data de fabricação:</label>*/}
           <input type="text" id="capacidade" name="capacidade" required placeholder="Capacidade (ex: 20)" />
-
-          {/*<label htmlFor="placa">Placa:</label>*/}
           <input type="text" id="motorista" name="motorista" required placeholder="ID do motorista" />
-
-          {/*<label htmlFor="modelo">Modelo:</label>*/}
           <input type="text" id="modelo" name="modelo" required placeholder="Modelo" />
-
-          {/*<label htmlFor="marca">Marca:</label>*/}
           <input type="text" id="marca" name="marca" required placeholder="Marca" />
-
           <input type="text" id="ano" name="ano" required placeholder="Ano de Fabricação"></input>
 
           <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded mb-5 hover:bg-blue-700 transition duration-300 ease">Registrar</button>

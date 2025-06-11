@@ -14,18 +14,24 @@ export default function RegistroPage() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     const camposNumericos = ['escola_id', 'ponto_embarque_id', 'viagem_id', 'veiculo_id'];
-  
+    const camposSemNumeros = ['nome', 'nome_responsavel'];
+
     let novoValor = value;
+
+    // Remove dígitos de nomes
+    if (camposSemNumeros.includes(name)) {
+      novoValor = novoValor.replace(/[0-9]/g, '');
+    }
     if (name === 'cpf' || name === 'cpf_responsavel') {
       novoValor = value.replace(/\D/g, '').slice(0, 11); // remove tudo que não é dígito e limita a 11
     }
-  
+
     setForm((prev) => ({
       ...prev,
       [name]: camposNumericos.includes(name) ? (novoValor ? parseInt(novoValor, 10) : null) : novoValor
     }));
   };
-  
+
 
   const formRef = useRef(null);
   const [form, setForm] = useState({});
@@ -35,6 +41,7 @@ export default function RegistroPage() {
     e.preventDefault();
     if (!tipo) return alert('Selecione um tipo de usuário.');
     if (tipo === 'aluno' && !form.escola_id) return alert('Selecione uma escola da lista.');
+
 
     try {
       let url = '';
@@ -54,6 +61,7 @@ export default function RegistroPage() {
               ponto_embarque_id: form.ponto_embarque_id,
               viagem_id: form.viagem_id,
               senha: form.senha,
+              turno: form.turno
             },
             responsavel: {
               cpf: form.cpf_responsavel,
@@ -89,7 +97,7 @@ export default function RegistroPage() {
         default:
           return alert('Tipo de cadastro não suportado.');
       }
-
+      console.log("DADOS DO FORM:", form);
       const resposta = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -155,6 +163,36 @@ export default function RegistroPage() {
     }
   };
 
+  const [responsavelExiste, setResponsavelExiste] = useState(null);
+
+// chama qnd campos de cpf/email/telefone do responsavel mudarem
+useEffect(() => {
+  const verificar = async () => {
+    if (form.cpf_responsavel && form.email_responsavel && form.telefone_responsavel) {
+      try {
+        const res = await fetch('http://localhost:3001/verificar-responsavel', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            cpf: form.cpf_responsavel,
+            email: form.email_responsavel,
+            telefone: form.telefone_responsavel,
+          }),
+        });
+
+        const data = await res.json();
+        setResponsavelExiste(data.existe);
+      } catch (err) {
+        console.error('Erro ao verificar responsável', err);
+        setResponsavelExiste(null);
+      }
+    }
+  };
+  verificar();
+}, [form.cpf_responsavel, form.email_responsavel, form.telefone_responsavel]);
+
   // ao digitar nomes, ele nao permite caracteres numericos
   const textRef = useRef(null);
   useEffect(() => {
@@ -216,7 +254,7 @@ export default function RegistroPage() {
               } />
             </div>
             <input name="email" pattern="^[a-zA-Z0-9._%+-]+@al\.gov\.br$" placeholder="Email institucional" onChange={handleChange} required autoComplete="off" />
-            <input name="nome" placeholder="Nome completo" onChange={handleChange} required ref={textRef} />
+            <input name="nome" value={form.nome || ''} placeholder="Nome completo" onChange={handleChange} required />
             <input name="telefonePrinc" placeholder="Telefone" required value={formatPhone(form.telefonePrinc || '')} onChange={(e) => handleChange({
               target: {
                 name: 'telefonePrinc',
@@ -292,7 +330,13 @@ export default function RegistroPage() {
                 placeholder="Ponto de ônibus"
               />
             </div>
-            {/* ainda é preciso revisar os campos abaixo */}
+            <select name="turno" value={form.turno || ''} onChange={handleChange} required className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 mb-5">
+              <option value="" disabled>Selecionar turno</option>
+              <option value="manha">Manhã</option>
+              <option value="tarde">Tarde</option>
+              <option value="noite">Noite</option>
+              <option value="integral">Integral</option>
+            </select>
             <input name="senha" className="data" placeholder="Senha" type="password" onChange={handleChange} required autoComplete="off" />
             {/* Campos do Responsável */}
             <h2 className="text-lg font-semibold mt-6 h2-resp">Responsável</h2>
@@ -305,7 +349,7 @@ export default function RegistroPage() {
               })
             } />
             <input name="nome_responsavel" placeholder="Nome do responsável" onChange={handleChange} required value={form.nome_responsavel || ''} />
-            <input name="email_responsavel" placeholder="Email do responsável" onChange={handleChange} required value={form.email_responsavel || ''}/>
+            <input name="email_responsavel" placeholder="Email do responsável" onChange={handleChange} required value={form.email_responsavel || ''} />
             <input name="telefone_responsavel" placeholder="Telefone do responsável" value={formatPhone(form.telefone_responsavel || '')} onChange={(e) =>
               handleChange({
                 target: {
@@ -314,6 +358,17 @@ export default function RegistroPage() {
                 }
               })
             } />
+            {/* mostrar campo senha so se responsavel NÃO existir */}
+            {responsavelExiste === false && (
+              <input
+                name="senha_responsavel"
+                placeholder="Senha do responsável"
+                type="password"
+                onChange={handleChange}
+                required
+                value={form.senha_responsavel || ''}
+              />
+            )}
           </>
         );
 
@@ -326,7 +381,7 @@ export default function RegistroPage() {
             <input name="telefone" placeholder="Telefone" required value={formatPhone(form.telefone || '')} onChange={(e) => handleChange({ target: { name: 'telefone', value: e.target.value.replace(/\D/g, '') } })} />
             <input name="vencimento_habilitacao" placeholder="Validade da CNH" required type="date" value={form.vencimento_habilitacao || ''} onChange={handleChange} min={calcularMinData()} max={calcularMaxData()} className='data' />
             <input name="email" type='email' placeholder="Email" onChange={handleChange} required autoComplete="off" value={form.email || ''} className='data' />
-            <input type="password" name="senha" placeholder="Senha" required autoComplete="off" value={form.senha || ''} onChange={handleChange} className='data'/>
+            <input type="password" name="senha" placeholder="Senha" required autoComplete="off" value={form.senha || ''} onChange={handleChange} className='data' />
           </>
         );
       case 'administrador':
@@ -334,9 +389,9 @@ export default function RegistroPage() {
           <>
             <input name="cpf" placeholder="CPF" required value={formatCpf(form.cpf || '')} onChange={(e) => handleChange({ target: { name: 'cpf', value: e.target.value.replace(/\D/g, '') } })} />
             <input name="nome" placeholder="Nome completo" onChange={handleChange} required value={form.nome || ''} />
-            <input name="email" placeholder="Email" onChange={handleChange} required autoComplete="off" value={form.email || ''}/>
+            <input name="email" placeholder="Email" onChange={handleChange} required autoComplete="off" value={form.email || ''} />
             <input name="telefone" placeholder="Telefone" required value={formatPhone(form.telefone || '')} onChange={(e) => handleChange({ target: { name: 'telefone', value: e.target.value.replace(/\D/g, '') } })} />
-            <input name="senha" placeholder="Senha" type="password" value={form.senha || ''} onChange={handleChange} required autoComplete="off" className='data'/>
+            <input name="senha" placeholder="Senha" type="password" value={form.senha || ''} onChange={handleChange} required autoComplete="off" className='data' />
           </>
         );
 

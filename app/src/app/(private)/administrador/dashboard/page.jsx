@@ -14,8 +14,6 @@ import { VeiculosTable } from './components/TabelaVeiculos.jsx'
 import { IncidentesChart } from './components/GraficoBarras.jsx';
 import { EscolasTable } from './components/TabelaEscolas.jsx';
 import { PontosTable } from './components/TabelaPontos.jsx';
-//importação do bglh do dashboard
-//import './assets/vendor/apexcharts/dist/apexcharts.css';
 
 export default function dashboard() {
 
@@ -112,8 +110,9 @@ export default function dashboard() {
     return (
         <>
 
-            <div className='page-indicador'>
+             <div className='page-indicador'>
                 <h1>Dashboard</h1>
+                <hr />
             </div>
             <div className=' overflow-auto relative z-10'>
                 <main className='w-full mx-auto py-4 px-4 lg:px-8 '>

@@ -74,7 +74,6 @@ export const EscolasTable = () => {
             </div>
             <div className="botao-cadastro flex gap-3">
                 <a href="/administrador/registrar-escolas"><button className="botao bg-[#013FF6] hover:bg-[#022dae]">Registrar Escolas</button></a>
-                
             </div>
         </motion.div>
     );

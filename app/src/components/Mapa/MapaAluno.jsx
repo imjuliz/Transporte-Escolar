@@ -5,7 +5,6 @@ import L from 'leaflet';
 
 
 const MapaViagemAluno = ({ dados }) => {
-  // Verifica se os dados necessários estão disponíveis
   if (!dados || !dados.origem || !dados.destino) {
     return <p>Carregando dados do mapa...</p>;
   }
@@ -30,7 +29,7 @@ const MapaViagemAluno = ({ dados }) => {
   const [posicaoOnibus, setPosicaoOnibus] = useState(origemLatLng);
   const stepRef = useRef(0);
 
-  // Simulação da animação
+  // simulacao da animacao
   useEffect(() => {
     const interval = setInterval(() => {
       stepRef.current += 0.02;
@@ -55,24 +54,24 @@ const MapaViagemAluno = ({ dados }) => {
 
   return (
     <MapContainer center={origemLatLng} zoom={15} style={{ height: '100%', width: '100%' }}>
-      <TileLayer
-        attribution="&copy; OpenStreetMap contributors"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+<TileLayer
+  attribution='&copy; <a href="https://carto.com/">Carto</a>'
+  url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+/>
 
-      {/* Origem */}
+      {/* origem */}
       <Marker position={origemLatLng} icon={origemIcon}>
         <Popup>Origem</Popup>
       </Marker>
 
-      {/* Destino */}
+      {/* destino */}
       <Marker position={destinoLatLng} icon={destinoIcon}>
         <Popup>Destino</Popup>
       </Marker>
 
-      {/* Linha entre os pontos */}
+      {/* linha entre os pontos */}
       <Polyline positions={[origemLatLng, destinoLatLng]} color="blue" />
-       {/* Ônibus em movimento */}
+       {/* onibus em movimento */}
       <Marker position={posicaoOnibus} icon={onibusIcon}>
         <Popup>Ônibus escolar</Popup>
       </Marker>

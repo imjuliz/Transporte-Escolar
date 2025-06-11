@@ -129,17 +129,23 @@ export default function MeuPerfil() {
         }
     };
 
-    const [telefone, setTelefone] = useState(formatarTelefone(usuario.telefone));
-    const [email, setEmail] = useState(usuario.email || "");
+    const [telefone, setTelefone] = useState("");
+    const [email, setEmail] = useState("");
 
-    const handleReset = () => {
-        //volta para os valores originais
-        const handleReset = () => {
+    // att telefone e email quando usuario estiver disponivel
+    useEffect(() => {
+        if (usuario) {
             setTelefone(formatarTelefone(usuario.telefone || ""));
             setEmail(usuario.email || "");
-            setTelefoneEditando(false);
-            setEmailEditando(false);
-        };
+        }
+    }, [usuario]);
+
+    //volta para os valores originais
+    const handleReset = () => {
+        setTelefone(formatarTelefone(usuario?.telefone || ""));
+        setEmail(usuario?.email || "");
+        setTelefoneEditando(false);
+        setEmailEditando(false);
     };
 
     // enquanto carrega
@@ -220,13 +226,13 @@ export default function MeuPerfil() {
 
                                             <div className="flex items-center gap-2">
                                                 <input
-    type="text"
-    value={telefone}
-    onChange={(e) => setTelefone(formatarTelefone(e.target.value))}
-    readOnly={!telefoneEditando}
-    className="form-control"
-    maxLength={15}
-/>
+                                                    type="text"
+                                                    value={telefone}
+                                                    onChange={(e) => setTelefone(formatarTelefone(e.target.value))}
+                                                    readOnly={!telefoneEditando}
+                                                    className="form-control"
+                                                    maxLength={15}
+                                                />
 
                                                 <button
                                                     type="button"

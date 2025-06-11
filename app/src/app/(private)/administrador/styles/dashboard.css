@@ -85,7 +85,7 @@ margin-left: 3%;
 width: 80%;
 }
 .icone{
-    visibility: hidden;
+    display:none;
 }
 }
 @media screen and (max-width: 1280px) {
@@ -96,13 +96,9 @@ margin-left: 0%;
   .box-infos{
 width: 100%;
 }
-.icone{
-    visibility: hidden;
-}
+
 p .titulo{
     width: 150%;
     margin-right: 0%;
 }
 }
-
-
