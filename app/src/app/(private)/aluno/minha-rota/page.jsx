@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -20,6 +19,7 @@ export default function RotaAluno() {
   const [usuarioLogado, setUsuarioLogado] = useState(null); // null = ainda não sabe, true = logado, false = não logado
   const [carregando, setCarregando] = useState(true);
 
+
   useEffect(() => {
     async function checarSessao() {
       try {
@@ -32,16 +32,13 @@ export default function RotaAluno() {
         } else {
           setUsuarioLogado(false); // não está logado
           router.push('/login'); // redireciona para login
-        }
-      } catch (error) {
+        }} catch (error) {
         console.error('Erro ao validar sessão:', error);
         setUsuarioLogado(false);
         router.push('/login'); // redireciona para login também em caso de erro
       } finally {
         setCarregando(false); // termina o carregamento em qualquer caso
-      }
-    }
-    checarSessao();
+      } }checarSessao();
   }, [router]);
 
   // informacoes p ser renderizado no mapa

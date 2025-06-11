@@ -24,12 +24,11 @@ export default function MeuPerfil() {
             setPreview(URL.createObjectURL(file));
         }
     };
+
     const enviarFoto = async () => {
         if (!foto) return alert("Selecione uma foto");
-
         const formData = new FormData();
         formData.append("foto", foto);
-
         const res = await fetch("/api/editarPerfil/foto", {
             method: "POST",
             body: formData,
@@ -38,8 +37,7 @@ export default function MeuPerfil() {
             alert("Foto atualizada!");
         } else {
             alert("Erro ao enviar foto");
-        }
-    };
+        }};
 
     //info perfil 
     useEffect(() => {
@@ -55,8 +53,7 @@ export default function MeuPerfil() {
             .catch((err) => {
                 console.error("Erro ao buscar dados do usuário:", err.message);
                 setErro("Erro ao carregar perfil.");
-            })
-    }, []);
+            })}, []);
 
     // mascara telefone - ao escrever no input
     useEffect(() => {
@@ -67,8 +64,7 @@ export default function MeuPerfil() {
                 value = value.replace(/(\d{5})(\d)/, "$1-$2");
                 e.target.value = value;
             })
-        }
-    }, []);
+        }}, []);
 
     // formatação de cpf ao pegar o cpf do back
     const formatarCPF = (cpf) => {
@@ -123,11 +119,9 @@ export default function MeuPerfil() {
             }
             else {
                 console.error('Erro ao atualizar perfil');
-            }
-        } catch (error) {
+            } } catch (error) {
             console.error('Erro:', error);
-        }
-    };
+        } };
 
     const [telefone, setTelefone] = useState("");
     const [email, setEmail] = useState("");
@@ -137,8 +131,7 @@ export default function MeuPerfil() {
         if (usuario) {
             setTelefone(formatarTelefone(usuario.telefone || ""));
             setEmail(usuario.email || "");
-        }
-    }, [usuario]);
+        } }, [usuario]);
 
     //volta para os valores originais
     const handleReset = () => {
@@ -163,8 +156,7 @@ export default function MeuPerfil() {
                     <span className="sr-only">Carregando...</span>
                 </div>
             </div>
-        )
-    }
+        ) };
 
     function pegarPrimeiroEUltimoNome(nome) {
         if (!nome) return { primeiroNome: "", ultimoNome: "" };
@@ -180,6 +172,7 @@ export default function MeuPerfil() {
                 <h1>Meu perfil</h1>
                 <hr />
             </div>
+            {/*NOME DO USUÁRIO E TIPO*/}
             <div className='user flex items-center gap-3 border-b border-[#D0D0D0]'>
                 <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="" />
                 <div className="font-medium">
@@ -187,6 +180,7 @@ export default function MeuPerfil() {
                     <p className="text-sm text-gray-500">{usuario.tipo || "Tipo de usuário"}</p>
                 </div>
             </div>
+            {/*NOME DE USUÁRIO E CPF*/}
             <div className='sec'>
                 <div className='sec-indicador'><h4>Dados Pessoais</h4><hr /></div>
                 <div className='sec-container flex flex-wrap flex-row justify-between gap-3'>
@@ -194,6 +188,7 @@ export default function MeuPerfil() {
                     <div className='sec-campos'><h6>CPF:</h6><p>{formatarCPF(usuario.cpf)}</p></div>
                 </div>
             </div>
+            {/*EMAIL, TELEFONE E TIPO DE TELEFONE DO USUÁRIO*/}
             <div className='sec'>
                 <div className='sec-indicador'><h4>Contatos</h4><hr /></div>
                 <div className='sec-container flex flex-wrap flex-row justify-between gap-3'>
@@ -209,7 +204,7 @@ export default function MeuPerfil() {
                 <button type="button" className="btn-add mt-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Editar perfil
                 </button>
-
+{/*MODAL*/}
                 <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -221,9 +216,8 @@ export default function MeuPerfil() {
                             <div className="modal-body">
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-3">
-                                        <div>
-                                            <label htmlFor="telefone" className='form-label'>Telefone:</label>
-
+                                        {/*EDIÇÃO DO TELEFONE*/}
+                                        <div><label htmlFor="telefone" className='form-label'>Telefone:</label>
                                             <div className="flex items-center gap-2">
                                                 <input
                                                     type="text"
@@ -231,9 +225,7 @@ export default function MeuPerfil() {
                                                     onChange={(e) => setTelefone(formatarTelefone(e.target.value))}
                                                     readOnly={!telefoneEditando}
                                                     className="form-control"
-                                                    maxLength={15}
-                                                />
-
+                                                    maxLength={15}/>
                                                 <button
                                                     type="button"
                                                     onClick={() => setTelefoneEditando(true)}
@@ -244,13 +236,11 @@ export default function MeuPerfil() {
                                                     </svg>
                                                 </button>
                                             </div>
-
                                         </div>
                                     </div>
-
                                     <div className="mb-3">
+                                        {/*EDIÇÃO EMAIL*/}
                                         <label htmlFor="email" className='form-label'>Email</label>
-
                                         <div className="flex items-center gap-2">
                                             <input
                                                 type="email"
@@ -281,8 +271,7 @@ export default function MeuPerfil() {
                                                 return parsed.mensagem || 'Resposta recebida';
                                             } catch (e) {
                                                 return resposta; // mostra como texto cru se nn for json
-                                            }
-                                        })()}
+                                            }})()}
                                     </p></div>
                                 </form>
                             </div>
@@ -290,6 +279,4 @@ export default function MeuPerfil() {
                     </div>
                 </div>
             </div>
-        </section>
-    )
-}
+        </section>)}

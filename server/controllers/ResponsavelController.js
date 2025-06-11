@@ -47,8 +47,7 @@ const obterInformacoesFilhosController = async (req, res) => {
     } catch (error) {
         console.error('Erro geral no controller:', error);
         res.status(500).json({ message: 'Erro geral no controller' });
-    }
-};
+    }};
 
 // responsavel envia mensagem
 const enviarResponsavelMensagem = async (req, res) => {

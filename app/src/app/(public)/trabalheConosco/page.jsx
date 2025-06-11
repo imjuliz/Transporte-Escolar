@@ -21,9 +21,7 @@ export default function TrabalheConosco() {
                 value = value.replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3"); // adiciona o segundo ponto
                 value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4"); // adiciona o traço
                 e.target.value = value;
-            });
-        }
-    });
+            });  } });
 
     // ao digitar nomes, ele nao permite caracteres numericos
     const textRef = useRef(null);
@@ -32,9 +30,7 @@ export default function TrabalheConosco() {
             textRef.current.addEventListener("input", (e) => {
                 let value = e.target.value.replace(/[0-9]/g, '') // remove caracteres numericos
                 e.target.value = value;
-            })
-        }
-    })
+            })  } })
 
     // mascara de telefone
     const tellRef = useRef(null);
@@ -47,8 +43,7 @@ export default function TrabalheConosco() {
                 value = value.replace(/(\d{5})(\d)/, "$1-$2");
                 e.target.value = value;
             });
-        }
-    });
+        } });
 
     // mascara de data
     const dataRef = useRef(null);
@@ -60,8 +55,7 @@ export default function TrabalheConosco() {
                 value = value.replace(/(\d{2})(\d)/, "$1/$2");
                 e.target.value = value;
             });
-        }
-    });
+        } });
 
     // cnh
     const cnhRef = useRef(null);
@@ -72,8 +66,7 @@ export default function TrabalheConosco() {
                 value = value.slice(0, 9); // limite de 9 digitos
                 e.target.value = value;
             });
-        }
-    });
+        }  });
 
     // cep
     const cepRef = useRef(null);
@@ -85,8 +78,7 @@ export default function TrabalheConosco() {
                 value = value.replace(/^\d{5}(-\d{3})?$/)
                 e.target.value = value;
             })
-        }
-    })
+        }  })
 
     // nav bar
     const links = [
@@ -117,6 +109,7 @@ export default function TrabalheConosco() {
         }
     };
 
+    //infos
     const trabalheItens = [
         {
             title: 'Estrutura e Suporte',
@@ -137,7 +130,7 @@ export default function TrabalheConosco() {
             classNamee: 'row-left'
         }
     ];
-
+//form 
     const requisitos = [
         {
             img: './img/cnh.svg',
@@ -160,7 +153,7 @@ export default function TrabalheConosco() {
             req: 'Compromisso com segurança e pontualidade'
         }
     ];
-
+//infos do footer
     const contatos = [
         {
             img: '',
@@ -181,7 +174,7 @@ export default function TrabalheConosco() {
             link: ''
         }
     ]
-
+//banner principal
     const banners = [
         {
             img1: './img/banner1/montanha.svg',
@@ -419,17 +412,10 @@ export default function TrabalheConosco() {
                                         <div key={index}>
                                             <a href={social.link}>{social.img}</a>
                                         </div>
-                                    ))
-                                    }
-                                </div>
-                            </div>
-                        </div>
+                                    )) } </div>
+                            </div> </div>
                         <div className='cont-2'>
                             <p>© 2025. Feito por Julia Alves, Lorena Oshiro e Maria Brito.</p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </>
-    );
-}
+                        </div>  </div>
+                </div> </footer>
+        </> );}

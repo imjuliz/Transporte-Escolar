@@ -12,6 +12,7 @@ export default function Escolas() {
     setAtivo(ativo === id ? null : id);
   };
 
+  {/*BUSCA OS NOMES DAS ESCOLAS*/}
   useEffect(() => {
     async function fetchEscolas() {
       try {
@@ -25,10 +26,8 @@ export default function Escolas() {
       setEscolas(data.escolas);
     } catch (error) {
       console.error('Erro:', error.message);
-    }
-  }
-
-  fetchEscolas();
+    }}
+ fetchEscolas();
 }, []);
 
   return (
@@ -39,6 +38,7 @@ export default function Escolas() {
           <hr />
         </div>
         <div className="cont-escolas flex flex-col gap-8 justify-items-center justify-self-center self-center">
+          {/*ESCOLAS*/}
           {escolas.map((escola, index) => (
             <div key={index} className="cont-escolas bg-[#fff] rounded-[2vw] border-b border-slate-200" >
               <div className="cont-escolas flex items-center">
@@ -56,8 +56,7 @@ export default function Escolas() {
                     <p>{escola.escola_endereco}</p>
                   </span>
                   <div className="ver-mais items-center">
-                    Ver Alunos
-                     <span
+                    Ver Alunos <span
                     className={`text-slate-800 transition-transform duration-300 ${ativo === escola.escola_id ? 'rotate-180' : ''
                       }`}>
                     {/* Ícone para cima/baixo */}
@@ -66,13 +65,12 @@ export default function Escolas() {
                   </div>
                 </button>
               </div>
-
               {/* Conteúdo escondido */}
               <div
                 className={`container-escondido overflow-hidden transition-all duration-500 ease-in-out ${
                   ativo === escola.escola_id ? "max-h-500" : "max-h-0"
-                }`}
-              >
+                }`}>
+                  {/*ALUNOS DE CADA ESCOLA*/}
                 <div className="conteudo-escondido pb-5 text-sm text-slate-500">
                   <h3>Alunos da Escola</h3>
                   <hr />
@@ -84,16 +82,10 @@ export default function Escolas() {
                         <div className="info flex justify-between items-center">
                           <p>{aluno.aluno_nome}</p><p>{aluno.aluno_email}</p>
                         </div>
-                        <hr />
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+                        <hr/>
+                      </div>))
+                  )} </div>
+              </div> </div>
+          ))} </div>
+      </div> </section>
+  );}

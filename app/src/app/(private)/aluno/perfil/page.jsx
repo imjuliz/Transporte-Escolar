@@ -83,8 +83,7 @@ export default function MeuPerfil() {
                     value = value.replace(/(\d{5})(\d)/, "$1-$2");
                     e.target.value = value;
                 });
-            }
-        }, []);
+            }}, []);
     
         // formatação de cpf ao pegar o cpf do back
         const formatarCPF = (cpf) => {
@@ -139,13 +138,9 @@ export default function MeuPerfil() {
                     }
                     else {
                         console.error('Erro ao atualizar perfil');
-                    }
-                } catch (error) {
+                    } } catch (error) {
                     console.error('Erro:', error);
-                }
-        
-        
-            };
+                } };
         const [telefone, setTelefone] = useState("");
             const [email, setEmail] = useState("");
         
@@ -180,8 +175,7 @@ export default function MeuPerfil() {
                             <span className="sr-only">Carregando...</span>
                         </div>
                     </div>
-                )
-            }
+                ) }
         function pegarPrimeiroEUltimoNome(nome) {
         if (!nome) return { primeiroNome: "", ultimoNome: "" };
         const nomes = nome.trim().split(" ");
@@ -196,22 +190,24 @@ export default function MeuPerfil() {
                 <h1>Meu perfil</h1>
                 <hr />
             </div>
-
+{/*NOME DO ALUNO E TIPO DE USUÁRIO*/}
             <div className='user flex items-center gap-3 border-b border-[#D0D0D0]'>
                 <div className="font-medium">
                     <h3>{nomeSobrenome.primeiroNome} {nomeSobrenome.ultimoNome}</h3>
                     <p className="text-sm text-gray-500">{tiposFormatados[usuario.tipo] || "Tipo de usuário"}</p>
                 </div>
             </div>
+            {/*DADOS DO ALUNO - NOME, EMAIL, CPF */}
             <div className='sec'>
                 <div className='sec-indicador'><h4>Dados Pessoais</h4><hr /></div>
                 <div className='sec-container flex flex-row flex-wrap justify-between gap-8'>
                     <div className='sec-campos'><h6>Nome completo:</h6><p>{usuario.nome}</p></div>
                     <div className='sec-campos'><h6>Email institucional:</h6><p>{usuario.email}</p></div>
                     <div className='sec-campos'><h6>CPF:</h6><p>{formatarCPF(usuario.cpf)}</p></div>
-                    <div className='sec-campos'><h6>Escola ID e Ponto ID:</h6><p>{usuario.escola_id || "-"}</p><p>{usuario.ponto_embarque_id || "-"}</p></div>
+                    {/* <div className='sec-campos'><h6>Escola ID e Ponto ID:</h6><p>{usuario.escola_id || "-"}</p><p>{usuario.ponto_embarque_id || "-"}</p></div> */}
                 </div>
             </div>
+            {/*DADOS DE CONTATO DO ALUNO - EMAIL PESSOAL, TELEFONE E TIPO DE TELEFONE*/}
             <div className='sec'>
                 <div className='sec-indicador'><h4>Contatos</h4><hr /></div>
                     <div className='sec-container flex flex-row flex-wrap justify-between gap-8'>
@@ -224,12 +220,12 @@ export default function MeuPerfil() {
                 </div>
             </div>
             </div>
-
+{/*EDITAR PERFIL*/}
                 <div className='flex flex-wrap gap-6'>
                 <button type="button" className="btn-add mt-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Editar perfil
                 </button>
-
+{/*MODAL   */}
                 <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -237,7 +233,6 @@ export default function MeuPerfil() {
                                 <h1 className="modal-title fs-5" id="staticBackdropLabel">Editar Perfil</h1>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-
                             <div className="modal-body">
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-3">
@@ -267,28 +262,23 @@ export default function MeuPerfil() {
 
                                         </div>
                                     </div>
-
                                     <div className="mb-3">
                                         <label htmlFor="email" className='form-label'>Email</label>
-
                                         <div className="flex items-center gap-2">
                                             <input
                                                 type="email"
                                                 defaultValue={usuario.emailPessoal}
                                                 ref={emailInputRef}
                                                 className="form-control"
-                                                readOnly={!emailEditando}
-                                            />
+                                                readOnly={!emailEditando} />
                                             <button
                                                 type="button"
                                                 onClick={() => setEmailEditando(true)}
                                                 title="Editar e-mail"
-                                                className="text-gray-500 hover:text-black"
-                                            ><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                className="text-gray-500 hover:text-black"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M14.3786 6.44975L4.96376 15.8648C4.68455 16.144 4.32895 16.3343 3.94177 16.4117L1.00003 17.0001L1.58838 14.0583C1.66582 13.6711 1.85612 13.3155 2.13532 13.0363L11.5502 3.62132M14.3786 6.44975L15.7929 5.03553C16.1834 4.64501 16.1834 4.01184 15.7929 3.62132L14.3786 2.20711C13.9881 1.81658 13.355 1.81658 12.9644 2.20711L11.5502 3.62132M14.3786 6.44975L11.5502 3.62132" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg></button>
                                         </div>
-
                                         <div className='items-center mt-3 flex justify-center gap-3'>
                                             <button type="submit" className="btn-add">Salvar alterações</button>
                                         </div>
@@ -301,15 +291,9 @@ export default function MeuPerfil() {
                                                 return parsed.mensagem || 'Resposta recebida';
                                             } catch (e) {
                                                 return resposta; // mostra como texto cru se nn for json
-                                            }
-                                        })()}
+                                            }  })()}
                                     </p></div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-        </section>
-    );
-}
+                                </form> </div>
+                        </div></div>
+                </div>  </div>  </section>
+    );}

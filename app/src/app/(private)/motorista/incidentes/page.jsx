@@ -6,6 +6,7 @@ import './incidentes2.css'
 
 export default function incidentes() {
 
+    //CARDS COM OS TIPOS DE INCIDENTES
     const mensagens = [
         {
             id: 1,
@@ -70,9 +71,7 @@ export default function incidentes() {
                 alert("Erro ao carregar lista de alunos.");
             }
         };
-
-        fetchAlunos();
-    }, []);
+        fetchAlunos();}, []);
 
 
     // Atualiza seleção de motivo
@@ -93,6 +92,7 @@ export default function incidentes() {
 
         setLoading(true);
 
+        //ENVIA O FORM COM A MENSAGEM PARA O BACK
         try {
             const res = await fetch("http://localhost:3001/motoristaEnviarMensagem", {
                 method: "POST",
@@ -104,8 +104,7 @@ export default function incidentes() {
                     aluno_id: alunoSelecionado,
                     mensagem: textoMensagem,
                     motivo: selecionado
-                }),
-            });
+                }),});
 
             if (res.ok) {
                 setMensagemStatus({ tipo: "sucesso", texto: "Mensagem enviada com sucesso!" });
@@ -116,14 +115,12 @@ export default function incidentes() {
                     tipo: "erro",
                     texto: "Erro ao enviar mensagem: " + (data.erro || "Erro desconhecido"),
                 });
-            }
-        } catch (error) {
+            } } catch (error) {
             setMensagemStatus({ tipo: "erro", texto: "Erro ao enviar mensagem." });
             console.error(error);
         } finally {
             setLoading(false);
-        }
-    };
+        }};
 
     return (
         <>
@@ -134,6 +131,7 @@ export default function incidentes() {
                 </div>
                 <div className="p-4 space-y-4">
                     <form onSubmit={handleSubmit}>
+                        {/*CARDS DOS TIPOS DE INCIDENTES*/}
                         <div className=" mensagens flex gap-4">{/*grid grid-cols-2 justify-center items-center gap-4*/}
                             {mensagens.map((msg) => (
                                 <label
@@ -141,20 +139,17 @@ export default function incidentes() {
                                     className={`card-msg cursor-pointer text-white border ${msg.backgroundColor} rounded-[2vw] transition-all text-left ${selecionado === msg.valor
                                         ? `selecionado ${msg.bgSelected} text-white border-blue-700`
                                         : `nao-selecionado  text-gray-800 hover:border-blue-400`
-                                        }`}
-                                >
+                                        }`} >
                                     <input
                                         type="radio"
                                         name="motivo"
                                         value={msg.valor}
                                         checked={selecionado === msg.valor}
                                         onChange={() => handleChange(msg.valor)}
-                                        className="hidden"
-                                    />
+                                        className="hidden"  />
                                     <h3>{msg.label}</h3>
                                     <p>{msg.descricao}</p>
-                                </label>
-                            ))}
+                                </label> ))}
                         </div>
 
                         <div className="pt-4 flex flex-column">
@@ -162,7 +157,7 @@ export default function incidentes() {
                             <p className="mt-4">
                                 <strong>Motivo selecionado:</strong> {selecionado}
                             </p>
-
+{/*MENSAGEM PERSONALIZADA / ESCRITA*/}
                             <div className="enviar-msg">
                                 <input
                                     name="mensagem"
@@ -171,7 +166,7 @@ export default function incidentes() {
                                     onChange={(e) => setTextoMensagem(e.target.value)}
                                 />
                             </div>
-
+{/*SELECT DE ALUNOS*/}
                             <select
                                 className="py-3 mt-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 mb-5"
                                 value={alunoSelecionado}
@@ -197,10 +192,7 @@ export default function incidentes() {
                                 disabled={loading} >
                                 {loading ? "Enviando..." : "Enviar Mensagem"}
                             </button>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </>);
-}
+                        </div> </form>
+                </div> </section>
+        </>);}
 

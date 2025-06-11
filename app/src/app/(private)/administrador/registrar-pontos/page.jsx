@@ -18,7 +18,7 @@ export default function RegistrarEscola() {
       latitude: form.latitude.value,
       longitude: form.longitude.value
     };
-
+{/*ENVIO DAS INFORMAÇÕES PARA O BACK*/}
     try {
       const response = await fetch("http://localhost:3001/cadastro/cadastroPontos", {
         method: "POST",
@@ -39,15 +39,10 @@ export default function RegistrarEscola() {
       form.reset(); // limpa o formulário
     } else {
         alert("Erro ao cadastrar ponto de embarque.");
-      }
-
-    } catch (error) {
+      }} catch (error) {
       console.error("Erro:", error);
       setResposta("Erro ao enviar os dados.");
-    }
-
-
-  };
+    }};
 
 
   return (
@@ -59,7 +54,7 @@ export default function RegistrarEscola() {
             <hr />
           </div>
         </section>
-
+{/*FORMULÁRIO*/}
 
         <form onSubmit={handleSubmit} className='flex flex-col gap-6 mt-6'>
           {/*<label htmlFor="motorista_cpf">CPF do motorista:</label>*/}
@@ -74,13 +69,8 @@ export default function RegistrarEscola() {
           {/*<label htmlFor="modelo">Modelo:</label>*/}
           <input type="text" id="longitude" name="longitude" required placeholder="Longitude (ex: 46.33280)" />
 
-
           <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded mb-5 hover:bg-blue-700 transition duration-300 ease">Registrar Ponto de Embarque</button>
         </form>
-
-
       </div>
     </>
-  );
-
-}
+  );}

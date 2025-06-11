@@ -3,15 +3,17 @@ import './styles/layout.css';
 import { useEffect, useState } from "react";
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
+
 export default function AdmLayout({ children }) {
+
     const router = useRouter();
     // SIDEBAR
     const [sidebarActive, setSidebarActive] = useState(false);
 
     const toggleSidebar = () => {
-        setSidebarActive(!sidebarActive);
-    };
+        setSidebarActive(!sidebarActive); };
 
+        //ICONES NAV 1
     const iconsNav =
     {
         dashboard: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +36,7 @@ export default function AdmLayout({ children }) {
 
         )
     };
-
+//LINKS DA NAV 1
     const links = [
         { href: '/administrador/dashboard', name: 'dashboard', page: 'Dashboard geral' },
         { href: '/administrador/cadastrar', name: 'cadastrar', page: 'Cadastrar' },
@@ -44,18 +46,12 @@ export default function AdmLayout({ children }) {
     //nav2------------------------------------
     const iconsNav2 =
     {
-        ajuda: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clipPath="url(#clip0_13_310)">
-                <path d="M8.33325 7.49998C8.33325 7.01084 8.51569 6.69801 8.75521 6.49478C9.01285 6.27618 9.38605 6.14581 9.79159 6.14581C10.1971 6.14581 10.5703 6.27618 10.828 6.49478C11.0675 6.69801 11.2499 7.01084 11.2499 7.49998C11.2499 7.86428 11.1641 8.06654 11.0644 8.21612C10.948 8.39062 10.7949 8.52824 10.536 8.76096L10.4841 8.80765C10.2178 9.04735 9.86739 9.37139 9.60023 9.84339C9.3249 10.3298 9.16659 10.9176 9.16659 11.6666C9.16659 12.1269 9.53968 12.5 9.99992 12.5C10.4602 12.5 10.8333 12.1269 10.8333 11.6666C10.8333 11.1657 10.9354 10.8681 11.0507 10.6644C11.1741 10.4463 11.3446 10.2755 11.5991 10.0465C11.622 10.0259 11.6461 10.0043 11.6713 9.98188C11.899 9.77889 12.2109 9.50085 12.4511 9.14062C12.742 8.70425 12.9166 8.17734 12.9166 7.49998C12.9166 6.53079 12.5261 5.74987 11.9063 5.22393C11.3045 4.71336 10.5319 4.47915 9.79159 4.47915C9.05128 4.47915 8.27866 4.71336 7.67692 5.22393C7.05706 5.74987 6.66659 6.53079 6.66659 7.49998C6.66659 7.96022 7.03968 8.33331 7.49992 8.33331C7.96016 8.33331 8.33325 7.96022 8.33325 7.49998Z" fill="white" fillOpacity="0.5" />
-                <path d="M10.6249 15.5597C10.9345 15.2192 10.9094 14.6921 10.5688 14.3825C10.2283 14.0729 9.70125 14.098 9.39165 14.4386L9.38332 14.4477C9.07372 14.7883 9.0988 15.3153 9.43934 15.6249C9.77988 15.9345 10.3069 15.9094 10.6165 15.5689L10.6249 15.5597Z" fill="white" fillOpacity="0.5" />
-                <path fillRule="evenodd" clipRule="evenodd" d="M9.99992 0.833313C4.93718 0.833313 0.833252 4.93724 0.833252 9.99998C0.833252 15.0627 4.93718 19.1666 9.99992 19.1666C15.0627 19.1666 19.1666 15.0627 19.1666 9.99998C19.1666 4.93724 15.0627 0.833313 9.99992 0.833313ZM2.49992 9.99998C2.49992 5.85772 5.85766 2.49998 9.99992 2.49998C14.1422 2.49998 17.4999 5.85772 17.4999 9.99998C17.4999 14.1422 14.1422 17.5 9.99992 17.5C5.85766 17.5 2.49992 14.1422 2.49992 9.99998Z" fill="white" fillOpacity="0.5" /></g>
-            <defs><clipPath id="clip0_13_310"><rect width="20" height="20" fill="white" /></clipPath></defs></svg>),
-        perfil: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         perfil: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16.9696 19.5047C16.7257 17.5293 15.0414 16 13 16H11C8.95858 16 7.27433 17.5293 7.03036 19.5047M16.9696 19.5047C19.3986 17.893 21 15.1335 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 15.1335 4.60137 17.893 7.03036 19.5047M16.9696 19.5047C15.5456 20.4496 13.8371 21 12 21C10.1629 21 8.45441 20.4496 7.03036 19.5047M15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10Z" stroke="white" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>)
     };
+    //LINKS DA NAV 2
     const links2 = [
-        { href: '/ajuda', name: 'ajuda', page: 'Ajuda' },
         { href: '/administrador/perfil', name: 'perfil', page: 'Meu Perfil' },
     ];
 
@@ -129,6 +125,7 @@ export default function AdmLayout({ children }) {
                         </svg>
                         </i>
                     </div>
+                    {/*NAV BAR 1*/}
                     <ul className="navList">
                         {links.map(({ href, name, page }) => (
                             <li className="navList-item text-[#999999] hover:text-[#ffc01d] transition-colors duration-200" key={name}>
@@ -139,7 +136,7 @@ export default function AdmLayout({ children }) {
                                 <span className="tooltip">{page}</span>
                             </li>
                         ))}
-
+{/*NAV BAR 2*/}
                         <div className='links2'>
                             {links2.map(({ href, name, page, links3 }) => (
                                 <li className="navList-item" key={name}>
@@ -167,6 +164,4 @@ export default function AdmLayout({ children }) {
             <main className={`main-content justify-items-center ${sidebarActive ? 'collapsed' : ''}`}>
                 {children}
             </main>
-        </>
-    );
-}
+        </> );}

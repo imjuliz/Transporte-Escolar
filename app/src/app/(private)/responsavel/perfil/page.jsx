@@ -38,8 +38,7 @@ export default function MeuPerfil() {
             alert("Foto atualizada!");
         } else {
             alert("Erro ao enviar foto");
-        }
-    };
+        }  };
 
     //info perfil 
     useEffect(() => {
@@ -55,8 +54,7 @@ export default function MeuPerfil() {
             .catch((err) => {
                 console.error("Erro ao buscar dados do usuário:", err.message);
                 setErro("Erro ao carregar perfil.");
-            })
-    }, []);
+            })  }, []);
 
     // mascara telefone - ao escrever no input
     useEffect(() => {
@@ -123,13 +121,9 @@ export default function MeuPerfil() {
             }
             else {
                 console.error('Erro ao atualizar perfil');
-            }
-        } catch (error) {
+            } } catch (error) {
             console.error('Erro:', error);
-        }
-
-
-    };
+        } };
 const [telefone, setTelefone] = useState("");
     const [email, setEmail] = useState("");
 
@@ -162,10 +156,8 @@ const [telefone, setTelefone] = useState("");
                         <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
                     </svg>
                     <span className="sr-only">Carregando...</span>
-                </div>
-            </div>
-        )
-    }
+                </div> </div>
+        )}
 
     function pegarPrimeiroEUltimoNome(nome) {
         if (!nome) return { primeiroNome: "", ultimoNome: "" };
@@ -182,12 +174,14 @@ const [telefone, setTelefone] = useState("");
                 <hr />
             </div>
             <div className='user flex items-center gap-3 border-b border-[#D0D0D0]'>
+               {/*DADOS RESPONSAVEL NOME E TIPO*/}
                 <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="" />
                 <div className="font-medium">
                     <h3>{nomeSobrenome.primeiroNome} {nomeSobrenome.ultimoNome}</h3>
                     <p className="text-sm text-gray-500">{usuario.tipo || "Tipo de usuário"}</p>
                 </div>
             </div>
+             {/*DADOS RESPONSAVEL NOME E CPF*/}
             <div className='sec'>
                 <div className='sec-indicador'><h4>Dados Pessoais</h4><hr /></div>
                 <div className='sec-container flex flex-wrap flex-row justify-between gap-3'>
@@ -195,6 +189,7 @@ const [telefone, setTelefone] = useState("");
                     <div className='sec-campos'><h6>CPF:</h6><p>{formatarCPF(usuario.cpf)}</p></div>
                 </div>
             </div>
+             {/*DADOS RESPONSAVEL EMAIL E TELEFONE*/}
             <div className='sec'>
                 <div className='sec-indicador'><h4>Contatos</h4><hr /></div>
                 <div className='sec-container flex flex-wrap flex-row justify-between gap-3'>
@@ -209,7 +204,7 @@ const [telefone, setTelefone] = useState("");
                 <button type="button" className="btn-add mt-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Editar perfil
                 </button>
-
+ {/*MODAL DE EDIÇÃO DE PERFIL*/}
                 <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -281,15 +276,9 @@ const [telefone, setTelefone] = useState("");
                                                 return parsed.mensagem || 'Resposta recebida';
                                             } catch (e) {
                                                 return resposta; // mostra como texto cru se nn for json
-                                            }
-                                        })()}
+                                            } })()}
                                     </p></div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    )
-}
+                                </form>  </div>
+                        </div>  </div>
+                </div>  </div>
+        </section>  )}

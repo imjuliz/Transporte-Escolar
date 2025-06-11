@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     const toggleSidebar = () => {
         setSidebarActive(!sidebarActive);
     };
-
+// NAVBAR 
     const iconsNav =
     {
         rotas: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
         </svg>
         )
     };
-
+//LINKS DA NAV
     const links = [
         { href: '/responsavel/rotas', name: 'rotas', page: 'Painel de Navegação' },
         { href: '/responsavel/viagens', name: 'viagens', page: 'Viagens' },
@@ -81,8 +81,7 @@ export default function RootLayout({ children }) {
             .catch((err) => {
                 console.error("Erro ao buscar dados do usuário:", err.message);
                 setErro("Erro ao carregar perfil.");
-            });
-    }, []);
+            });}, []);
 
     const [usuario, setUsuario] = useState(null);
 
@@ -139,16 +138,15 @@ export default function RootLayout({ children }) {
                         </svg>
                         </i>
                     </div>
+                     {/*NAV BAR ICONES*/}
                     <ul className="navList">
                         {links.map(({ href, name, page }) => (
                             <li className="navList-item text-[#999999] hover:text-[#ffc01d] transition-colors duration-200" key={name}>
                                 <a href={href}>
                                     {iconsNav[name]}
-                                    <span className="linksNames">{page}</span>
-                                </a>
+                                    <span className="linksNames">{page}</span> </a>
                                 <span className="tooltip">{page}</span>
-                            </li>
-                        ))}
+                            </li> ))}
                     </ul>
                     <div className="profileContent">
                         <div className="profile">
@@ -158,13 +156,9 @@ export default function RootLayout({ children }) {
                                 </svg>
                                 <p className="text-[#757575] group-hover:text-[#FF0000] transition-colors duration-200">Sair</p>
                             </button>
-                        </div>
-                    </div>
-                </div>
-            </header>
+                        </div> </div>
+                </div> </header>
             <main className={`main-content justify-items-center ${sidebarActive ? 'collapsed' : ''} ${isMapa ? 'p-0' : 'px-[12%]'}`}>
                 {children}
-            </main>
-        </>
-    );
-}
+            </main>  </>
+    );}

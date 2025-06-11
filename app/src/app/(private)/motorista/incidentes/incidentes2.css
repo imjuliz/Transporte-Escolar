@@ -15,7 +15,7 @@ section {
     width: 100%;
 }
 
-.msg-status{
+.msg-status {
     color: #000;
     font-family: 'Plus Jakarta Sans SemiBold';
 }
@@ -29,28 +29,28 @@ section {
     font-family: 'Plus Jakarta Sans Bold';
 }
 
-p{
+p {
     font-family: 'Plus Jakarta Sans Medium';
     font-size: 1rem;
 }
 
-h3{
+h3 {
     font-family: 'Plus Jakarta Sans Semibold';
     font-size: 1.2rem;
 }
 
-.card-msg{
+.card-msg {
     width: 350px;
     height: 200px;
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
 }
 
-.card-msg:hover{
-    box-shadow: 0 0 11px rgba(0,0,0,0.06);
+.card-msg:hover {
+    box-shadow: 0 0 11px rgba(0, 0, 0, 0.06);
 }
 
-input{
+input {
     padding: 15px;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.200);
@@ -58,13 +58,34 @@ input{
     width: 100%
 };
 
-@media screen and (max-width: 750px){
-    .box-motivos{
-        flex-direction: column;
-    }
 
+@media screen and(max-width: 640px) {
     .card-msg{
-        width: 100%;
-        height: fit-content;
-    }
+        margin-left: -30%;
+        width: 35vw;
+        height: 25vw;
+        margin-right: 8%;
+        }
 }
+
+@media screen and (max-width: 768px) {
+    .card-msg{
+        margin-left: -30%;
+        width: 70vw;
+        height: 25vw;
+        margin-right: 8%;
+        }
+        .mensagens{
+            display: grid;
+            width: 50%;
+        }
+    .card-msg h3{
+        font-size: 20px;
+        }
+     }
+    @media screen and (max-width: 1024px) {
+        .card-msg{
+        margin-left: -10%;
+        height: 25vw;
+        margin-right: 8%;
+     }}

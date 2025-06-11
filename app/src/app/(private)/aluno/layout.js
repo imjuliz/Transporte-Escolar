@@ -13,7 +13,7 @@ export default function AlunoLayout({ children }) {
     const toggleSidebar = () => {
         setSidebarActive(!sidebarActive);
     };
-
+//NAV 
     const iconsNav =
     {
         rota: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +45,7 @@ export default function AlunoLayout({ children }) {
         )
 
     };
-
+//LINKS DA NAV
     const links = [
         { href: '/aluno/minha-rota', name: 'rota', page: 'Minha Rota' },
         { href: '/aluno/viagens', name: 'viagens', page: 'Viagens' },
@@ -125,6 +125,7 @@ export default function AlunoLayout({ children }) {
                         </svg>
                         </i>
                     </div>
+                    {/*ICONS DA NAV*/}
                     <ul className="navList">
                         {links.map(({ href, name, page }) => (
                             <li className="navList-item text-[#999999] hover:text-[#ffc01d] transition-colors duration-200" key={name}>
@@ -151,6 +152,4 @@ export default function AlunoLayout({ children }) {
             <main className={`main-content justify-items-center`}>
                 {children}
             </main>
-        </>
-    );
-}
+        </>);}

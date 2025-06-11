@@ -3,12 +3,12 @@ import { useRef, useState, useEffect } from 'react';
 import '../styles/cadastrar.css';
 
 export default function RegistroPage() {
-  // titulo da guia
+
+  // TITULO DA GUIA 
   useEffect(() => {
     document.title = 'EduTrip - Cadastrar';
   }, []);
 
-  const cpfInputRef = useRef(null);
   const [tipo, setTipo] = useState('');
 
   const handleChange = (e) => {
@@ -36,13 +36,13 @@ export default function RegistroPage() {
   const formRef = useRef(null);
   const [form, setForm] = useState({});
 
-  // escolha de usuario
+  // ESCOLHA DE USUÁRIO
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!tipo) return alert('Selecione um tipo de usuário.');
     if (tipo === 'aluno' && !form.escola_id) return alert('Selecione uma escola da lista.');
 
-
+// ENVIO DO FORM
     try {
       let url = '';
       let corpo = {};
@@ -120,7 +120,7 @@ export default function RegistroPage() {
     }
   };
 
-  // Após setar escola_id e ponto_embarque_id, busca o viagem_id
+  // APÓS SETAR ESCOLA_ID E PONTO_EMBARQUE_ID, BUSCA O VIAGEM_ID
   useEffect(() => {
     async function fetchViagem() {
       if (form.escola_id && form.ponto_embarque_id) {
@@ -145,7 +145,7 @@ export default function RegistroPage() {
     fetchViagem();
   }, [form.escola_id, form.ponto_embarque_id]);
 
-  // busca as escola com base no que o usuario escrever
+  //BUSCA AS ESCOLAS COM BASSE NO QUE O USUARIO ESCREVER
   const [nomeEscola, setNomeEscola] = useState('');
   const [escolas, setEscolas] = useState([]);
   const [pontoNome, setPontoNome] = useState('');
@@ -165,7 +165,7 @@ export default function RegistroPage() {
 
   const [responsavelExiste, setResponsavelExiste] = useState(null);
 
-// chama qnd campos de cpf/email/telefone do responsavel mudarem
+//CHAMA QUANDO CAMPOS DE CPF/EMAIL/TELEFONE DO RESPONSAVEL MUDAREM
 useEffect(() => {
   const verificar = async () => {
     if (form.cpf_responsavel && form.email_responsavel && form.telefone_responsavel) {
@@ -193,7 +193,7 @@ useEffect(() => {
   verificar();
 }, [form.cpf_responsavel, form.email_responsavel, form.telefone_responsavel]);
 
-  // ao digitar nomes, ele nao permite caracteres numericos
+  //AO DIGITAR NOMES, ELE NÃO PERMITE CARACTERES NUMERICOS
   const textRef = useRef(null);
   useEffect(() => {
     if (textRef.current) {
@@ -204,7 +204,7 @@ useEffect(() => {
     }
   })
 
-  // formatacao de cpf para o front
+  //FORMATAÇÃO DO CPF PARA O FRONT
   const formatCpf = (value) => {
     const digits = value.replace(/\D/g, '').slice(0, 11);
     return digits
@@ -213,7 +213,7 @@ useEffect(() => {
       .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
   };
 
-  //formatacao de telefone p o front
+//FORMATAÇÃO DO TELEFONE PARA O FRONT
   const formatPhone = (value) => {
     const digits = value.replace(/\D/g, '').slice(0, 11);
     return digits
@@ -221,12 +221,12 @@ useEffect(() => {
       .replace(/(\d{5})(\d)/, '$1-$2');
   };
 
-  // formatacao de cnh p o front
+  //FORMATAÇÃO DE CNH PARA O FRONT
   const formatCNH = (value) => {
     return value.replace(/\D/g, '').slice(0, 9);
   };
 
-  // validade min da CNH pode ser hoje, a validade max pode ser a partir de hoje + 5 anos
+  //VALIDADE MINIMA DA CNH PODE SER HOJE, A VALIDADE MAXIMA PODE SER A PARTIR DE HOJE +5 ANOS
   function calcularMinData() {
     const hoje = new Date();
     return hoje.toISOString().split('T')[0]; // formata para yyyy-mm-dd
@@ -239,10 +239,12 @@ useEffect(() => {
   }
 
   const renderCamposEspecificos = () => {
+    {/*CASO DO ALUNO E DO RESPONSAVEL (ELES SÃO ADICIONADOS JUNTOS)*/}
     switch (tipo) {
       case 'aluno':
         return (
           <>
+          {/*INPUT DO CPF*/}
             <div className="w-full group">
               <input name="cpf" placeholder="CPF" required value={formatCpf(form.cpf || '')} onChange={(e) =>
                 handleChange({
@@ -253,15 +255,18 @@ useEffect(() => {
                 })
               } />
             </div>
+            {/*INPUT EMAIL*/}
             <input name="email" pattern="^[a-zA-Z0-9._%+-]+@al\.gov\.br$" placeholder="Email institucional" onChange={handleChange} required autoComplete="off" />
+            {/*INPUT NOME*/}
             <input name="nome" value={form.nome || ''} placeholder="Nome completo" onChange={handleChange} required />
+            {/*INPUT TELEFONE*/}
             <input name="telefonePrinc" placeholder="Telefone" required value={formatPhone(form.telefonePrinc || '')} onChange={(e) => handleChange({
               target: {
                 name: 'telefonePrinc',
                 value: e.target.value.replace(/\D/g, '')
-              }
-            })
+              }})
             } />
+            {/*INPUT DATA DE NASCIMENTO*/}
             <input type="date"
               name="dataNascimento"
               placeholder="Data de nascimento"
@@ -309,15 +314,10 @@ useEffect(() => {
                           }
                         } catch (err) {
                           console.error('Erro ao buscar ponto de embarque:', err);
-                        }
-                      }}
-                    >
+                        }}} >
                       {escola.nome}
                     </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+                  ))}</ul>)} </div>
 
             {/* Campo preenchido automaticamente com o nome do ponto */}
             <div className="w-full group">
@@ -330,6 +330,7 @@ useEffect(() => {
                 placeholder="Ponto de ônibus"
               />
             </div>
+            {/*SELECT DO TURNO*/}
             <select name="turno" value={form.turno || ''} onChange={handleChange} required className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 mb-5">
               <option value="" disabled>Selecionar turno</option>
               <option value="manha">Manhã</option>
@@ -348,8 +349,11 @@ useEffect(() => {
                 }
               })
             } />
+            {/*INPUT NOME DO RESPONSAVEL*/}
             <input name="nome_responsavel" placeholder="Nome do responsável" onChange={handleChange} required value={form.nome_responsavel || ''} />
+           {/*INPUT EMAIL DO RESPONSAVEL*/}
             <input name="email_responsavel" placeholder="Email do responsável" onChange={handleChange} required value={form.email_responsavel || ''} />
+            {/*INPUT TELEFONE DO RESPONSAVEL*/}
             <input name="telefone_responsavel" placeholder="Telefone do responsável" value={formatPhone(form.telefone_responsavel || '')} onChange={(e) =>
               handleChange({
                 target: {
@@ -368,10 +372,8 @@ useEffect(() => {
                 required
                 value={form.senha_responsavel || ''}
               />
-            )}
-          </>
-        );
-
+            )}</>);
+{/*CASO MOTORISTA*/}
       case 'motorista':
         return (
           <>
@@ -384,6 +386,7 @@ useEffect(() => {
             <input type="password" name="senha" placeholder="Senha" required autoComplete="off" value={form.senha || ''} onChange={handleChange} className='data' />
           </>
         );
+        {/*CASO ADMINISTRADOR*/}
       case 'administrador':
         return (
           <>
@@ -394,11 +397,9 @@ useEffect(() => {
             <input name="senha" placeholder="Senha" type="password" value={form.senha || ''} onChange={handleChange} required autoComplete="off" className='data' />
           </>
         );
-
       default:
         return null;
-    }
-  };
+    }};
 
   return (
     <div className='w-full'>
@@ -407,15 +408,14 @@ useEffect(() => {
           <h1>Cadastrar Usuário</h1>
           <hr />
         </div>
-
-
+        {/*SELECT DO TIPO*/}
         <select onChange={(e) => setTipo(e.target.value)} value={tipo} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 mb-5">
           <option value="">Selecionar tipo</option>
           <option value="aluno">Aluno e responsável</option>
           <option value="motorista">Motorista</option>
           <option value="administrador">Administrador</option>
         </select>
-
+{/*SWITCH CASE*/}
         {tipo && (
           <form onSubmit={handleSubmit} ref={formRef} className='flex flex-col gap-6 mt-6'>
             {renderCamposEspecificos()}
