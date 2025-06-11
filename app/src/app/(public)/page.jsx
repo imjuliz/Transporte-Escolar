@@ -14,7 +14,8 @@ export default function Home() {
     /* nav bar */
     const links = [
         { href: '/', page: 'Página Inicial' },
-        { href: './trabalheConosco', page: 'Trabalhe Conosco' }
+        { href: '/trabalheConosco', page: 'Trabalhe Conosco' },
+        { href: '/login', page: 'Entrar' }
     ];
     const [activeIndex, setActiveIndex] = useState(0);
     const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -93,7 +94,7 @@ export default function Home() {
         {
             img1: './img/sessao4/bolinha1.svg',
             img2: './img/sessao4/card4_1.svg',
-            text: 'Clique no botão de "Entrar"'
+            text: 'Entre em contato com um dos administradores. Seja cadastrado em nosso sistema.'
         },
         {
             img1: './img/sessao4/bolinha2.svg',
@@ -191,7 +192,7 @@ export default function Home() {
             {/* navbar */}
             <header>
                 <ul className="linksrapidos">
-                    <li className="logo">Nome</li>
+                    <li className="logo">EduTrip</li>
                     <div className="highlight" ref={highlightRef}></div>
                     {links.map((link, index) => (
                         <li key={index} className="link-item" ref={(el) => (itemRefs.current[index] = el)} onClick={() => setActiveIndex(index)} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
@@ -200,9 +201,9 @@ export default function Home() {
                             </a>
                         </li>
                     ))}
-                    <a href="/login">
+                    {/* <a href="/login">
                         <button className="login text-[#fff] bg-[#2D2F39]">Entrar</button>
-                    </a>
+                    </a> */}
                 </ul>
             </header>
 

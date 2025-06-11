@@ -91,7 +91,8 @@ export default function TrabalheConosco() {
     // nav bar
     const links = [
         { href: '/', page: 'Página Inicial' },
-        { href: '/trabalheConosco', page: 'Trabalhe Conosco' }
+        { href: '/trabalheConosco', page: 'Trabalhe Conosco' },
+        { href: '/login', page: 'Entrar' }
     ];
 
     const [activeIndex, setActiveIndex] = useState(0);
@@ -120,19 +121,19 @@ export default function TrabalheConosco() {
         {
             title: 'Estrutura e Suporte',
             text: 'Oferecemos frota moderna, manutenção preventiva garantida e suporte diário da equipe administrativa para rotas, pais e comunicação, garantindo segurança e tranquilidade no trabalho.',
-            img: '',
+            img: './img/gestao-transporte.svg',
             classNamee: 'row-left'
         },
         {
             title: 'Jornada Organizada',
             text: 'No transporte escolar, os horários são fixos e previsíveis. Isso significa menos estresse, mais tempo para a família e uma melhor qualidade de vida. Valorizamos o equilíbrio entre trabalho e vida pessoal, oferecendo uma jornada clara, sem surpresas ou longas horas extras.',
-            img: '',
+            img: './img/jornada-org.svg',
             classNamee: 'row-right'
         },
         {
             title: 'Salário Competitivo',
             text: 'Reconhecemos o valor do trabalho dos nossos motoristas e oferecemos uma remuneração compatível com o mercado, justa e sempre em dia.',
-            img: '',
+            img: './img/salario.svg',
             classNamee: 'row-left'
         }
     ];
@@ -200,7 +201,7 @@ export default function TrabalheConosco() {
         },
         {
             name: "Trabalhe Conosco",
-            link: "./trabalheConosco"
+            link: "/trabalheConosco"
         },
         {
             name: "Termos de uso e privacidade",
@@ -253,7 +254,7 @@ export default function TrabalheConosco() {
             {/* navbar */}
             <header>
                 <ul className="linksrapidos">
-                    <li className="logo">Nome</li>
+                    <li className="logo">EduTrip</li>
                     <div className="highlight" ref={highlightRef}></div>
                     {links.map((link, index) => (
                         <li key={index} className="link-item" ref={(el) => (itemRefs.current[index] = el)} onClick={() => setActiveIndex(index)} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
@@ -262,9 +263,9 @@ export default function TrabalheConosco() {
                             </a>
                         </li>
                     ))}
-                    <a href="/login">
+                    {/* <a href="/login">
                         <button className="login text-[#fff] bg-[#2D2F39]">Entrar</button>
-                    </a>
+                    </a> */}
                 </ul>
             </header>
 
@@ -293,7 +294,7 @@ export default function TrabalheConosco() {
                 <div className="trabalhe grid grid-flow-col grid-rows-3 gap-4">
                     {trabalheItens.map((trabalheItem, index) => (
                         <div key={index} className={trabalheItem.classNamee}>
-                            <img src='' />
+                            <img src={trabalheItem.img} className='img-trabalhe'/>
                             <div className='trabalhe-text'>
                                 <h2>{trabalheItem.title}</h2>
                                 <p>{trabalheItem.text}</p>

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from 'next/image';
 import MapaViagemResponsavel from "../../../../components/Mapa/MapaResponsavel.jsx";
 import '../styles/rotas.css'
+import 'leaflet/dist/leaflet.css';
 
 export default function RotaResponsavel() {
   const router = useRouter();
@@ -53,7 +54,7 @@ export default function RotaResponsavel() {
           setError("Nenhuma viagem ativa no momento.");
         } else {
           setInfoFilhos(data.infoFilhos);
-          setFilhoSelecionado(data.infoFilhos[0].id_aluno || data.infoFilhos[0].alunoId); 
+          setFilhoSelecionado(data.infoFilhos[0].id_aluno || data.infoFilhos[0].alunoId);
         }
         setLoading(false);
       })
@@ -112,9 +113,9 @@ export default function RotaResponsavel() {
       )}
 
       {dadosMapa ? (
-        <div style={{ height: "100%", width: "100%" }}>
+        <section className="mapa-resp relative w-screen h-full m-8">
           <MapaViagemResponsavel dados={dadosMapa} />
-        </div>
+        </section>
       ) : (
         <div className='flex flex-col gap-10 items-center justify-center'>
           <Image
@@ -127,10 +128,10 @@ export default function RotaResponsavel() {
           <p className="">Não há nenhuma viagem em andamento.</p>
           <button className="btn-viagens">
             <a href='./viagens'>
-            <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="seta" >
-              <path d="M17 7H1M1 7L7 1M1 7L7 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <p className='text-viagens text-[#fff] no-underline m-0'>Ver viagens</p>
+              <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="seta" >
+                <path d="M17 7H1M1 7L7 1M1 7L7 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <p className='text-viagens text-[#fff] no-underline m-0'>Ver viagens</p>
             </a>
           </button>
         </div>

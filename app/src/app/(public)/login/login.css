@@ -45,7 +45,7 @@
     border-radius: 0 0 3px 3px;
 } */
 
-.seta:hover path{
+.seta:hover path {
     stroke: #FFC01D;
 }
 
@@ -71,6 +71,20 @@
     width: 40%;
     height: 100%;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.imgLogin h3 {
+    font-family: "Plus Jakarta Sans SemiBold";
+    color: #000;
+    margin-bottom: 10vh !important;
+}
+
+.img-login {
+    width: 80%;
 }
 
 .login-btn {

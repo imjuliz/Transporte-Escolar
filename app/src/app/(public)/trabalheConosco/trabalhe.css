@@ -21,7 +21,12 @@ header ul {
 
 .logo {
   font-size: 1.1rem;
-  color: #ffffff86;
+  font-family: "Plus Jakarta Sans Bold";
+  color: #fff;
+}
+
+.img-trabalhe{
+  height: 20vh;
 }
 
 .linksrapidos {
@@ -104,12 +109,18 @@ header ul {
 }
 
 .row-left{
+  
+  flex-direction: row;
+  gap:40px;
+  align-items: center;
     display: flex;
 }
 
 .row-right{
     display: flex;
     flex-direction: row-reverse;
+    gap:40px;
+    align-items: center;
 }
 
 .row-right p, .row-right h2{

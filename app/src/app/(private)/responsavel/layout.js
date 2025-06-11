@@ -118,7 +118,7 @@ export default function RootLayout({ children }) {
     };
     return (
         <>
-            <header>
+            <header className='z-[9999]'>
                 <div className={`sidebar ${sidebarActive ? 'active' : ''}`}>
                     <div className="logoContent flex flex-nowrap gap-4 items-center">
                         <Image

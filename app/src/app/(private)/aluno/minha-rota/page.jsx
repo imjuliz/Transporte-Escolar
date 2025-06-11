@@ -6,42 +6,6 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
 import '../styles/viagens.css';
-
-// export default function MinhaRotaAluno() {
-//     const [usuario, setUsuario] = useState(null);
-
-//     useEffect(() => {
-//         const usuarioSalvo = localStorage.getItem("usuario");
-
-//         if (usuarioSalvo) {
-//             try {
-//                 const usuarioObj = JSON.parse(usuarioSalvo);
-//                 console.log("Dados recuperados do localStorage:", usuarioObj);
-
-//                 if (usuarioObj.id) {
-//                     setUsuario(usuarioObj);
-//                 } else {
-//                     console.error("ID do usuário está ausente.");
-//                 }
-//             } catch (error) {
-//                 console.error("Erro ao parsear localStorage:", error);
-//             }
-//         } else {
-//             console.error("Nenhum usuário encontrado no localStorage.");
-//         }
-//     }, []);
-
-//     if (!usuario) {
-//         return <p>Carregando informações do usuário...</p>;
-//     }
-
-//     return (
-//         <section className="relative w-screen m-8">
-//         <Mapa usuarioId={usuario.id} tipoUsuario={usuario.tipo} className="h-full"/>
-//         </section>
-//     );
-// }
-
 import MapaViagemAluno from '../../../../components/Mapa/MapaAluno.jsx';
 import { useRouter, usePathname } from "next/navigation";
 

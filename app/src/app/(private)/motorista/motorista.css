@@ -9,6 +9,7 @@ body{
   width: calc(100% - 78px);
   transition: margin-left 0.3s ease, width 0.3s ease;
   padding: 0 12%;
+  height: 100vh;
 }
 
 .main-content.collapsed {
@@ -21,6 +22,10 @@ body{
   justify-content: space-between;
   align-items: center;
   height: 85%;
+}
+
+section{
+  height: 100%;
 }
 
 .btn-sair{
@@ -297,8 +302,8 @@ body{
   transform: translate(-50%, -50%);
   border-radius: 6px;
   height: 40px;
-  width: 122px;
-  background: #F6F6F6;
+  width: 152px;
+  background: #161A23;
   line-height: 35px;
   text-align: center;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);

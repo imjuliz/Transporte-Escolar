@@ -114,12 +114,12 @@ export default function Viagens() {
 
                     // Função para criar horário completo com base na data da viagem
                     function criarHorarioCompleto(horaString, baseDate) {
+                      if (!horaString || typeof horaString !== 'string') return null;
                       const [h, m, s] = horaString.split(':');
                       const d = new Date(baseDate);
                       d.setHours(Number(h), Number(m), Number(s || 0), 0);
                       return d;
-                    }
-
+                    }  
                     const horaEmbarque = criarHorarioCompleto(viagem.horaEmbarque, dataBase);
                     const horaSaida = criarHorarioCompleto(viagem.horaSaida, dataBase);
 

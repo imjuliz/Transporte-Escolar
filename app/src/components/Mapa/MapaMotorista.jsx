@@ -26,7 +26,7 @@ const MapaViagemMotorista = ({ dados }) => {
   });
 
   const onibusIcon = new L.Icon({
-    iconUrl: 'https://cdn-icons-png.flaticon.com/512/61/61231.png',
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/174/174237.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32],
   });

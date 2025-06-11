@@ -62,6 +62,33 @@ export default function RootLayout({ children }) {
         { href: '/motorista/perfil', name: 'perfil', page: 'Meu perfil' },
     ];
 
+    // buscar informações do perfil
+    useEffect(() => {
+        fetch("http://localhost:3001/perfil", {
+            method: "GET",
+            credentials: "include",
+        })
+            .then(async (res) => {
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.mensagem);
+                setUsuario(data);
+            })
+            .catch((err) => {
+                console.error("Erro ao buscar dados do usuário:", err.message);
+                setErro("Erro ao carregar perfil.");
+            });
+    }, []);
+
+    const [usuario, setUsuario] = useState(null);
+
+    // pega primeiro e ultimo nome do usuario
+    const pegarPrimeiroEUltimoNome = (nome) => {
+        if (!nome) return { primeiroNome: "", ultimoNome: "" };
+        const nomes = nome.trim().split(" ");
+        return { primeiroNome: nomes[0], ultimoNome: nomes[nomes.length - 1] };
+    };
+    const nomeSobrenome = usuario?.nome ? pegarPrimeiroEUltimoNome(usuario.nome) : { primeiroNome: '', ultimoNome: '' };
+
     //logout
     const handleLogout = async () => {
     try {
@@ -86,7 +113,7 @@ export default function RootLayout({ children }) {
   };
     return (
         <>
-            <header>
+            <header className='z-[9999]'>
                 <div className={`sidebar ${sidebarActive ? 'active' : ''}`}>
                     <div className="logoContent flex flex-nowrap gap-4 items-center">
                         <Image
@@ -98,7 +125,7 @@ export default function RootLayout({ children }) {
                         />
                         <div className="logo flex flex-col">
                             <p className="logoName">Motorista</p>
-                            <h4 className='nomepessoa'>nome</h4>
+                            <h4 className='nomepessoa'>Olá, {nomeSobrenome.primeiroNome}</h4>
                         </div>
                         <i className='bx bx-menu' id="btn" onClick={toggleSidebar}><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="0.5" y="0.5" width="27" height="27" rx="7.5" fill="#161A23" />
