@@ -39,6 +39,7 @@ export default function RotaAluno() {
     checarSessao();
   }, [router]);
 
+  {/*CHAMA AS VIAGENS CADASTRTADAS PARA ESTE ALUNO*/}
   useEffect(() => {
     fetch("http://localhost:3001/viagem-mapa", {
       method: "GET",
@@ -83,6 +84,7 @@ export default function RotaAluno() {
     }: null;
   return (
     <section className="relative h-screen w-screen">
+      {/*.MAP DAS VIAGENS*/}
       {infoFilhos.length > 1 && (
         <nav className="flex gap-x-1 --prevent-on-load-init mt-4 mb-4" role="tablist">
           {infoFilhos.map((filho) => {

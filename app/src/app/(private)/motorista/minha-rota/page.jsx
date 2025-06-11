@@ -28,11 +28,11 @@ export default function RotaMotorista() {
         router.push('/login');
       } finally {
         setCarregando(false);
-      }
-    }
+      } }
     checarSessao();
   }, [router]);
 
+  //BUSCA OS DADOS DA VIAGEM
   useEffect(() => {
     fetch('http://localhost:3001/viagem-mapa', {
       method: 'GET',

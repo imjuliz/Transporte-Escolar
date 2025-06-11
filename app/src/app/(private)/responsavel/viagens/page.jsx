@@ -7,6 +7,7 @@ export default function Viagens() {
   const [abaAlunoAtiva, setAbaAlunoAtiva] = useState(null);
   const [abaStatusAtiva, setAbaStatusAtiva] = useState('todos');
 
+   {/*INFORMAÇÕES DOS FILHOS*/}
   useEffect(() => {
     fetch('http://localhost:3001/filhos', {
       credentials: 'include'
@@ -53,15 +54,13 @@ export default function Viagens() {
               <button
                 className={`barrinha nav-link ${abaAlunoAtiva === aluno.id_aluno ? 'active' : ''}`}
                 type="button"
-                onClick={() => setAbaAlunoAtiva(aluno.id_aluno)}
-              >
+                onClick={() => setAbaAlunoAtiva(aluno.id_aluno)}>
                 <img src={aluno.img || '/default-profile.png'} alt="" className='fotodeperfil' />
                 <p className='nomeAluno'>{aluno.nome_aluno}</p>
               </button>
             </li>
           ))}
         </ul>
-
         {/* Sub-abas de status */}
         <ul className="nav nav-tabs mt-3" id="statusTabs" role="tablist">
           {['em andamento', 'agendada', 'concluída', 'todos'].map((status) => (
@@ -69,12 +68,10 @@ export default function Viagens() {
               <button
                 className={`barrinha nav-link ${abaStatusAtiva === status ? 'active' : ''}`}
                 type="button"
-                onClick={() => setAbaStatusAtiva(status)}
-              >
+                onClick={() => setAbaStatusAtiva(status)} >
                 {primeiraLetraMaiuscula(status)}
               </button>
-            </li>
-          ))}
+            </li> ))}
         </ul>
 
         {/* Conteúdo das viagens */}
@@ -87,8 +84,7 @@ export default function Viagens() {
             return (
               <div
                 key={aluno.id_aluno}
-                className="tab-pane fade show active"
-              >
+                className="tab-pane fade show active" >
                 {viagensFiltradas.length === 0 ? (
                   <p>Nenhuma viagem {primeiraLetraMaiuscula(abaStatusAtiva)}.</p>
                 ) : viagensFiltradas.map((viagem, i) => {
@@ -100,8 +96,7 @@ export default function Viagens() {
                     const [h, m, s] = horaStr.split(':');
                     const d = new Date(base);
                     d.setHours(Number(h), Number(m), Number(s || 0));
-                    return d;
-                  }
+                    return d;}
 
                   const horaEmbarque = criarHorarioCompleto(viagem.horaEmbarque, dataBase);
                   const horaSaida = criarHorarioCompleto(viagem.horaSaída, dataBase);
@@ -126,15 +121,9 @@ export default function Viagens() {
                       <div className='titulo-status flex gap-4 items-center justify-between'>
                         <h3>{primeiraLetraMaiuscula(viagem.tipo)}</h3>
                         <div className='status'>{primeiraLetraMaiuscula(viagem.status)}</div>
-                      </div>
-                    </div>
-                  )
-                })}
+                      </div></div>
+                  ) })}
               </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
+            ); })}
+        </div> </div>
+    </section> );}

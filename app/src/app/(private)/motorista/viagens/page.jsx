@@ -7,6 +7,7 @@ export default function Viagens() {
   const [motoristas, setMotoristas] = useState([]);
   const [abaAtiva, setAbaAtiva] = useState('todos'); // Estado da aba ativa
 
+   {/*BUSCA DADOS DAS VIAGENS*/}
   useEffect(() => {
     fetch('http://localhost:3001/viagens', {
       credentials: 'include'
@@ -46,6 +47,7 @@ export default function Viagens() {
           <h1>Viagens</h1>
           <hr />
         </div>
+         {/*VIAGEM CONCLUIDA, EM ANDAMENTO E AGENDADA*/}
         <div className='chrome'>
           <ul className="nav nav-tabs" id="myTab" role="tablist">
             <li className="nav-item" role="presentation">
@@ -53,8 +55,7 @@ export default function Viagens() {
                 className={`barrinha nav-link ${abaAtiva === 'em andamento' ? 'active' : ''}`}
                 type="button"
                 onClick={() => setAbaAtiva('em andamento')}
-                aria-selected={abaAtiva === 'em andamento'}
-              >
+                aria-selected={abaAtiva === 'em andamento'}>
                 Em andamento
               </button>
             </li>
@@ -64,8 +65,7 @@ export default function Viagens() {
                 className={`barrinha nav-link ${abaAtiva === 'agendada' ? 'active' : ''}`}
                 type="button"
                 onClick={() => setAbaAtiva('agendada')}
-                aria-selected={abaAtiva === 'agendada'}
-              >
+                aria-selected={abaAtiva === 'agendada'} >
                 Agendada
               </button>
             </li>
@@ -74,8 +74,7 @@ export default function Viagens() {
                 className={`barrinha nav-link ${abaAtiva === 'concluida' ? 'active' : ''}`}
                 type="button"
                 onClick={() => setAbaAtiva('concluida')}
-                aria-selected={abaAtiva === 'concluida'}
-              >
+                aria-selected={abaAtiva === 'concluida'}>
                 Concluída
               </button>
             </li>
@@ -84,8 +83,7 @@ export default function Viagens() {
                 className={`barrinha nav-link ${abaAtiva === 'todos' ? 'active' : ''}`}
                 type="button"
                 onClick={() => setAbaAtiva('todos')}
-                aria-selected={abaAtiva === 'todos'}
-              >
+                aria-selected={abaAtiva === 'todos'}>
                 Todos
               </button>
             </li>
@@ -101,8 +99,7 @@ export default function Viagens() {
                   className={`tab-pane fade show active`} // sempre mostra para o motorista, pois filtro é geral
                   id={`content-${motorista.id_veiculo}`}
                   role="tabpanel"
-                  aria-labelledby={`tab-${motorista.id_veiculo}`}
-                >
+                  aria-labelledby={`tab-${motorista.id_veiculo}`}>
                   {viagensFiltradas.length === 0 && (
                     <p>Nenhuma viagem {primeiraLetraMaiuscula(abaAtiva)}.</p>
                   )}
@@ -117,8 +114,7 @@ export default function Viagens() {
                       const [h, m, s] = horaString.split(':');
                       const d = new Date(baseDate);
                       d.setHours(Number(h), Number(m), Number(s || 0), 0);
-                      return d;
-                    }
+                      return d;}
 
                     const horaEmbarque = criarHorarioCompleto(viagem.horaEmbarque, dataBase);
                     const horaSaida = criarHorarioCompleto(viagem.horaSaida, dataBase);
@@ -134,23 +130,16 @@ export default function Viagens() {
                           <svg className='circle' width="5" height="5" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="1.5" cy="1.5" r="1.5" fill="#8F9BB3" />
                           </svg>
-
+ {/*horarios*/}
                           <p className='m-0 text-[#8F9BB3]'>{viagem.horaEmbarque} - {viagem.horaSaida}</p>
                         </div>
                         <div className='titulo-status flex gap-4 items-center justify-between'>
                           <h3>{primeiraLetraMaiuscula(viagem.tipo)}</h3>
                           <div className='status'>{primeiraLetraMaiuscula(viagem.status)}</div>
                         </div>
-
                       </div>
-                    )
-                  })}
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-    </>
-  )
-}
+                    ) })} </div>
+              ) })}
+          </div> </div>
+      </section></>
+  )}

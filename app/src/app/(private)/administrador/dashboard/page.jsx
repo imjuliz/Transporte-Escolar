@@ -3,7 +3,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useRef, useEffect, useState } from "react";
 import '../styles/dashboard.css';
 import React from 'react';
-
 import { motion } from 'framer-motion';
 
 //componentes do dashboard
@@ -67,7 +66,8 @@ export default function dashboard() {
                 setQtdEscolas(data.total_escolas);
             } catch (error) {
                 console.error('Erro ao buscar total de escolas:', error);
-            }}
+            }
+        }
         qtdEscolas();
     }, []);
 
@@ -84,24 +84,26 @@ export default function dashboard() {
                 setQtdMotoristas(data.total_motoristas);
             } catch (error) {
                 console.error('Erro ao buscar total de motoristas:', error);
-            } }
+            }
+        }
         qtdMotoristas();
     }, []);
 
+    //INFORMAÇÕES DOS CARDS
     const infos = [
         {
             img: '/img/icon-motorista2.png',
             nome: 'Motoristas ativos',
             informacao: qtdMotoristas !== null ? qtdMotoristas : 'Carregando...'
-        },{
+        }, {
             img: '/img/bus-solid.svg',
             nome: 'Viagens em andamento',
             informacao: qtdViagens !== null ? qtdViagens : 'Carregando...'
-        },{
+        }, {
             img: '/img/users-solid.svg',
             nome: 'Novos usuários',
             informacao: qtdUsuarios !== null ? qtdUsuarios : 'Carregando...'
-        },{
+        }, {
             img: '/img/school-solid.svg',
             nome: 'Escolas cadastradas',
             informacao: qtdEscolas !== null ? qtdEscolas : 'Carregando...'
@@ -109,46 +111,42 @@ export default function dashboard() {
 
     return (
         <>
-
-             <div className='page-indicador'>
+            <div className='page-indicador'>
                 <h1>Dashboard</h1>
                 <hr />
             </div>
             <div className=' overflow-auto relative z-10'>
                 <main className='w-full mx-auto py-4 px-4 lg:px-8 '>
+                    {/*CARDS EM BAIXO DO TÍTULO*/}
                     <motion.div className="statcards grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4 mb-8"
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
                         {infos.map((infos, index) => (
-
                             <StatCard className='statcard' key={index} name={infos.nome} img={infos.img} value={infos.informacao}></StatCard>
-
                         ))} </motion.div>
-
+                    {/*GRAFICO*/}
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mt-5'>
-                        {/**Para o gráfico funcionar, é preciso adicionar datas diferentes na tabela das viagens */}
                         <ViagensGrafico></ViagensGrafico>
                         <TipoUsuarioChart></TipoUsuarioChart>
-
                     </div>
-
+                    {/*TABELA VEICULOS*/}
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-5">
                         <div className="lg:col-span-2">
                             <VeiculosTable />
                         </div>
+                        {/*REGISTRO DOS INCIDENTES*/}
                         <div className="lg:col-span-1 ">
                             <IncidentesChart></IncidentesChart>
                         </div>
                     </div>
-
+                    {/*TABELA DAS ESCOLAS*/}
                     <div className="grid grid-cols-1 gap-8 mt-5">
-<EscolasTable></EscolasTable>
+                        <EscolasTable></EscolasTable>
                     </div>
+                    {/*TABELA DOS PONTOS*/}
                     <div className="grid grid-cols-1 gap-8 mt-5">
-<PontosTable></PontosTable>
+                        <PontosTable></PontosTable>
                     </div>
-
                 </main>
             </div>
-        </>
-    )
+        </>)
 }

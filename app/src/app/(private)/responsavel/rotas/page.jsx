@@ -16,6 +16,7 @@ export default function RotaResponsavel() {
   const [carregando, setCarregando] = useState(true);
   const [filhoSelecionado, setFilhoSelecionado] = useState(null);
 
+
   useEffect(() => {
     async function checarSessao() {
       try {
@@ -27,18 +28,16 @@ export default function RotaResponsavel() {
         } else {
           setUsuarioLogado(false);
           router.push("/login");
-        }
-      } catch (error) {
+        } } catch (error) {
         console.error("Erro ao validar sessão:", error);
         setUsuarioLogado(false);
         router.push("/login");
       } finally {
         setCarregando(false);
-      }
-    }
-    checarSessao();
-  }, [router]);
+      } }  checarSessao(); }, [router]);
 
+
+//INFORMAÇÕES DAS VIAGENS
   useEffect(() => {
     fetch("http://localhost:3001/viagem-mapa", {
       method: "GET",
@@ -54,14 +53,12 @@ export default function RotaResponsavel() {
         } else {
           setInfoFilhos(data.infoFilhos);
           setFilhoSelecionado(data.infoFilhos[0].id_aluno || data.infoFilhos[0].alunoId); 
-        }
-        setLoading(false);
+        } setLoading(false);
       })
       .catch((err) => {
         setError(err.message);
         setLoading(false);
-      });
-  }, []);
+      });}, []);
 
   if (loading || carregando) return <div className="w-screen h-screen justify-items-center content-center"><p>Carregando dados da viagem...</p></div>;
   if (error) return <p className="text-red-500">Erro: {error}</p>;
@@ -98,18 +95,14 @@ export default function RotaResponsavel() {
               disabled:opacity-50 disabled:pointer-events-none
               ${isSelected ?
                     "rounded-full bg-gray-100 text-gray-800"
-                    : ""}
-            `}
+                    : ""}`}
                 role="tab"
                 aria-selected={isSelected}
-                data-hs-tab={filho.nome_aluno || filho.nome || "tab"}
-              >
+                data-hs-tab={filho.nome_aluno || filho.nome || "tab"}>
                 {filho.nome_aluno}
               </div>
-            );
-          })}
-        </nav>
-      )}
+            ); })}
+        </nav>)}
 
       {dadosMapa ? (
         <div style={{ height: "100%", width: "100%" }}>
@@ -122,8 +115,7 @@ export default function RotaResponsavel() {
             width={600}
             height={400}
             alt="Menino e menina esparando ônibus"
-            className='404-img'
-          />
+            className='404-img' />
           <p className="">Não há nenhuma viagem em andamento.</p>
           <button className="btn-viagens">
             <a href='./viagens'>
@@ -131,11 +123,7 @@ export default function RotaResponsavel() {
               <path d="M17 7H1M1 7L7 1M1 7L7 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <p className='text-viagens text-[#fff] no-underline m-0'>Ver viagens</p>
-            </a>
-          </button>
-        </div>
-      )}
+            </a> </button>
+        </div> )}
     </section>
-
-  );
-}
+  );}

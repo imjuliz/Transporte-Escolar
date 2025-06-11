@@ -7,6 +7,8 @@ import Image from 'next/image'
 export default function veiculos() {
     const [veiculo, setUsuario] = useState(null);
     const [erro, setErro] = useState("");
+
+     {/*PEGA OS DADOS DO VEÍCULO*/}
     useEffect(() => {
         fetch("http://localhost:3001/verVeiculo", {
             method: "GET",
@@ -20,8 +22,7 @@ export default function veiculos() {
             .catch((err) => {
                 console.error("Erro ao buscar dados do veiculo:", err.message);
                 setErro("Erro ao carregar informações do veiculo.");
-            });
-    }, []);
+            }); }, []);
 
      // 1. Enquanto carrega
      if (erro) {
@@ -38,8 +39,7 @@ export default function veiculos() {
                     <span className="sr-only">Carregando...</span>
                 </div>
             </div>
-        );
-    }
+        );}
 
     return (
         <>
@@ -49,6 +49,7 @@ export default function veiculos() {
                         <hr />
                     </div>
                     <div className='@container'>
+                     {/*MODELO, MARCA E PLACA DO VEICULO*/}
                     <div className='sec'>
                         <div className='sec-indicador'>
                             <h4>Dados do ônibus escolar</h4>
@@ -69,7 +70,7 @@ export default function veiculos() {
                             </div>
                         </div>
                     </div>
-               
+                {/*ANO DA FABRICAÇÃO E CAPACIDADE */}
                     <div className='sec'>
                         <div className='sec-container grid grid-flow-col grid-rows-1 gap-3  '>
                             <div className='sec-campos flex flex-nowrap gap-140 2xl:gap-105 md:gap-32 sm:gap-20'>
@@ -81,11 +82,7 @@ export default function veiculos() {
                                 <h6>N° de passageiros</h6>
                                 <p>{veiculo.capacidade}</p>
                             </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </section>
-        </>
-    )
-}
+                            </div> </div>
+                    </div>  </div>
+                </section> </>
+    )}

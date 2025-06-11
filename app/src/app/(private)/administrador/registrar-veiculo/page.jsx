@@ -21,7 +21,7 @@ export default function RegistrarVeiculo() {
       anoFabricacao: form.ano.value
 
     };
-
+{/*ENVIA PRO BACK*/}
     try {
       const response = await fetch("http://localhost:3001/registrar-veiculo", {
         method: "POST",
@@ -45,13 +45,10 @@ export default function RegistrarVeiculo() {
         alert("Erro: já existe um veículo com essa placa.");
       } else {
         alert("Erro ao cadastrar veículo.");
-      }}
-
-    } catch (error) {
+      }}} catch (error) {
       console.error("Erro:", error);
       setResposta("Erro ao enviar os dados.");
-    }
-  };
+    }};
 
   return (
     <>
@@ -62,8 +59,7 @@ export default function RegistrarVeiculo() {
             <hr />
           </div>
         </section>
-
-
+{/*FORMULÁRIO*/}
         <form onSubmit={handleSubmit} className='flex flex-col gap-6 mt-6'>
           <input type="text" id="placa" name="placa" required placeholder="Placa do Veículo" />
           <input type="text" id="capacidade" name="capacidade" required placeholder="Capacidade (ex: 20)" />
@@ -74,10 +70,6 @@ export default function RegistrarVeiculo() {
 
           <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded mb-5 hover:bg-blue-700 transition duration-300 ease">Registrar</button>
         </form>
-
-
       </div>
     </>
-  );
-
-}
+  );}

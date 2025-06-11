@@ -27,8 +27,7 @@ export const cadastrarAlunoComResponsavel = async (req, res) => {
       );
 
       if (r) {
-        // se todos os dados forem iguais, usa o id do responsavel ja existent
-        responsavel_id = r.id;
+        responsavel_id = r.id; // se todos os dados forem iguais, usa o id do responsavel ja existent
       } else {
         // se algum dado nn bater, retorna erro e nn permite criar novo responsavel
         return res.status(400).json({
@@ -36,8 +35,7 @@ export const cadastrarAlunoComResponsavel = async (req, res) => {
         });
       }
     } else {
-      // Se nn existir responsavel com CPF/email/telefone, cria um novo e armazena
-      responsavel_id = await criarResponsavel(responsavel);
+      responsavel_id = await criarResponsavel(responsavel); // Se nn existir responsavel com CPF/email/telefone, cria um novo e armazena
     }
 
     // busca o id da viagem com base na escola e ponto de embarque escolhidos pelo aluno

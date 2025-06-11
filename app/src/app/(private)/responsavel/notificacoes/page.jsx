@@ -7,6 +7,7 @@ export default function Notificacoes() {
     const [mensagens, setMensagens] = useState([]);
     const [ativo, setAtivo] = useState(null);
 
+     {/*PUXA AS MENSAGENS ENVIADAS DO BACK*/}
     useEffect(() => {
         const fetchMensagens = async () => {
             try {
@@ -23,10 +24,7 @@ export default function Notificacoes() {
                 }
             } catch (error) {
                 console.error("Erro ao buscar mensagens:", error);
-            }
-        };
-
-        fetchMensagens();
+            } }; fetchMensagens();
     }, []);
 
     const hoje = new Date().toLocaleDateString("sv-SE");
@@ -57,35 +55,29 @@ export default function Notificacoes() {
                     <img className="foto-aluno" src="/img/padrao.jpg" alt={msg.aluno_nome} />
                     <button
                         onClick={() => toggle(identificadorUnico)}
-                        className="conteudo-card w-full flex justify-between items-center"
-                    >
+                        className="conteudo-card w-full flex justify-between items-center" >
                         <span className="textos text-start">
                             <h3>{msg.tipo || "Mensagem"}</h3>
+                             {/*INFORMAÇÕES DA MENSAGEM*/}
                             <p className="text-sm text-slate-500">De: {msg.motorista_nome} - Aluno: {msg.aluno_nome}</p>
                         </span>
                         <div className="ver-mais items-center">
                             Ver Mais
                             <span
                                 className={`transition-transform duration-300 ${ativo === identificadorUnico ? "rotate-180" : ""
-                                    }`}
-                            >
+                                    }`} >
                                 <svg className="drop" viewBox="0 0 320 512">
                                     <path
                                         fill="#ffffff"
                                         d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 
                                             11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 
                                             192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 
-                                            25.7 6.9 34.9l128 128z"
-                                    />
-                                </svg>
-                            </span>
-                        </div>
-                    </button>
-                </div>
-                <div
+                                            25.7 6.9 34.9l128 128z" />
+                                </svg> </span>
+                        </div> </button>
+                </div> <div
                     className={`overflow-hidden transition-all duration-500 ease-in-out ${ativo === identificadorUnico ? "max-h-500" : "max-h-0"
-                        }`}
-                >
+                        }`} >
                     <div className="conteudo-escondido pt-5 text-sm text-slate-500">
                         <p>{msg.conteudo || "Sem detalhes adicionais."}</p>
                     </div>
@@ -94,8 +86,7 @@ export default function Notificacoes() {
                     </small>
                 </div>
             </div>
-        );
-    };
+        );};
 
     return (
         <>
@@ -124,12 +115,9 @@ export default function Notificacoes() {
                         <div className="mounth days">
                             <h2>Esse Mês</h2>
                             {mensagensAntigas.map(renderMensagem)}
-                        </div>
-                    )}
-                </>
-            )}
+                        </div> )}
+                </>  )}
         </div>
         </section>
         </>
-    );
-}
+    );}
