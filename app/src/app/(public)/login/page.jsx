@@ -25,7 +25,7 @@ export default function Login() {
   const handleUserClick = (nome) => {
     setUsuarioAtivo(nome);
   };
-
+//tipos de usuários
   const usuarios = [
     { nome: 'Administrador' },
     { nome: 'Aluno' },
@@ -58,7 +58,7 @@ export default function Login() {
       setLoginStatus("Preencha todos os campos.");
       return;
     }
-
+//envia as informações para o back verificar 
     try {
       const response = await fetch('http://localhost:3001/login', {
         method: 'POST',
@@ -70,8 +70,7 @@ export default function Login() {
           email,
           senha,
           tipo: normalizarTipo(usuarioAtivo)
-        })
-      });
+        }) });
 
       const data = await response.json();
       console.log('Resposta:', data);
@@ -94,12 +93,10 @@ export default function Login() {
         }
       } else {
         setLoginStatus(data.erro || data.mensagem || "Erro desconhecido");
-      }
-    } catch (error) {
+      }  } catch (error) {
       console.error("Erro ao tentar fazer login:", error);
       setLoginStatus("Erro ao conectar com o servidor.");
-    }
-  };
+    }};
 
   // mensagem de erro
   useEffect(() => {
@@ -109,8 +106,7 @@ export default function Login() {
         setStatusAtual('mensagem'); // esconde a mensagem depois de 4 seg
       }, 4000);
       return () => clearTimeout(timeout);
-    }
-  }, [loginStatus]);
+    }}, [loginStatus]);
 
   // limpar o formulario
   const limparForm = () => {
@@ -133,14 +129,10 @@ export default function Login() {
                       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6 14L22 14M22 14L16 20M22 14L16 8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         <circle cx="14" cy="14" r="14" fill="white" fillOpacity="0.5" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+                      </svg> </button>
+                  </div> </div>
+              ))} </div>
+          </div> </div>
       ) : (
         <div className="login-btn">
           <div className="login-corpo">
@@ -159,16 +151,12 @@ export default function Login() {
               <button
                 type="submit"
                 className="btn-entrar transition duration-300 ease"
-                disabled={loading}
-              >
+                disabled={loading} >
                 {loading ? "Entrando..." : "Entrar"}
               </button>
               <div className={statusAtual} style={{ marginTop: "3vh" }}><span className='text-red-500' >{loginStatus}</span></div>
             </form>
             <button style={{ marginTop: "1rem", color: "#FFC01D" }} onClick={() => setUsuarioAtivo("")}>Voltar</button>
-          </div>
-        </div>
-      )}
-    </section>
-  );
-}
+          </div> </div>
+      )}</section>
+  );}

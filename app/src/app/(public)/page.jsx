@@ -225,6 +225,7 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+             {/*seção SVGS E TEXTINHOS*/}
             <section className='secao3'>
                 <div className='secao3-corpo'>
                     <h2>Sobre nós</h2>
@@ -238,6 +239,7 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+            {/*seção PQ USAR EDU TRIP*/}
             <section className='secao5 justify-items-center content-center'>
                 <h2 className='title5_2'>Por que usar EduTrip?</h2>
                 <h1 className='title5_1'>Simples, fácil e rápido</h1>
@@ -257,6 +259,7 @@ export default function Home() {
                     <img src='/img/fotoInicio.svg' className='rounded banner2 xl:w-5/6' />
                 </div>
             </section>
+             {/*seção COMO FUNCIONA O SITE*/}
             <section className='secao4 justify-items-center content-center'>
                 <h2 className='title2'>Como funciona?</h2>
                 <h1 className='title'>Entenda em poucos passos</h1>
