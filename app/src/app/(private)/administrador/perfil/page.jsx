@@ -174,7 +174,6 @@ export default function MeuPerfil() {
             </div>
             {/*NOME DO USUÁRIO E TIPO*/}
             <div className='user flex items-center gap-3 border-b border-[#D0D0D0]'>
-                <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="" />
                 <div className="font-medium">
                     <h3>{nomeSobrenome.primeiroNome} {nomeSobrenome.ultimoNome}</h3>
                     <p className="text-sm text-gray-500">{usuario.tipo || "Tipo de usuário"}</p>

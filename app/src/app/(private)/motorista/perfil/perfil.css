@@ -21,6 +21,12 @@ section{
     white-space: nowrap;
 }
 
+.perfil{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .perfil-img-nome div{
     height: fit-content;
 }

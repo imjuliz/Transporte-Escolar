@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from 'next/image';
 import MapaViagemResponsavel from "../../../../components/Mapa/MapaResponsavel.jsx";
 import '../styles/rotas.css'
+import 'leaflet/dist/leaflet.css';
 
 export default function RotaResponsavel() {
   const router = useRouter();
@@ -105,9 +106,9 @@ export default function RotaResponsavel() {
         </nav>)}
 
       {dadosMapa ? (
-        <div style={{ height: "100%", width: "100%" }}>
+        <section className="mapa-resp relative w-screen h-full m-8">
           <MapaViagemResponsavel dados={dadosMapa} />
-        </div>
+        </section>
       ) : (
         <div className='flex flex-col gap-10 items-center justify-center'>
           <Image

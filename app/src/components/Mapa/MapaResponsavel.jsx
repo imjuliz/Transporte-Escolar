@@ -2,6 +2,7 @@
 import { MapContainer, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
 import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 const MapaViagemResponsavel = ({ dados }) => {
   if (!dados || !dados.origem || !dados.destino) {
@@ -43,7 +44,7 @@ const MapaViagemResponsavel = ({ dados }) => {
   }, [origem, destino]);
 
   const onibusIcon = new L.Icon({
-    iconUrl: 'https://cdn-icons-png.flaticon.com/512/61/61231.png',
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/174/174237.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32],
   });

@@ -21,7 +21,9 @@ export default function TrabalheConosco() {
                 value = value.replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3"); // adiciona o segundo ponto
                 value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4"); // adiciona o traço
                 e.target.value = value;
-            });  } });
+            });
+        }
+    });
 
     // ao digitar nomes, ele nao permite caracteres numericos
     const textRef = useRef(null);
@@ -30,7 +32,9 @@ export default function TrabalheConosco() {
             textRef.current.addEventListener("input", (e) => {
                 let value = e.target.value.replace(/[0-9]/g, '') // remove caracteres numericos
                 e.target.value = value;
-            })  } })
+            })
+        }
+    })
 
     // mascara de telefone
     const tellRef = useRef(null);
@@ -43,7 +47,8 @@ export default function TrabalheConosco() {
                 value = value.replace(/(\d{5})(\d)/, "$1-$2");
                 e.target.value = value;
             });
-        } });
+        }
+    });
 
     // mascara de data
     const dataRef = useRef(null);
@@ -55,7 +60,8 @@ export default function TrabalheConosco() {
                 value = value.replace(/(\d{2})(\d)/, "$1/$2");
                 e.target.value = value;
             });
-        } });
+        }
+    });
 
     // cnh
     const cnhRef = useRef(null);
@@ -66,7 +72,8 @@ export default function TrabalheConosco() {
                 value = value.slice(0, 9); // limite de 9 digitos
                 e.target.value = value;
             });
-        }  });
+        }
+    });
 
     // cep
     const cepRef = useRef(null);
@@ -78,12 +85,14 @@ export default function TrabalheConosco() {
                 value = value.replace(/^\d{5}(-\d{3})?$/)
                 e.target.value = value;
             })
-        }  })
+        }
+    })
 
     // nav bar
     const links = [
         { href: '/', page: 'Página Inicial' },
-        { href: '/trabalheConosco', page: 'Trabalhe Conosco' }
+        { href: '/trabalheConosco', page: 'Trabalhe Conosco' },
+        { href: '/login', page: 'Entrar' }
     ];
 
     const [activeIndex, setActiveIndex] = useState(0);
@@ -108,28 +117,27 @@ export default function TrabalheConosco() {
         }
     };
 
-    //infos
     const trabalheItens = [
         {
             title: 'Estrutura e Suporte',
             text: 'Oferecemos frota moderna, manutenção preventiva garantida e suporte diário da equipe administrativa para rotas, pais e comunicação, garantindo segurança e tranquilidade no trabalho.',
-            img: '',
+            img: './img/gestao-transporte.svg',
             classNamee: 'row-left'
         },
         {
             title: 'Jornada Organizada',
             text: 'No transporte escolar, os horários são fixos e previsíveis. Isso significa menos estresse, mais tempo para a família e uma melhor qualidade de vida. Valorizamos o equilíbrio entre trabalho e vida pessoal, oferecendo uma jornada clara, sem surpresas ou longas horas extras.',
-            img: '',
+            img: './img/jornada-org.svg',
             classNamee: 'row-right'
         },
         {
             title: 'Salário Competitivo',
             text: 'Reconhecemos o valor do trabalho dos nossos motoristas e oferecemos uma remuneração compatível com o mercado, justa e sempre em dia.',
-            img: '',
+            img: './img/salario.svg',
             classNamee: 'row-left'
         }
     ];
-//form 
+
     const requisitos = [
         {
             img: './img/cnh.svg',
@@ -152,7 +160,7 @@ export default function TrabalheConosco() {
             req: 'Compromisso com segurança e pontualidade'
         }
     ];
-//infos do footer
+
     const contatos = [
         {
             img: '',
@@ -173,7 +181,7 @@ export default function TrabalheConosco() {
             link: ''
         }
     ]
-//banner principal
+
     const banners = [
         {
             img1: './img/banner1/montanha.svg',
@@ -193,7 +201,7 @@ export default function TrabalheConosco() {
         },
         {
             name: "Trabalhe Conosco",
-            link: "./trabalheConosco"
+            link: "/trabalheConosco"
         },
         {
             name: "Termos de uso e privacidade",
@@ -246,17 +254,18 @@ export default function TrabalheConosco() {
             {/* navbar */}
             <header>
                 <ul className="linksrapidos">
-                    <li className="logo">Nome</li>
+                    <li className="logo">EduTrip</li>
                     <div className="highlight" ref={highlightRef}></div>
                     {links.map((link, index) => (
                         <li key={index} className="link-item" ref={(el) => (itemRefs.current[index] = el)} onClick={() => setActiveIndex(index)} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
                             <a href={link.href} style={{ color: hoveredIndex === index ? '#161A23' : activeIndex === index && hoveredIndex !== null ? '#fff' : activeIndex === index ? '#161A23' : '#fff' }} >
                                 <span>{link.page}</span>
                             </a>
-                        </li>  ))}
-                    <a href="/login">
+                        </li>
+                    ))}
+                    {/* <a href="/login">
                         <button className="login text-[#fff] bg-[#2D2F39]">Entrar</button>
-                    </a>
+                    </a> */}
                 </ul>
             </header>
 
@@ -285,7 +294,7 @@ export default function TrabalheConosco() {
                 <div className="trabalhe grid grid-flow-col grid-rows-3 gap-4">
                     {trabalheItens.map((trabalheItem, index) => (
                         <div key={index} className={trabalheItem.classNamee}>
-                            <img src='' />
+                            <img src={trabalheItem.img} className='img-trabalhe'/>
                             <div className='trabalhe-text'>
                                 <h2>{trabalheItem.title}</h2>
                                 <p>{trabalheItem.text}</p>
@@ -410,10 +419,17 @@ export default function TrabalheConosco() {
                                         <div key={index}>
                                             <a href={social.link}>{social.img}</a>
                                         </div>
-                                    )) } </div>
-                            </div> </div>
+                                    ))
+                                    }
+                                </div>
+                            </div>
+                        </div>
                         <div className='cont-2'>
                             <p>© 2025. Feito por Julia Alves, Lorena Oshiro e Maria Brito.</p>
-                        </div>  </div>
-                </div> </footer>
-        </> );}
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </>
+    );
+}

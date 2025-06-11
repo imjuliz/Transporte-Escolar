@@ -115,7 +115,11 @@ export default function Login() {
   }
   return (
     <section className="login">
-      <img src='/img/login-img.svg' className="imgLogin" />
+      <div className="imgLogin">
+        <h3>Faça parte da nossa jornada</h3>
+        <img src='/img/login-img.svg' className='img-login' />
+      </div>
+
       {!usuarioAtivo ? (
         <div className="login-btn">
           <div className="login-corpo">

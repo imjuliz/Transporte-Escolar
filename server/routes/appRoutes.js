@@ -7,7 +7,7 @@ import { cadastrarAlunoComResponsavel, criarPontoEmbarqueController, criarEscola
 import { obterInformacoesFilhosController, enviarResponsavelMensagem, mensagensParaResponsavel } from '../controllers/ResponsavelController.js'
 import { verAlunosController, verVeiculoController, obterInformacoesviagensController, verDadosEscolaController, mensagensParaMotorista, enviarMotoristaMensagemController, obterInformacoesAlunosController} from "../controllers/MotoristaController.js";
 import { upload } from '../middlewares/uploadMiddleware.js';
-import { verMotoristaController } from "../controllers/AlunoController.js";
+import { verMotoristaController, obterHistoricoViagensController } from "../controllers/AlunoController.js";
 const router = express.Router();
 
 // Rotas públicas
@@ -102,6 +102,10 @@ router.get('/alunosMensagem', obterInformacoesAlunosController, autorizarAcesso(
 
 
 router.post('/motoristaEnviarMensagem', enviarMotoristaMensagemController, autorizarAcesso('Motorista'));//enviar mensagens 
+
+// aluno - ver viagens
+router.get('/viagens-historico', obterHistoricoViagensController)
+router.get('/verEscolas-alunos', buscarEscolas)
 
 // logout
 router.post('/logout', (req, res) => {

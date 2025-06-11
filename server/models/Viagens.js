@@ -50,163 +50,163 @@ import { read, readAll, readQuery } from '../config/database.js';
 
 //OBTER DADOS DA VIAGEM DO ALUNO --------------------------------------------------------
 async function obterDadosDaViagemDoAluno(alunoId) {
-    console.log('Iniciando busca para alunoId:', alunoId);
+  console.log('Iniciando busca para alunoId:', alunoId);
 
-    const alunoIdInt = parseInt(alunoId, 10);
-    if (isNaN(alunoIdInt)) {
-        console.error('ID de aluno inválido:', alunoId);
-        return null;
-    }
+  const alunoIdInt = parseInt(alunoId, 10);
+  if (isNaN(alunoIdInt)) {
+    console.error('ID de aluno inválido:', alunoId);
+    return null;
+  }
 
-    const aluno = await read('alunos', `id = ${alunoIdInt}`);
-    console.log('Aluno encontrado:', aluno);
+  const aluno = await read('alunos', `id = ${alunoIdInt}`);
+  console.log('Aluno encontrado:', aluno);
 
-    if (!aluno || !aluno.ponto_embarque_id) {
-        console.error('Aluno não encontrado ou sem ponto de embarque');
-        return null;
-    }
+  if (!aluno || !aluno.ponto_embarque_id) {
+    console.error('Aluno não encontrado ou sem ponto de embarque');
+    return null;
+  }
 
-    const tabela = `alunos_viagens JOIN viagens ON alunos_viagens.viagem_id = viagens.id`;
-    const condicao = `alunos_viagens.aluno_id = ${alunoIdInt} AND viagens.status IN ('agendada','em_andamento')`;
+  const tabela = `alunos_viagens JOIN viagens ON alunos_viagens.viagem_id = viagens.id`;
+  const condicao = `alunos_viagens.aluno_id = ${alunoIdInt} AND viagens.status IN ('agendada','em_andamento')`;
 
-    console.log('Tabela:', tabela);
-    console.log('Condição:', condicao);
+  console.log('Tabela:', tabela);
+  console.log('Condição:', condicao);
 
-    const viagens = await readAll(tabela, condicao);
-    console.log('Viagens encontradas para aluno:', viagens);
+  const viagens = await readAll(tabela, condicao);
+  console.log('Viagens encontradas para aluno:', viagens);
 
-    if (!viagens || viagens.length === 0) {
-        console.error('Nenhuma viagem ativa encontrada para o aluno');
-        return null;
-    }
+  if (!viagens || viagens.length === 0) {
+    console.error('Nenhuma viagem ativa encontrada para o aluno');
+    return null;
+  }
 
-    const viagem = viagens[0];
-    console.log('Viagem escolhida:', viagem);
+  const viagem = viagens[0];
+  console.log('Viagem escolhida:', viagem);
 
-    const pontoId = parseInt(aluno.ponto_embarque_id, 10);
+  const pontoId = parseInt(aluno.ponto_embarque_id, 10);
 
-    // determina se a escola é ponto final ou inicial e pega o seu id
-    let escolaId = null;
-    if (viagem.ponto_final_tipo === 'escola') {
-        escolaId = parseInt(viagem.ponto_final_id, 10);
-    } else if (viagem.ponto_inicial_tipo === 'escola') {
-        escolaId = parseInt(viagem.ponto_inicial_id, 10);
-    }
+  // determina se a escola é ponto final ou inicial e pega o seu id
+  let escolaId = null;
+  if (viagem.ponto_final_tipo === 'escola') {
+    escolaId = parseInt(viagem.ponto_final_id, 10);
+  } else if (viagem.ponto_inicial_tipo === 'escola') {
+    escolaId = parseInt(viagem.ponto_inicial_id, 10);
+  }
 
-    //busca ponto de embarque e escola pelo id
-    const ponto = await read('pontos_embarque', `id = ${pontoId}`);
-    const escola = await read('escolas', `id = ${escolaId}`);
+  //busca ponto de embarque e escola pelo id
+  const ponto = await read('pontos_embarque', `id = ${pontoId}`);
+  const escola = await read('escolas', `id = ${escolaId}`);
 
-    if (!ponto || !escola) {
-        console.error('Ponto de embarque ou escola não encontrados');
-        return null;
-    }
+  if (!ponto || !escola) {
+    console.error('Ponto de embarque ou escola não encontrados');
+    return null;
+  }
 
-    // Usa o campo tipo_viagem para definir origem e destino
-    const tipoViagem = (viagem.tipo_viagem || '').trim().toLowerCase();
-    console.log('Tipo da viagem:', tipoViagem);
+  // Usa o campo tipo_viagem para definir origem e destino
+  const tipoViagem = (viagem.tipo_viagem || '').trim().toLowerCase();
+  console.log('Tipo da viagem:', tipoViagem);
 
-    let origem, destino;
-    if (tipoViagem === 'ida') {
-        origem = { lat: parseFloat(ponto.latitude), lng: parseFloat(ponto.longitude) };
-        destino = { lat: parseFloat(escola.latitude), lng: parseFloat(escola.longitude) };
-    } else if (tipoViagem === 'volta') {
-        origem = { lat: parseFloat(escola.latitude), lng: parseFloat(escola.longitude) };
-        destino = { lat: parseFloat(ponto.latitude), lng: parseFloat(ponto.longitude) };
-    } else {
-        console.error('Tipo de viagem inválido:', viagem.tipo_viagem);
-        return null; // evita lançar erro e quebra a execução
-    }
+  let origem, destino;
+  if (tipoViagem === 'ida') {
+    origem = { lat: parseFloat(ponto.latitude), lng: parseFloat(ponto.longitude) };
+    destino = { lat: parseFloat(escola.latitude), lng: parseFloat(escola.longitude) };
+  } else if (tipoViagem === 'volta') {
+    origem = { lat: parseFloat(escola.latitude), lng: parseFloat(escola.longitude) };
+    destino = { lat: parseFloat(ponto.latitude), lng: parseFloat(ponto.longitude) };
+  } else {
+    console.error('Tipo de viagem inválido:', viagem.tipo_viagem);
+    return null; // evita lançar erro e quebra a execução
+  }
 
-    return {
-        viagemId: viagem.id,
-        sentido: viagem.tipo_viagem, // << aqui!
-        ponto: origem,
-        escola: destino
-    };
+  return {
+    viagemId: viagem.id,
+    sentido: viagem.tipo_viagem,
+    ponto: origem,
+    escola: destino
+  };
 }
 
 //OBTER DADOS DA VIAGEM DO MOTORISTA --------------------------------------------------------
 async function obterDadosDaViagemDoMotorista(motoristaId) {
-    const motorista = await read('motoristas', `id = ${motoristaId}`);
-    console.log('Motorista encontrado:', motorista);
+  const motorista = await read('motoristas', `id = ${motoristaId}`);
+  console.log('Motorista encontrado:', motorista);
 
-    if (!motorista) {
-        console.error('Motorista não encontrado');
-        return null;
+  if (!motorista) {
+    console.error('Motorista não encontrado');
+    return null;
+  }
+
+  const veiculo = await read('veiculos', `motorista_id = ${motoristaId}`);
+  console.log('Veículo vinculado ao motorista:', veiculo);
+
+  if (!veiculo) {
+    console.error('Motorista sem veículo vinculado');
+    return null;
+  }
+
+  const veiculoId = veiculo.id;
+  const condicao = `veiculo_id = ${veiculoId} AND status IN ('agendada', 'em_andamento')`;
+  const viagens = await readAll('viagens', condicao);
+  console.log('Viagens encontradas:', viagens);
+
+  if (!viagens || viagens.length === 0) {
+    console.error('Nenhuma viagem encontrada para o motorista ou veículo');
+    return null;
+  }
+
+  // Converter hora para minutos
+  function horaParaMinutos(hora) {
+    const [h, m, s] = hora.split(':').map(Number);
+    return h * 60 + m + Math.floor(s / 60);
+  }
+
+  const agora = new Date();
+  const horaAtualMinutos = agora.getHours() * 60 + agora.getMinutes();
+
+  // Filtrar viagem no horário atual
+  const viagem = viagens.find(v => {
+    const inicio = horaParaMinutos(v.hora_saida);
+    const fim = horaParaMinutos(v.hora_chegada_prevista);
+    return horaAtualMinutos >= inicio && horaAtualMinutos <= fim;
+  });
+
+  console.log('Viagem selecionada:', viagem);
+
+  if (!viagem) {
+    console.error('Nenhuma viagem ativa no horário atual');
+    return null;
+  }
+
+  let origem, destino;
+
+  if (viagem.ponto_inicial_tipo === 'ponto_embarque') {
+    origem = await read('pontos_embarque', `id = ${viagem.ponto_inicial_id}`);
+  } else if (viagem.ponto_inicial_tipo === 'escola') {
+    origem = await read('escolas', `id = ${viagem.ponto_inicial_id}`);
+  }
+
+  if (viagem.ponto_final_tipo === 'ponto_embarque') {
+    destino = await read('pontos_embarque', `id = ${viagem.ponto_final_id}`);
+  } else if (viagem.ponto_final_tipo === 'escola') {
+    destino = await read('escolas', `id = ${viagem.ponto_final_id}`);
+  }
+
+  if (!origem || !destino) {
+    console.error('Origem ou destino não encontrados');
+    return null;
+  }
+
+  return {
+    viagemId: viagem.id,
+    origem: {
+      lat: parseFloat(origem.latitude),
+      lng: parseFloat(origem.longitude)
+    },
+    destino: {
+      lat: parseFloat(destino.latitude),
+      lng: parseFloat(destino.longitude)
     }
-
-    const veiculo = await read('veiculos', `motorista_id = ${motoristaId}`);
-    console.log('Veículo vinculado ao motorista:', veiculo);
-
-    if (!veiculo) {
-        console.error('Motorista sem veículo vinculado');
-        return null;
-    }
-
-    const veiculoId = veiculo.id;
-    const condicao = `veiculo_id = ${veiculoId} AND status IN ('agendada', 'em_andamento')`;
-    const viagens = await readAll('viagens', condicao);
-    console.log('Viagens encontradas:', viagens);
-
-    if (!viagens || viagens.length === 0) {
-        console.error('Nenhuma viagem encontrada para o motorista ou veículo');
-        return null;
-    }
-
-    // Converter hora para minutos
-    function horaParaMinutos(hora) {
-        const [h, m, s] = hora.split(':').map(Number);
-        return h * 60 + m + Math.floor(s / 60);
-    }
-
-    const agora = new Date();
-    const horaAtualMinutos = agora.getHours() * 60 + agora.getMinutes();
-
-    // Filtrar viagem no horário atual
-    const viagem = viagens.find(v => {
-        const inicio = horaParaMinutos(v.hora_saida);
-        const fim = horaParaMinutos(v.hora_chegada_prevista);
-        return horaAtualMinutos >= inicio && horaAtualMinutos <= fim;
-    });
-
-    console.log('Viagem selecionada:', viagem);
-
-    if (!viagem) {
-        console.error('Nenhuma viagem ativa no horário atual');
-        return null;
-    }
-
-    let origem, destino;
-
-    if (viagem.ponto_inicial_tipo === 'ponto_embarque') {
-        origem = await read('pontos_embarque', `id = ${viagem.ponto_inicial_id}`);
-    } else if (viagem.ponto_inicial_tipo === 'escola') {
-        origem = await read('escolas', `id = ${viagem.ponto_inicial_id}`);
-    }
-
-    if (viagem.ponto_final_tipo === 'ponto_embarque') {
-        destino = await read('pontos_embarque', `id = ${viagem.ponto_final_id}`);
-    } else if (viagem.ponto_final_tipo === 'escola') {
-        destino = await read('escolas', `id = ${viagem.ponto_final_id}`);
-    }
-
-    if (!origem || !destino) {
-        console.error('Origem ou destino não encontrados');
-        return null;
-    }
-
-    return {
-        viagemId: viagem.id,
-        origem: {
-            lat: parseFloat(origem.latitude),
-            lng: parseFloat(origem.longitude)
-        },
-        destino: {
-            lat: parseFloat(destino.latitude),
-            lng: parseFloat(destino.longitude)
-        }
-    };
+  };
 }
 
 // async function obterDadosDasViagensDoResponsavel(responsavelId) {
@@ -342,7 +342,7 @@ async function obterDadosDasViagensDoResponsavel(responsavelId) {
 
 //BUSCAR VIAGEM DO ALUNO --------------------------------------------------------
 async function buscarViagensDoAluno(alunoId) {
-    const query = `
+  const query = `
     SELECT 
       viagens.data_viagem,
       viagens.hora_saida,
@@ -387,8 +387,8 @@ async function buscarViagensDoAluno(alunoId) {
     ORDER BY viagens.data_viagem, viagens.hora_saida;
   `;
 
-    const viagens = await readQuery(query, [alunoId]);
-    return viagens;
+  const viagens = await readQuery(query, [alunoId]);
+  return viagens;
 }
 
 export { obterDadosDaViagemDoAluno, obterDadosDaViagemDoMotorista, obterDadosDasViagensDoResponsavel, buscarViagensDoAluno };
