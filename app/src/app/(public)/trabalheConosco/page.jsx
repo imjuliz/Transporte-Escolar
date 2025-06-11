@@ -263,11 +263,7 @@ export default function TrabalheConosco() {
                             </a>
                         </li>
                     ))}
-<<<<<<< HEAD
                     {/* <a href="/login">
-=======
-                    <a href="/login">
->>>>>>> parent of 305dc98 (ultimos comentarios)
                         <button className="login text-[#fff] bg-[#2D2F39]">Entrar</button>
                     </a> */}
                 </ul>
