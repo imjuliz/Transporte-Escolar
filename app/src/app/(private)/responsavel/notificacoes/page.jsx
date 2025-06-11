@@ -98,7 +98,14 @@ export default function Notificacoes() {
     };
 
     return (
+        <>
+    <section>
+    <div className="page-indicador">
+                <h1>Notificações</h1>
+                <hr />
+            </div>
         <div className="flex flex-column">
+           
             {/* caso nao haja notificacoes, mostra a mensgaem */}
             {mensagensHoje.length === 0 && mensagensAntigas.length === 0 ? (
                 <div className="sem-notificacoes text-center text-slate-500 py-10">
@@ -106,7 +113,7 @@ export default function Notificacoes() {
                 </div>
             ) : (
                 <>
-                {/* se houver, mostra as mensagem que foram enviadas */}
+                    {/* se houver, mostra as mensagem que foram enviadas */}
                     {mensagensHoje.length > 0 && (
                         <div className="today days">
                             <h2>Hoje</h2>
@@ -122,5 +129,7 @@ export default function Notificacoes() {
                 </>
             )}
         </div>
+        </section>
+        </>
     );
 }

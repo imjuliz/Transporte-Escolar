@@ -12,6 +12,12 @@ main {
 
 section {
     margin-top: 10vh;
+    width: 100%;
+}
+
+.msg-status{
+    color: #000;
+    font-family: 'Plus Jakarta Sans SemiBold';
 }
 
 .page-indicador {
@@ -52,33 +58,13 @@ input{
     width: 100%
 };
 
-@media screen and(max-width: 640px) {
-  
-}
-@media screen and (max-width: 768px) {
-    .card-msg{
-        margin-left: -40%;
-        width: 28vw;
-        height: 25vw;
-        margin-right: 8%;
-        }
-        .mensagens{
-            display: flex;flex-direction: row;
-            /* grid-auto-rows: auto; */
-            width: 80%;
-        }
-    .card-msg h3{
-        font-size: 20px;
-        }
-       
+@media screen and (max-width: 750px){
+    .box-motivos{
+        flex-direction: column;
     }
-    @media screen and (max-width: 1024px) {
-        .card-msg{
-        margin-left: -10%;
-        width: 28vw;
-        height: 25vw;
-        margin-right: 8%;
-          
-        }
-        }
 
+    .card-msg{
+        width: 100%;
+        height: fit-content;
+    }
+}

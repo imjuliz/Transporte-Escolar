@@ -11,6 +11,10 @@ section h1{
     height: fit-content;
 }
 
+section{
+    margin-bottom: 10vh;
+}
+
 .sec-cont-1{
     width: 100%;
     justify-content: space-between;

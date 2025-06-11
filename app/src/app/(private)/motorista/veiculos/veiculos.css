@@ -1,6 +1,12 @@
 
 /*Body*/
 /*seção 1*/
+main, .main-content{
+    height: 100vh;
+    justify-items: center;
+    align-content: center;
+}
+
 section{
     width: 100%;
 }
@@ -54,6 +60,10 @@ section h1{
 .sec-campos h6{
     color: #384D6C;
     font-family: "Plus Jakarta Sans Regular";
+}
+
+.sec, .sec-container, .sec-campos{
+    width: 100%;
 }
 
 .sec-campos p{

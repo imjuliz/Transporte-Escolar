@@ -3,6 +3,10 @@ section{
   margin: 10vh 0
 }
 
+.navegacao{
+  margin-bottom: 10vh;
+}
+
 .page-indicador {
     width: fit-content;
     margin-bottom: 8vh;
@@ -32,4 +36,22 @@ p{
 
 .texto-card p, .texto-card h3{
   margin:0;
+}
+
+.conteudo-card span h3, .conteudo-card span p{
+  text-align: left;
+}
+
+@media screen and (max-width: 850px) {
+  .conteudo-card{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width:600px) {
+  .foto-aluno{
+    display: none;
+  }
 }

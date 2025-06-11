@@ -41,9 +41,6 @@ export default function veiculos() {
         );
     }
 
-    if (erro) return <p className="text-red-600 p-4">{erro}</p>;
-    if (!veiculo) return <div className="text-center"><div role="status">Carregando...</div></div>;
-
     return (
         <>
             <section className='secao1'>
@@ -51,24 +48,10 @@ export default function veiculos() {
                         <h1>Meus veículos</h1>
                         <hr />
                     </div>
-                    <div className='user'>
-                        <div className='perfil-img-nome flex flex-nowrap items-center gap-3'>
-                            <Image
-                                src="/img/fotoPerfil.png"
-                                width={100}
-                                height={100}
-                                alt="Foto de perfil"
-                                className='fotoPerfil'/>
-                            <div>
-                                <h3>Ônibus escolar</h3>
-                            </div>
-                        </div>
-                        <hr/>
-                    </div>
                     <div className='@container'>
                     <div className='sec'>
                         <div className='sec-indicador'>
-                            <h4>Dados </h4>
+                            <h4>Dados do ônibus escolar</h4>
                             <hr/>
                         </div>
                         <div className='sec-container grid grid-flow-col grid-rows-2 gap-3'>
@@ -89,7 +72,7 @@ export default function veiculos() {
                
                     <div className='sec'>
                         <div className='sec-container grid grid-flow-col grid-rows-1 gap-3  '>
-                            <div className='sec-campos flex flex-nowrap gap-140 2xl:gap-105 xl:gap-80 lg:gap-56 md:gap-32 sm:gap-20'>
+                            <div className='sec-campos flex flex-nowrap gap-140 2xl:gap-105 md:gap-32 sm:gap-20'>
                             <div className='sec-campos'>
                                 <h6>Data de fabricação</h6>
                                 <p>{veiculo.anoFabricacao}</p>

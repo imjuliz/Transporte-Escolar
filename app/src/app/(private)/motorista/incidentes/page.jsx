@@ -51,6 +51,7 @@ export default function incidentes() {
     const [alunoSelecionado, setAlunoSelecionado] = useState("");
     const [textoMensagem, setTextoMensagem] = useState("");
     const [loading, setLoading] = useState(false);
+    const [mensagemStatus, setMensagemStatus] = useState({ tipo: "", texto: "" });
 
     // Buscar filhos no carregamento do componente
     useEffect(() => {
@@ -102,20 +103,22 @@ export default function incidentes() {
                 body: JSON.stringify({
                     aluno_id: alunoSelecionado,
                     mensagem: textoMensagem,
-                    motivo: selecionado,
-                    // não envia motorista_id, pega do session no backend
+                    motivo: selecionado
                 }),
             });
 
             if (res.ok) {
-                alert("Mensagem enviada com sucesso!");
+                setMensagemStatus({ tipo: "sucesso", texto: "Mensagem enviada com sucesso!" });
                 setTextoMensagem("");
             } else {
                 const data = await res.json();
-                alert("Erro ao enviar mensagem: " + (data.erro || "Erro desconhecido"));
+                setMensagemStatus({
+                    tipo: "erro",
+                    texto: "Erro ao enviar mensagem: " + (data.erro || "Erro desconhecido"),
+                });
             }
         } catch (error) {
-            alert("Erro ao enviar mensagem.");
+            setMensagemStatus({ tipo: "erro", texto: "Erro ao enviar mensagem." });
             console.error(error);
         } finally {
             setLoading(false);
@@ -124,9 +127,9 @@ export default function incidentes() {
 
     return (
         <>
-            <section className="informacoes">
+            <section className="">
                 <div className="page-indicador">
-                    <h1>Enviar Mensagem</h1>
+                    <h1>Registrar incidente</h1>
                     <hr />
                 </div>
                 <div className="p-4 space-y-4">
@@ -183,6 +186,11 @@ export default function incidentes() {
                                     ))
                                     : (<><option disabled>Carregando...</option></>)}
                             </select>
+                            { /* mensagem de erro ou sucesso */}
+                            {mensagemStatus.texto && (
+                                <div className={`p-3 rounded-md text-white mb-4`}><p className='msg-status'>{mensagemStatus.texto}</p>
+                                </div>
+                            )}
                             <button
                                 type="submit"
                                 className="bg-blue-600 text-white px-4 py-2 rounded mb-5 hover:bg-blue-700 transition duration-300 ease"

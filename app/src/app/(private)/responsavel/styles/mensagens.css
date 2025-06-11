@@ -14,6 +14,11 @@ section {
     margin-top: 10vh;
 }
 
+.msg-status{
+    color: #000;
+    font-family: 'Plus Jakarta Sans SemiBold';
+}
+
 .page-indicador {
     width: fit-content;
     margin-bottom: 8vh;

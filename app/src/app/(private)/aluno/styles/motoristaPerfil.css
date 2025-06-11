@@ -5,8 +5,6 @@
     }
   };
   
-  /* Defaults hover styles on all devices */
-  @custom-variant hover (&:hover);
 section h1{
     font-family: "Plus Jakarta Sans SemiBold";
     font-size: 2rem;
@@ -66,11 +64,7 @@ section h1{
     margin: 0;
 }
 .sec-campos{
-    width: 60%;
-}
-.sec-campos2{
-    width: 40%;
-    margin-right: -30%;
+    width: fit-content;
 }
 .sec-container{
     width: 70%;
@@ -133,42 +127,6 @@ section h1{
     color: red;
 }
 
-@media screen and (max-width: 640px) {
-   
-    .sec-campos2 h6{
-        width: 140%;
-        white-space: pre-line;
-      }
-      .sec-campos2{
-        margin-right: 0%;
-        margin-left: -20%;
-       
-   }
-    .sec-container.gap-8{
-        gap: 7rem;
-
-       }
-}
-@media screen and (max-width: 768px) {
-    .sec-container{
-        width:100%;
-       
-    }
-    .sec-campos{
-        margin-right: 20%;
-   }
-   .sec-campos2{
-    white-space: nowrap;
-   
-   }
-   .sec-campos2 p{
-     width: 120%;
-   }
-   .gap-8{
-    gap: 10rem;
-   }
-       
-    }
     @media screen and (max-width: 1024px) {
         .sec-container{
             width:80%;
@@ -178,20 +136,11 @@ section h1{
             margin-right: 10%;
        }
         }
-        @media screen and (max-width: 1280px) {
-            .sec-container{
-                width:60%;
-               
-            }.sec-campos2{
-                margin-right: 10%;
-           }
-            }
-            @media screen and (max-width: 1536px) {
-                .sec-container{
-                    width: 80%;
-                   
-                }
-                .sec-campos2{
-                     margin-left: -30%;
-                }
-                }
+@media screen and (max-width: 1280px) {
+    .sec-container{
+                width:60%;         
+}
+.sec-campos2{
+    margin-right: 10%;
+}
+}
