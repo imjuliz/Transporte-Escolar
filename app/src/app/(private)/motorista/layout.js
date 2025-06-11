@@ -116,13 +116,7 @@ export default function RootLayout({ children }) {
             <header className='z-[9999]'>
                 <div className={`sidebar ${sidebarActive ? 'active' : ''}`}>
                     <div className="logoContent flex flex-nowrap gap-4 items-center">
-                        <Image
-                            src="/img/fotoPerfil.png"
-                            width={100}
-                            height={100}
-                            alt="Foto de perfil"
-                            className='fotoPerfil'
-                        />
+                       
                         <div className="logo flex flex-col">
                             <p className="logoName">Motorista</p>
                             <h4 className='nomepessoa'>Olá, {nomeSobrenome.primeiroNome}</h4>

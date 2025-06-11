@@ -134,9 +134,9 @@ export default function dashboard() {
                             <VeiculosTable />
                         </div>
                         {/*REGISTRO DOS INCIDENTES*/}
-                        <div className="lg:col-span-1 ">
+                        {/* <div className="lg:col-span-1 ">
                             <IncidentesChart></IncidentesChart>
-                        </div>
+                        </div> */}
                     </div>
                     {/*TABELA DAS ESCOLAS*/}
                     <div className="grid grid-cols-1 gap-8 mt-5">
