@@ -453,3 +453,16 @@ SELECT 'Responsáveis' AS tipo, COUNT(*) AS quantidade FROM responsaveis
 UNION ALL
 SELECT 'Administradores' AS tipo, COUNT(*) AS quantidade FROM adm;
 */
+-- incidentes
+INSERT INTO mensagens_motoristas (aluno_id, responsavel_id, motorista_id, tipo, conteudo) VALUES
+(1, 1, 1, 'congestionamento', 'Congestionamento na avenida Lauro Gomes pode atrasar o desembarque de Roberto'),
+(2, 2, 2, 'rota', 'Mudança temporária na rota de Beatriz devido a obras no bairro Jardim São Paulo'),
+(3, 3, 3, 'emergencia', 'Marcos passou mal durante o trajeto, estamos levando ele de volta para casa e avisaremos em breve'),
+(4, 4, 4, 'veiculo', 'O ônibus apresentou falha mecânica. A manutenção já foi acionada, e o transporte será reprogramado'),
+(5, 5, 5, 'rota', 'Carlos Eduardo será buscado 15 minutos mais cedo amanhã por conta da nova organização de pontos'),
+(6, 6, 6, 'congestionamento', 'Trânsito intenso na rodovia dos Imigrantes pode atrasar a chegada de Beatriz Santos'),
+(7, 7, 7, 'veiculo', 'O ar-condicionado do veículo está com defeito, mas a viagem seguirá normalmente até a manutenção amanhã'),
+(8, 8, 8, 'emergencia', 'Fernanda teve uma queda leve ao subir no veículo, mas está bem. Aplicamos gelo e estamos monitorando'),
+(9, 1, 1, 'rota', 'A entrada da escola de Gustavo está bloqueada. Vamos deixá-lo na lateral, próximo ao portão 2'),
+(10, 2, 2, 'congestionamento', 'Trânsito parado na Marginal Tietê. Mariana pode chegar com até 25 minutos de atraso'),
+(11, 3, 3, 'veiculo', 'Veículo da rota do Novo Aluno passou por revisão hoje, portanto o embarque será com um motorista substituto');

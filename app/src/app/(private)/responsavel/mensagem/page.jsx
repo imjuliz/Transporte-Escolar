@@ -103,7 +103,7 @@ export default function EnviarMensagemResponsavel() {
       <div className="p-4 space-y-4">
         <form onSubmit={handleSubmit}>
            {/*CARDS*/}
-          <div className="box-motivos flex justify-between gap-4">
+          <div className="box-motivos flex  gap-4">
             {mensagens.map((msg) => (
               <label
                 key={msg.valor}
