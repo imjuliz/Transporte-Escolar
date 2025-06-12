@@ -88,7 +88,7 @@ CREATE TABLE alunos (
     cpf VARCHAR(11) not null unique,
     email varchar(100) not null unique,
     nome varchar(100) not null,
-    telefonePrinc VARCHAR(9) NOT NULL unique,
+    telefone VARCHAR(11) NOT NULL unique,
     emailPessoal VARCHAR(100) unique,
     dataNascimento date NOT NULL,
     senha VARCHAR(255) NOT NULL,
@@ -100,6 +100,8 @@ CREATE TABLE alunos (
     FOREIGN KEY (escola_id) REFERENCES escolas(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (ponto_embarque_id) REFERENCES pontos_embarque(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+select * from alunos;
 
 CREATE TABLE mensagens_responsaveis (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -180,6 +182,8 @@ END$$
 
 DELIMITER ;
 
+select * from alunos_viagens;
+
 INSERT INTO motoristas (cpf, nome, cnh, telefone, vencimento_habilitacao, email, senha) VALUES
 ('55555555555', 'Ana Souza', '1234567890', '11999999999', '2026-05-15', 'ana@gmail.com', 'ana@motorista'),
 ('66666666666', 'Marcos Silva', '0987654321', '11988888888', '2025-07-20', 'marcos@gmail.com', 'marcos@motorista'),
@@ -243,6 +247,8 @@ INSERT INTO viagens
 -- tarde
 (1, 1, CURDATE(), 'tarde', '12:00:00', '12:30:00', 'ponto_embarque', 1, 'escola', 1, 'ida', 'agendada', 30),
 (1, 1, CURDATE(), 'tarde', '17:00:00', '18:00:00', 'escola', 1, 'ponto_embarque', 1, 'volta', 'agendada', 60),
+-- teste
+(1, 1, CURDATE(), 'noite', '17:00:00', '00:00:00', 'escola', 1, 'ponto_embarque', 1, 'volta', 'agendada', 60),
 -- para apresentacao
 (1, 1, CURDATE(), 'tarde', '13:30:00', '15:00:00', 'ponto_embarque', 2, 'escola', 2, 'ida', 'agendada', 90),
 (1, 1, CURDATE(), 'tarde', '15:15:00', '17:30:00', 'escola', 2, 'ponto_embarque', 2, 'volta', 'agendada', 135),
@@ -324,7 +330,7 @@ INSERT INTO escola_ponto_embarque (escola_id, ponto_embarque_id) VALUES
 (7, 7),
 (8, 8);
 
-INSERT INTO alunos (cpf, email, nome, telefonePrinc, emailPessoal, dataNascimento, senha, escola_id, ponto_embarque_id, turno) VALUES
+INSERT INTO alunos (cpf, email, nome, telefone, emailPessoal, dataNascimento, senha, escola_id, ponto_embarque_id, turno) VALUES
 ('88888888888', 'roberto@al.gov.br', 'Roberto Alves Costa', '11969903253', 'roberto_costa@gmail.com', '2010-05-20', 'roberto@aluno', 2, 2, 'tarde'),
 ('99999999999', 'beatriz@al.gov.br', 'Beatriz Sousa Garcia', '11929076857', 'beatrizgarcia2010@gmail.com', '2011-08-15', 'beatriz@aluno', 5, 5, 'integral'),
 ('10101010101', 'marcos@al.gov.br', 'Marcos Correia', '11956435985', 'marcos_correia@gmail.com', '2012-03-10', 'marcos@aluno', 3, 3, 'noite'),
@@ -441,6 +447,8 @@ INSERT INTO viagens (veiculo_id, motorista_id, data_viagem, hora_saida, hora_che
 (4, 4, '2025-06-02', '19:35:00', '20:30:00', 'ponto_embarque', 8, 'escola', 7, 'ida', 'agendada', 55),
 (4, 4, '2025-06-02', '20:35:00', '21:30:00', 'escola', 5, 'ponto_embarque', 7, 'volta', 'agendada', 55),
 (4, 4, '2025-06-02', '21:35:00', '22:30:00', 'escola', 7, 'ponto_embarque', 8, 'volta', 'agendada', 55);
+
+select *from motoristas;
 
 /*
 select *from viagens;

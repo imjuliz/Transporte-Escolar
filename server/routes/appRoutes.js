@@ -1,13 +1,12 @@
 import express from "express";
 import { autorizarAcesso } from "../middlewares/authMiddleware.js";
 import { loginController } from "../controllers/LoginController.js";
-import { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController,editarPerfilMotoristaController} from '../controllers/PerfilController.js';
+import { obterPerfilUsuario, editarPerfilController,editarPerfilMotoristaController, editarPerfilAlunoController} from '../controllers/PerfilController.js';
 import { obterViagemPorUsuario } from "../controllers/ViagensController.js";
 import { cadastrarAlunoComResponsavel, criarPontoEmbarqueController, criarEscolaController, cadastrarMotorista, cadastrarAdministrador, buscarEscolas, buscarPontoPorEscola, verTodosController, verResponsaveisController, verAdminsController, verMotoristasController, viagensEmAndamentoController, quantidadeViagensEmAndamentoController, contarUsuariosController, contarEscolasController, contarMotoristasController, viagensPorDiaController, usuariosPorTipoController, listarVeiculosController, buscarViagemPorEscolaEPontoController, contarIncidentesController, deletarPerfilController, registrarVeiculosController, verEscolasController, verPontosController, verificarResponsavel} from '../controllers/AdminController.js';;
 import { obterInformacoesFilhosController, enviarResponsavelMensagem, mensagensParaResponsavel } from '../controllers/ResponsavelController.js'
 import { verAlunosController, verVeiculoController, obterInformacoesviagensController, verDadosEscolaController, mensagensParaMotorista, enviarMotoristaMensagemController, obterInformacoesAlunosController} from "../controllers/MotoristaController.js";
-import { upload } from '../middlewares/uploadMiddleware.js';
-import { verMotoristaController, obterHistoricoViagensController } from "../controllers/AlunoController.js";
+import { verMotoristaController, obterHistoricoViagensController, alunoVerVeiculoController } from "../controllers/AlunoController.js";
 const router = express.Router();
 
 // Rotas públicas
@@ -23,7 +22,6 @@ router.get('/motorista', autorizarAcesso('Motorista'));
 router.get('/perfil', obterPerfilUsuario, autorizarAcesso( 'aluno', 'responsavel', 'administrador', 'Motorista'));
 router.patch('/editarPerfil', editarPerfilController, autorizarAcesso( 'aluno', 'responsavel', 'administrador', 'Motorista'));
 
-router.post('/editarPerfil/foto', upload.single('foto'), editarFotoPerfilController);
 //
 router.get('/viagens', obterInformacoesviagensController)
 
@@ -35,7 +33,13 @@ router.get('/viagem-mapa', obterViagemPorUsuario);
 
 // ALUNOS ------------------------------------------------------------------------------------------
 router.get('/verMotorista', verMotoristaController, autorizarAcesso('aluno'));//ver o motorista do onibus
-
+// aluno - ver viagens
+router.get('/viagens-historico', obterHistoricoViagensController)
+router.get('/verEscolas-alunos', buscarEscolas)
+// aluno - ver veiculo 
+router.get('/veiculos-aluno', alunoVerVeiculoController);
+//aluno - editar perfil
+router.patch('/editarPerfilAluno', editarPerfilAlunoController);
 
 // ADM ------------------------------------------------------------------------------------------
 // cadastro de usuarios
@@ -103,9 +107,7 @@ router.get('/alunosMensagem', obterInformacoesAlunosController, autorizarAcesso(
 
 router.post('/motoristaEnviarMensagem', enviarMotoristaMensagemController, autorizarAcesso('Motorista'));//enviar mensagens 
 
-// aluno - ver viagens
-router.get('/viagens-historico', obterHistoricoViagensController)
-router.get('/verEscolas-alunos', buscarEscolas)
+
 
 // logout
 router.post('/logout', (req, res) => {

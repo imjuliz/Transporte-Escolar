@@ -15,6 +15,10 @@ main {
   align-content: start;
 }
 
+.sidebar.active .img-logo{
+  width: 6vw;
+}
+
 .main-content {
   width: calc(100% - 78px);
   transition: margin-left 0.3s ease, width 0.3s ease;

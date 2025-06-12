@@ -78,7 +78,8 @@ ul li{
 
 .conteudo {
     background-color: #fff !important;
-    border-radius: 20px;
+border-bottom-left-radius: 20px;
+border-bottom-right-radius: 20px;
 }
 
 .conteudo .tab-content p {

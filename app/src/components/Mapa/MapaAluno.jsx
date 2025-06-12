@@ -3,7 +3,6 @@ import { MapContainer, TileLayer, Marker, Polyline, Popup, useMap } from 'react-
 import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 
-
 const MapaViagemAluno = ({ dados }) => {
   if (!dados || !dados.origem || !dados.destino) {
     return <p>Carregando dados do mapa...</p>;

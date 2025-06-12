@@ -11,6 +11,13 @@ export default function RegistroPage() {
 
   const [tipo, setTipo] = useState('');
 
+// limpa mensagens ao mudar o tipo de usuario
+useEffect(() => {
+  setMensagem('');
+  setTipoMensagem('');
+}, [tipo]);
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     const camposNumericos = ['escola_id', 'ponto_embarque_id', 'viagem_id', 'veiculo_id'];
@@ -36,13 +43,16 @@ export default function RegistroPage() {
   const formRef = useRef(null);
   const [form, setForm] = useState({});
 
+  {/* PARA MENSAGENS DE SUCESSO OU ERRO */ }
+  const [mensagem, setMensagem] = useState('');
+  const [tipoMensagem, setTipoMensagem] = useState('');
   // ESCOLHA DE USUÁRIO
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!tipo) return alert('Selecione um tipo de usuário.');
     if (tipo === 'aluno' && !form.escola_id) return alert('Selecione uma escola da lista.');
 
-// ENVIO DO FORM
+    // ENVIO DO FORM
     try {
       let url = '';
       let corpo = {};
@@ -107,16 +117,19 @@ export default function RegistroPage() {
 
       const resultado = await resposta.json();
       if (resposta.ok) {
-        alert(resultado.mensagem);
+        setMensagem(resultado.mensagem || 'Cadastro realizado com sucesso.');
+        setTipoMensagem('sucesso');
         setForm({});
         setNomeEscola('');
         setPontoNome('');
         formRef.current.reset();
       } else {
-        alert(resultado.erro || 'Erro ao registrar.');
+        setMensagem(resultado.erro || 'Erro ao registrar.');
+        setTipoMensagem('erro');
       }
     } catch (err) {
-      alert('Erro de rede: ' + err.message);
+      setMensagem('Erro de rede: ' + err.message);
+      setTipoMensagem('erro');
     }
   };
 
@@ -165,44 +178,33 @@ export default function RegistroPage() {
 
   const [responsavelExiste, setResponsavelExiste] = useState(null);
 
-//CHAMA QUANDO CAMPOS DE CPF/EMAIL/TELEFONE DO RESPONSAVEL MUDAREM
-useEffect(() => {
-  const verificar = async () => {
-    if (form.cpf_responsavel && form.email_responsavel && form.telefone_responsavel) {
-      try {
-        const res = await fetch('http://localhost:3001/verificar-responsavel', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            cpf: form.cpf_responsavel,
-            email: form.email_responsavel,
-            telefone: form.telefone_responsavel,
-          }),
-        });
-
-        const data = await res.json();
-        setResponsavelExiste(data.existe);
-      } catch (err) {
-        console.error('Erro ao verificar responsável', err);
-        setResponsavelExiste(null);
-      }
-    }
-  };
-  verificar();
-}, [form.cpf_responsavel, form.email_responsavel, form.telefone_responsavel]);
-
-  //AO DIGITAR NOMES, ELE NÃO PERMITE CARACTERES NUMERICOS
-  const textRef = useRef(null);
+  //CHAMA QUANDO CAMPOS DE CPF/EMAIL/TELEFONE DO RESPONSAVEL MUDAREM
   useEffect(() => {
-    if (textRef.current) {
-      textRef.current.addEventListener("input", (e) => {
-        let value = e.target.value.replace(/[0-9]/g, '') // remove caracteres numericos
-        e.target.value = value;
-      })
-    }
-  })
+    const verificar = async () => {
+      if (form.cpf_responsavel && form.email_responsavel && form.telefone_responsavel) {
+        try {
+          const res = await fetch('http://localhost:3001/verificar-responsavel', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              cpf: form.cpf_responsavel,
+              email: form.email_responsavel,
+              telefone: form.telefone_responsavel,
+            }),
+          });
+
+          const data = await res.json();
+          setResponsavelExiste(data.existe);
+        } catch (err) {
+          console.error('Erro ao verificar responsável', err);
+          setResponsavelExiste(null);
+        }
+      }
+    };
+    verificar();
+  }, [form.cpf_responsavel, form.email_responsavel, form.telefone_responsavel]);
 
   //FORMATAÇÃO DO CPF PARA O FRONT
   const formatCpf = (value) => {
@@ -213,7 +215,7 @@ useEffect(() => {
       .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
   };
 
-//FORMATAÇÃO DO TELEFONE PARA O FRONT
+  //FORMATAÇÃO DO TELEFONE PARA O FRONT
   const formatPhone = (value) => {
     const digits = value.replace(/\D/g, '').slice(0, 11);
     return digits
@@ -239,12 +241,12 @@ useEffect(() => {
   }
 
   const renderCamposEspecificos = () => {
-    {/*CASO DO ALUNO E DO RESPONSAVEL (ELES SÃO ADICIONADOS JUNTOS)*/}
+    {/*CASO DO ALUNO E DO RESPONSAVEL (ELES SÃO ADICIONADOS JUNTOS)*/ }
     switch (tipo) {
       case 'aluno':
         return (
           <>
-          {/*INPUT DO CPF*/}
+            {/*INPUT DO CPF*/}
             <div className="w-full group">
               <input name="cpf" placeholder="CPF" required value={formatCpf(form.cpf || '')} onChange={(e) =>
                 handleChange({
@@ -256,7 +258,7 @@ useEffect(() => {
               } />
             </div>
             {/*INPUT EMAIL*/}
-            <input name="email" pattern="^[a-zA-Z0-9._%+-]+@al\.gov\.br$" placeholder="Email institucional" onChange={handleChange} required autoComplete="off" />
+            <input name="email" value={form.email || ''} pattern="^[a-zA-Z0-9._%+-]+@al\.gov\.br$" placeholder="Email institucional" onChange={handleChange} required autoComplete="off" />
             {/*INPUT NOME*/}
             <input name="nome" value={form.nome || ''} placeholder="Nome completo" onChange={handleChange} required />
             {/*INPUT TELEFONE*/}
@@ -264,7 +266,8 @@ useEffect(() => {
               target: {
                 name: 'telefonePrinc',
                 value: e.target.value.replace(/\D/g, '')
-              }})
+              }
+            })
             } />
             {/*INPUT DATA DE NASCIMENTO*/}
             <input type="date"
@@ -314,7 +317,8 @@ useEffect(() => {
                           }
                         } catch (err) {
                           console.error('Erro ao buscar ponto de embarque:', err);
-                        }}} >
+                        }
+                      }} >
                       {escola.nome}
                     </li>
                   ))}</ul>)} </div>
@@ -338,7 +342,7 @@ useEffect(() => {
               <option value="noite">Noite</option>
               <option value="integral">Integral</option>
             </select>
-            <input name="senha" className="data" placeholder="Senha" type="password" onChange={handleChange} required autoComplete="off" />
+            <input name="senha" className="data" value={form.senha || ''} placeholder="Senha" type="password" onChange={handleChange} required autoComplete="off" />
             {/* Campos do Responsável */}
             <h2 className="text-lg font-semibold mt-6 h2-resp">Responsável</h2>
             <input name="cpf_responsavel" placeholder="CPF do responsável" required value={formatCpf(form.cpf_responsavel || '')} onChange={(e) =>
@@ -351,7 +355,7 @@ useEffect(() => {
             } />
             {/*INPUT NOME DO RESPONSAVEL*/}
             <input name="nome_responsavel" placeholder="Nome do responsável" onChange={handleChange} required value={form.nome_responsavel || ''} />
-           {/*INPUT EMAIL DO RESPONSAVEL*/}
+            {/*INPUT EMAIL DO RESPONSAVEL*/}
             <input name="email_responsavel" placeholder="Email do responsável" onChange={handleChange} required value={form.email_responsavel || ''} />
             {/*INPUT TELEFONE DO RESPONSAVEL*/}
             <input name="telefone_responsavel" placeholder="Telefone do responsável" value={formatPhone(form.telefone_responsavel || '')} onChange={(e) =>
@@ -373,12 +377,12 @@ useEffect(() => {
                 value={form.senha_responsavel || ''}
               />
             )}</>);
-{/*CASO MOTORISTA*/}
+        {/*CASO MOTORISTA*/ }
       case 'motorista':
         return (
           <>
             <input name="cpf" placeholder="CPF" required value={formatCpf(form.cpf || '')} onChange={(e) => handleChange({ target: { name: 'cpf', value: e.target.value.replace(/\D/g, '') } })} />
-            <input name="nome" placeholder="Nome completo" onChange={handleChange} required ref={textRef} value={form.nome || ''} />
+            <input name="nome" placeholder="Nome completo" onChange={handleChange} required value={form.nome || ''} />
             <input name="cnh" placeholder="CNH" required value={formatCNH(form.cnh || '')} onChange={(e) => handleChange({ target: { name: 'cnh', value: e.target.value } })} />
             <input name="telefone" placeholder="Telefone" required value={formatPhone(form.telefone || '')} onChange={(e) => handleChange({ target: { name: 'telefone', value: e.target.value.replace(/\D/g, '') } })} />
             <input name="vencimento_habilitacao" placeholder="Validade da CNH" required type="date" value={form.vencimento_habilitacao || ''} onChange={handleChange} min={calcularMinData()} max={calcularMaxData()} className='data' />
@@ -386,7 +390,7 @@ useEffect(() => {
             <input type="password" name="senha" placeholder="Senha" required autoComplete="off" value={form.senha || ''} onChange={handleChange} className='data' />
           </>
         );
-        {/*CASO ADMINISTRADOR*/}
+        {/*CASO ADMINISTRADOR*/ }
       case 'administrador':
         return (
           <>
@@ -399,7 +403,10 @@ useEffect(() => {
         );
       default:
         return null;
-    }};
+    }
+  };
+
+
 
   return (
     <div className='w-full'>
@@ -415,10 +422,16 @@ useEffect(() => {
           <option value="motorista">Motorista</option>
           <option value="administrador">Administrador</option>
         </select>
-{/*SWITCH CASE*/}
+        {/*SWITCH CASE*/}
         {tipo && (
           <form onSubmit={handleSubmit} ref={formRef} className='flex flex-col gap-6 mt-6'>
             {renderCamposEspecificos()}
+
+            {mensagem && (
+              <div className={`mensagem ${tipoMensagem === 'erro' ? 'mensagem-erro' : 'mensagem-sucesso'}`}>
+                {mensagem}
+              </div>
+            )}
             <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded mb-5 hover:bg-blue-700 transition duration-300 ease">Registrar</button>
           </form>
         )}

@@ -1,45 +1,44 @@
-import { historicoAlunoViagens, verMotorista } from '../models/Aluno.js';
+import { historicoAlunoViagens, verMotorista, verVeiculo } from '../models/Aluno.js';
 
 // logica pra ver o historico de viagens
 const obterHistoricoViagensController = async (req, res) => {
-    try {
-        const alunoId = req.session.usuario?.id;
+  try {
+    const alunoId = req.session.usuario?.id;
+    const rows = await historicoAlunoViagens(alunoId);
 
-        const rows = await historicoAlunoViagens(alunoId);
-        console.log('rows:', rows);
+    // agrupar por aluno (apesar de ser só um aluno, mantém padrão)
+    const infoAlunos = [];
+    const alunosMap = {};
 
-        const infoViagens = [];
-        const viagensMap = {};
+    for (const row of rows) {
+      if (!alunosMap[row.id_aluno]) {
+        alunosMap[row.id_aluno] = {
+          id_aluno: row.id_aluno,
+          nome_aluno: row.nome_aluno,
+          idade: row.idade,
+          nome_escola: row.nome_escola,
+          endereco_embarque: row.endereco_embarque,
+          viagens: []
+        };
+        infoAlunos.push(alunosMap[row.id_aluno]);
+      }
 
-        for (const row of rows) {
-            if (!viagensMap[row.id_aluno]) {
-                viagensMap[row.id_aluno] = {
-                    id_aluno: row.id_aluno,
-                    nome_aluno: row.nome_aluno,
-                    idade: row.idade,
-                    nome_escola: row.nome_escola,
-                    endereco_embarque: row.endereco_embarque,
-                    viagens: []
-                };
-                infoViagens.push(viagensMap[row.id_aluno]);
-            }
-
-            viagensMap[row.id_aluno].viagens.push({
-                tipo: row.tipo_viagem,
-                horaEmbarque: row.hora_saida,
-                horaSaída: row.hora_chegada_prevista,
-                data: row.data,
-                status: row.status_viagem,
-                nome_motorista: row.nome_motorista
-            });
-        }
-
-        res.json({ infoViagens });
-
-    } catch (error) {
-        console.error('Erro ao buscar histórico de viagens do aluno:', error);
-        res.status(500).json({ message: 'Erro ao buscar histórico de viagens do aluno' });
+      alunosMap[row.id_aluno].viagens.push({
+        tipo: row.tipo_viagem,
+        horaEmbarque: row.hora_saida,
+        horaSaida: row.hora_chegada_prevista,
+        data: row.data,
+        status: row.status_viagem,
+        nome_motorista: row.nome_motorista
+      });
     }
+
+    res.json({ infoAlunos });
+
+  } catch (error) {
+    console.error('Erro ao buscar viagens do aluno:', error);
+    res.status(500).json({ message: 'Erro ao buscar viagens do aluno' });
+  }
 };
 
 const verMotoristaController = async(req,res)=>{
@@ -60,4 +59,25 @@ const verMotoristaController = async(req,res)=>{
     }
 }
 
-export{verMotoristaController, obterHistoricoViagensController }
+const alunoVerVeiculoController = async (req, res) => {
+  try {
+    const aluno_id = req.session.usuario?.id;
+    if (!aluno_id) {
+      return res.status(401).json({ erro: 'Aluno não autenticado!!!' });
+    }
+
+    const veiculo = await verVeiculo(aluno_id);
+
+    if (!Array.isArray(veiculo)) {
+      return res.json([]);
+    }
+
+    res.json(veiculo);
+  } catch (error) {
+    console.error('Erro ao buscar veículo:', error);
+    res.status(500).json({ erro: 'Erro ao buscar veículo' });
+  }
+};
+
+
+export{verMotoristaController, obterHistoricoViagensController, alunoVerVeiculoController }

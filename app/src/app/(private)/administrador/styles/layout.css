@@ -48,6 +48,10 @@ main {
   display: inline;
 }
 
+.sidebar.active .img-logo{
+  width: 12vw;
+}
+
 .nav-label {
   display: none;
   font-family: "Plus Jakarta Sans SemiBold";

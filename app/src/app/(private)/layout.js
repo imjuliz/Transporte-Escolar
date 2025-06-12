@@ -27,7 +27,8 @@ export default function PrivateLayout({ children }) {
         router.push('/login'); // redireciona para login também em caso de erro
       } finally {
         setCarregando(false); // termina o carregamento em qualquer caso
-      } } checarSessao();
+      }
+    } checarSessao();
   }, [router]);
 
   if (carregando) {
@@ -45,10 +46,12 @@ export default function PrivateLayout({ children }) {
           </svg>
           <span className="sr-only">Carregando...</span>
         </div> </div>
-    );}
+    );
+  }
   if (!usuarioLogado) {
     return null;
   }
   return (
     <>  {children} </>
-  );}
+  );
+}

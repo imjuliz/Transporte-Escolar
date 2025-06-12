@@ -1,238 +1,240 @@
 /* bolinha piscando quando a viagem estiver ativa*/
 .blink {
-  animation: piscar 1s infinite;
+    animation: piscar 1s infinite;
 }
 
 @keyframes piscar {
-  0% {
-      opacity: 1;
-  }
+    0% {
+        opacity: 1;
+    }
 
-  50% {
-      opacity: 0.2;
-  }
+    50% {
+        opacity: 0.2;
+    }
 
-  100% {
-      opacity: 1;
-  }
+    100% {
+        opacity: 1;
+    }
 }
 
 
 .chrome {
-  /* background-color: white; */
-  height: fit-content;
-  /* border-radius: 30px; */
+    /* background-color: white; */
+    height: fit-content;
+    /* border-radius: 30px; */
 }
 
 .conteudo {
-  padding: 30px 30px;
+    padding: 30px 30px;
 }
 
 .container-viagem {
-  width: 100%;
-  height: fit-content;
-  padding: 1.3rem 2.3rem;
-  box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
-  margin-bottom: 30px;
-  transition: box-shadow .3s;
-  border-radius: 2vw !important
+    width: 100%;
+    height: fit-content;
+    padding: 1.3rem 2.3rem;
+    box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
+    margin-bottom: 30px;
+    transition: box-shadow .3s;
+    border-radius: 2vw !important
 }
 
 hr {
-  width: 250px;
+    width: 250px;
 }
 
 main {
-  align-content: start;
-  height: max-content !important;
+    align-content: start;
+    height: max-content !important;
 
 }
 
 section {
-  margin-top: 10vh;
-  width: 100%;
+    margin-top: 10vh;
+    width: 100%;
 }
 
 .titulo {
-  align-items: flex-start;
+    align-items: flex-start;
 }
 
 .fotodeperfil {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .nomealuno {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 ul {
-  list-style: circle;
+    list-style: circle;
 }
 
-ul li{
-  font-family: 'Plus Jakarta Sans Medium';
+ul li {
+    font-family: 'Plus Jakarta Sans Medium';
 }
 
 .conteudo {
-  background-color: #fff !important;
-  border-radius: 20px;
+    background-color: #fff !important;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
 }
 
 .conteudo .tab-content p {
-  margin: 0;
-  font-family: 'Plus Jakarta Sans Medium';
+    margin: 0;
+    font-family: 'Plus Jakarta Sans Medium';
 }
 
 .aluno {
-  background-color: rgb(233, 233, 233);
-  padding: 1vh 3vh;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+    background-color: rgb(233, 233, 233);
+    padding: 1vh 3vh;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .nomeAluno {
-  margin: 0;
-  font-family: 'Plus Jakarta Sans Medium';
-  font-size: 1rem;
-  color: black
+    margin: 0;
+    font-family: 'Plus Jakarta Sans Medium';
+    font-size: 1rem;
+    color: black
 }
 
 /********************************************************************/
 
 body {
-  background-color: #F5F5F5 !important;
+    background-color: #F5F5F5 !important;
 }
 
 main {
-  align-content: start;
-  overflow: hidden;
+    align-content: start;
+    overflow: hidden;
 }
 
 section {
-  margin-top: 10vh;
+    margin-top: 10vh;
 }
 
 .page-indicador {
-  width: fit-content;
-  margin-bottom: 8vh;
+    width: fit-content;
+    margin-bottom: 8vh;
 }
 
 .page-indicador h1 {
-  font-family: 'Plus Jakarta Sans Bold';
+    font-family: 'Plus Jakarta Sans Bold';
 }
 
 .days,
 section {
-  width: 100%;
+    width: 100%;
 }
 
 .days h2 {
-  font-family: 'Plus Jakarta Sans Semibold';
-  margin-bottom: 3vh;
-  font-size: 1.5rem;
+    font-family: 'Plus Jakarta Sans Semibold';
+    margin-bottom: 3vh;
+    font-size: 1.5rem;
 }
 
 .container-viagem {
-  width: 100%;
-  padding: 1.3rem 2.3rem;
-  box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
-  margin-bottom: 30px;
-  transition: box-shadow .3s;
+    width: 100%;
+    padding: 1.3rem 2.3rem;
+    box-shadow: rgba(0, 0, 0, 0.04) 5px 3px 5px 5px;
+    margin-bottom: 30px;
+    transition: box-shadow .3s;
 }
 
 .container-viagem p {
-  font-family: 'Plus Jakarta Sans Medium';
-  font-size: 1rem;
+    font-family: 'Plus Jakarta Sans Medium';
+    font-size: 1rem;
 }
 
 .container-viagem h3 {
-  font-family: 'Plus Jakarta Sans Semibold';
-  font-size: 1.2rem;
+    font-family: 'Plus Jakarta Sans Semibold';
+    font-size: 1.2rem;
 }
 
 .container-viagem:hover {
-  box-shadow: 0 0 11px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 0 11px rgba(0, 0, 0, 0.06);
 }
 
 .status {
-  width: fit-content;
-  padding: 0.4rem 2rem;
-  font-family: 'Plus Jakarta Sans Medium';
-  font-size: 1rem;
-  text-align: center;
+    width: fit-content;
+    padding: 0.4rem 2rem;
+    font-family: 'Plus Jakarta Sans Medium';
+    font-size: 1rem;
+    text-align: center;
 }
 
 .titulo-status {
-  width: 100%
+    width: 100%
 }
 
 .titulo-status h3 {
-  margin: 0;
+    margin: 0;
 }
 
 .circle {
-  margin: 0 1.7vw;
+    margin: 0 1.7vw;
 }
 
 .circle-t {
-  margin: 0 1vw 0 0;
+    margin: 0 1vw 0 0;
 }
 
 .barrinha {
-  gap: 15px
+    gap: 15px
 }
 
 @media screen and (max-width: 1536px) {
-  .container-viagem h3 {
-      font-size: 1.5rem;
-  }
+    .container-viagem h3 {
+        font-size: 1.5rem;
+    }
 
-  .titulo-status {
-      justify-content: space-between;
-  }
+    .titulo-status {
+        justify-content: space-between;
+    }
 }
 
 @media screen and (max-width: 1280px) {
-  .container-viagem h3 {
-      font-size: 1.3rem;
-  }
+    .container-viagem h3 {
+        font-size: 1.3rem;
+    }
 
-  .titulo-status {
-      justify-content: space-between;
-  }
+    .titulo-status {
+        justify-content: space-between;
+    }
 }
 
 @media screen and (max-width: 1024px) {
-  .container-viagem h3 {
-      font-size: 1rem;
-  }
+    .container-viagem h3 {
+        font-size: 1rem;
+    }
 
-  .titulo-status {
-      justify-content: space-between;
-  }
+    .titulo-status {
+        justify-content: space-between;
+    }
 }
 
 @media screen and (max-width: 768px) {
-  .container-viagem h3 {
-      font-size: 1rem;
-  }
+    .container-viagem h3 {
+        font-size: 1rem;
+    }
 }
 
 @media screen and (max-width: 640px) {
-  .container-viagem h3 {
-      font-size: 1rem;
-  }
+    .container-viagem h3 {
+        font-size: 1rem;
+    }
 
-  .titulo-status {
-      justify-content: space-between;
-  }
+    .titulo-status {
+        justify-content: space-between;
+    }
 }
 
 @media screen and (max-width: 600px) {
-  .titulo-status {
-      flex-direction: column;
-  }
+    .titulo-status {
+        flex-direction: column;
+    }
 }

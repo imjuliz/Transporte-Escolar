@@ -104,10 +104,10 @@ export default function AdmLayout({ children }) {
 
     return (
         <>
-            <header>
+            <header className='z-[9999]'>
                 <div className={`sidebar ${sidebarActive ? 'active' : ''}`}>
                     <div className="logoContent flex flex-nowrap gap-4 items-center">
-            
+            <img src='/img/logo.png' className='img-logo'/>
                         <div className="logo flex flex-col items-end">
                             <p className="logoName">Administrador</p>
                             <h4 className='nomepessoa'>Olá, {nomeSobrenome.primeiroNome}</h4>

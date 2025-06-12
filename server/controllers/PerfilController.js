@@ -1,4 +1,4 @@
-import { obterDadosDoUsuario, editarPerfil, editarPerfilMotorista } from '../models/Perfil.js';
+import { obterDadosDoUsuario, editarPerfil, editarPerfilMotorista, editarPerfilAluno } from '../models/Perfil.js';
 import session from "express-session";
 
 // obter dados do perfil do usuario
@@ -88,7 +88,7 @@ const editarPerfilMotoristaController = async (req, res) => {
       return res.status(400).json({ mensagem: 'Nenhum dado para atualizar.' });
     }
 
-    await editarPerfilMotorista(tipo, id, atualizacoes);
+    await editarPerfilAluno(tipo, id, atualizacoes);
     res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!' });
   } catch (err) {
     console.error(err);
@@ -96,26 +96,29 @@ const editarPerfilMotoristaController = async (req, res) => {
   }
 };
 
-// upload da foto de perfil
-const editarFotoPerfilController = async (req, res) => {
+const editarPerfilAlunoController = async (req, res) => {
   try {
     const id = req.session.usuario.id;
     const tipo = req.session.usuario.tipo;
 
-    if (!req.file) {
-      return res.status(400).json({ mensagem: 'Nenhuma foto enviada.' });
+    const { emailPessoal, telefone } = req.body;
+    
+console.log('dados que vc quer editar: ', req.body)
+    const atualizacoes = {};
+   if (emailPessoal !== undefined && emailPessoal !== "") atualizacoes.emailPessoal = emailPessoal;
+    if (telefone !== undefined && telefone !== "") atualizacoes.telefone = telefone;
+
+    if (Object.keys(atualizacoes).length === 0) {
+      return res.status(400).json({ mensagem: 'Nenhum dado para atualizar.' });
     }
 
-    const caminhoFoto = '/uploads/' + req.file.filename;
-
-    await editarPerfil(tipo, id, { foto: caminhoFoto });
-
-    res.status(200).json({ mensagem: 'Foto atualizada com sucesso!', foto: caminhoFoto });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensagem: 'Erro ao atualizar foto' });
+    await editarPerfilAluno(tipo, id, atualizacoes);
+    res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensagem: 'Erro ao atualizar perfil' });
   }
 };
 
-export { obterPerfilUsuario, editarPerfilController, editarFotoPerfilController, editarPerfilMotoristaController };
+export { obterPerfilUsuario, editarPerfilController, editarPerfilMotoristaController, editarPerfilAlunoController };
 

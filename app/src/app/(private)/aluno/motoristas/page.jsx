@@ -13,21 +13,22 @@ export default function motoristas() {
     const [erro, setErro] = useState("");
 
 
-    //ver veiculo
     useEffect(() => {
-        fetch("http://localhost:3001/verVeiculo", {
+        // Pega o veículo associado ao aluno logado
+        fetch("http://localhost:3001/veiculos-aluno", {
             method: "GET",
             credentials: "include",
         })
             .then(async (res) => {
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.mensagem);
-                setVeiculo(data);
+                setVeiculo(data[0]);
             })
             .catch((err) => {
                 console.error("Erro ao buscar dados do veiculo:", err.message);
-                setErro("Erro ao carregar informações do veiculo.");
-            });}, []);
+                setErro("Erro ao carregar informações do veículo.");
+            });
+    }, []);
 
     //ver motorista
     useEffect(() => {
@@ -82,18 +83,10 @@ export default function motoristas() {
 
                 {/*NOME MOTORISTA*/}
                 <div className='user'>
-                    <div className='perfil-img-nome flex flex-nowrap items-center gap-3'>
-                        <div className='ft-up flex flex-row items-end justify-items-end-safe'>
-                        <Image
-                            src="/img/fotoPerfil.png"
-                            width={80}
-                            height={80}
-                            alt="Foto de perfil"
-                            className='fotoPerfil'
-                        />
-                        </div>
+                    <div className='perfil-img-nome flex flex-nowrap items-center justify-start gap-3'>
                         <div>
                             <h3>{motorista.nome}</h3>
+                            <p>Motorista do ônibus escolar</p>
                         </div>
                     </div>
                     <hr />
