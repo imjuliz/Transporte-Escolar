@@ -385,6 +385,7 @@ useEffect(() => {
             <input name="nome" placeholder="Nome completo" onChange={handleChange} required value={form.nome || ''} />
             <input name="cnh" placeholder="CNH" required value={formatCNH(form.cnh || '')} onChange={(e) => handleChange({ target: { name: 'cnh', value: e.target.value } })} />
             <input name="telefone" placeholder="Telefone" required value={formatPhone(form.telefone || '')} onChange={(e) => handleChange({ target: { name: 'telefone', value: e.target.value.replace(/\D/g, '') } })} />
+            <label htmlFor="vencimento_habilitacao">Validade da CNH:</label>
             <input name="vencimento_habilitacao" placeholder="Validade da CNH" required type="date" value={form.vencimento_habilitacao || ''} onChange={handleChange} min={calcularMinData()} max={calcularMaxData()} className='data' />
             <input name="email" type='email' placeholder="Email" onChange={handleChange} required autoComplete="off" value={form.email || ''} className='data' />
             <input type="password" name="senha" placeholder="Senha" required autoComplete="off" value={form.senha || ''} onChange={handleChange} className='data' />

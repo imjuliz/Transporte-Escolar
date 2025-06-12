@@ -269,8 +269,8 @@ INSERT INTO viagens
 (3, 3, CURDATE(), 'manha', '11:30:00', '12:00:00', 'escola', 6, 'ponto_embarque', 6, 'volta', 'agendada', 30),
 -- integral
 (3, 3, CURDATE(), 'integral', '06:00:00', '07:00:00', 'ponto_embarque', 5, 'escola', 5, 'ida', 'agendada', 60),
-(3, 3, CURDATE(), 'integral', '16:00:00', '16:30:00', 'escola', 5, 'ponto_embarque', 5, 'volta', 'agendada', 30),
-(3, 3, CURDATE(), 'integral', '06:00:00', '07:00:00', 'ponto_embarque', 6, 'escola', 6, 'ida', 'agendada', 60),
+(3, 3, CURDATE(), 'integral', '16:00:00', '17:30:00', 'escola', 5, 'ponto_embarque', 5, 'volta', 'agendada', 30),
+(3, 3, CURDATE(), 'integral', '06:00:00', '12:00:00', 'ponto_embarque', 6, 'escola', 6, 'ida', 'agendada', 60),
 (3, 3, CURDATE(), 'integral', '16:00:00', '16:30:00', 'escola', 6, 'ponto_embarque', 6, 'volta', 'agendada', 30),
 -- ônibus 4, motorista 4, escolas 7 e 8, períodos: integral e noite
 -- integral
@@ -284,7 +284,7 @@ INSERT INTO viagens
 (4, 4, CURDATE(), 'noite', '18:30:00', '19:00:00', 'ponto_embarque', 8, 'escola', 8, 'ida', 'agendada', 30),
 (4, 4, CURDATE(), 'noite', '23:00:00', '23:30:00', 'escola', 8, 'ponto_embarque', 8, 'volta', 'agendada', 30),
 -- ônibus 1, motorista 5, escolas 1 e 2, período: noite
-(1, 5, CURDATE(), 'noite', '18:30:00', '19:00:00', 'ponto_embarque', 1, 'escola', 1, 'ida', 'agendada', 30),
+(1, 5, CURDATE(), 'noite', '06:30:00', '19:00:00', 'ponto_embarque', 1, 'escola', 1, 'ida', 'agendada', 30),
 (1, 5, CURDATE(), 'noite', '23:00:00', '23:30:00', 'escola', 1, 'ponto_embarque', 1, 'volta', 'agendada', 30),
 (1, 5, CURDATE(), 'noite', '18:30:00', '19:00:00', 'ponto_embarque', 1, 'escola', 2, 'ida', 'agendada', 30),
 (1, 5, CURDATE(), 'noite', '23:00:00', '23:30:00', 'escola', 2, 'ponto_embarque', 1, 'volta', 'agendada', 30),
@@ -293,7 +293,7 @@ INSERT INTO viagens
 (2, 6, CURDATE(), 'manha', '06:00:00', '07:00:00', 'ponto_embarque', 2, 'escola', 3, 'ida', 'agendada', 60),
 (2, 6, CURDATE(), 'manha', '11:30:00', '12:00:00', 'escola', 3, 'ponto_embarque', 2, 'volta', 'agendada', 30),
 -- integral
-(2, 6, CURDATE(), 'integral', '06:00:00', '07:00:00', 'ponto_embarque', 3, 'escola', 4, 'ida', 'agendada', 60),
+(2, 6, CURDATE(), 'integral', '06:00:00', '12:00:00', 'ponto_embarque', 3, 'escola', 4, 'ida', 'agendada', 60),
 (2, 6, CURDATE(), 'integral', '16:00:00', '16:30:00', 'escola', 4, 'ponto_embarque', 3, 'volta', 'agendada', 30),
 -- ônibus 3, motorista 7, escolas 5 e 6, períodos: tarde e noite
 -- tarde
@@ -329,16 +329,16 @@ INSERT INTO escola_ponto_embarque (escola_id, ponto_embarque_id) VALUES
 (8, 8);
 
 INSERT INTO alunos (cpf, email, nome, telefone, emailPessoal, dataNascimento, senha, escola_id, ponto_embarque_id, turno) VALUES
-('88888888888', 'roberto@al.gov.br', 'Roberto Alves Costa', '11969903253', 'roberto_costa@gmail.com', '2010-05-20', 'roberto@aluno', 2, 2, 'tarde'),
+('88888888888', 'roberto@al.gov.br', 'Roberto Alves Costa', '11969903253', 'roberto_costa@gmail.com', '2010-05-20', 'roberto@aluno', 5, 5, 'tarde'),
 ('99999999999', 'beatriz@al.gov.br', 'Beatriz Sousa Garcia', '11929076857', 'beatrizgarcia2010@gmail.com', '2011-08-15', 'beatriz@aluno', 5, 5, 'integral'),
 ('10101010101', 'marcos@al.gov.br', 'Marcos Correia', '11956435985', 'marcos_correia@gmail.com', '2012-03-10', 'marcos@aluno', 3, 3, 'noite'),
-('11121211121', 'ana.julia@al.gov.br', 'Ana Julia Oliveira', '11987654321', 'ana.j.oliveira@hotmail.com', '2018-11-05', 'ana@aluno', 1, 1, 'manha'),
+('11121211121', 'ana.julia@al.gov.br', 'Ana Julia Oliveira', '11987654321', 'ana.j.oliveira@hotmail.com', '2018-11-05', 'ana@aluno', 5, 5, 'manha'),
 ('12131213121', 'carlos.eduardo@al.gov.br', 'Carlos Eduardo Pereira', '11998877665', 'cadu_pereira@gmail.com.br', '2016-06-01', 'carlos@aluno', 4, 4, 'manha'),
 ('13131414131', 'beatriz.santos@al.gov.br', 'Beatriz Santos Lima', '11912345678', 'bia_lima_santos@outlook.com', '2013-09-22', 'beatriz@aluno', 2, 2, 'tarde'),
-('14141515141', 'lucas.mendes@al.gov.br', 'Lucas Mendes Ferreira', '11955554444', 'lucas.ferreira.m@gmail.com', '2012-01-30', 'lucas@aluno', 2, 2, 'tarde'),
+('14141515141', 'lucas.mendes@al.gov.br', 'Lucas Mendes Ferreira', '11955554444', 'lucas.ferreira.m@gmail.com', '2012-01-30', 'lucas@aluno', 5, 5, 'tarde'),
 ('15141514151', 'fernanda.almeida@al.gov.br', 'Fernanda Almeida Goncalves', '11943218765', 'fernanda_goncalves@outlook.com', '2013-05-17', 'fernanda@aluno', 8, 8, 'tarde'),
 ('16151615161', 'gustavo.ribeiro@al.gov.br', 'Gustavo Ribeiro Azevedo', '11988881111', 'guga_ribeiro@icloud.com', '2015-07-09', 'gustavo@aluno', 1, 1, 'manha'),
-('17161716171', 'mariana.souza@al.gov.br', 'Mariana Souza Carvalho', '11977772222', 'mari_carvalho88@gmail.com', '2012-12-01', 'mariana@aluno', 2, 2, 'tarde'),
+('17161716171', 'mariana.souza@al.gov.br', 'Mariana Souza Carvalho', '11977772222', 'mari_carvalho88@gmail.com', '2012-12-01', 'mariana@aluno', 5, 5, 'tarde'),
 ('12345678900', 'novo.email@exemplo.com', 'Novo Aluno', '1199999-9999', 'email.pessoal@exemplo.com', '2005-07-20', 'senhaSegura', 3, 3, 'noite');
 INSERT INTO alunos (
     cpf, email, nome, telefone, emailPessoal, dataNascimento, senha, turno, escola_id, ponto_embarque_id
@@ -347,15 +347,12 @@ INSERT INTO alunos (
     '2010-05-10', 'marcos@aluno', 'noite', 1, 1
 );
 
-select * from alunos;
-
 INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
 (1, 1),
-(2, 2),
 (3, 3),
 (4, 4),
 (5, 5),
-(6, 6), (6, 7), (6, 12),  -- responsavel 6 tem 3 filhos
+(6, 2), (6, 7), (6, 12),  -- responsavel 6 tem 3 filhos
 (7, 8),
 (8, 9);
 
@@ -450,13 +447,14 @@ INSERT INTO viagens (veiculo_id, motorista_id, data_viagem, hora_saida, hora_che
 -- incidentes
 INSERT INTO mensagens_motoristas (aluno_id, responsavel_id, motorista_id, tipo, conteudo) VALUES
 (1, 1, 1, 'congestionamento', 'Congestionamento na avenida Lauro Gomes pode atrasar o desembarque de Roberto'),
-(2, 2, 2, 'rota', 'Mudança temporária na rota de Beatriz devido a obras no bairro Jardim São Paulo'),
+(2, 6, 3, 'rota', 'Mudança temporária na rota de Beatriz devido a obras no bairro Jardim São Paulo'),
 (3, 3, 3, 'emergencia', 'Marcos passou mal durante o trajeto, estamos levando ele de volta para casa e avisaremos em breve'),
 (4, 4, 4, 'veiculo', 'O ônibus apresentou falha mecânica. A manutenção já foi acionada, e o transporte será reprogramado'),
 (5, 5, 5, 'rota', 'Carlos Eduardo será buscado 15 minutos mais cedo amanhã por conta da nova organização de pontos'),
-(6, 6, 6, 'congestionamento', 'Trânsito intenso na rodovia dos Imigrantes pode atrasar a chegada de Beatriz Santos'),
-(7, 7, 7, 'veiculo', 'O ar-condicionado do veículo está com defeito, mas a viagem seguirá normalmente até a manutenção amanhã'),
+(6, 2, 6, 'congestionamento', 'Trânsito intenso na rodovia dos Imigrantes pode atrasar a chegada de Beatriz Santos'),
+(7, 6, 1, 'veiculo', 'O ar-condicionado do veículo está com defeito, mas a viagem seguirá normalmente até a manutenção amanhã'),
 (8, 8, 8, 'emergencia', 'Fernanda teve uma queda leve ao subir no veículo, mas está bem. Aplicamos gelo e estamos monitorando'),
 (9, 1, 1, 'rota', 'A entrada da escola de Gustavo está bloqueada. Vamos deixá-lo na lateral, próximo ao portão 2'),
 (10, 2, 2, 'congestionamento', 'Trânsito parado na Marginal Tietê. Mariana pode chegar com até 25 minutos de atraso'),
-(11, 3, 3, 'veiculo', 'Veículo da rota do Novo Aluno passou por revisão hoje, portanto o embarque será com um motorista substituto');
+(11, 3, 3, 'veiculo', 'Veículo da rota do Novo Aluno passou por revisão hoje, portanto o embarque será com um motorista substituto'),
+(12, 6, 5, 'veiculo', 'Veículo da rota de Marcos passou por revisão hoje, portanto o embarque será com um motorista substituto');
