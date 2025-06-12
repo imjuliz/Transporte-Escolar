@@ -70,8 +70,9 @@ export const associarResponsavelAluno = async (responsavelId, alunoId) => {
   }
 };
 
-export const associarAlunoViagem = async (viagemId, alunoId) => {
+export const associarAlunoViagem = async (alunoId, viagemId) => {
   try {
+    console.log('Tentando associar aluno à viagem:', alunoId, viagemId);
     return await create('alunos_viagens', {
       viagem_id: viagemId,
       aluno_id: alunoId
