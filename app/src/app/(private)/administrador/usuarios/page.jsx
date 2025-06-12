@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import '../styles/cadastros.css';
 
 export default function UsuariosPage() {
+    useEffect(() => {
+    document.title = 'EduTrip - Usuários';
+  }, []);
     const [tipo, setTipo] = useState("");
 
     const [alunos, setAlunos] = useState([]);
@@ -186,7 +189,7 @@ export default function UsuariosPage() {
                 switch (col) {
                     case "Nome": return item.nome;
                     case "CPF": return formatarCPF(item.cpf);
-                    case "Telefone": return formatarTelefone(item.telefonePrinc);
+                    case "Telefone": return formatarTelefone(item.telefone);
                     case "Email": return item.email;
                     case "Turno": return item.turno;
                     case "Status": return item.status;

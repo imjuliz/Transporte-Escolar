@@ -65,7 +65,7 @@ useEffect(() => {
               cpf: form.cpf,
               nome: form.nome,
               email: form.email,
-              telefonePrinc: form.telefonePrinc,
+              telefone: form.telefone,
               dataNascimento: form.dataNascimento,
               escola_id: form.escola_id,
               ponto_embarque_id: form.ponto_embarque_id,
@@ -262,9 +262,9 @@ useEffect(() => {
             {/*INPUT NOME*/}
             <input name="nome" value={form.nome || ''} placeholder="Nome completo" onChange={handleChange} required />
             {/*INPUT TELEFONE*/}
-            <input name="telefonePrinc" placeholder="Telefone" required value={formatPhone(form.telefonePrinc || '')} onChange={(e) => handleChange({
+            <input name="telefone" placeholder="Telefone" required value={formatPhone(form.telefone || '')} onChange={(e) => handleChange({
               target: {
-                name: 'telefonePrinc',
+                name: 'telefone',
                 value: e.target.value.replace(/\D/g, '')
               }
             })

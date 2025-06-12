@@ -1,4 +1,3 @@
-// app/dashboard/motorista/rota/page.jsx
 'use client';
 import MapaViagemMotorista from '../../../../components/Mapa/MapaMotorista.jsx';
 import { useEffect, useState } from 'react';
