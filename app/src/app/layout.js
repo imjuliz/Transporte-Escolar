@@ -13,6 +13,8 @@ export default function RootLayout({ children }) {
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true' />
       <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet"></link>
+  <link rel="icon" href="/img/logo-favicon.png" />
+
       </head>
       <body className="body">
         {children}
