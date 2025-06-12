@@ -3,7 +3,9 @@ import { useState } from "react";
 import '../styles/registrar-veiculo.css'
 
 export default function RegistrarVeiculo() {
-
+useEffect(() => {
+    document.title = 'EduTrip - Registrar Veículo';
+  }, []);
   const [resposta, setResposta] = useState("");
 
   const handleSubmit = async (e) => {

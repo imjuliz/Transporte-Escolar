@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 export default function ViagensAluno() {
   const [alunos, setAlunos] = useState([]);
   const [abaAtiva, setAbaAtiva] = useState('todos');
+  useEffect(() => {
+    document.title = 'EduTrip - Minhas Viagens';
+  }, []);
 
   useEffect(() => {
     fetch('http://localhost:3001/viagens-historico', { credentials: 'include' })

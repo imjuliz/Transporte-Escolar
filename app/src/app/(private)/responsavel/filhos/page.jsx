@@ -4,6 +4,9 @@ import '../styles/filhos.css';
 import { useRouter } from 'next/navigation';
 
 export default function filhos() {
+  useEffect(() => {
+    document.title = 'EduTrip - Filhos';
+  }, []);
   const router = useRouter();
 
   const [filhos, setFilhos] = useState([]);

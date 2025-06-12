@@ -7,6 +7,10 @@ import Image from 'next/image';
 import './viagens.css'
 
 export default function RotaMotorista() {
+  useEffect(() => {
+    document.title = 'EduTrip - Minha Rota';
+  }, []);
+
   const router = useRouter();
   const [usuarioLogado, setUsuarioLogado] = useState(null);
   const [carregando, setCarregando] = useState(true);

@@ -8,6 +8,9 @@ import '../styles/rotas.css'
 import 'leaflet/dist/leaflet.css';
 
 export default function RotaResponsavel() {
+  useEffect(() => {
+    document.title = 'EduTrip - Rotas';
+  }, []);
   const router = useRouter();
 
   const [infoFilhos, setInfoFilhos] = useState(null);

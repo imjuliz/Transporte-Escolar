@@ -5,6 +5,9 @@ import "../../../globals.css";
 import './incidentes2.css'
 
 export default function incidentes() {
+    useEffect(() => {
+    document.title = 'EduTrip - Registrar Incidentes';
+  }, []);
 
     //CARDS COM OS TIPOS DE INCIDENTES
     const mensagens = [

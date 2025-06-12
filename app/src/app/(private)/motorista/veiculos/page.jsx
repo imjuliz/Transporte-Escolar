@@ -5,6 +5,9 @@ import { useRef, useEffect, useState } from "react";
 import Image from 'next/image'
 
 export default function veiculos() {
+    useEffect(() => {
+    document.title = 'EduTrip - Meus Veículos';
+  }, []);
     const [veiculo, setUsuario] = useState(null);
     const [erro, setErro] = useState("");
 

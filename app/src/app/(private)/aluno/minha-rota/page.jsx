@@ -10,6 +10,9 @@ import MapaViagemAluno from '../../../../components/Mapa/MapaAluno.jsx';
 import { useRouter, usePathname } from "next/navigation";
 
 export default function RotaAluno() {
+  useEffect(() => {
+    document.title = 'EduTrip - Minha Rota';
+  }, []);
   const router = useRouter();
 
   const [dadosViagem, setDadosViagem] = useState(null);

@@ -4,6 +4,9 @@ import "../../../globals.css";
 import "../styles/mensagens.css";
 
 export default function EnviarMensagemResponsavel() {
+  useEffect(() => {
+    document.title = 'EduTrip - Enviar Mensagem';
+  }, []);
    {/*CARDS COM OS TIPOS DAS MENSAGENS*/}
   const mensagens = [
     {

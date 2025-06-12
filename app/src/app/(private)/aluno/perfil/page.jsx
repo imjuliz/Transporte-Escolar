@@ -5,6 +5,9 @@ import React, { useRef, useEffect } from 'react';
 import { useState } from "react";
 
 export default function MeuPerfil() {
+    useEffect(() => {
+    document.title = 'EduTrip - Meu Perfil';
+  }, []);
 
     const tellRef = useRef(null);
     const emailInputRef = useRef(null);

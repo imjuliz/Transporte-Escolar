@@ -4,6 +4,10 @@ import { useRouter } from "next/navigation";
 import './embarque.css'
 
 export default function Escolas() {
+  useEffect(() => {
+    document.title = 'EduTrip - Passageiros';
+  }, []);
+
   const [escolas, setEscolas] = useState([]);
   const [ativo, setAtivo] = useState(null);
   const router = useRouter();

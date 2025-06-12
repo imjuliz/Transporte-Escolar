@@ -3,6 +3,9 @@ import './teste.css'
 import { useRef, useEffect, useState } from "react";
 
 export default function Viagens() {
+  useEffect(() => {
+    document.title = 'EduTrip - Minhas Viagens';
+  }, []);
   // busca dados do back
   const [motoristas, setMotoristas] = useState([]);
   const [abaAtiva, setAbaAtiva] = useState('todos'); // Estado da aba ativa

@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import "./notificacoes.css";
 
 export default function Notificacoes() {
+    useEffect(() => {
+    document.title = 'EduTrip - Notificações';
+  }, []);
     const [mensagens, setMensagens] = useState([]);
     const [ativo, setAtivo] = useState(null);
 

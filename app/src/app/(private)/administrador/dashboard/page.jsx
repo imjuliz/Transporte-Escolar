@@ -15,7 +15,9 @@ import { EscolasTable } from './components/TabelaEscolas.jsx';
 import { PontosTable } from './components/TabelaPontos.jsx';
 
 export default function dashboard() {
-
+useEffect(() => {
+    document.title = 'EduTrip - Dashboard';
+  }, []);
     //----------------------------------------cards
     // qntd de viagens em andamento
     const [qtdViagens, setQtdViagens] = useState(null);

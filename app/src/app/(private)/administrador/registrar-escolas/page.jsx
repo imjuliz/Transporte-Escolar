@@ -3,6 +3,9 @@ import { useState } from "react";
 import '../styles/registrar-veiculo.css'
 
 export default function RegistrarEscola() {
+  useEffect(() => {
+    document.title = 'EduTrip - Registrar Escolas';
+  }, []);
 
   const [resposta, setResposta] = useState("");
 
