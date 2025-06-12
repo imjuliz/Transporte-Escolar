@@ -100,7 +100,7 @@ export default function RotaResponsavel() {
     : null;
 
   return (
-    <section className="relative h-screen w-screen justify-items-center content-center">
+    <section className="relative h-full w-full justify-items-center content-center">
       {infoFilhos.length > 1 && (
         <nav className="flex gap-x-1 --prevent-on-load-init mt-4 mb-4" role="tablist">
           {infoFilhos.map((filho) => {

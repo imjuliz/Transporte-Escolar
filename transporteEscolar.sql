@@ -101,8 +101,6 @@ CREATE TABLE alunos (
     FOREIGN KEY (ponto_embarque_id) REFERENCES pontos_embarque(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-select * from alunos;
-
 CREATE TABLE mensagens_responsaveis (
   id INT AUTO_INCREMENT PRIMARY KEY,
   aluno_id INT,
@@ -182,8 +180,6 @@ END$$
 
 DELIMITER ;
 
-select * from alunos_viagens;
-
 INSERT INTO motoristas (cpf, nome, cnh, telefone, vencimento_habilitacao, email, senha) VALUES
 ('55555555555', 'Ana Souza', '1234567890', '11999999999', '2026-05-15', 'ana@gmail.com', 'ana@motorista'),
 ('66666666666', 'Marcos Silva', '0987654321', '11988888888', '2025-07-20', 'marcos@gmail.com', 'marcos@motorista'),
@@ -211,8 +207,6 @@ INSERT INTO responsaveis (cpf, nome, email, senha, telefone) VALUES
 ('80088888888', 'Henrique Souza', 'henrique.souza@email.com', 'henrique@responsavel', '11990008888');
 INSERT INTO responsaveis (cpf, nome, email, senha, telefone) VALUES
 ('32784623482', 'teste123', 'testeresponsavel@gmail.com', 'senha123', '11972189653');
-
-select* from responsaveis;
 
 insert into escolas(nome, endereco, latitude, longitude) value
 ('Cemei Edna Cassiano', 'R. Mal. Deodoro da Fonseca - Monte Azul Paulista, SP, 14730-000', -20.9070, -48.6392),
@@ -252,7 +246,7 @@ INSERT INTO viagens
 (1, 1, CURDATE(), 'tarde', '12:00:00', '12:30:00', 'ponto_embarque', 1, 'escola', 1, 'ida', 'agendada', 30),
 (1, 1, CURDATE(), 'tarde', '17:00:00', '18:00:00', 'escola', 1, 'ponto_embarque', 1, 'volta', 'agendada', 60),
 -- teste
-(1, 1, CURDATE(), 'noite', '17:00:00', '23:00:00', 'escola', 1, 'ponto_embarque', 1, 'volta', 'agendada', 60),
+(1, 1, CURDATE(), 'noite', '17:00:00', '23:50:00', 'escola', 1, 'ponto_embarque', 1, 'volta', 'agendada', 60),
 -- para apresentacao
 (1, 1, CURDATE(), 'tarde', '13:30:00', '15:00:00', 'ponto_embarque', 2, 'escola', 2, 'ida', 'agendada', 90),
 (1, 1, CURDATE(), 'tarde', '15:15:00', '17:30:00', 'escola', 2, 'ponto_embarque', 2, 'volta', 'agendada', 135),
@@ -349,15 +343,11 @@ INSERT INTO alunos (cpf, email, nome, telefone, emailPessoal, dataNascimento, se
 INSERT INTO alunos (
     cpf, email, nome, telefone, emailPessoal, dataNascimento, senha, turno, escola_id, ponto_embarque_id
 ) VALUES (
-    '12345678901', 'aluno7@teste.com', 'Aluno da Viagem 7', '11999999999', 'aluno.pessoal7@teste.com',
-    '2010-05-10', 'senhaSegura123', 'noite', 1, 1
+    '12345678901', 'marcio.souza@al.gov.br', 'Marcos Souza Costa', '11943999459', 'marcos.costa@gmail.com',
+    '2010-05-10', 'marcos@aluno', 'noite', 1, 1
 );
 
-SELECT v.*
-FROM viagens v
-JOIN alunos_viagens av ON v.id = av.viagem_id
-JOIN alunos a ON a.id = av.aluno_id
-WHERE a.id = 12;
+select * from alunos;
 
 INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
 (1, 1),
@@ -365,20 +355,10 @@ INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
 (3, 3),
 (4, 4),
 (5, 5),
-(6, 6), (6, 7),  -- responsavel 6 tem dois filhos
+(6, 6), (6, 7), (6, 12),  -- responsavel 6 tem 3 filhos
 (7, 8),
 (8, 9);
 
-INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
-(9, 12);
-
-/*
--- para função de contar viagens
-SELECT data_viagem AS data, COUNT(*) AS total_viagens
-FROM viagens
-GROUP BY data_viagem
-ORDER BY data_viagem;
-*/
 -- para funcionar no gráfico é necessário add datas diferentes
 INSERT INTO viagens (veiculo_id, motorista_id, data_viagem, hora_saida, hora_chegada_prevista, ponto_inicial_tipo, ponto_inicial_id, ponto_final_tipo, ponto_final_id, tipo_viagem, status, tempo_estimado_viagem) VALUES
 -- ONIBUS 1
@@ -467,19 +447,6 @@ INSERT INTO viagens (veiculo_id, motorista_id, data_viagem, hora_saida, hora_che
 (4, 4, '2025-06-02', '20:35:00', '21:30:00', 'escola', 5, 'ponto_embarque', 7, 'volta', 'agendada', 55),
 (4, 4, '2025-06-02', '21:35:00', '22:30:00', 'escola', 7, 'ponto_embarque', 8, 'volta', 'agendada', 55);
 
-select *from motoristas;
-
-/*
-select *from viagens;
--- funcao de contar tipo de usuarios (gráfico de pizza)
-SELECT 'Alunos' AS tipo, COUNT(*) AS quantidade FROM alunos
-UNION ALL
-SELECT 'Motoristas' AS tipo, COUNT(*) AS quantidade FROM motoristas
-UNION ALL
-SELECT 'Responsáveis' AS tipo, COUNT(*) AS quantidade FROM responsaveis
-UNION ALL
-SELECT 'Administradores' AS tipo, COUNT(*) AS quantidade FROM adm;
-*/
 -- incidentes
 INSERT INTO mensagens_motoristas (aluno_id, responsavel_id, motorista_id, tipo, conteudo) VALUES
 (1, 1, 1, 'congestionamento', 'Congestionamento na avenida Lauro Gomes pode atrasar o desembarque de Roberto'),
