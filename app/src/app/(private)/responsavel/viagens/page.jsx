@@ -55,7 +55,6 @@ export default function Viagens() {
                 className={`barrinha nav-link ${abaAlunoAtiva === aluno.id_aluno ? 'active' : ''}`}
                 type="button"
                 onClick={() => setAbaAlunoAtiva(aluno.id_aluno)}>
-                <img src={aluno.img || '/default-profile.png'} alt="" className='fotodeperfil' />
                 <p className='nomeAluno'>{aluno.nome_aluno}</p>
               </button>
             </li>
