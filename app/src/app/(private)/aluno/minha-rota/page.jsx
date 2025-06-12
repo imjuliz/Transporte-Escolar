@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
 import '../styles/viagens.css';
+import Image from 'next/image';
 import MapaViagemAluno from '../../../../components/Mapa/MapaAluno.jsx';
 import { useRouter, usePathname } from "next/navigation";
 
@@ -52,18 +53,43 @@ export default function RotaAluno() {
         return res.json();
       })
       .then(data => {
-        setDadosViagem(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
+      setDadosViagem(data);
+      setLoading(false);
+      setError(null);
+    })
+    .catch(err => {
+      setDadosViagem(null);
+      setLoading(false);
+      setError(err.message);
+    });
+}, []);
 
   if (loading) return <p>Carregando dados da viagem...</p>;
-  if (error) return <p>Erro: {error}</p>;
-  if (!dadosViagem || !dadosViagem.dados) return <p>Dados da viagem não encontrados.</p>;
+// caso nao haja viagens em andamento
+  if (error || !dadosViagem || !dadosViagem.dados) {
+  return (
+    <div className='w-full h-screen justify-items-center content-center'>
+    <div className='flex flex-col gap-10 items-center justify-center'>
+      <Image
+        src="/img/semViagensAndamento.svg"
+        width={600}
+        height={400}
+        alt="Menino e menina esperando ônibus"
+        className='404-img'
+      />
+      <p>Não há nenhuma viagem em andamento.</p>
+      <button className="btn-viagens">
+        <a href="./viagens">
+          <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="seta">
+            <path d="M17 7H1M1 7L7 1M1 7L7 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <p className='text-viagens text-[#fff] no-underline m-0'>Ver viagens</p>
+        </a>
+      </button>
+    </div>
+    </div>
+  );
+}
 
   return (
     <section className="relative w-screen m-8">

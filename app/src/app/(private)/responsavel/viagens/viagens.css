@@ -27,6 +27,8 @@
     padding: 50px 30px;
     background-color: #ffffff;
     margin: 0 !important;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .container-viagem {

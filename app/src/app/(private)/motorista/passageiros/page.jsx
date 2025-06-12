@@ -45,7 +45,7 @@ export default function Escolas() {
                 
                 <button
                   onClick={() => toggle(escola.escola_id)}
-                  className="conteudo-card w-full flex justify-between items-center py-5 text-slate-800"
+                  className="conteudo-card w-full flex justify-between items-center py-5 px-5 text-slate-800"
                 >
                   <span className="flex flex-col gap-3 items-start texto-card">
                     <h3>{escola.escola_nome}</h3>
@@ -67,7 +67,7 @@ export default function Escolas() {
                   ativo === escola.escola_id ? "max-h-500" : "max-h-0"
                 }`}>
                   {/*ALUNOS DE CADA ESCOLA*/}
-                <div className="conteudo-escondido pb-5 text-sm text-slate-500">
+                <div className="conteudo-escondido pb-5 px-5 text-sm text-slate-500">
                   <h3>Alunos da Escola</h3>
                   <hr />
                   {escola.alunos.length === 0 ? (

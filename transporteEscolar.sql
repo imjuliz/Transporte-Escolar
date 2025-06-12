@@ -209,6 +209,10 @@ INSERT INTO responsaveis (cpf, nome, email, senha, telefone) VALUES
 ('80066666666', 'Felipe Martins', 'felipe.martins@email.com', 'felipe@responsavel', '11990006666'),
 ('80077777777', 'Gabriela Fernandes', 'gabriela.fernandes@email.com', 'gabriela@responsavel', '11990007777'),
 ('80088888888', 'Henrique Souza', 'henrique.souza@email.com', 'henrique@responsavel', '11990008888');
+INSERT INTO responsaveis (cpf, nome, email, senha, telefone) VALUES
+('32784623482', 'teste123', 'testeresponsavel@gmail.com', 'senha123', '11972189653');
+
+select* from responsaveis;
 
 insert into escolas(nome, endereco, latitude, longitude) value
 ('Cemei Edna Cassiano', 'R. Mal. Deodoro da Fonseca - Monte Azul Paulista, SP, 14730-000', -20.9070, -48.6392),
@@ -248,7 +252,7 @@ INSERT INTO viagens
 (1, 1, CURDATE(), 'tarde', '12:00:00', '12:30:00', 'ponto_embarque', 1, 'escola', 1, 'ida', 'agendada', 30),
 (1, 1, CURDATE(), 'tarde', '17:00:00', '18:00:00', 'escola', 1, 'ponto_embarque', 1, 'volta', 'agendada', 60),
 -- teste
-(1, 1, CURDATE(), 'noite', '17:00:00', '00:00:00', 'escola', 1, 'ponto_embarque', 1, 'volta', 'agendada', 60),
+(1, 1, CURDATE(), 'noite', '17:00:00', '23:00:00', 'escola', 1, 'ponto_embarque', 1, 'volta', 'agendada', 60),
 -- para apresentacao
 (1, 1, CURDATE(), 'tarde', '13:30:00', '15:00:00', 'ponto_embarque', 2, 'escola', 2, 'ida', 'agendada', 90),
 (1, 1, CURDATE(), 'tarde', '15:15:00', '17:30:00', 'escola', 2, 'ponto_embarque', 2, 'volta', 'agendada', 135),
@@ -342,6 +346,18 @@ INSERT INTO alunos (cpf, email, nome, telefone, emailPessoal, dataNascimento, se
 ('16151615161', 'gustavo.ribeiro@al.gov.br', 'Gustavo Ribeiro Azevedo', '11988881111', 'guga_ribeiro@icloud.com', '2015-07-09', 'gustavo@aluno', 1, 1, 'manha'),
 ('17161716171', 'mariana.souza@al.gov.br', 'Mariana Souza Carvalho', '11977772222', 'mari_carvalho88@gmail.com', '2012-12-01', 'mariana@aluno', 2, 2, 'tarde'),
 ('12345678900', 'novo.email@exemplo.com', 'Novo Aluno', '1199999-9999', 'email.pessoal@exemplo.com', '2005-07-20', 'senhaSegura', 3, 3, 'noite');
+INSERT INTO alunos (
+    cpf, email, nome, telefone, emailPessoal, dataNascimento, senha, turno, escola_id, ponto_embarque_id
+) VALUES (
+    '12345678901', 'aluno7@teste.com', 'Aluno da Viagem 7', '11999999999', 'aluno.pessoal7@teste.com',
+    '2010-05-10', 'senhaSegura123', 'noite', 1, 1
+);
+
+SELECT v.*
+FROM viagens v
+JOIN alunos_viagens av ON v.id = av.viagem_id
+JOIN alunos a ON a.id = av.aluno_id
+WHERE a.id = 12;
 
 INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
 (1, 1),
@@ -352,6 +368,9 @@ INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
 (6, 6), (6, 7),  -- responsavel 6 tem dois filhos
 (7, 8),
 (8, 9);
+
+INSERT INTO responsaveis_alunos (responsavel_id, aluno_id) VALUES
+(9, 12);
 
 /*
 -- para função de contar viagens

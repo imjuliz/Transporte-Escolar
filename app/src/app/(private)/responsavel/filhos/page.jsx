@@ -12,7 +12,7 @@ export default function filhos() {
   const toggle = (id) => {
     setAtivo(ativo === id ? null : id)
   }
- {/*DADOS DOS FILHOS DO BACK*/}
+  {/*DADOS DOS FILHOS DO BACK*/ }
   useEffect(() => {
     async function fetchFilhos() {
       try {
@@ -32,6 +32,15 @@ export default function filhos() {
     fetchFilhos();
   }, []);
 
+  // formatação de telefone ao pegar o telefone do back
+    const formatarTelefone = (telefone) => {
+        if (!telefone) return " - ";
+        telefone = telefone.replace(/\D/g, "").slice(0, 11);
+        telefone = telefone.replace(/^(\d{2})(\d)/, "($1)$2");
+        telefone = telefone.replace(/(\d{5})(\d)/, "$1-$2");
+        return telefone;
+    };
+
   return (
     <section className='informacoes'>
       <div className='page-indicador'>
@@ -40,13 +49,8 @@ export default function filhos() {
       </div>
       <div className="justify-items-center mt-10 ">
         {filhos.map((filho, index) => (
-           <div key={filho.id_aluno} className="container-viagem bg-[#fff] rounded-[2vw] border-b border-slate-200">
+          <div key={filho.id_aluno} className="container-viagem bg-[#fff] rounded-[2vw] border-b border-slate-200">
             <div className='flex '>
-              <img
-                className='foto-aluno object-cover rounded-l-[2vw]'
-                src={filho.img || "/imgs/default-aluno.png"}
-                alt="Foto do aluno"
-              />
               <button
                 onClick={() => toggle(filho.id_aluno)}
                 className="conteudo-card w-full flex justify-between items-center py-5 text-slate-800" >
@@ -69,24 +73,24 @@ export default function filhos() {
               <div className="conteudo-escondido pb-5 text-sm text-slate-500">
                 <h3>Informações do Aluno</h3>
                 <hr></hr>
-                 {/*INFORMAÇÕES DOS ALUNOS*/}
+                {/*INFORMAÇÕES DOS ALUNOS*/}
                 <div className='informacoes-aluno flex flex-column'>
                   <div className='info flex justify-between items-center'><p>Nome:</p><p className='align-right'>{filho.nome_aluno}</p></div><hr />
                   <div className='info flex justify-between items-center'><p>Idade:</p><p className='align-right'>{filho.idade}</p></div><hr />
                   <div className='info flex justify-between items-center'><p>Escola:</p><p className='align-right'>{filho.nome_escola}</p></div><hr />
                   <div className='info flex justify-between items-center'><p>Ponto de embarque:</p><p className='align-right'>{filho.endereco_embarque}</p></div><hr />
-                  <div className='info flex justify-between items-center'><p>Rota:</p><p className='align-right'>Ida e volta</p></div><hr />
+                  <div className='info flex justify-between items-center'><p>Rota:</p><p className='align-right'>Ida e volta</p></div>
                 </div>
                 {/**Colocar aqui o mapa da rota de cada aluno - linkar na const */}
-                <h3>Motorista</h3>
-                <div className='info-motorista flex items-center gap-5 pt-3'>
-                  <img
-                    className='img-motorista'
-                    src={filho.motorista_img || "/imgs/default-motorista.png"}
-                    alt="Foto do motorista"/>
-                  <h3>{filho.viagens[0]?.nome_motorista}</h3>
-                </div>
+                <h3 className='mt-4'>Informações do Motorista</h3><hr />
+                <div className='informacoes-aluno flex flex-column'>
+                  <div className='info flex justify-between items-center'><p>Nome:</p><p className='align-right'>{filho.viagens[0]?.nome_motorista}</p></div><hr />
+                  <div className='info flex justify-between items-center'><p>Email:</p><p className='align-right'>{filho.viagens[0]?.email_motorista}</p></div>
+                  <hr />
+                  <div className='info flex justify-between items-center'><p>Telefone:</p><p className='align-right'>{formatarTelefone(filho.viagens[0]?.telefone_motorista)}</p></div>
+                 </div>
               </div></div>
           </div>))}
       </div></section>
-  )}
+  )
+}

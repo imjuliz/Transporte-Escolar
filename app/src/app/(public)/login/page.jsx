@@ -128,7 +128,7 @@ export default function Login() {
               {usuarios.map((usuario, index) => (
                 <div key={index} className="container-login">
                   <div className="container-itens-login">
-                    <p className="user">{usuario.nome}</p>
+                    <p className="usuario-tipo">{usuario.nome}</p>
                     <button className='seta' onClick={() => handleUserClick(usuario.nome)}>
                       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6 14L22 14M22 14L16 20M22 14L16 8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -141,7 +141,7 @@ export default function Login() {
         <div className="login-btn">
           <div className="login-corpo">
             <h3 className="">Entrar como <span style={{ color: "#FFC01D" }}>{usuarioAtivo}</span></h3>
-            <form id='loginForm' onSubmit={login}>
+            <form id='loginForm' onSubmit={login} className='formulario-login'>
               <label htmlFor="email">Email:</label>
               <input type="email" id="email" placeholder="Digite seu email" value={email} onChange={(e) => setEmail(e.target.value)} />
               <label htmlFor="senha">Senha:</label>

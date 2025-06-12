@@ -52,7 +52,6 @@ export default function Notificacoes() {
                             <circle cx="5" cy="5" r="5" fill="currentColor" fillOpacity="0.48" />
                         </svg>
                     </div>
-                    <img className="foto-aluno" src="/img/padrao.jpg" alt={msg.aluno_nome} />
                     <button
                         onClick={() => toggle(identificadorUnico)}
                         className="conteudo-card w-full flex justify-between items-center" >

@@ -14,16 +14,6 @@ export default function MeuPerfil() {
     const [editando, setEditando] = useState(false);
     const [emailEditando, setEmailEditando] = useState(false);
     const [telefoneEditando, setTelefoneEditando] = useState(false);
-    const [foto, setFoto] = useState(null);
-    const [preview, setPreview] = useState("/docs/images/people/profile-picture-5.jpg");
-
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setFoto(file);
-        if (file) {
-            setPreview(URL.createObjectURL(file));
-        }
-    };
 
     //info perfil 
     useEffect(() => {

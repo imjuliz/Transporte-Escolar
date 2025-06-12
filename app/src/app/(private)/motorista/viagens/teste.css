@@ -45,12 +45,12 @@ hr {
 main {
     align-content: start;
     height: max-content !important;
-
 }
 
 section {
     margin-top: 10vh;
     width: 100%;
+    margin-bottom: 10vh;
 }
 
 .titulo {

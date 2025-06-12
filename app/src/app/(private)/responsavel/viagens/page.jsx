@@ -99,7 +99,7 @@ export default function Viagens() {
                     return d;}
 
                   const horaEmbarque = criarHorarioCompleto(viagem.horaEmbarque, dataBase);
-                  const horaSaida = criarHorarioCompleto(viagem.horaSaída, dataBase);
+                  const horaSaida = criarHorarioCompleto(viagem.horaSaida, dataBase);
 
                   const corCirculo = (agora >= horaEmbarque && agora <= horaSaida) ? '#00B383' : '#ADAEB1';
 
@@ -115,7 +115,7 @@ export default function Viagens() {
                         <svg className='circle' width="5" height="5">
                           <circle cx="1.5" cy="1.5" r="1.5" fill="#8F9BB3" />
                         </svg>
-                        <p className='m-0 text-[#8F9BB3]'>{viagem.horaEmbarque} - {viagem.horaSaída}</p>
+                        <p className='m-0 text-[#8F9BB3]'>{viagem.horaEmbarque} - {viagem.horaSaida}</p>
                       </div>
 
                       <div className='titulo-status flex gap-4 items-center justify-between'>

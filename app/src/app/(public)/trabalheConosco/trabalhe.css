@@ -309,6 +309,10 @@ margin-top: 2%;
     .cont-busca{
       width: 100%;
     }
+
+    .req-text p{
+      margin-bottom: 5vh;
+    }
   }
   
   @media screen and (max-width: 1280px) {

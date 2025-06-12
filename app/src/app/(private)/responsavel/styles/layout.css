@@ -48,6 +48,10 @@ main {
   display: inline;
 }
 
+.sidebar.active .img-logo{
+  width: 4vw;
+}
+
 .nav-label {
   display: none;
   font-family: "Plus Jakarta Sans SemiBold";
@@ -116,7 +120,6 @@ main {
   display: flex;
   height: fit-content;
   width: fit-content;
-  align-items: center;
   opacity: 0;
   pointer-events: none;
   transition: all 0.6s ease;
@@ -174,7 +177,6 @@ main {
   padding: 0;
   padding-top: 20%;
   border-top: 1px solid #2D2F39;
- 
 }
 
 .sidebar .navList .navList-item {
@@ -465,12 +467,6 @@ main {
   .sidebar {
     /*barra lateral*/
     height: 100%;
-    padding: 3px 10px;
-}
-
-.sidebar.active {
-    /*widht da barra lateral*/
-    width: 190px;
 }
 
   .sidebar .logoContent .logo {
@@ -486,13 +482,20 @@ main {
 }
 
 @media screen and (max-width: 680px) {
-/* .sidebar.active{
-  width: 30%;
-  height: 100%;
-} */
-
 .sidebar {
   background-color: #161A23;
+}
+
+.sidebar .logo{
+  visibility: hidden;
+} 
+
+.sidebar.active .logo{
+  visibility: visible;
+} 
+
+.sidebar.active{
+  width: 50%;
 }
 
 .sidebar.active .logoContent .logo .logoName {
@@ -506,26 +509,10 @@ main {
 
 .sidebar.active .navList {
   visibility: visible;
-  margin-top: 10vh;
 }
 
 .sidebar .navList .barra {
   margin-bottom: 4vh;
-}
-
-.sidebar #btn {
-  left: 10%;
-  top: 0;
-}
-
-.sidebar.active #btn {
-  left: 90%;
-}
-
-.sidebar .logoContent {
-  position: absolute;
-  z-index: 1;
-  width: 70%;
 }
 
 .main-content{
@@ -533,11 +520,15 @@ main {
 }
 
 .main-content.collapsed{
-  width: 70%
+  width: 100%
 }
 
 .sidebar.active .navList .navList-item a svg{
   margin-left: 0.6rem;
+}
+
+.navList{
+  height: 70vh;
 }
 }
 
@@ -546,15 +537,3 @@ main {
   width: 100%;
 }
 }
-
-@media screen and (max-width: 640px) {
-  .sidebar.active {
-    width: 30%;
-  }
-  .sidebar #btn{
-    margin-left: 55%;
-  }
-  .sidebar.active .logoContent .logo .logoName {
-    font-size: 0.8rem;
-  }
-  }

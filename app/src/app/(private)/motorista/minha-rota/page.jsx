@@ -3,6 +3,8 @@
 import MapaViagemMotorista from '../../../../components/Mapa/MapaMotorista.jsx';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import './viagens.css'
 
 export default function RotaMotorista() {
   const router = useRouter();
@@ -55,8 +57,31 @@ export default function RotaMotorista() {
   }, []);
 
   if (carregando) return <p>Verificando sessão...</p>;
-  if (error) return <p>Erro: {error}</p>;
-  if (!dadosViagem || !dadosViagem.origem) return <p>Dados da viagem não encontrados.</p>;
+
+   if (error || !dadosViagem || !dadosViagem.origem) {
+    return (
+      <div className='w-full h-screen justify-items-center content-center'>
+      <div className='flex flex-col gap-10 items-center justify-center'>
+        <Image
+          src="/img/semViagensAndamento.svg"
+          width={600}
+          height={400}
+          alt="Menino e menina esperando ônibus"
+          className='404-img'
+        />
+        <p>Não há nenhuma viagem em andamento.</p>
+        <button className="btn-viagens">
+          <a href="./viagens">
+            <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="seta">
+              <path d="M17 7H1M1 7L7 1M1 7L7 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <p className='text-viagens text-[#fff] no-underline m-0'>Ver viagens</p>
+          </a>
+        </button>
+      </div>
+      </div>
+    );
+  }
 
   return (
     <section className="relative w-screen m-8">
